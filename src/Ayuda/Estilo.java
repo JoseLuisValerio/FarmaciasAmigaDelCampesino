@@ -11,10 +11,10 @@ public class Estilo {
     
     public static void lblTitulo(JLabel label){
         label.setFont(new java.awt.Font("Science Fair",Font.PLAIN,14));
-        
     }
     
     public static void lblBody(JLabel label){
-        
+        label.setFont(new java.awt.Font("Walkway SemiBold",Font.PLAIN,12));
     }
+    
 }
