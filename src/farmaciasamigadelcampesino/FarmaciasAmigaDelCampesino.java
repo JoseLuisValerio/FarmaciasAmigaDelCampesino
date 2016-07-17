@@ -5,6 +5,8 @@
  */
 package farmaciasamigadelcampesino;
 
+import Vista.Producto;
+
 /**
  *
  * @author root
@@ -16,6 +18,8 @@ public class FarmaciasAmigaDelCampesino {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        Producto ventana = new Producto();
+        ventana.setVisible(true);
     }
     
 }
