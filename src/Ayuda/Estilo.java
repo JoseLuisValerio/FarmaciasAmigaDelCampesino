@@ -4,6 +4,10 @@
 package Ayuda;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.net.URL;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -18,14 +22,14 @@ public class Estilo {
      * Fuente = Science Fair (Necesaria en Windows/fonts)
      * @param label 
      */
-    public static void lblTitulo(JLabel label){
+    public void lblTitulo(JLabel label){
         label.setFont(new java.awt.Font("Science Fair",Font.PLAIN,16));
     }
     /**
      * Estilo de JLabel común.
      * @param label recibe el JLabel al que se le cambiará fuente, tipo y tamaño
      */
-    public static void lblBody(JLabel label){
+    public void lblBody(JLabel label){
         label.setFont(new java.awt.Font("Century Gothic",Font.BOLD,12));
     }
     
@@ -35,28 +39,43 @@ public class Estilo {
      * @param mensaje recibe el mensaje que desplegará en el JLabel
      * @param opc recibe la opción de mensaje 1. Alerta, 2. Error, 3. Exito, cualquier otra no mostrará nada
      */
-    public static void lblMensajes(JLabel label,String mensaje,int opc){
+    public void lblMensajes(JLabel label,String mensaje,int opc){
         label.setOpaque(true);
         label.setText(mensaje);
         label.setFont(new java.awt.Font("Impact",Font.PLAIN,22));
-        
+        String path="";
+        URL url=null;
+        ImageIcon icon=null;
         
         switch (opc){
             case 1:
                 //Alerta
                 label.setForeground(Color.BLACK);
                 label.setBackground(Color.YELLOW);
+                path = "/Vista/Imagenes/Alerta.png";
+                url = this.getClass().getResource(path);
+                icon = new ImageIcon(url);
+                label.setIcon(icon);
             break;
             
             case 2:
                 //Error
                 label.setForeground(Color.yellow);
                 label.setBackground(Color.red);            
+                path = "/Vista/Imagenes/Error.png";
+                url = this.getClass().getResource(path);
+                icon = new ImageIcon(url);
+                label.setIcon(icon);
             break;
+            
             case 3:
-                //Exito
+                //Correcto
                 label.setForeground(Color.white);
                 label.setBackground(Color.green);
+                path = "/Vista/Imagenes/Correcto.png";
+                url = this.getClass().getResource(path);
+                icon = new ImageIcon(url);
+                label.setIcon(icon);
             break;
             
             default:
@@ -72,7 +91,7 @@ public class Estilo {
      * @param panel recibe un JPanel 
      * @param titulo recibe el titulo/encabezado que mostrará en el panel
      */
-    public static void PnlTitulo(JPanel panel,String titulo){
+    public void PnlTitulo(JPanel panel,String titulo){
         panel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, titulo, javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Science Fair", Font.PLAIN, 14), new java.awt.Color(0,0,0)));
     }
     
@@ -80,11 +99,29 @@ public class Estilo {
      * Recibe un jButton y un mensaje que mostrará en el mismo. 
      * Fuente = Britannic Bold, Plain, tamaño = 12
      * @param boton recibe el boton
-     * @param mensaje recibe el texto que mostrará dicho botón
      */
-    public static void BtnMsg(JButton boton, String mensaje){
-        boton.setText(mensaje);
-        boton.setFont(new java.awt.Font("Britannic Bold",Font.PLAIN,12));
+    public void BtnOpcion(JButton boton, int opc){
+        String path = "";
+        URL url = null;
+        ImageIcon icon = null;
+        boton.setFont(new java.awt.Font("Britannic Bold", Font.PLAIN, 12));
+
+        switch (opc) {
+            case 1: //Agregar
+                path = "/Vista/Imagenes/Agregar.png";
+                url = this.getClass().getResource(path);
+                icon = new ImageIcon(url);
+                boton.setText("Agregar");
+                break;
+
+            case 2://Actualizar
+                path = "/Vista/Imagenes/Update.png";
+                url = this.getClass().getResource(path);
+                icon = new ImageIcon(url);
+                boton.setText("Guardar");
+                break;
+
+        }
     }
     
     /** 
@@ -92,7 +129,7 @@ public class Estilo {
      * @param textfield recibe el elemento
      * @param Descripcion recibe el mensaje/descripción que se mostrara en el elemento
      */
-    public static void txtfDescripcion(org.edisoncor.gui.textField.TextFieldRectBackground textfield, String Descripcion){
+    public void txtfDescripcion(org.edisoncor.gui.textField.TextFieldRectBackground textfield, String Descripcion){
         textfield.setDescripcion(Descripcion);
     }
     
@@ -100,8 +137,22 @@ public class Estilo {
      * Evita que el jframe que recibe se pueda dimensionar y lo coloca al centro de la pantalla
      * @param ventana recibe  jframe
      */
-    public static void frmAnti(JFrame ventana){
+    public void frmInicial(JFrame ventana,String titulo){
+        Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Vista/Imagenes/Icono.png"));
         ventana.setLocationRelativeTo(null); //centra en la pantalla
         ventana.setResizable(false);//evita redimensionar
+        ventana.setTitle(titulo);
+       ventana.setIconImage(icon);
+    }
+    
+    /**
+     * Recibe un JLabel y dibuja la imagen de encabezado en él.
+     * @param label recibe el panel de encabezado en el que se dibujara
+     */
+    public void lblEncabezado(JLabel label){
+        String path = "/Vista/Imagenes/Encabezado.png";
+        URL url = this.getClass().getResource(path);
+        ImageIcon icon = new ImageIcon(url);
+        label.setIcon(icon);
     }
 }

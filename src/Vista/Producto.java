@@ -12,6 +12,7 @@ import Ayuda.Estilo;
  * @author root
  */
 public class Producto extends javax.swing.JFrame {
+    Estilo Estilo = new Estilo();
     /**
      * Creates new form Producto
      */
@@ -34,13 +35,15 @@ public class Producto extends javax.swing.JFrame {
         Estilo.PnlTitulo(pnlProducto, "Datos del producto");
         Estilo.PnlTitulo(pnlTabla, "Productos");
         
-        Estilo.BtnMsg(btnAdd, "Agregar");
-        Estilo.BtnMsg(btnUpdate, "Actualizar");
+        Estilo.BtnOpcion(btnAdd, 1);
+        Estilo.BtnOpcion(btnUpdate, 2);
         
-        Estilo.lblMensajes(lblAlerta, "",9);
-        Estilo.frmAnti(this);
+        Estilo.lblMensajes(lblAlerta, "",4);
+        Estilo.frmInicial(this, "Productos");
+        Estilo.lblEncabezado(lblEncabezado);
+                
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -51,6 +54,7 @@ public class Producto extends javax.swing.JFrame {
     private void initComponents() {
 
         pnlEncabezado = new javax.swing.JPanel();
+        lblEncabezado = new javax.swing.JLabel();
         pnlTabla = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblProductos = new javax.swing.JTable();
@@ -78,15 +82,19 @@ public class Producto extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        lblEncabezado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout pnlEncabezadoLayout = new javax.swing.GroupLayout(pnlEncabezado);
         pnlEncabezado.setLayout(pnlEncabezadoLayout);
         pnlEncabezadoLayout.setHorizontalGroup(
             pnlEncabezadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 776, Short.MAX_VALUE)
+            .addGroup(pnlEncabezadoLayout.createSequentialGroup()
+                .addComponent(lblEncabezado, javax.swing.GroupLayout.DEFAULT_SIZE, 785, Short.MAX_VALUE)
+                .addContainerGap())
         );
         pnlEncabezadoLayout.setVerticalGroup(
             pnlEncabezadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 40, Short.MAX_VALUE)
+            .addComponent(lblEncabezado, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
         );
 
         tblProductos.setModel(new javax.swing.table.DefaultTableModel(
@@ -233,8 +241,8 @@ public class Producto extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnlEncabezado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnlEncabezado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pnlTabla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pnlProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -296,6 +304,7 @@ public class Producto extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblAlerta;
+    private javax.swing.JLabel lblEncabezado;
     private javax.swing.JPanel pnlEncabezado;
     private javax.swing.JPanel pnlProducto;
     private javax.swing.JPanel pnlTabla;
