@@ -6,9 +6,9 @@
 
 package Vista;
 import Ayuda.Estilo;
-import java.awt.Color;
 /**
- *
+ * Esta clase es la vista de todos los productos, es posible agregar y modificar los valores de 
+ * los mismos.
  * @author root
  */
 public class Producto extends javax.swing.JFrame {
@@ -17,7 +17,7 @@ public class Producto extends javax.swing.JFrame {
      */
     public Producto() {
         initComponents();
-        
+        //Inicialización de los componentes usando la clase estilo
         Estilo.lblBody(jLabel1);
         Estilo.lblBody(jLabel2);
         Estilo.lblBody(jLabel3);
@@ -37,7 +37,7 @@ public class Producto extends javax.swing.JFrame {
         Estilo.BtnMsg(btnAdd, "Agregar");
         Estilo.BtnMsg(btnUpdate, "Actualizar");
         
-        Estilo.lblAlerta(lblAlerta, "",9);
+        Estilo.lblMensajes(lblAlerta, "",9);
         Estilo.frmAnti(this);
     }
 
