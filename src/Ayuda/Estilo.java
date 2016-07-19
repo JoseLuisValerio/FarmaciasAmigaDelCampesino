@@ -98,19 +98,20 @@ public class Estilo {
     /**
      * Recibe un jButton y un mensaje que mostrará en el mismo. 
      * Fuente = Britannic Bold, Plain, tamaño = 12
-     * @param boton recibe el boton
+     * @param boton recibe el botón 
+     * @param opc recibe la opción 1. Agregar, 2. Actualizar
      */
     public void BtnOpcion(JButton boton, int opc){
         String path = "";
         URL url = null;
         ImageIcon icon = null;
         boton.setFont(new java.awt.Font("Britannic Bold", Font.PLAIN, 12));
-
         switch (opc) {
             case 1: //Agregar
                 path = "/Vista/Imagenes/Agregar.png";
                 url = this.getClass().getResource(path);
                 icon = new ImageIcon(url);
+                boton.setIcon(icon);
                 boton.setText("Agregar");
                 break;
 
@@ -118,9 +119,9 @@ public class Estilo {
                 path = "/Vista/Imagenes/Update.png";
                 url = this.getClass().getResource(path);
                 icon = new ImageIcon(url);
+                boton.setIcon(icon);
                 boton.setText("Guardar");
                 break;
-
         }
     }
     
@@ -143,6 +144,7 @@ public class Estilo {
         ventana.setResizable(false);//evita redimensionar
         ventana.setTitle(titulo);
        ventana.setIconImage(icon);
+       ventana.setBackground(Color.WHITE);
     }
     
     /**

@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package Vista;
 import Ayuda.Estilo;
 /**
@@ -12,13 +6,13 @@ import Ayuda.Estilo;
  * @author root
  */
 public class Producto extends javax.swing.JFrame {
-    Estilo Estilo = new Estilo();
+    Estilo Estilo; 
     /**
-     * Creates new form Producto
+     * Inicializa todos los componentes usando la clase estilo
      */
     public Producto() {
+        Estilo = new Estilo();
         initComponents();
-        //Inicialización de los componentes usando la clase estilo
         Estilo.lblBody(jLabel1);
         Estilo.lblBody(jLabel2);
         Estilo.lblBody(jLabel3);
@@ -215,13 +209,11 @@ public class Producto extends javax.swing.JFrame {
 
         pnlProducto.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 200, 280));
 
-        btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/Update.png"))); // NOI18N
         btnUpdate.setText("jButton1");
-        pnlProducto.add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, -1, -1));
+        pnlProducto.add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, 120, 60));
 
-        btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/Agregar.png"))); // NOI18N
         btnAdd.setText("jButton2");
-        pnlProducto.add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 320, -1, -1));
+        pnlProducto.add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 320, 120, 60));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
