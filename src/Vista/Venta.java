@@ -37,7 +37,6 @@ Ayuda.Estilo Estilo=null;
         Estilo.txtfDescripcion(txtCliente, "Clave de cliente");
         Estilo.txtfDescripcion(txtProducto, "Código del producto");
         Estilo.txtfDescripcion(txtBusqueda, "Nombre del cliente");
-        
     }
 
     /**
