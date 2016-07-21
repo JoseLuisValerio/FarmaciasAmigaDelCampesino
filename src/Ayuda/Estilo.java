@@ -98,7 +98,8 @@ public class Estilo {
     /**
      * Recibe un jButton y un mensaje que mostrará en el mismo. 
      * Fuente = Britannic Bold, Plain, tamaño = 12
-     * @param boton recibe el boton
+     * @param boton recibe el boton 
+     * @param opc 1.Agregar, 2.Actualizar,3.Cancelar,4.Login
      */
     public void BtnOpcion(JButton boton, int opc){
         String path = "";
@@ -112,6 +113,7 @@ public class Estilo {
                 url = this.getClass().getResource(path);
                 icon = new ImageIcon(url);
                 boton.setText("Agregar");
+                boton.setIcon(icon);
                 break;
 
             case 2://Actualizar
@@ -119,20 +121,25 @@ public class Estilo {
                 url = this.getClass().getResource(path);
                 icon = new ImageIcon(url);
                 boton.setText("Guardar");
+                boton.setIcon(icon);
                 break;
-            case 3:
-                path = "/Vista/Imagenes/Login.png";
-                url = this.getClass().getResource(path);
-                icon = new ImageIcon(url);
-                boton.setText("Inciar");
-                break;
-            case 4:
+            case 3: //Cancelar
                 path = "/Vista/Imagenes/Update.png";
                 url = this.getClass().getResource(path);
                 icon = new ImageIcon(url);
                 boton.setText("Guardar");
+                boton.setIcon(icon);
                 break;
-
+            case 4: //Login
+                path = "/Vista/Imagenes/Login.png";
+                url = this.getClass().getResource(path);
+                icon = new ImageIcon(url);
+                boton.setText("Inciar");
+                boton.setIcon(icon);
+                break;
+            default:
+                boton.setText("No definido");
+                break;
         }
     }
     
@@ -168,3 +175,4 @@ public class Estilo {
         label.setIcon(icon);
     }
 }
+
