@@ -47,3 +47,4 @@ Temporary Items
 .apdisk
 build/classes/Vista/Producto.class
 *.properties
+/dist/
