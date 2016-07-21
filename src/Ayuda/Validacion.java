@@ -57,7 +57,6 @@ public class Validacion {
 
             } else {
                 txt.setText(null);
-                //JOptionPane.showMessageDialog(null, "DEBEN SER SOLO NÚMERO");
             }
         
     }

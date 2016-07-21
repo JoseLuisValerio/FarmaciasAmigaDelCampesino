@@ -120,6 +120,18 @@ public class Estilo {
                 icon = new ImageIcon(url);
                 boton.setText("Guardar");
                 break;
+            case 3:
+                path = "/Vista/Imagenes/Login.png";
+                url = this.getClass().getResource(path);
+                icon = new ImageIcon(url);
+                boton.setText("Inciar");
+                break;
+            case 4:
+                path = "/Vista/Imagenes/Update.png";
+                url = this.getClass().getResource(path);
+                icon = new ImageIcon(url);
+                boton.setText("Guardar");
+                break;
 
         }
     }
