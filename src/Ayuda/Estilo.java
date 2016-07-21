@@ -92,20 +92,21 @@ public class Estilo {
      * @param titulo recibe el titulo/encabezado que mostrará en el panel
      */
     public void PnlTitulo(JPanel panel,String titulo){
-        panel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, titulo, javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Science Fair", Font.PLAIN, 14), new java.awt.Color(0,0,0)));
+        //panel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, titulo, javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Science Fair", Font.PLAIN, 14), new java.awt.Color(0,0,0)));
+        panel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), titulo, javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Science Fair", Font.PLAIN, 14)));
     }
     
     /**
      * Recibe un jButton y un mensaje que mostrará en el mismo. 
      * Fuente = Britannic Bold, Plain, tamaño = 12
      * @param boton recibe el botón 
-     * @param opc recibe la opción 1. Agregar, 2. Actualizar
+     * @param opc recibe la opción 1. Agregar, 2. Actualizar, 3. Cancelar
      */
     public void BtnOpcion(JButton boton, int opc){
         String path = "";
         URL url = null;
         ImageIcon icon = null;
-        boton.setFont(new java.awt.Font("Britannic Bold", Font.PLAIN, 12));
+        boton.setFont(new java.awt.Font("Britannic Bold", Font.PLAIN, 13));
         switch (opc) {
             case 1: //Agregar
                 path = "/Vista/Imagenes/Agregar.png";
@@ -121,6 +122,14 @@ public class Estilo {
                 icon = new ImageIcon(url);
                 boton.setIcon(icon);
                 boton.setText("Guardar");
+                break;
+                
+            case 3: //Cancelar
+                path = "/Vista/Imagenes/Cancelar.png";
+                url = this.getClass().getResource(path);
+                icon = new ImageIcon(url);
+                boton.setIcon(icon);
+                boton.setText("Cancelar");
                 break;
         }
     }
@@ -139,6 +148,7 @@ public class Estilo {
      * @param ventana recibe  jframe
      */
     public void frmInicial(JFrame ventana,String titulo){
+        ventana.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Vista/Imagenes/Icono.png"));
         ventana.setLocationRelativeTo(null); //centra en la pantalla
         ventana.setResizable(false);//evita redimensionar
