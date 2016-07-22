@@ -27,7 +27,7 @@ public class Controlador_Login {
         Object[][] datos = null;
         boolean se = false;
         String[] columnas = {"Alias", "Nombre", "APATERNO", "AMATERNO", "tipousuario.nombre"};
-        datos = sensql.Comprueba(columnas, "SELECT usuario.Alias,usuario.Nombre,usuario.APATERNO, usuario.AMATERNO,tipousuario.nombre FROM usuario INNER JOIN tipousuario where usuario.ALIAS='" + usuario + "' and usuario.PASSWORD='" + Pass + "' and (usuario.idtipousuario = tipousuario.idtipousuario)");
+        datos = sensql.Comprueba(columnas, "SELECT usuario.Alias,usuario.Nombre,usuario.APATERNO, usuario.AMATERNO,tipousuario.nombre FROM usuario INNER JOIN tipousuario where usuario.ALIAS='" + usuario + "' and usuario.PASSWORD='" + Pass + "' and (usuario.idtipousuario = tipousuario.idtipousuario) and (usuario.Estatus = 1)");
         String Alias = (String) datos[0][0];
         String Nombre = (String) datos[0][1] +" "+ (String) datos[0][2]+" " + (String) datos[0][3];
         String tuser = (String) datos[0][4];
