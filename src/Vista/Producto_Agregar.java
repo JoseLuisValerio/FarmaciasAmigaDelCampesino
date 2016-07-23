@@ -1,6 +1,9 @@
 
 package Vista;
 
+import Controlador.Controlador_Producto_Agregar;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Jose Luis
@@ -10,8 +13,18 @@ public class Producto_Agregar extends javax.swing.JFrame {
     /**
      * Creates new form Producto_Agregar
      */
+     private Object[][] datostabla; 
     public Producto_Agregar() {
         initComponents();
+        mostrar_tabla();
+    }
+      public void mostrar_tabla(){
+        Controlador_Producto_Agregar ctr;       
+        ctr = new Controlador_Producto_Agregar();
+        String[] columnas = {"Código","Nombre","Activo","Descripcion","Precio Publico","Precio Compra","Stock","Proveedor"};
+        datostabla = ctr.consulta_Productos();
+        DefaultTableModel datos = new DefaultTableModel(datostabla,columnas);
+        tblproducto.setModel(datos);
     }
 
     /**
@@ -43,7 +56,7 @@ public class Producto_Agregar extends javax.swing.JFrame {
         jComboBox2 = new javax.swing.JComboBox();
         jLabel9 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblproducto = new javax.swing.JTable();
         jLabel10 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
@@ -81,6 +94,8 @@ public class Producto_Agregar extends javax.swing.JFrame {
             }
         });
 
+        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
+
         jLabel6.setText("Stock");
 
         jLabel7.setText("Precio Compra");
@@ -95,7 +110,7 @@ public class Producto_Agregar extends javax.swing.JFrame {
 
         jLabel9.setText("Proveedor");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblproducto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -103,7 +118,7 @@ public class Producto_Agregar extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(tblproducto);
 
         jLabel10.setText("LABEL DE MENSAJES");
 
@@ -275,8 +290,8 @@ public class Producto_Agregar extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTable tblproducto;
     private org.edisoncor.gui.textField.TextFieldRectBackground txtCodigo;
     private org.edisoncor.gui.textField.TextFieldRectBackground txtCodigo1;
     private org.edisoncor.gui.textField.TextFieldRectBackground txtCodigo2;
