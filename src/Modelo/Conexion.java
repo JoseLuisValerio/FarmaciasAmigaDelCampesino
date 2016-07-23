@@ -11,120 +11,83 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 /**
+ * Esta clase desencripta la conexión usando los datos de un archivo de
+ * configuracion definida en el paquete "ArchivosConfiguracion".
  *
  * @author Jose Luis
  */
-
 public class Conexion {
-private final String url = "jdbc:mysql://localhost/farmacia";
+    private static String base = "";//Base de Datos
+    private static String usuario = "";//usuario
+    private static String pass = "";//contraseña
+    private static String url = "";//host
+    private int cont=0;
+
     PreparedStatement psPrepararSentencia;
     Connection con = null;
-   
 
-    
-    public Conexion() {
-     try{  
-         
-         Class.forName("com.mysql.jdbc.Driver");
-         
-         con = DriverManager.getConnection(url,"root","12345");
-         if (con!=null){
-            System.out.println("Conexión a base de datos. listo");
-         }
-      }
-         catch(SQLException e)
-         {
-         System.out.println(e);
-         }
-         catch(ClassNotFoundException e)
-         {
-          System.out.println(e);
-         }
-    }
-     /**
-     *
-     * @return
-     */
-    public Connection conectado(){
-      return con;
-}
-
-    public void desconectar(){
-      con = null;
-      System.out.println("conexion terminada");
-
-    } 
-
-   /* static String base = "";//Base de Datos
-    static String usuario = "";//usuario
-    static String pass = "";//contraseña
-    static String ruta = "";//host
-    Connection conexion = null;
-    static int cont = 0;
-
-    public void config() throws Exception {
+    public void LeerArchivoConf() throws Exception {
         Properties propiedades = new Properties();
         InputStream entrada = null;
 
         try {
-            entrada = new FileInputStream("./src/Modelo/ConfiguracionBD.properties");
+            entrada = new FileInputStream("./src/ArchivosConfiguracion/ConfiguracionBD.properties");
             // cargamos el archivo de propiedades
             propiedades.load(entrada);
-            // obtenemos las propiedades y las imprimimos
-
-            try {
-                base = Descifrar.Desencriptar(propiedades.getProperty("BD"));
-                usuario = Descifrar.Desencriptar(propiedades.getProperty("User"));
-                pass = Descifrar.Desencriptar(propiedades.getProperty("Psw"));
-                ruta = Descifrar.Desencriptar(propiedades.getProperty("Servidor")) + base;
-            } catch (IOException ex) {
-            }
+            //Se obtienen las valores almacenados en el archivo de configuracion
+            base = Descifrar.Desencriptar(propiedades.getProperty("BD"));
+            usuario = Descifrar.Desencriptar(propiedades.getProperty("User"));
+            pass = Descifrar.Desencriptar(propiedades.getProperty("Psw"));
+            url = Descifrar.Desencriptar(propiedades.getProperty("Servidor")) + base;
         } catch (IOException ex) {
-            ex.printStackTrace();
+            System.err.println("Error al leer el archivo de configuración ");
         } finally {
             if (entrada != null) {
                 try {
                     entrada.close();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    System.err.println("Error al cerrar el flujo InputStream");
                 }
             }
         }
     }
 
-    public Conexion() throws Exception {
-        // Si es la primera vez, que se ejecuta, desencriptar
-        if (cont == 0) {
-            config();
+    public Conexion() {
+        if(cont==0){
+            try{
+            LeerArchivoConf();
+            cont++;
+            }catch(Exception e){
+                System.err.println("Error al llamar al método de lectura");
+            }
         }
-        cont++;
-
         try {
-            //obtenemos el driver para mysql
             Class.forName("com.mysql.jdbc.Driver");
-            //obtenemos la conexión
-            conexion = DriverManager.getConnection(ruta, usuario, pass);
-            if (conexion != null) {
-                System.out.println("Conexión a base de datos " + base + ". listo");
+            con = DriverManager.getConnection(url, usuario, pass);
+            if (con != null) {
+                System.out.println("Conexión a base de datos "+base+". listo");
             }
         } catch (SQLException e) {
-            System.out.println("Error en conexion" + e);
-
+            System.out.println(e);
         } catch (ClassNotFoundException e) {
             System.out.println(e);
         }
     }
 
+    /** 
+     * Retorna la conexión generada
+     * @return
+     */
     public Connection conectado() {
-        return conexion;
+        return con;
     }
 
+    /**
+     * Cierra la conexión hecha
+     */
     public void desconectar() {
-        conexion = null;
+        con = null;
         System.out.println("conexion terminada");
 
-    }*/
-       
-   
-   
+    }
 }
