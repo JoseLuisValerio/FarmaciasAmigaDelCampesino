@@ -1,29 +1,26 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Ayuda;
 
-import java.awt.Color;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 
 /**
- *
+ * Clase de validación de texto
  * @author Jose Luis
  */
 public class Validacion {
 
+    /**
+     * Verifica que lo ingresado en un textfield este vacio
+     * @param txt recibe el textfield de edison.
+     */
     public static void txtVacio(org.edisoncor.gui.textField.TextFieldRectBackground txt) {
         if (txt.getText().isEmpty()) {
             txt.setDescripcion("Campo Vacio");
         }
-
     }
 
+    
     public static void txtCompara(JPasswordField txt, JPasswordField txt2) {
-
         char[] txt0;
         char[] txt1;
         boolean valor = false;

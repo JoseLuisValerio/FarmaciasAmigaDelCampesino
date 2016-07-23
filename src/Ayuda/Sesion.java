@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
@@ -70,7 +69,7 @@ public class Sesion {
        //Retorna los datos de la sesion en en un ArrayList de tipo String con los datos leidos del archivo de la sesión
         String cadena;
         ArrayList <String> datos= new ArrayList <String>();
-      FileReader f = new FileReader("datosSesion.txt");
+      FileReader f = new FileReader("datosSesion.frm");
       BufferedReader b = new BufferedReader(f);
       while((cadena = b.readLine())!=null) {
           datos.add(cadena);

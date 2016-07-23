@@ -39,7 +39,7 @@ Estilo Estilo;
         //Estilo de ventana
         Estilo.lblMensajes(lblAlerta,"",4);
         Estilo.frmInicial(this, "Clientes");
-        Estilo.lblEncabezado(lblEncabezado);
+        Estilo.lblLogo(lblEncabezado);
     }
 
     /**

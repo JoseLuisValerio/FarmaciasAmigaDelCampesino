@@ -31,9 +31,9 @@ public class Controlador_Login {
         String Alias = (String) datos[0][0];
         String Nombre = (String) datos[0][1] +" "+ (String) datos[0][2]+" " + (String) datos[0][3];
         String tuser = (String) datos[0][4];
+        
         if(datos[0][0]==null){
             se=false;
-            JOptionPane.showMessageDialog(null, "TUS DATOS NO SON CORRECTOS VERIFICA PORFAVOR", "ERROR DE SESION", JOptionPane.ERROR_MESSAGE);
         }else{
             se=true;
             Sesion.iniciarSesion(Alias,Nombre,tuser);

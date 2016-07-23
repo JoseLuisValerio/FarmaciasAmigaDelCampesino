@@ -32,7 +32,7 @@ Ayuda.Estilo Estilo=null;
         //Estilo de ventana
         Estilo.lblMensajes(lblAlerta,"AAAAAA",1);
         Estilo.frmInicial(this, "Venta");
-        Estilo.lblEncabezado(lblEncabezado);
+        Estilo.lblLogo(lblEncabezado);
         //Estilo de textfields
         Estilo.txtfDescripcion(txtCliente, "Clave de cliente");
         Estilo.txtfDescripcion(txtProducto, "Código del producto");

@@ -33,7 +33,7 @@ public class Producto_Consultar extends javax.swing.JFrame {
         
         Estilo.lblMensajes(lblAlerta, "",4);
         Estilo.frmInicial(this, "Productos");
-        Estilo.lblEncabezado(lblEncabezado);
+        Estilo.lblLogo(lblEncabezado);
                 
     }
     

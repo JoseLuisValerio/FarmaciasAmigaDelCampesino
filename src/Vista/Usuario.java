@@ -17,7 +17,7 @@ public class Usuario extends javax.swing.JFrame {
         Estilo.lblBody(jLabel5);
         Estilo.lblBody(jLabel6);
         Estilo.lblBody(jLabel7);
-        Estilo.lblEncabezado(lblEncabezado);
+        Estilo.lblLogo(lblEncabezado);
         Estilo.lblMensajes(lblAlerta, "", 4);
         
         Estilo.BtnOpcion(btnAdd, 1);

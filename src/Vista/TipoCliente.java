@@ -12,7 +12,7 @@ public class TipoCliente extends javax.swing.JFrame {
         Estilo = new Ayuda.Estilo();
         Estilo.lblBody(jLabel1);
         Estilo.lblBody(jLabel2);
-        Estilo.lblEncabezado(lblEncabezado);
+        Estilo.lblLogo(lblEncabezado);
         Estilo.lblMensajes(lblAlerta, "", 4);
         
         Estilo.BtnOpcion(btnAdd, 1);

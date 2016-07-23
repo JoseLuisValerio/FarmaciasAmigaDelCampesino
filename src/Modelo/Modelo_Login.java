@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- *
+ * 
  * @author Jose Luis
  */
 public class Modelo_Login {
@@ -17,7 +17,13 @@ public class Modelo_Login {
         con = new Conexion();
     }
     
-  public Object [][] Comprueba(String colName[], String sql){
+  /**
+   * C
+   * @param colName
+   * @param sql
+   * @return 
+   */
+    public Object [][] Comprueba(String colName[], String sql){
       int registros = 0;
       
       try{
@@ -27,7 +33,7 @@ public class Modelo_Login {
          registros = res.getInt("total");
          res.close();
       }catch(SQLException e){
-         System.out.println(e);
+         System.err.println("Error al contar la cantidad de usuarios: "+e.getMessage());
       }
 
     Object[][] data = new String[registros][colName.length];
@@ -46,7 +52,7 @@ public class Modelo_Login {
          }
          res.close();
           }catch(SQLException e){
-         System.out.println(e);
+         System.err.println(e.getMessage());
     }
     return data;
  }

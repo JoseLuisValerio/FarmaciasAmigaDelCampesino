@@ -1,36 +1,35 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Vista;
 
-import Ayuda.Estilo;
-import Ayuda.Sesion;
 import Ayuda.Validacion;
-import Controlador.Controlador_Login;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Esta vista permite la autentificación del usuario que quiere acceder al sistema.
+ * Por defecto iniciará en esta y si la autentificación es correcta, se pasará a la 
+ * ventana principal
  * @author Jose Luis
  */
 public class Login extends javax.swing.JFrame {
 
-    Estilo estilo = new Estilo();
-    Controlador_Login con = new Controlador_Login();
-//private Object[][] datostabla;
+    Ayuda.Estilo Estilo = new Ayuda.Estilo();
+    Controlador.Controlador_Login ControladorLogin = new Controlador.Controlador_Login();
 
-    /**
-     * Creates new form Login
-     */
     public Login() {
         initComponents();
-        estilo.txtfDescripcion(userName, "Nombre de Usuario");
-        estilo.BtnOpcion(jButton1, 3);
+        Estilo.lblBody(jLabel3);
+        Estilo.lblBody(jLabel2);
+        Estilo.lblLogo(lblEncabezado);
+        Estilo.lblMensajes(lblAlerta, "", 4);
+        
+        Estilo.txtfDescripcion(txtUser, "Nombre de Usuario");
+        Estilo.BtnOpcion(btnLogin, 4);
+        Estilo.BtnOpcion(btnCancel, 3);
+        
+        Estilo.PnlTitulo(jPanel1, "Ingrese sus datos correctamente para acceder al sistema");
+        Estilo.frmInicial(this,"Entrada de usuarios");
     }
 
     /**
@@ -42,69 +41,158 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        userName = new org.edisoncor.gui.textField.TextFieldRectBackground();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
+        lblEncabezado = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        txtUser = new org.edisoncor.gui.textField.TextFieldRectBackground();
+        passwField = new javax.swing.JPasswordField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        lblAlerta = new javax.swing.JLabel();
+        btnLogin = new javax.swing.JButton();
+        btnCancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        userName.setDescripcion("Código de producto");
+        lblEncabezado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/UserLogin.png"))); // NOI18N
+
+        txtUser.setDescripcion("Código de producto");
+
+        passwField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                passwFieldActionPerformed(evt);
             }
         });
+
+        jLabel2.setText("Usuario:");
+
+        jLabel3.setText("Contraseña:");
+
+        lblAlerta.setText("Mensajes");
+
+        btnLogin.setText("jButton1");
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginActionPerformed(evt);
+            }
+        });
+
+        btnCancel.setText("jButton2");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 175, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(btnLogin))
+                        .addGap(28, 28, 28)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnCancel)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtUser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(passwField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(51, 51, 51))
+                    .addComponent(lblAlerta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jLabel1)
+                    .addContainerGap(372, Short.MAX_VALUE)))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(passwField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLogin)
+                    .addComponent(btnCancel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addComponent(lblAlerta, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jLabel1)
+                    .addContainerGap(87, Short.MAX_VALUE)))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(userName, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
-                    .addComponent(jPasswordField1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(274, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(53, 53, 53))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblEncabezado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(93, 93, 93)
-                .addComponent(userName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52)
-                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(jButton1)
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(lblEncabezado, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        boolean ses=false;
-        Validacion.txtVacio(userName);
-        String sl = new String(jPasswordField1.getPassword());
-        try {
-           ses= con.consultaUsuario(userName.getText(), sl);
-        } catch (IOException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        if(ses=false){
-            JOptionPane.showMessageDialog(null, "NO SE PUDO INICIAR SESIÓN", "ERROR DE SESION", JOptionPane.ERROR_MESSAGE);
-        }else{
-        Inicio in = new Inicio();
-        in.setVisible(true);
-        this.setVisible(false);
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        VerificaUsuario();
+    }//GEN-LAST:event_btnLoginActionPerformed
 
+    private void passwFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwFieldActionPerformed
+        VerificaUsuario();
+    }//GEN-LAST:event_passwFieldActionPerformed
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        Ayuda.Utilidades Util = new Ayuda.Utilidades();
+        Util.txtLimpiar(txtUser);
+        Util.passLimpiar(passwField);
+        Estilo.lblMensajes(lblAlerta, "", 4);
+        Util.txtFoco(txtUser);
+    }//GEN-LAST:event_btnCancelActionPerformed
+    private void VerificaUsuario(){
+        boolean ses=false;
+        Validacion.txtVacio(txtUser);
+        String Password = new String(passwField.getPassword());
+        try {
+            ses= ControladorLogin.consultaUsuario(txtUser.getText(), Password);
+        } catch (IOException ex) {
+            System.err.println("Error al consultar Usuario(Controlador)"+ex.getMessage());
+        }
+        if(ses==false){
+            Estilo.lblMensajes(lblAlerta, "No se ha podido iniciar sesión. Verifique datos.", 2);
+        }else{
+            Inicio in = new Inicio();
+            in.setVisible(true);
+            this.setVisible(false);
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -141,8 +229,15 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JPasswordField jPasswordField1;
-    private org.edisoncor.gui.textField.TextFieldRectBackground userName;
+    private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnLogin;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblAlerta;
+    private javax.swing.JLabel lblEncabezado;
+    private javax.swing.JPasswordField passwField;
+    private org.edisoncor.gui.textField.TextFieldRectBackground txtUser;
     // End of variables declaration//GEN-END:variables
 }

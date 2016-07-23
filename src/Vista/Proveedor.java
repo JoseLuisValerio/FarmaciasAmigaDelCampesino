@@ -14,7 +14,7 @@ public class Proveedor extends javax.swing.JFrame {
         initComponents();
         Estilo= new Ayuda.Estilo();
         //Estilo de JLabels
-        Estilo.lblEncabezado(lblEncabezado);
+        Estilo.lblLogo(lblEncabezado);
         Estilo.lblBody(jLabel6);
         Estilo.lblBody(jLabel7);
         Estilo.lblBody(jLabel8);

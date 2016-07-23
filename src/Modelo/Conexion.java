@@ -27,9 +27,9 @@ private final String url = "jdbc:mysql://localhost/farmacia";
          
          Class.forName("com.mysql.jdbc.Driver");
          
-         con = DriverManager.getConnection(url,"root","");
+         con = DriverManager.getConnection(url,"root","12345");
          if (con!=null){
-            System.out.println("Conexión a base de datos facturacion. listo");
+            System.out.println("Conexión a base de datos. listo");
          }
       }
          catch(SQLException e)

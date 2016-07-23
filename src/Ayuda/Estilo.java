@@ -1,5 +1,6 @@
 /**
- * Contiene clases necesarias para facilitar configuraciones globales
+ * Contiene clases necesarias para facilitar los estilos de 
+ * las vistas.
  */
 package Ayuda;
 import java.awt.Color;
@@ -11,6 +12,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 /**
  * Da formato visual a los elementos de las vistas
@@ -79,6 +82,10 @@ public class Estilo {
             break;
             
             default:
+                label.setForeground(null);
+                label.setBackground(null);
+                path = "/Vista/Imagenes/Alerta.png";
+                label.setIcon(null);
             break;
         }
         
@@ -106,7 +113,7 @@ public class Estilo {
         URL url = null;
         ImageIcon icon = null;
         boton.setFont(new java.awt.Font("Britannic Bold", Font.PLAIN, 12));
-
+        
         switch (opc) {
             case 1: //Agregar
                 path = "/Vista/Imagenes/Agregar.png";
@@ -124,22 +131,23 @@ public class Estilo {
                 boton.setIcon(icon);
                 break;
             case 3: //Cancelar
-                path = "/Vista/Imagenes/Update.png";
+                path = "/Vista/Imagenes/Cancelar.png";
                 url = this.getClass().getResource(path);
                 icon = new ImageIcon(url);
-                boton.setText("Guardar");
+                boton.setText("Cancelar");
                 boton.setIcon(icon);
                 break;
             case 4: //Login
                 path = "/Vista/Imagenes/Login.png";
                 url = this.getClass().getResource(path);
                 icon = new ImageIcon(url);
-                boton.setText("Inciar");
+                boton.setText("Entrar");
                 boton.setIcon(icon);
                 break;
             default:
                 boton.setText("No definido");
                 break;
+                
         }
     }
     
@@ -161,18 +169,139 @@ public class Estilo {
         ventana.setLocationRelativeTo(null); //centra en la pantalla
         ventana.setResizable(false);//evita redimensionar
         ventana.setTitle(titulo);
-       ventana.setIconImage(icon);
+        ventana.setIconImage(icon);
+        ventana.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
     }
     
     /**
      * Recibe un JLabel y dibuja la imagen de encabezado en él.
      * @param label recibe el panel de encabezado en el que se dibujara
      */
-    public void lblEncabezado(JLabel label){
+    public void lblLogo(JLabel label){
         String path = "/Vista/Imagenes/Encabezado.png";
         URL url = this.getClass().getResource(path);
         ImageIcon icon = new ImageIcon(url);
         label.setIcon(icon);
+        label.setHorizontalAlignment(JLabel.CENTER);
+        label.setVerticalAlignment(JLabel.CENTER);
+    }
+    
+    /**
+     * Recibe un objeto de tipo JMenu agregandole un icono y cambiando la fuente
+     * @param menu recibe un JMenu
+     * @param opc recibe la opción que le corresponde al meú
+     * 1. Archivo.
+     * 2. Productos.
+     * 3. Clientes
+     * 4. Caja.
+     * 5. Usuarios.
+     * 6. Movimientos.
+     * 7. Pedidos.
+     */
+    public void MnIcon(JMenu menu, int opc){
+        String path = "";
+        URL url = null; 
+        ImageIcon tmpIcon = null;
+        ImageIcon thumbnail = null;
+        menu.setFont(new java.awt.Font("Britannic Bold", Font.PLAIN, 13));
+        
+        switch(opc){
+            case 1://Archivo
+                path = "/Vista/Imagenes/Archivo.png";
+                url = this.getClass().getResource(path);
+                tmpIcon = new ImageIcon(url);
+                thumbnail = new ImageIcon(tmpIcon.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+                menu.setIcon(thumbnail);
+                break;
+
+            case 2: //Producto
+                path = "/Vista/Imagenes/Producto.png";
+                url = this.getClass().getResource(path);
+                tmpIcon = new ImageIcon(url);
+                thumbnail = new ImageIcon(tmpIcon.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+                menu.setIcon(thumbnail);
+                break;
+
+            case 3: //Clientes
+                path = "/Vista/Imagenes/Cliente.png";
+                url = this.getClass().getResource(path);
+                tmpIcon = new ImageIcon(url);
+                thumbnail = new ImageIcon(tmpIcon.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+                menu.setIcon(thumbnail);
+                break;
+
+            case 4: //Caja
+                path = "/Vista/Imagenes/Caja.png";
+                url = this.getClass().getResource(path);
+                tmpIcon = new ImageIcon(url);
+                thumbnail = new ImageIcon(tmpIcon.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+                menu.setIcon(thumbnail);
+                break;
+
+            case 5: //Usuarios
+                path = "/Vista/Imagenes/AgregarUsuario.png";
+                url = this.getClass().getResource(path);
+                tmpIcon = new ImageIcon(url);
+                thumbnail = new ImageIcon(tmpIcon.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+                menu.setIcon(thumbnail);
+                break;
+
+            case 6: //Movimientos
+                path = "/Vista/Imagenes/Movimiento.png";
+                url = this.getClass().getResource(path);
+                tmpIcon = new ImageIcon(url);
+                thumbnail = new ImageIcon(tmpIcon.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+                menu.setIcon(thumbnail);
+                break;
+
+            case 7: //Pedidos
+                path = "/Vista/Imagenes/Pedido.png";
+                url = this.getClass().getResource(path);
+                tmpIcon = new ImageIcon(url);
+                thumbnail = new ImageIcon(tmpIcon.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+                menu.setIcon(thumbnail);
+                break;
+                
+            case 8: //Proveedores
+                path = "/Vista/Imagenes/Proveedor.png";
+                url = this.getClass().getResource(path);
+                tmpIcon = new ImageIcon(url);
+                thumbnail = new ImageIcon(tmpIcon.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+                menu.setIcon(thumbnail);
+                break;
+             
+            case 9: //Ventas
+                path = "/Vista/Imagenes/Vender.png";
+                url = this.getClass().getResource(path);
+                tmpIcon = new ImageIcon(url);
+                thumbnail = new ImageIcon(tmpIcon.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+                menu.setIcon(thumbnail);
+                break;
+        }
+    }
+    
+    /**
+     * Recibe un JMenuItem se selecciona de que tipo es y se le coloca el icono correspondiente
+     * @param item recibe el JMenuItem 
+     * @param opc recibe la opción deseada.
+     * 1. Cerrar sesión.
+     */
+    public void mnitemIcon(JMenuItem item, int opc){
+        String path = "";
+        URL url = null; 
+        ImageIcon tmpIcon = null;
+        ImageIcon thumbnail = null;
+        item.setFont(new java.awt.Font("Arial", Font.PLAIN, 12));
+        
+        switch(opc){
+            case 1://Archivo
+                path = "/Vista/Imagenes/Logout.png";
+                url = this.getClass().getResource(path);
+                tmpIcon = new ImageIcon(url);
+                thumbnail = new ImageIcon(tmpIcon.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+                item.setIcon(thumbnail);
+                break;
+        }
     }
 }
 

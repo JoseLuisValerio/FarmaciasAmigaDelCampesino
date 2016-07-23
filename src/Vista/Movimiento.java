@@ -11,7 +11,7 @@ public class Movimiento extends javax.swing.JFrame {
         initComponents();
         Estilo = new Ayuda.Estilo();
         //Estilo de JLabels
-        Estilo.lblEncabezado(lblEncabezado);
+        Estilo.lblLogo(lblEncabezado);
         Estilo.lblBody(jLabel1);
         Estilo.lblBody(jLabel2);
         Estilo.lblBody(jLabel3);
