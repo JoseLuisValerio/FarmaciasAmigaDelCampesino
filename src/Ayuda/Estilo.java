@@ -285,6 +285,12 @@ public class Estilo {
      * @param item recibe el JMenuItem 
      * @param opc recibe la opción deseada.
      * 1. Cerrar sesión.
+     * 2. Agregar
+     * 3. Buscar
+     * 4. Transferir
+     * 5. Descuento
+     * 6. Corte de caja
+     * 7. Ver
      */
     public void mnitemIcon(JMenuItem item, int opc){
         String path = "";
@@ -294,8 +300,55 @@ public class Estilo {
         item.setFont(new java.awt.Font("Arial", Font.PLAIN, 12));
         
         switch(opc){
-            case 1://Archivo
+            case 1://Logout
                 path = "/Vista/Imagenes/Logout.png";
+                url = this.getClass().getResource(path);
+                tmpIcon = new ImageIcon(url);
+                thumbnail = new ImageIcon(tmpIcon.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+                item.setIcon(thumbnail);
+                break;
+                
+        case 2://Agregar y/o modificar
+                path = "/Vista/Imagenes/Agregar.png";
+                url = this.getClass().getResource(path);
+                tmpIcon = new ImageIcon(url);
+                thumbnail = new ImageIcon(tmpIcon.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+                item.setIcon(thumbnail);
+                break;
+                
+        case 3://Buscar
+                path = "/Vista/Imagenes/Buscar.png";
+                url = this.getClass().getResource(path);
+                tmpIcon = new ImageIcon(url);
+                thumbnail = new ImageIcon(tmpIcon.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+                item.setIcon(thumbnail);
+                break;
+                
+        case 4://Transferir
+                path = "/Vista/Imagenes/Transferir.png";
+                url = this.getClass().getResource(path);
+                tmpIcon = new ImageIcon(url);
+                thumbnail = new ImageIcon(tmpIcon.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+                item.setIcon(thumbnail);
+                break;
+                
+        case 5://Descuento
+                path = "/Vista/Imagenes/Descuento.png";
+                url = this.getClass().getResource(path);
+                tmpIcon = new ImageIcon(url);
+                thumbnail = new ImageIcon(tmpIcon.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+                item.setIcon(thumbnail);
+                break;
+                
+        case 6://Corte de Caja
+                path = "/Vista/Imagenes/CorteCaja.png";
+                url = this.getClass().getResource(path);
+                tmpIcon = new ImageIcon(url);
+                thumbnail = new ImageIcon(tmpIcon.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+                item.setIcon(thumbnail);
+                break;
+        case 7://Ver
+                path = "/Vista/Imagenes/Ver.png";
                 url = this.getClass().getResource(path);
                 tmpIcon = new ImageIcon(url);
                 thumbnail = new ImageIcon(tmpIcon.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));

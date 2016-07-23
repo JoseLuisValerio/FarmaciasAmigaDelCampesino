@@ -34,7 +34,18 @@ public class Inicio extends javax.swing.JFrame {
         Estilo.MnIcon(MnProveedores, 8);
         Estilo.MnIcon(MnVentas, 9);
         
-        Estilo.mnitemIcon(jMenuItem1, 1);
+        Estilo.mnitemIcon(MnItemCerrSesion, 1);
+        Estilo.mnitemIcon(MnItemAddProd, 2);
+        Estilo.mnitemIcon(MnItemSearchProd, 3);
+        Estilo.mnitemIcon(MnItemTransProd, 4);
+        Estilo.mnitemIcon(MnItemAddClient, 2);
+        Estilo.mnitemIcon(MnItemDesClient, 5);
+        Estilo.mnitemIcon(MnItemCortCaja, 6);
+        Estilo.mnitemIcon(MnItemAddMovimient, 2);
+        Estilo.mnitemIcon(MnItemAddUser, 2);
+        Estilo.mnitemIcon(MnItemAddMovimient, 2);
+        Estilo.mnitemIcon(MnItemPedidos, 7);
+        Estilo.mnitemIcon(MnItemProveedores, 2);
         
         Estilo.frmInicial(this, "Farmacia y consultorio 'Amiga del campesino'");
         
@@ -77,24 +88,25 @@ public class Inicio extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         MnArchivo = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        MnItemCerrSesion = new javax.swing.JMenuItem();
         MnProductos = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        MnItemAddProd = new javax.swing.JMenuItem();
+        MnItemSearchProd = new javax.swing.JMenuItem();
+        MnItemTransProd = new javax.swing.JMenuItem();
         MnVentas = new javax.swing.JMenu();
         MnClientes = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
+        MnItemAddClient = new javax.swing.JMenuItem();
+        MnItemDesClient = new javax.swing.JMenuItem();
         MnCaja = new javax.swing.JMenu();
-        jMenuItem7 = new javax.swing.JMenuItem();
+        MnItemCortCaja = new javax.swing.JMenuItem();
         MnUsuarios = new javax.swing.JMenu();
-        jMenuItem8 = new javax.swing.JMenuItem();
+        MnItemAddUser = new javax.swing.JMenuItem();
         MnMovimientos = new javax.swing.JMenu();
-        jMenuItem9 = new javax.swing.JMenuItem();
+        MnItemAddMovimient = new javax.swing.JMenuItem();
         MnPedidos = new javax.swing.JMenu();
-        jMenuItem10 = new javax.swing.JMenuItem();
+        MnItemPedidos = new javax.swing.JMenuItem();
         MnProveedores = new javax.swing.JMenu();
+        MnItemProveedores = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -162,26 +174,26 @@ public class Inicio extends javax.swing.JFrame {
 
         MnArchivo.setText("Archivo");
 
-        jMenuItem1.setText("Cerrar sesión");
-        jMenuItem1.addMouseListener(new java.awt.event.MouseAdapter() {
+        MnItemCerrSesion.setText("Cerrar sesión");
+        MnItemCerrSesion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jMenuItem1MousePressed(evt);
+                MnItemCerrSesionMousePressed(evt);
             }
         });
-        MnArchivo.add(jMenuItem1);
+        MnArchivo.add(MnItemCerrSesion);
 
         jMenuBar1.add(MnArchivo);
 
         MnProductos.setText("Productos");
 
-        jMenuItem2.setText("Agregar");
-        MnProductos.add(jMenuItem2);
+        MnItemAddProd.setText("Agregar");
+        MnProductos.add(MnItemAddProd);
 
-        jMenuItem3.setText("Buscar");
-        MnProductos.add(jMenuItem3);
+        MnItemSearchProd.setText("Buscar");
+        MnProductos.add(MnItemSearchProd);
 
-        jMenuItem4.setText("Transferir a sucursal");
-        MnProductos.add(jMenuItem4);
+        MnItemTransProd.setText("Transferir a sucursal");
+        MnProductos.add(MnItemTransProd);
 
         jMenuBar1.add(MnProductos);
 
@@ -190,43 +202,47 @@ public class Inicio extends javax.swing.JFrame {
 
         MnClientes.setText("Clientes");
 
-        jMenuItem5.setText("Agregar/Editar");
-        MnClientes.add(jMenuItem5);
+        MnItemAddClient.setText("Agregar/Editar");
+        MnClientes.add(MnItemAddClient);
 
-        jMenuItem6.setText("Descuento");
-        MnClientes.add(jMenuItem6);
+        MnItemDesClient.setText("Descuento");
+        MnClientes.add(MnItemDesClient);
 
         jMenuBar1.add(MnClientes);
 
         MnCaja.setText("Caja");
 
-        jMenuItem7.setText("Corte de Caja");
-        MnCaja.add(jMenuItem7);
+        MnItemCortCaja.setText("Corte de Caja");
+        MnCaja.add(MnItemCortCaja);
 
         jMenuBar1.add(MnCaja);
 
         MnUsuarios.setText("Usuarios");
 
-        jMenuItem8.setText("Agregar/Editar usuarios");
-        MnUsuarios.add(jMenuItem8);
+        MnItemAddUser.setText("Agregar/Editar usuarios");
+        MnUsuarios.add(MnItemAddUser);
 
         jMenuBar1.add(MnUsuarios);
 
         MnMovimientos.setText("Movimientos");
 
-        jMenuItem9.setText("Ingresar/retirar dinero");
-        MnMovimientos.add(jMenuItem9);
+        MnItemAddMovimient.setText("Ingresar/retirar dinero");
+        MnMovimientos.add(MnItemAddMovimient);
 
         jMenuBar1.add(MnMovimientos);
 
         MnPedidos.setText("Pedidos");
 
-        jMenuItem10.setText("Ver pedidos");
-        MnPedidos.add(jMenuItem10);
+        MnItemPedidos.setText("Ver pedidos");
+        MnPedidos.add(MnItemPedidos);
 
         jMenuBar1.add(MnPedidos);
 
         MnProveedores.setText("Proveedores");
+
+        MnItemProveedores.setText("Agregar/Modificar Proveedores");
+        MnProveedores.add(MnItemProveedores);
+
         jMenuBar1.add(MnProveedores);
 
         setJMenuBar(jMenuBar1);
@@ -270,12 +286,12 @@ public class Inicio extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jMenuItem1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem1MousePressed
+    private void MnItemCerrSesionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MnItemCerrSesionMousePressed
         Ayuda.Sesion.cerrarSesion();
         this.setVisible(false);
         Login Ventana = new Login();
         Ventana.setVisible(true);
-    }//GEN-LAST:event_jMenuItem1MousePressed
+    }//GEN-LAST:event_MnItemCerrSesionMousePressed
 
     /**
      * @param args the command line arguments
@@ -316,6 +332,17 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JMenu MnArchivo;
     private javax.swing.JMenu MnCaja;
     private javax.swing.JMenu MnClientes;
+    private javax.swing.JMenuItem MnItemAddClient;
+    private javax.swing.JMenuItem MnItemAddMovimient;
+    private javax.swing.JMenuItem MnItemAddProd;
+    private javax.swing.JMenuItem MnItemAddUser;
+    private javax.swing.JMenuItem MnItemCerrSesion;
+    private javax.swing.JMenuItem MnItemCortCaja;
+    private javax.swing.JMenuItem MnItemDesClient;
+    private javax.swing.JMenuItem MnItemPedidos;
+    private javax.swing.JMenuItem MnItemProveedores;
+    private javax.swing.JMenuItem MnItemSearchProd;
+    private javax.swing.JMenuItem MnItemTransProd;
     private javax.swing.JMenu MnMovimientos;
     private javax.swing.JMenu MnPedidos;
     private javax.swing.JMenu MnProductos;
@@ -325,16 +352,6 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem10;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblEncabezado;
