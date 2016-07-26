@@ -13,20 +13,20 @@ import java.sql.SQLException;
  *
  * @author Jose Luis
  */
-public class Modelo_Producto_Agregar {
+public class Modelo_Producto_Buscar {
 
     private Conexion con;
     PreparedStatement ps;
     ResultSet res;
     
     
-    public Modelo_Producto_Agregar() {
+    public Modelo_Producto_Buscar() {
         con = new Conexion();
     }
 
-    public Object[][] GetTabla(String colName[], String sql) {
+    public Object[][] GetTabla(String colName[], String sql,String tablas) {//recibir de las tablas el final de la consulta 
         int registros = 0;
-        String sentencia="select count(*) as total from (producto INNER JOIN proveedor on producto.IDPROVEEDOR = proveedor.IDproveedor) INNER JOIN (detallesucursal INNER JOIN sucursal on detallesucursal.idsucursal = sucursal.idsucursal and detallesucursal.Stock <= 3) on producto.IDPRODUCTO =detallesucursal.IDPRODUCTO";
+        String sentencia="select count(*) as total from "+tablas;
 
         try {
             ps = con.conectado().prepareStatement(sentencia);
@@ -57,5 +57,33 @@ public class Modelo_Producto_Agregar {
             System.out.println(e);
         }
         return data;
+    }
+    
+    public Object[] llenarCombo(String tabla, String nombrecol, String sql){
+          int registros = 0;      
+      try{
+         ps = con.conectado().prepareStatement("SELECT count(*) as total FROM " + tabla);
+         res = ps.executeQuery();
+         res.next();
+         registros = res.getInt("total");
+         res.close();
+      }catch(SQLException e){
+         System.out.println(e);
+      }
+
+    Object[] datos = new Object[registros];
+      try{
+         ps = con.conectado().prepareStatement(sql);
+         res = ps.executeQuery();
+         int i = 0;
+         while(res.next()){
+            datos[i] = res.getObject(nombrecol);
+            i++;
+         }
+         res.close();
+          }catch(SQLException e){
+         System.out.println(e);
+    }
+    return datos;
     }
 }

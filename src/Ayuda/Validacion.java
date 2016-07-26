@@ -14,8 +14,9 @@ public class Validacion {
      * @param txt recibe el textfield de edison.
      */
     public static void txtVacio(org.edisoncor.gui.textField.TextFieldRectBackground txt) {
-        if (txt.getText().isEmpty()) {
+        while(txt.getText().isEmpty()) {            
             txt.setDescripcion("Campo Vacio");
+            break; 
         }
     }
 
@@ -35,6 +36,8 @@ public class Validacion {
             while ((!valor) && (puntero < txt0.length)) {
                 if (txt0[puntero] != txt1[puntero]) {
                     valor = false;
+                    JOptionPane.showMessageDialog(null, "LAS CONTRASEÑAS NO COINCIDEN", "ERROR DE CONTRASEÑA", JOptionPane.ERROR_MESSAGE);
+                    break;
                 } else {
                     valor = true;
                 }
@@ -42,7 +45,7 @@ public class Validacion {
         }
         if (valor = false) {
             //JOptionPane.showMessageDialog(this,"Las Contraseñas no Coinciden","EROR DE CONTRASEÑA",JOptionPane.ERROR_MESSAGE);
-            JOptionPane.showMessageDialog(null, "LAS CONTRASEÑAS NO COINCIDEN", "ERROR DE CONTRASEÑA", JOptionPane.ERROR_MESSAGE);
+
         }
     }
 
@@ -50,10 +53,10 @@ public class Validacion {
         String numero = txt.getText();
 
 
-            if (isNumeric(numero) == true) {
+            while (isNumeric(numero) == false) {
 
-            } else {
                 txt.setText(null);
+                break;
             }
         
     }
