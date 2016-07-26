@@ -18,15 +18,14 @@ public class Modelo_Producto_Buscar {
     private Conexion con;
     PreparedStatement ps;
     ResultSet res;
-    
-    
+
     public Modelo_Producto_Buscar() {
         con = new Conexion();
     }
 
-    public Object[][] GetTabla(String colName[], String sql,String tablas) {//recibir de las tablas el final de la consulta 
+    public Object[][] GetTabla(String colName[], String sql, String tablas) {//recibir de las tablas el final de la consulta 
         int registros = 0;
-        String sentencia="select count(*) as total from "+tablas;
+        String sentencia = "select count(*) as total from " + tablas;
 
         try {
             ps = con.conectado().prepareStatement(sentencia);
@@ -58,27 +57,58 @@ public class Modelo_Producto_Buscar {
         }
         return data;
     }
-    
-    public Object[] llenarCombo(String tabla, String nombrecol, String sql){
-          int registros = 0;      
-      try{
-         ps = con.conectado().prepareStatement("SELECT count(*) as total FROM " + tabla);
-         res = ps.executeQuery();
-         res.next();
-         registros = res.getInt("total");
-         res.close();
-      }catch(SQLException e){
-         System.out.println(e);
-      }
 
-    Object[] datos = new Object[registros];
+    public Object[] llenarCombo(String tabla, String nombrecol, String sql) {
+        int registros = 0;
+        try {
+            ps = con.conectado().prepareStatement("SELECT count(*) as total FROM " + tabla);
+            res = ps.executeQuery();
+            res.next();
+            registros = res.getInt("total");
+            res.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        Object[] datos = new Object[registros];
+        try {
+            ps = con.conectado().prepareStatement(sql);
+            res = ps.executeQuery();
+            int i = 0;
+            while (res.next()) {
+                datos[i] = res.getObject(nombrecol);
+                i++;
+            }
+            res.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return datos;
+    }
+
+    public boolean insertar(String datos[], String insert) {
+        boolean estado = false;
+        try {
+            ps = con.conectado().prepareStatement(insert);
+            for (int i = 0; i <= datos.length - 1; i++) {
+                ps.setString(i + 1, datos[i]);
+            }
+            ps.execute();
+            ps.close();
+            estado = true;
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return estado;
+    }
+    public String obtenerIdProvedor(String nombre_columna, String sentenciasql){
+        
+    String datos ="";
       try{
-         ps = con.conectado().prepareStatement(sql);
+         ps = con.conectado().prepareStatement(sentenciasql);
          res = ps.executeQuery();
-         int i = 0;
          while(res.next()){
-            datos[i] = res.getObject(nombrecol);
-            i++;
+            datos = res.getString(nombre_columna);
          }
          res.close();
           }catch(SQLException e){
@@ -86,4 +116,5 @@ public class Modelo_Producto_Buscar {
     }
     return datos;
     }
+
 }

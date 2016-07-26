@@ -19,6 +19,18 @@ public class Controlador_Producto_Buscar {
         sensql = new Modelo_Producto_Buscar();
     }
 
+        public Object[][] mostrarProductos() {
+
+        String seleccion = "SELECT producto.IDPRODUCTO, producto.NOMBRE,producto.ACTIVO,producto.DESCRIPCION,producto.PPUBLICO,producto.PCOMPRA,detallesucursal.Stock,proveedor.CONTACTO,sucursal.nombre from";
+        String tablas = "(producto INNER JOIN proveedor on producto.IDPROVEEDOR = proveedor.IDproveedor) INNER JOIN (detallesucursal INNER JOIN sucursal on detallesucursal.idsucursal = sucursal.idsucursal) on producto.IDPRODUCTO =detallesucursal.IDPRODUCTO";
+        String sentencia = seleccion + tablas;
+        Object[][] datos = null;
+        String[] columnas = {"producto.IDPRODUCTO", "producto.NOMBRE", "producto.ACTIVO", "producto.DESCRIPCION", "producto.PPUBLICO", "producto.PCOMPRA", "detallesucursal.Stock", "proveedor.CONTACTO", "sucursal.nombre"};
+        //dividir la consulta en dos una parta de los datos a busca y otra que tendra las tablas 
+        datos = sensql.GetTabla(columnas, sentencia, tablas);
+
+        return datos;
+    }
     public Object[][] consulta_Productos() {
 
         String seleccion = "SELECT producto.IDPRODUCTO, producto.NOMBRE,producto.ACTIVO,producto.DESCRIPCION,producto.PPUBLICO,producto.PCOMPRA,detallesucursal.Stock,proveedor.CONTACTO,sucursal.nombre from";
@@ -88,13 +100,63 @@ public class Controlador_Producto_Buscar {
         String seleccion = "SELECT sucursal.nombre from ";
         String sentencia = seleccion + tablas;
         String columnas = "sucursal.nombre";
-        return sensql.llenarCombo(tablas, columnas,sentencia);
+        return sensql.llenarCombo(tablas, columnas, sentencia);
     }
-    
+
     public Object[] cargaProveedor(String tablas) {
         String seleccion = "SELECT proveedor.CONTACTO from ";
         String sentencia = seleccion + tablas;
         String columnas = "proveedor.CONTACTO";
-        return sensql.llenarCombo(tablas, columnas,sentencia);
+        return sensql.llenarCombo(tablas, columnas, sentencia);
+    }
+
+    public Object[][] buscaProductosSucursal(String Sucursal) {
+
+        String seleccion = "SELECT producto.IDPRODUCTO, producto.NOMBRE,producto.ACTIVO,producto.DESCRIPCION,producto.PPUBLICO,producto.PCOMPRA,detallesucursal.Stock,proveedor.CONTACTO,sucursal.nombre from";
+        String tablas = "(producto INNER JOIN proveedor on producto.IDPROVEEDOR = proveedor.IDproveedor) INNER JOIN (detallesucursal INNER JOIN sucursal on detallesucursal.idsucursal = sucursal.idsucursal and sucursal.nombre LIKE '%" + Sucursal + "%') on producto.IDPRODUCTO =detallesucursal.IDPRODUCTO";
+        String sentencia = seleccion + tablas;
+        Object[][] datos = null;
+        String[] columnas = {"producto.IDPRODUCTO", "producto.NOMBRE", "producto.ACTIVO", "producto.DESCRIPCION", "producto.PPUBLICO", "producto.PCOMPRA", "detallesucursal.Stock", "proveedor.CONTACTO", "sucursal.nombre"};
+        //dividir la consulta en dos una parta de los datos a busca y otra que tendra las tablas 
+        datos = sensql.GetTabla(columnas, sentencia, tablas);
+
+        return datos;
+    }
+
+    public Object[][] buscaProductosProveedor(String Proveedor) {
+
+        String seleccion = "SELECT producto.IDPRODUCTO, producto.NOMBRE,producto.ACTIVO,producto.DESCRIPCION,producto.PPUBLICO,producto.PCOMPRA,detallesucursal.Stock,proveedor.CONTACTO,sucursal.nombre from";
+        String tablas = "(producto INNER JOIN proveedor on producto.IDPROVEEDOR = proveedor.IDproveedor and proveedor.CONTACTO LIKE '%" + Proveedor + "%') INNER JOIN (detallesucursal INNER JOIN sucursal on detallesucursal.idsucursal = sucursal.idsucursal) on producto.IDPRODUCTO =detallesucursal.IDPRODUCTO";
+        String sentencia = seleccion + tablas;
+        Object[][] datos = null;
+        String[] columnas = {"producto.IDPRODUCTO", "producto.NOMBRE", "producto.ACTIVO", "producto.DESCRIPCION", "producto.PPUBLICO", "producto.PCOMPRA", "detallesucursal.Stock", "proveedor.CONTACTO", "sucursal.nombre"};
+        //dividir la consulta en dos una parta de los datos a busca y otra que tendra las tablas 
+        datos = sensql.GetTabla(columnas, sentencia, tablas);
+
+        return datos;
+    }
+
+    public boolean ingresarProductoNuevo(String id,String nombre, String activo, String descripcion,String ppublico,String ppcompra,String idpreveedor,String status) {
+
+        String datos[] = {id,nombre,activo, descripcion,ppublico,ppcompra,idpreveedor,status};           
+            return sensql.insertar(datos, "INSERT INTO `producto` (`IDPRODUCTO`, `NOMBRE`, `ACTIVO`, `DESCRIPCION`, `PPUBLICO`, `PCOMPRA`, `IDPROVEEDOR`, `estatus`) VALUES (?,?,?,?,?,?,?,?)");
+    }
+    public boolean ingresarDetalleNuevo(String idproducto,String sucursal,String stock, String vendidos, String area) {
+
+        String datos[] = {idproducto,sucursal,stock,vendidos,area};           
+            return sensql.insertar(datos, "INSERT INTO `detallesucursal` (`IDPRODUCTO`, `idsucursal`, `Stock`, `Vendidos`, `idArea`) VALUES (?,?,?,?,?)");
+    }
+    public String obtenerIdProveedor(String contacto){
+        String sentencia = "SELECT proveedor.IDproveedor from proveedor WHERE proveedor.CONTACTO = '"+contacto+"'";
+        String datos = null;
+        String columnas = "IDproveedor";
+        //dividir la consulta en dos una parta de los datos a busca y otra que tendra las tablas 
+        datos = sensql.obtenerIdProvedor(columnas, sentencia);
+        return datos;
+    }
+    public boolean actualizarStock(String idproducto, String idsucursal, String stock){
+        String campos[]={stock,idproducto,idsucursal};
+        String sentencia="UPDATE detallesucursal SET Stock = Stock+? WHERE detallesucursal.IDPRODUCTO =? and detallesucursal.idsucursal = ?";
+        return sensql.insertar(campos, sentencia);
     }
 }
