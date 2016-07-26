@@ -48,3 +48,4 @@ Temporary Items
 build/classes/Vista/Producto.class
 *.properties
 /dist/
+*.class
