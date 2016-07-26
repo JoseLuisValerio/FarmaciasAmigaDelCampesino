@@ -5,18 +5,18 @@
  */
 package Controlador;
 
-import Modelo.Modelo_Producto_Buscar;
+import Modelo.Modelo_Producto_Root;
 
 /**
  *
  * @author Jose Luis
  */
-public class Controlador_Producto_Buscar {
+public class Controlador_Producto_Root {
 
-    Modelo_Producto_Buscar sensql;
+    Modelo_Producto_Root sensql;
 
-    public Controlador_Producto_Buscar() {
-        sensql = new Modelo_Producto_Buscar();
+    public Controlador_Producto_Root() {
+        sensql = new Modelo_Producto_Root();
     }
 
         public Object[][] mostrarProductos() {

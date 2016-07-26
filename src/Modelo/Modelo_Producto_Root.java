@@ -13,13 +13,13 @@ import java.sql.SQLException;
  *
  * @author Jose Luis
  */
-public class Modelo_Producto_Buscar {
+public class Modelo_Producto_Root {
 
     private Conexion con;
     PreparedStatement ps;
     ResultSet res;
 
-    public Modelo_Producto_Buscar() {
+    public Modelo_Producto_Root() {
         con = new Conexion();
     }
 

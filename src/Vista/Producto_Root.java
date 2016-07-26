@@ -1,6 +1,6 @@
 package Vista;
 
-import Controlador.Controlador_Producto_Buscar;
+import Controlador.Controlador_Producto_Root;
 import javax.swing.table.DefaultTableModel;
 import Ayuda.Estilo;
 
@@ -8,7 +8,7 @@ import Ayuda.Estilo;
  *
  * @author Jose Luis
  */
-public class Producto_Buscar extends javax.swing.JFrame {
+public class Producto_Root extends javax.swing.JFrame {
 
     /**
      * Creates new form Producto_Agregar
@@ -16,9 +16,9 @@ public class Producto_Buscar extends javax.swing.JFrame {
     Ayuda.Estilo Estilo = new Ayuda.Estilo();
     private Object[][] datostabla;
     String[] columnas = {"Código", "Nombre", "Activo", "Descripcion", "Precio Publico", "Precio Compra", "Stock", "Proveedor","Sucursal"};
-    Controlador_Producto_Buscar ctr = new Controlador_Producto_Buscar();
+    Controlador_Producto_Root ctr = new Controlador_Producto_Root();
     String idprovedor="";
-    public Producto_Buscar() {
+    public Producto_Root() {
         initComponents();
         mostrar_tabla();
         cargarCombos();
@@ -478,21 +478,23 @@ public class Producto_Buscar extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Producto_Buscar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Producto_Root.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Producto_Buscar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Producto_Root.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Producto_Buscar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Producto_Root.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Producto_Buscar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Producto_Root.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Producto_Buscar().setVisible(true);
+                new Producto_Root().setVisible(true);
             }
         });
     }
