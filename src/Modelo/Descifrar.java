@@ -7,11 +7,12 @@ import javax.crypto.spec.SecretKeySpec;
 import org.apache.commons.codec.binary.Base64;
 
 /**
- *
+ * Esta clase desencripta los datos contenidos en el archivo de configuración
+ * de la conexión a la base de datos.
  * @author Jose Luis
  */
 public class Descifrar {
-        private final static String llave = "frmcmp";
+        private final static String llave = "FarmAx23!";
 
     /**
      * Metodo de desenciptacion
