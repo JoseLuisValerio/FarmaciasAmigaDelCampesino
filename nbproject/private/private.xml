@@ -3,8 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/4lejandroRojas/Documents/NetBeansProjects/FarmaciasAmigaDelCampesino/src/Modelo/Conexion.java</file>
-            <file>file:/C:/Users/4lejandroRojas/Documents/NetBeansProjects/FarmaciasAmigaDelCampesino/src/Ayuda/Validacion.java</file>
+            <file>file:/C:/Users/4lejandroRojas/Documents/NetBeansProjects/FarmaciasAmigaDelCampesino/src/Modelo/Modelo_Producto_Root.java</file>
+            <file>file:/C:/Users/4lejandroRojas/Documents/NetBeansProjects/FarmaciasAmigaDelCampesino/src/Controlador/Controlador_Producto_Root.java</file>
+            <file>file:/C:/Users/4lejandroRojas/Documents/NetBeansProjects/FarmaciasAmigaDelCampesino/src/Ayuda/Utilidades.java</file>
+            <file>file:/C:/Users/4lejandroRojas/Documents/NetBeansProjects/FarmaciasAmigaDelCampesino/src/Vista/Login.java</file>
+            <file>file:/C:/Users/4lejandroRojas/Documents/NetBeansProjects/FarmaciasAmigaDelCampesino/src/Modelo/Modelo_Usuario.java</file>
+            <file>file:/C:/Users/4lejandroRojas/Documents/NetBeansProjects/FarmaciasAmigaDelCampesino/src/Vista/Producto_Root.java</file>
+            <file>file:/C:/Users/4lejandroRojas/Documents/NetBeansProjects/FarmaciasAmigaDelCampesino/src/Vista/Usuario.java</file>
+            <file>file:/C:/Users/4lejandroRojas/Documents/NetBeansProjects/FarmaciasAmigaDelCampesino/src/Controlador/Controlador_Usuario.java</file>
         </group>
     </open-files>
 </project-private>

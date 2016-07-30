@@ -20,33 +20,30 @@ public class Validacion {
         }
     }
 
-    
-    public static void txtCompara(JPasswordField txt, JPasswordField txt2) {
-        char[] txt0;
-        char[] txt1;
-        boolean valor = false;
+    /**
+     * Recibe dos objetos tipo JPasswordField y los compara para ver si lo introducido en ellos coincide
+     * @param Pass1 Recibe un JPasswordField
+     * @param Pass2  recibe el segundo JPasswordField
+     * @return retorna el resultado de dicha comparación
+     */
+    public boolean PassCompara(JPasswordField Pass1, JPasswordField Pass2) {
+        char[] Password1 = Pass1.getPassword();
+        char[] Password2 = Pass2.getPassword();
+        boolean esIgual = false;
         int puntero = 0;
-
-        txt0 = txt.getPassword();
-        txt1 = txt2.getPassword();
-
-        if (txt0.length != txt1.length) {
-            valor = false;
+        if (Password1.length != Password2.length) {
+            esIgual = false;
         } else {
-            while ((!valor) && (puntero < txt0.length)) {
-                if (txt0[puntero] != txt1[puntero]) {
-                    valor = false;
-                    JOptionPane.showMessageDialog(null, "LAS CONTRASEÑAS NO COINCIDEN", "ERROR DE CONTRASEÑA", JOptionPane.ERROR_MESSAGE);
+            while ((!esIgual) && (puntero < Password1.length)) {
+                if (Password1[puntero] != Password2[puntero]) {
+                    esIgual = false;
                     break;
                 } else {
-                    valor = true;
+                    esIgual = true;
                 }
             }
         }
-        if (valor = false) {
-            //JOptionPane.showMessageDialog(this,"Las Contraseñas no Coinciden","EROR DE CONTRASEÑA",JOptionPane.ERROR_MESSAGE);
-
-        }
+        return esIgual;
     }
 
     public static void txtNumero(org.edisoncor.gui.textField.TextFieldRectBackground txt) {

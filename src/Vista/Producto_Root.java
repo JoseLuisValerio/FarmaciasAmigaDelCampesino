@@ -197,7 +197,7 @@ public class Producto_Root extends javax.swing.JFrame {
             }
         });
 
-        spStock.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
+        spStock.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
         jLabel6.setText("Stock");
 
@@ -256,6 +256,11 @@ public class Producto_Root extends javax.swing.JFrame {
         btnAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnAgregarMouseClicked(evt);
+            }
+        });
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
             }
         });
 
@@ -460,6 +465,10 @@ public class Producto_Root extends javax.swing.JFrame {
         mostrartodo();
         limpia();
     }//GEN-LAST:event_btnAgregarMouseClicked
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAgregarActionPerformed
 
     /**
      * @param args the command line arguments

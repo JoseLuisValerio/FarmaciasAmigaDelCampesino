@@ -1,15 +1,29 @@
 package Vista;
 
+import Controlador.Controlador_Usuario;
+import javax.swing.table.DefaultTableModel;
+
 /**
- *  Esta vista permite la creación y edición de usuarios o empleados
- *  a traves de la selección de tipo de se asignan los permisos necesarios.
+ * Esta vista permite la creación y edición de usuarios o empleados a traves de
+ * la selección de tipo de se asignan los permisos necesarios.
+ *
  * @author root
  */
 public class Usuario extends javax.swing.JFrame {
+
     Ayuda.Estilo Estilo;
+    Ayuda.Utilidades Util;
+    Ayuda.Validacion Valido;
+    private Object[][] datostabla;
+    String[] columnas = {"Usuario", "Tipo", "Nombre", "A. Paterno", "A. Materno"};
+    Controlador.Controlador_Usuario Controlador;
+
     public Usuario() {
         initComponents();
+        Controlador = new Controlador_Usuario();
         Estilo = new Ayuda.Estilo();
+        Util = new Ayuda.Utilidades();
+        Valido = new Ayuda.Validacion();
         Estilo.lblBody(jLabel1);
         Estilo.lblBody(jLabel2);
         Estilo.lblBody(jLabel3);
@@ -19,24 +33,62 @@ public class Usuario extends javax.swing.JFrame {
         Estilo.lblBody(jLabel7);
         Estilo.lblLogo(lblEncabezado);
         Estilo.lblMensajes(lblAlerta, "", 4);
-        
+
         Estilo.BtnOpcion(btnAdd, 1);
         Estilo.BtnOpcion(btnUpdate, 2);
         Estilo.BtnOpcion(btnCancel, 3);
-        
+
         Estilo.PnlTitulo(jPanel1, "Datos del usuario/empleado");
         Estilo.PnlTitulo(jPanel2, "Usuarios/empleados registrados");
-        
+
         Estilo.frmInicial(this, "Usuarios/empleados");
-        
+
         Estilo.txtfDescripcion(txtAPaterno, "Apellido paterno");
         Estilo.txtfDescripcion(txtAMaterno, "Apellido materno");
         Estilo.txtfDescripcion(txtNombre, "Nombre(s)");
         Estilo.txtfDescripcion(txtUsuario, "Nombre de usuario");
-        
-        
-        
-        
+
+        //Inicio de valores iniciales
+        MostrarTabla();
+        LlenarcmbTipos();
+        Util.botonHabilitar(btnUpdate, false);
+
+    }
+
+    /**
+     * Muestra todos los usuarios de la tabla Usuario en la tabla
+     */
+    private void MostrarTabla() {
+        datostabla = Controlador.ConsultaUsuarios();
+        DefaultTableModel datos = new DefaultTableModel(datostabla, columnas);
+        tblUsuarios.setModel(datos);
+    }
+
+    /**
+     * Llena los combos de los tipos
+     */
+    private void LlenarcmbTipos() {
+        Object[] Tipos = Controlador.CargaTipos();
+        cmbTipo.removeAllItems();
+        cmbTipo.addItem("");
+        for (int i = 0; i < Tipos.length; i++) {
+            cmbTipo.addItem((String) Tipos[i]);
+        }
+    }
+    
+    private void Limpiar(){
+        Util.passLimpiar(passField1);
+        Util.passLimpiar(passField2);
+        Util.txtLimpiar(txtNombre);
+        Util.txtLimpiar(txtUsuario);
+        Util.txtLimpiar(txtAPaterno);
+        Util.txtLimpiar(txtAMaterno);
+        Util.passLimpiar(passField1);
+        Util.passLimpiar(passField2);
+        Util.botonHabilitar(btnAdd, true);
+        Util.botonHabilitar(btnUpdate, false);
+        MostrarTabla();
+        Util.txtFoco(txtUsuario);
     }
 
     /**
@@ -69,7 +121,7 @@ public class Usuario extends javax.swing.JFrame {
         btnCancel = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblProducto = new javax.swing.JTable();
+        tblUsuarios = new javax.swing.JTable();
         lblAlerta = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -93,10 +145,25 @@ public class Usuario extends javax.swing.JFrame {
         cmbTipo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         btnAdd.setText("jButton1");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
 
         btnUpdate.setText("jButton1");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         btnCancel.setText("jButton1");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -181,7 +248,7 @@ public class Usuario extends javax.swing.JFrame {
                 .addContainerGap(33, Short.MAX_VALUE))
         );
 
-        tblProducto.setModel(new javax.swing.table.DefaultTableModel(
+        tblUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -189,7 +256,12 @@ public class Usuario extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(tblProducto);
+        tblUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tblUsuariosMousePressed(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblUsuarios);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -218,11 +290,9 @@ public class Usuario extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblEncabezado, javax.swing.GroupLayout.DEFAULT_SIZE, 506, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblAlerta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblAlerta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -240,6 +310,52 @@ public class Usuario extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        String Password = new String(passField1.getPassword());
+        if (Controlador.InsertarUsuario(txtUsuario.getText(), Password, cmbTipo.getSelectedItem().toString(), txtNombre.getText(), txtAPaterno.getText(), txtAMaterno.getText())) {
+            Estilo.lblMensajes(lblAlerta, "Usuario Registrado exitosamente ", 3);
+            MostrarTabla();
+            Limpiar();
+        } else {
+            Estilo.lblMensajes(lblAlerta, "Ha ocurrido un error al insertar ", 2);
+        }
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    private void tblUsuariosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUsuariosMousePressed
+        int fila = tblUsuarios.getSelectedRow();
+        if (fila >= 0) {
+            txtUsuario.setText(String.valueOf(tblUsuarios.getValueAt(fila, 0)));
+            //cmbTipo 
+            txtNombre.setText(String.valueOf(tblUsuarios.getValueAt(fila, 2)));
+            txtAPaterno.setText(String.valueOf(tblUsuarios.getValueAt(fila, 3)));
+            txtAMaterno.setText(String.valueOf(tblUsuarios.getValueAt(fila, 4)));
+            Util.botonHabilitar(btnUpdate, true);
+            Util.botonHabilitar(btnAdd, false);
+            Util.txtHabilitar(txtUsuario, false);
+        }
+    }//GEN-LAST:event_tblUsuariosMousePressed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        if(Valido.PassCompara(passField1, passField2)){
+        String Password = new String(passField1.getPassword());
+        if(Controlador.ActualizarUsuario(txtUsuario.getText(), Password, cmbTipo.getSelectedItem().toString(), txtNombre.getText(), txtAPaterno.getText(), txtAMaterno.getText())){
+            Estilo.lblMensajes(lblAlerta, "Usuario actualizado correctamente", 3);
+            Limpiar();
+            Util.txtHabilitar(txtUsuario, true);
+        }else{
+            Estilo.lblMensajes(lblAlerta, "Ha ocurrido un error al actualizar usuario", 2);
+        }
+    }else{
+            Estilo.lblMensajes(lblAlerta, "Las contraseñas no coinciden, verifique", 1);
+            }
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        Limpiar();
+        Estilo.lblMensajes(lblAlerta, "", 4);
+        Util.txtHabilitar(txtUsuario, true);
+    }//GEN-LAST:event_btnCancelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -295,7 +411,7 @@ public class Usuario extends javax.swing.JFrame {
     private javax.swing.JLabel lblEncabezado;
     private javax.swing.JPasswordField passField1;
     private javax.swing.JPasswordField passField2;
-    private javax.swing.JTable tblProducto;
+    private javax.swing.JTable tblUsuarios;
     private org.edisoncor.gui.textField.TextFieldRectBackground txtAMaterno;
     private org.edisoncor.gui.textField.TextFieldRectBackground txtAPaterno;
     private org.edisoncor.gui.textField.TextFieldRectBackground txtNombre;
