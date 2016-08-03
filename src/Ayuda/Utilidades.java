@@ -1,10 +1,7 @@
 package Ayuda;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+import javax.swing.JButton;
 import javax.swing.JPasswordField;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 
 /**
  * Código diverso: Limpieza de tablas, de textfields y jPasswordFields
@@ -20,6 +17,7 @@ public class Utilidades {
         textfield.setText("");
     }
     
+    
     /**
      * Recibe un JPasswordField y borra lo que contiene
      * @param passField recibe un JPasswordField de Swing
@@ -27,26 +25,30 @@ public class Utilidades {
     public void passLimpiar(JPasswordField passField){
         passField.setText("");
     }
-    
-    /**
-     * Recibe una JTable, define un nuevo modelo así como elimina las filas de dicha tabla
-     * dejandola vacía.
-     * @param tabla recibe una JTable de la clase Swing
-     */
-    public void tblLimpiar(JTable tabla) {
-        DefaultTableModel Modelo = new DefaultTableModel();
-        for (int i = 0; i < tabla.getRowCount(); i++) {
-            tabla.setModel(Modelo);
-            Modelo.removeRow(i);
-            i -= 1;
-        }
-    }
-    
+      
     /**
      * Coloca el cursor en el textfield de edisoncorp seleccionado
      * @param txt recibe un textfield de edisoncorp
      */
     public void txtFoco(org.edisoncor.gui.textField.TextFieldRectBackground txt){
         txt.requestFocus();
+    }
+    
+    /**
+     * Recibe un boton y lo habilita o deshabilita segun sea el caso
+     * @param boton recibe un objeto de tipo JButton
+     * @param estado recibe un boolean para definir si el boton estara habilitado o no
+     */
+    public void botonHabilitar(JButton boton, boolean estado){
+        boton.setEnabled(estado);
+    }
+    
+    /**
+     * Recibe un objeto de tipo textfield y lo habilita o deshabilita segun sea el caso
+     * @param txt recibe el objeto textfield
+     * @param estado recibe el estado true=habilitado, false=deshabilitado
+     */
+    public void txtHabilitar(org.edisoncor.gui.textField.TextFieldRectBackground txt, boolean estado){
+        txt.setEnabled(estado);
     }
 }

@@ -55,6 +55,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Agregar/Editar"/>
               </Properties>
+              <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="MnItemAddClientMousePressed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="MnItemDesClient">
               <Properties>
@@ -84,6 +87,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Agregar/Editar usuarios"/>
               </Properties>
+              <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="MnItemAddUserMousePressed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
