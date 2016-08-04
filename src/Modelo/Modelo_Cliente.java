@@ -20,17 +20,18 @@ public class Modelo_Cliente {
     /**
      * 
      * @param colName
-     * @param sql
+     * @param SQLExecute
      * @return 
      */
-    public Object [][] GetTabla(String colName[], String sql){
+    public Object [][] GetTabla(String colName[], String SQLExecute, String SQLContar){
       int registros = 0;
       try{//Cuenta la cantidad de registros en la tabla Cliente
-         ps = con.conectado().prepareStatement("SELECT count(*) AS total FROM Cliente");
+         ps = con.conectado().prepareStatement("SELECT count(*) AS total FROM "+SQLContar);
          res = ps.executeQuery();
          res.next();
          registros = res.getInt("total");
          res.close();
+         //con.desconectar(); -> Error Null Pointer
       }catch(SQLException e){
          System.err.println("Error al contar los registros en la tabla Cliente: "+e.getMessage());
       }
@@ -39,7 +40,7 @@ public class Modelo_Cliente {
     String col[] = new String[colName.length];
     
       try{
-         ps = con.conectado().prepareStatement(sql);
+         ps = con.conectado().prepareStatement(SQLExecute);
          res = ps.executeQuery();
          int i = 0;
          while(res.next()){
@@ -50,8 +51,9 @@ public class Modelo_Cliente {
             i++;
          }
          res.close();
+         con.desconectar();
           }catch(SQLException e){
-         System.out.println(e);
+         System.err.println("Error al leer los registros en cliente: "+e.getMessage());
     }
     return data;
  }
@@ -59,13 +61,14 @@ public class Modelo_Cliente {
     public Object[] llenarCombo(String nombrecol, String sql) {
         int registros = 0;
         try {
-            ps = con.conectado().prepareStatement("SELECT count(*) as total FROM Cliente");
+            ps = con.conectado().prepareStatement("SELECT count(*) as total FROM Tipo_Cliente");
             res = ps.executeQuery();
             res.next();
             registros = res.getInt("total");
             res.close();
+            con.desconectar();
         } catch (SQLException e) {
-            System.err.println("Error al contar los registros de cliente: "+e.getMessage());
+            System.err.println("Error al contar los registros de tipo de cliente: "+e.getMessage());
         }
 
         Object[] datos = new Object[registros];
@@ -78,6 +81,7 @@ public class Modelo_Cliente {
                 i++;
             }
             res.close();
+            con.desconectar();
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -100,6 +104,7 @@ public class Modelo_Cliente {
                 datos = res.getString(nombre_columna);
             }
             res.close();
+            con.desconectar();
         } catch (SQLException e) {
             System.err.println("Error al obtener el idTipoCliente " + e.getMessage());
         }
@@ -122,6 +127,7 @@ public class Modelo_Cliente {
             }
             ps.execute();
             ps.close();
+            con.desconectar();
             estado = true;
         } catch (SQLException e) {
             System.err.println("Error al insertar un nuevo registro en Cliente: "+e.getMessage());

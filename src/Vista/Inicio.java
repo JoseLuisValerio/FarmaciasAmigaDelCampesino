@@ -201,6 +201,11 @@ public class Inicio extends javax.swing.JFrame {
         jMenuBar1.add(MnProductos);
 
         MnVentas.setText("Ventas");
+        MnVentas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                MnVentasMousePressed(evt);
+            }
+        });
         jMenuBar1.add(MnVentas);
 
         MnClientes.setText("Clientes");
@@ -301,7 +306,7 @@ public class Inicio extends javax.swing.JFrame {
 
     private void MnItemCerrSesionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MnItemCerrSesionMousePressed
         Ayuda.Sesion.cerrarSesion();
-        this.setVisible(false);
+        this.dispose();
         Login Ventana = new Login();
         Ventana.setVisible(true);
     }//GEN-LAST:event_MnItemCerrSesionMousePressed
@@ -315,6 +320,11 @@ public class Inicio extends javax.swing.JFrame {
         Cliente Ventana = new Cliente();
         Ventana.setVisible(true);
     }//GEN-LAST:event_MnItemAddClientMousePressed
+
+    private void MnVentasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MnVentasMousePressed
+        Venta Ventana = new Venta();
+        Ventana.setVisible(true);
+    }//GEN-LAST:event_MnVentasMousePressed
 
     /**
      * @param args the command line arguments

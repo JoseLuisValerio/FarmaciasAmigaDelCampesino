@@ -1,17 +1,25 @@
 package Vista;
 
+import javax.swing.table.DefaultTableModel;
+
 /**
  * Esta vista cobrará los productos solicitados por un cliente
+ *
  * @author root
  */
 public class Venta extends javax.swing.JFrame {
-Ayuda.Estilo Estilo=null;
+
+    Ayuda.Estilo Estilo = null;
+    Ayuda.Utilidades Util = null;
+    String[] columnas = {"Código", "Nombre", "Precio"};
+    DefaultTableModel ModelProducto;
 
     /**
      * Inicializa los elementos usando la clase Estilo
      */
     public Venta() {
-        Estilo= new Ayuda.Estilo();
+        Estilo = new Ayuda.Estilo();
+        Util = new Ayuda.Utilidades();
         initComponents();
         //Estilo JLabels
         Estilo.lblBody(jLabel5);
@@ -30,15 +38,31 @@ Ayuda.Estilo Estilo=null;
         Estilo.BtnOpcion(btnAdd, 1);
         Estilo.BtnOpcion(btnCancelar, 3);
         //Estilo de ventana
-        Estilo.lblMensajes(lblAlerta,"AAAAAA",1);
+        Estilo.lblMensajes(lblAlerta, "", 4);
         Estilo.frmInicial(this, "Venta");
         Estilo.lblLogo(lblEncabezado);
         //Estilo de textfields
         Estilo.txtfDescripcion(txtCliente, "Clave de cliente");
         Estilo.txtfDescripcion(txtProducto, "Código del producto");
         Estilo.txtfDescripcion(txtBusqueda, "Nombre del cliente");
+        
+        //Valores iniciales
+        MostrarCliente("");
+        ModelProducto = new DefaultTableModel();
+        ModelProducto.addColumn(columnas);
     }
-
+    
+    private void MostrarCliente(String Buscar){
+        Object [][]datostabla;
+        String[] columnas = {"Alias", "Nombre", "APaterno", "AMaterno", "Tel","DineroElectronico"};
+        Controlador.Controlador_Cliente Controlador;
+        Controlador = new Controlador.Controlador_Cliente();
+        datostabla = Controlador.ConsultaUnCliente(Buscar);
+        DefaultTableModel datos = new DefaultTableModel(datostabla, columnas);
+        tblCliente.setModel(datos);
+        Estilo.tblColumnaOculta(tblCliente, 0);
+        Estilo.tblColumnaOculta(tblCliente, 5);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -68,7 +92,7 @@ Ayuda.Estilo Estilo=null;
         pnlClienteBuscar = new javax.swing.JPanel();
         txtBusqueda = new org.edisoncor.gui.textField.TextFieldRectBackground();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblProducto1 = new javax.swing.JTable();
+        tblCliente = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -108,8 +132,8 @@ Ayuda.Estilo Estilo=null;
         );
         pnlClienteLayout.setVerticalGroup(
             pnlClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlClienteLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlClienteLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnlClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -121,7 +145,7 @@ Ayuda.Estilo Estilo=null;
                 .addGroup(pnlClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addGap(42, 42, 42))
         );
 
         tblProducto.setModel(new javax.swing.table.DefaultTableModel(
@@ -140,15 +164,15 @@ Ayuda.Estilo Estilo=null;
             pnlProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlProductosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addComponent(jScrollPane1)
+                .addContainerGap())
         );
         pnlProductosLayout.setVerticalGroup(
             pnlProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlProductosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         jLabel1.setText("Total:");
@@ -165,10 +189,21 @@ Ayuda.Estilo Estilo=null;
         lblTotal.setText("0.0");
 
         btnCancelar.setText("jButton2");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         lblAlerta.setText("Mensajes");
 
-        tblProducto1.setModel(new javax.swing.table.DefaultTableModel(
+        txtBusqueda.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBusquedaKeyReleased(evt);
+            }
+        });
+
+        tblCliente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -176,7 +211,12 @@ Ayuda.Estilo Estilo=null;
 
             }
         ));
-        jScrollPane2.setViewportView(tblProducto1);
+        tblCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tblClienteMousePressed(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tblCliente);
 
         javax.swing.GroupLayout pnlClienteBuscarLayout = new javax.swing.GroupLayout(pnlClienteBuscar);
         pnlClienteBuscar.setLayout(pnlClienteBuscarLayout);
@@ -186,7 +226,7 @@ Ayuda.Estilo Estilo=null;
                 .addContainerGap()
                 .addGroup(pnlClienteBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pnlClienteBuscarLayout.setVerticalGroup(
@@ -195,8 +235,8 @@ Ayuda.Estilo Estilo=null;
                 .addContainerGap()
                 .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -206,14 +246,6 @@ Ayuda.Estilo Estilo=null;
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(55, 55, 55))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblEncabezado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -223,6 +255,14 @@ Ayuda.Estilo Estilo=null;
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(pnlClienteBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(55, 55, 55))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(pnlProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
@@ -238,34 +278,63 @@ Ayuda.Estilo Estilo=null;
                 .addContainerGap()
                 .addComponent(lblEncabezado, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pnlCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlClienteBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnlClienteBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnlCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
+                        .addComponent(pnlProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pnlProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(15, 15, 15)
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(42, 42, 42)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblTotal)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblAlerta, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        
+
     }//GEN-LAST:event_btnAddActionPerformed
+
+    private void txtBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaKeyReleased
+        MostrarCliente(txtBusqueda.getText());
+    }//GEN-LAST:event_txtBusquedaKeyReleased
+
+    private void tblClienteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblClienteMousePressed
+        try{
+            int fila =tblCliente.getSelectedRow();
+            if(fila>=0){
+                txtCliente.setText(String.valueOf(tblCliente.getValueAt(fila, 0)));
+                lblDinElectro.setText("$ "+String.valueOf(tblCliente.getValueAt(fila, 5)));
+                Util.txtFoco(txtProducto);
+                Util.txtHabilitar(txtCliente, false);
+            }
+        }catch(Exception e){
+            System.err.println("Ha ocurrido un error al seleccionar fila en tabla Cliente: "+e.getMessage());
+        }
+    }//GEN-LAST:event_tblClienteMousePressed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        Util.txtLimpiar(txtBusqueda);
+        Util.txtLimpiar(txtCliente);
+        Util.txtLimpiar(txtProducto);
+        Util.lblLimpiar(lblDinElectro);
+        MostrarCliente("");
+        Util.tblLimpiar(tblProducto, ModelProducto);
+        Util.txtHabilitar(txtCliente, true);
+        Util.txtFoco(txtCliente);
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -319,8 +388,8 @@ Ayuda.Estilo Estilo=null;
     private javax.swing.JPanel pnlCliente;
     private javax.swing.JPanel pnlClienteBuscar;
     private javax.swing.JPanel pnlProductos;
+    private javax.swing.JTable tblCliente;
     private javax.swing.JTable tblProducto;
-    private javax.swing.JTable tblProducto1;
     private org.edisoncor.gui.textField.TextFieldRectBackground txtBusqueda;
     private org.edisoncor.gui.textField.TextFieldRectBackground txtCliente;
     private org.edisoncor.gui.textField.TextFieldRectBackground txtProducto;

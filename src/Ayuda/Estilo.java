@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 /**
  * Da formato visual a los elementos de las vistas
  */
@@ -171,6 +172,7 @@ public class Estilo {
         ventana.setTitle(titulo);
         ventana.setIconImage(icon);
         ventana.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        ventana.dispose();
     }
     
     /**
@@ -355,6 +357,12 @@ public class Estilo {
                 item.setIcon(thumbnail);
                 break;
         }
+    }
+    
+    public void tblColumnaOculta(JTable tabla, int Columna){
+        tabla.getColumnModel().getColumn(Columna).setMaxWidth(0);
+        tabla.getColumnModel().getColumn(Columna).setMinWidth(0);
+        tabla.getColumnModel().getColumn(Columna).setPreferredWidth(0);
     }
 }
 

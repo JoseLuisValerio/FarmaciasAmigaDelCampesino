@@ -1,3 +1,3 @@
-Usuario1
-Juanito Perez Saucedo
-Empleado
+4lejandro
+Alejandro Rojas Cruz
+Administrador

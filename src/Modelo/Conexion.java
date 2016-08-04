@@ -86,8 +86,12 @@ public class Conexion {
      * Cierra la conexión hecha
      */
     public void desconectar() {
+        try{
+        con.close();
         con = null;
         System.out.println("conexion terminada");
-
+        }catch(SQLException e){
+            System.err.println("Ha Ocurrido un error al cerrar la conexion: "+e.getMessage());
+        }
     }
 }

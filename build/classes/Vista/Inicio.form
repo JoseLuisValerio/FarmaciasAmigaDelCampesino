@@ -45,6 +45,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Ventas"/>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="MnVentasMousePressed"/>
+          </Events>
         </Menu>
         <Menu class="javax.swing.JMenu" name="MnClientes">
           <Properties>
