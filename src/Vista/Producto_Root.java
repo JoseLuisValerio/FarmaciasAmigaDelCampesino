@@ -200,7 +200,7 @@ public class Producto_Root extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         txtCodigo.setDescripcion("Código de producto");
         txtCodigo.addActionListener(new java.awt.event.ActionListener() {
