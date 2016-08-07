@@ -1,12 +1,10 @@
 package Modelo;
 
-//import static Modelo.Conexion.cont;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Properties;
 
@@ -23,7 +21,6 @@ public class Conexion {
     private static String url = "";//host
     private int cont=0;
 
-    PreparedStatement psPrepararSentencia;
     Connection con = null;
 
     public void LeerArchivoConf() throws Exception {
@@ -53,6 +50,11 @@ public class Conexion {
     }
 
     public Conexion() {
+        try{
+        LeerArchivoConf();
+        }catch(Exception e){System.err.println("Error al leer el archivo de configuración");}
+    }
+    private void Conectar(){
         if(cont==0){
             try{
             LeerArchivoConf();
@@ -79,6 +81,7 @@ public class Conexion {
      * @return
      */
     public Connection conectado() {
+        Conectar();
         return con;
     }
 
@@ -88,7 +91,6 @@ public class Conexion {
     public void desconectar() {
         try{
         con.close();
-        con = null;
         System.out.println("conexion terminada");
         }catch(SQLException e){
             System.err.println("Ha Ocurrido un error al cerrar la conexion: "+e.getMessage());
