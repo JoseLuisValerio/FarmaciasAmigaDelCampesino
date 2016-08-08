@@ -195,6 +195,7 @@ public class Producto_Root extends javax.swing.JFrame {
         menuItemBuscar = new javax.swing.JMenuItem();
         menuItemAgregar = new javax.swing.JMenuItem();
         menuItemEditar = new javax.swing.JMenuItem();
+        menuItemTransaccion = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
@@ -376,11 +377,24 @@ public class Producto_Root extends javax.swing.JFrame {
         });
         jMenu1.add(menuItemEditar);
 
+        menuItemTransaccion.setText("Transacción");
+        menuItemTransaccion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemTransaccionActionPerformed(evt);
+            }
+        });
+        jMenu1.add(menuItemTransaccion);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Proveedor");
 
         jMenuItem4.setText("Agregar");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem4);
 
         jMenuBar1.add(jMenu2);
@@ -736,6 +750,16 @@ public class Producto_Root extends javax.swing.JFrame {
         rbtAgregar.setSelected(true);// TODO add your handling code here:
     }//GEN-LAST:event_menuItemAgregarActionPerformed
 
+    private void menuItemTransaccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemTransaccionActionPerformed
+        Producto_Root_Transaccion tran = new Producto_Root_Transaccion();
+        tran.setVisible(true);
+    }//GEN-LAST:event_menuItemTransaccionActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        Proveedor prov = new Proveedor();
+        prov.setVisible(true);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -804,6 +828,7 @@ public class Producto_Root extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuItemAgregar;
     private javax.swing.JMenuItem menuItemBuscar;
     private javax.swing.JMenuItem menuItemEditar;
+    private javax.swing.JMenuItem menuItemTransaccion;
     private javax.swing.JRadioButton rbtAgregar;
     private javax.swing.JRadioButton rbtBuscar;
     private javax.swing.JRadioButton rbtModificar;
