@@ -32,6 +32,7 @@ public class Modelo_Producto_Root_Transaccion {
             res.next();
             registros = res.getInt("total");
             res.close();
+            con.desconectar();
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -51,6 +52,7 @@ public class Modelo_Producto_Root_Transaccion {
                 i++;
             }
             res.close();
+            con.desconectar();
         } catch (SQLException e) {
             System.out.println(e);
         }

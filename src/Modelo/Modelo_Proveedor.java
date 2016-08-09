@@ -32,6 +32,7 @@ public class Modelo_Proveedor {
             res.next();
             registros = res.getInt("total");
             res.close();
+            con.desconectar();
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -51,6 +52,7 @@ public class Modelo_Proveedor {
                 i++;
             }
             res.close();
+            con.desconectar();
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -66,6 +68,7 @@ public class Modelo_Proveedor {
             }
             ps.execute();
             ps.close();
+            con.desconectar();
             estado = true;
         } catch (SQLException e) {
             System.out.println(e);

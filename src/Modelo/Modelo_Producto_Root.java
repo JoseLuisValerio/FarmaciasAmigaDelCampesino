@@ -33,6 +33,7 @@ public class Modelo_Producto_Root {
             res.next();
             registros = res.getInt("total");
             res.close();
+            con.desconectar();
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -52,6 +53,7 @@ public class Modelo_Producto_Root {
                 i++;
             }
             res.close();
+            con.desconectar();
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -66,6 +68,7 @@ public class Modelo_Producto_Root {
             res.next();
             registros = res.getInt("total");
             res.close();
+            con.desconectar();
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -80,6 +83,7 @@ public class Modelo_Producto_Root {
                 i++;
             }
             res.close();
+            con.desconectar();
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -95,6 +99,7 @@ public class Modelo_Producto_Root {
             }
             ps.execute();
             ps.close();
+            con.desconectar();
             estado = true;
         } catch (SQLException e) {
             System.out.println(e);
@@ -111,6 +116,7 @@ public class Modelo_Producto_Root {
             datos = res.getString(nombre_columna);
          }
          res.close();
+         con.desconectar();
           }catch(SQLException e){
          System.out.println(e);
     }
