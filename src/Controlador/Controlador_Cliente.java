@@ -45,14 +45,14 @@ public class Controlador_Cliente {
      */
     public Object[][] ConsultaUnCliente(String Buscar) {
         Object[][] datos = null;
-        String[] columnaminima = {"Alias", "Nombre", "APaterno", "AMaterno", "Tel", "DineroElectronico"};
+        String[] columnaminima = {"Alias", "Nombre", "APaterno", "AMaterno", "Tel", "DineroElectronico", "idCliente"};
         if (Buscar.equals("")) {
             String SQLContar="Cliente;";
-            String SQLExecte="SELECT Alias, Nombre, APaterno, AMaterno, Tel, DineroElectronico FROM "+SQLContar;
+            String SQLExecte="SELECT Alias, Nombre, APaterno, AMaterno, Tel, DineroElectronico,idCliente FROM "+SQLContar;
             datos = ModeloCliente.GetTabla(columnaminima,SQLExecte,SQLContar);
         } else {
             String SQLContar="Cliente WHERE Nombre LIKE '%"+Buscar+"%' OR APaterno LIKE '%"+Buscar+"%' OR AMaterno LIKE '%"+Buscar+"%' OR Tel LIKE '%"+Buscar+"%';";
-            String SQLExecute="SELECT Alias, Nombre, APaterno, AMaterno, Tel,DineroElectronico FROM "+SQLContar;
+            String SQLExecute="SELECT Alias, Nombre, APaterno, AMaterno, Tel,DineroElectronico, idCliente FROM "+SQLContar;
             datos = ModeloCliente.GetTabla(columnaminima, SQLExecute,SQLContar);
         }
         return datos;

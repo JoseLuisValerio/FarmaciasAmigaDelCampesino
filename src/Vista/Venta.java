@@ -1,5 +1,9 @@
 package Vista;
 
+import Ayuda.Sesion;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -9,10 +13,12 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Venta extends javax.swing.JFrame {
 
-    Ayuda.Estilo Estilo = null;
-    Ayuda.Utilidades Util = null;
-    String[] columnas = {"Código", "Nombre", "Precio"};
-    DefaultTableModel ModelProducto;
+    private Ayuda.Estilo Estilo = null;
+    private Ayuda.Utilidades Util = null;
+    private Controlador.Controlador_Venta Controlador = null;
+    private final String[] columnas = {"Código", "Nombre", "Descripcion", "Precio Unitario", "Cantidad", "Precio Total"};
+    private DefaultTableModel ModelVenta;
+    private String idCliente;
 
     /**
      * Inicializa los elementos usando la clase Estilo
@@ -20,6 +26,8 @@ public class Venta extends javax.swing.JFrame {
     public Venta() {
         Estilo = new Ayuda.Estilo();
         Util = new Ayuda.Utilidades();
+        Controlador = new Controlador.Controlador_Venta();
+        idCliente="";
         initComponents();
         //Estilo JLabels
         Estilo.lblBody(jLabel5);
@@ -45,16 +53,20 @@ public class Venta extends javax.swing.JFrame {
         Estilo.txtfDescripcion(txtCliente, "Clave de cliente");
         Estilo.txtfDescripcion(txtProducto, "Código del producto");
         Estilo.txtfDescripcion(txtBusqueda, "Nombre del cliente");
-        
+
         //Valores iniciales
         MostrarCliente("");
-        ModelProducto = new DefaultTableModel();
-        ModelProducto.addColumn(columnas);
+        ModelVenta = new DefaultTableModel(null, columnas);
+        tblVenta.setModel(ModelVenta);
     }
-    
-    private void MostrarCliente(String Buscar){
-        Object [][]datostabla;
-        String[] columnas = {"Alias", "Nombre", "APaterno", "AMaterno", "Tel","DineroElectronico"};
+
+    /** 
+     * Muestra los clientes
+     * @param Buscar 
+     */
+    private void MostrarCliente(String Buscar) {
+        Object[][] datostabla;
+        String[] columnas = {"Alias", "Nombre", "APaterno", "AMaterno", "Tel", "DineroElectronico", "idCliente"};
         Controlador.Controlador_Cliente Controlador;
         Controlador = new Controlador.Controlador_Cliente();
         datostabla = Controlador.ConsultaUnCliente(Buscar);
@@ -62,7 +74,68 @@ public class Venta extends javax.swing.JFrame {
         tblCliente.setModel(datos);
         Estilo.tblColumnaOculta(tblCliente, 0);
         Estilo.tblColumnaOculta(tblCliente, 5);
+        Estilo.tblColumnaOculta(tblCliente, 6);
     }
+
+    /**
+     * Auxiliar para determinar si el producto ingresado ya se ha ingresado antes a la tabla
+     * @param tabla recibe la jtable
+     * @param codigo recibe el codigo del producto
+     * @return Si datos[0]==0 ---> El producto no ha sido ingresado antes
+     *            datos[0]==1 ---> El producto ya ha sido ingresado
+     *            datos[1]==100 ---> indice aleatorio de la tabla
+     *            datos[1]!=100 ---> Indice de la tabla en el que se ingreso
+     */
+    private int[] ExisteCodigoTbl(JTable tabla, String codigo) {
+        int datos[] = new int[2];
+        datos[0] = 0;//-->No existe codigo
+        datos[1] = 100; //Posicion
+
+        if (tabla.getRowCount() > 0) {
+            for (int i = 0; i < tabla.getRowCount(); i++) {
+                if (codigo.equals(String.valueOf(tabla.getValueAt(i, 0)))){
+                datos[0]=1;
+                datos[1]=i;
+                break;
+                }
+            }
+        }
+        return datos;
+    }
+    
+    /**
+     * Cuenta todos los precios totales ingresados a la tabla y los muestra en 
+     * el jlabel correspondiente
+     * @return el total de totales
+     */
+    private String PrecioTotal(){
+        float total=0f;
+        for( int i=0 ; i<ModelVenta.getRowCount(); i++){
+            float numero =0f;
+             numero = Float.valueOf(ModelVenta.getValueAt(i, 5).toString() );
+            total += numero;
+    }
+        return String.valueOf(total);
+    }
+    
+    /**
+     * Auxiliar para limpiar los controles involucrados despues de cobrar o por
+     * el boton cancelar.
+     */
+    private void Limpiar(){
+        Util.txtLimpiar(txtBusqueda);
+        Util.txtLimpiar(txtCliente);
+        Util.txtLimpiar(txtProducto);
+        Util.lblLimpiar(lblDinElectro);
+        MostrarCliente("");
+        Util.tblLimpiar(tblVenta, ModelVenta);
+        Util.txtHabilitar(txtCliente, true);
+        Util.txtFoco(txtCliente);
+        lblTotal.setText("0.0");
+        Estilo.lblMensajes(lblAlerta, "", 4);
+        idCliente ="";
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -82,7 +155,7 @@ public class Venta extends javax.swing.JFrame {
         lblDinElectro = new javax.swing.JLabel();
         pnlProductos = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblProducto = new javax.swing.JTable();
+        tblVenta = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         btnAdd = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
@@ -98,6 +171,12 @@ public class Venta extends javax.swing.JFrame {
 
         lblEncabezado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
+        txtCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtClienteActionPerformed(evt);
+            }
+        });
+
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel5.setText("Cliente:");
 
@@ -106,6 +185,12 @@ public class Venta extends javax.swing.JFrame {
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel7.setText("Producto:");
+
+        txtProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtProductoActionPerformed(evt);
+            }
+        });
 
         lblDinElectro.setText("$");
 
@@ -148,7 +233,7 @@ public class Venta extends javax.swing.JFrame {
                 .addGap(42, 42, 42))
         );
 
-        tblProducto.setModel(new javax.swing.table.DefaultTableModel(
+        tblVenta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -156,7 +241,7 @@ public class Venta extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(tblProducto);
+        jScrollPane1.setViewportView(tblVenta);
 
         javax.swing.GroupLayout pnlProductosLayout = new javax.swing.GroupLayout(pnlProductos);
         pnlProductos.setLayout(pnlProductosLayout);
@@ -261,8 +346,8 @@ public class Venta extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(55, 55, 55))
+                        .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(49, 49, 49))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(pnlProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
@@ -291,10 +376,10 @@ public class Venta extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(42, 42, 42)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblTotal)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                    .addComponent(lblTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblAlerta, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -304,7 +389,27 @@ public class Venta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-
+        if(tblVenta.getRowCount()>0 && !idCliente.equals("")){
+            Calendar c = new GregorianCalendar();
+        String Fecha = Integer.toString(c.get(Calendar.DATE)) + "/" + Integer.toString(c.get(Calendar.MONTH) + 1) + "/" + Integer.toString(c.get(Calendar.YEAR));
+        String Hora = Integer.toString(c.get(Calendar.HOUR_OF_DAY)) + ":" + Integer.toString(c.get(Calendar.MINUTE)) + ":" + Integer.toString(c.get(Calendar.SECOND));
+        String Sucursal = Controlador.ObtenerSucursal();
+        String Usuario=Sesion.LeerSesion("idUsuario");
+        if(Controlador.RegistrarVenta(Fecha, Hora,"0", PrecioTotal(), Usuario, idCliente, Sucursal)){
+            String idVenta = Controlador.ObteneridVenta(Fecha, Hora, Sucursal, Usuario);
+            for(int i=0;i<tblVenta.getRowCount();i++){
+                String Cantidad= String.valueOf(tblVenta.getValueAt(i, 4));
+                String idProducto= String.valueOf(tblVenta.getValueAt(i, 0));
+            Controlador.RegistrarDetalleVenta(Cantidad, idProducto, idVenta);
+            }
+            Estilo.lblMensajes(lblAlerta, "Venta Cobrada exitosamente", 3);
+            Limpiar();
+        }else{
+            Estilo.lblMensajes(lblAlerta, "Ha ocurrido un error, por favor verifique", 2);
+        }
+        }else{
+            Estilo.lblMensajes(lblAlerta, "Debe ingresar a menos un producto y seleccionar un cliente", 1);
+        }
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void txtBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaKeyReleased
@@ -312,29 +417,67 @@ public class Venta extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBusquedaKeyReleased
 
     private void tblClienteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblClienteMousePressed
-        try{
-            int fila =tblCliente.getSelectedRow();
-            if(fila>=0){
+        try {
+            int fila = tblCliente.getSelectedRow();
+            if (fila >= 0) {
                 txtCliente.setText(String.valueOf(tblCliente.getValueAt(fila, 0)));
-                lblDinElectro.setText("$ "+String.valueOf(tblCliente.getValueAt(fila, 5)));
+                lblDinElectro.setText("$ " + String.valueOf(tblCliente.getValueAt(fila, 5)));
+                idCliente = String.valueOf(tblCliente.getValueAt(fila, 6));
                 Util.txtFoco(txtProducto);
                 Util.txtHabilitar(txtCliente, false);
             }
-        }catch(Exception e){
-            System.err.println("Ha ocurrido un error al seleccionar fila en tabla Cliente: "+e.getMessage());
+        } catch (Exception e) {
+            System.err.println("Ha ocurrido un error al seleccionar fila en tabla Cliente: " + e.getMessage());
         }
     }//GEN-LAST:event_tblClienteMousePressed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        Util.txtLimpiar(txtBusqueda);
-        Util.txtLimpiar(txtCliente);
-        Util.txtLimpiar(txtProducto);
-        Util.lblLimpiar(lblDinElectro);
-        MostrarCliente("");
-        Util.tblLimpiar(tblProducto, ModelProducto);
-        Util.txtHabilitar(txtCliente, true);
-        Util.txtFoco(txtCliente);
+        Limpiar();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void txtProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProductoActionPerformed
+        if (txtProducto.getText().length() != 0) {
+            //Recorre el arreglo original para obtener solo la primera columna
+            int ResultadosTabla[] = ExisteCodigoTbl(tblVenta, txtProducto.getText());
+            
+            if (ResultadosTabla[0] == 1) {//Es por que existe en la Tabla
+                int Cantidad = Integer.parseInt(String.valueOf(tblVenta.getValueAt(ResultadosTabla[1], 4))) + 1;
+                tblVenta.setValueAt(Cantidad, ResultadosTabla[1], 4);
+                float auxPrecioTotal = Float.parseFloat(String.valueOf(tblVenta.getValueAt(ResultadosTabla[1], 3)));
+                tblVenta.setValueAt(Cantidad * auxPrecioTotal, ResultadosTabla[1], 5);
+                Estilo.lblMensajes(lblAlerta, "Producto agregado", 3);
+            }else {//No existe en la tabla, busca en la BD
+                Object[][] aux = null; //Auxiliar para obtener arreglo unidimensional de los resultados
+                aux = Controlador.ObtenerProducto(txtProducto.getText()).clone();
+
+                if (aux.length != 0) { //Si su tamaño es = 0 es por que no recibio nada de la consulta
+                    Object[] Producto = null; //arreglo que se mostrará en la tabla
+                    for (int i = 0; i < aux.length; i++) {
+                        Producto = new Object[aux[i].length + 2];
+                        for (int j = 0; j < aux[i].length; j++) {
+                            Producto[j] = aux[i][j];
+                        }
+                    }
+                    Producto[4] = 1;
+                    Producto[5] = Double.parseDouble(String.valueOf(Producto[4])) * Double.parseDouble(String.valueOf(Producto[3]));
+                    ModelVenta.addRow(Producto);
+                    tblVenta.setModel(ModelVenta);
+                    Estilo.lblMensajes(lblAlerta, "Producto agregado", 3);
+                } else {
+                    Estilo.lblMensajes(lblAlerta, "El producto ingresado no esta registrado, por favor verifique.", 1);
+                }
+            }
+            }else {
+            Estilo.lblMensajes(lblAlerta, "Debe ingresar un código de barras válido", 1);
+        }
+            Util.txtLimpiar(txtProducto);
+            Util.txtFoco(txtProducto);
+            lblTotal.setText(""+PrecioTotal());
+    }//GEN-LAST:event_txtProductoActionPerformed
+
+    private void txtClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtClienteActionPerformed
+        Util.txtFoco(txtProducto);
+    }//GEN-LAST:event_txtClienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -389,7 +532,7 @@ public class Venta extends javax.swing.JFrame {
     private javax.swing.JPanel pnlClienteBuscar;
     private javax.swing.JPanel pnlProductos;
     private javax.swing.JTable tblCliente;
-    private javax.swing.JTable tblProducto;
+    private javax.swing.JTable tblVenta;
     private org.edisoncor.gui.textField.TextFieldRectBackground txtBusqueda;
     private org.edisoncor.gui.textField.TextFieldRectBackground txtCliente;
     private org.edisoncor.gui.textField.TextFieldRectBackground txtProducto;

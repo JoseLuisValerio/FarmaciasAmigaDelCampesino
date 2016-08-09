@@ -31,7 +31,7 @@ public class Modelo_Cliente {
          res.next();
          registros = res.getInt("total");
          res.close();
-         //con.desconectar(); -> Error Null Pointer
+         con.desconectar();
       }catch(SQLException e){
          System.err.println("Error al contar los registros en la tabla Cliente: "+e.getMessage());
       }
