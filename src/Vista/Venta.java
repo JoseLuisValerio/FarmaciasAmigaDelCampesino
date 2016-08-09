@@ -462,7 +462,6 @@ public class Venta extends javax.swing.JFrame {
                     Producto[5] = Double.parseDouble(String.valueOf(Producto[4])) * Double.parseDouble(String.valueOf(Producto[3]));
                     ModelVenta.addRow(Producto);
                     tblVenta.setModel(ModelVenta);
-                    //lblTotal.setText(PrecioTotal());
                     Estilo.lblMensajes(lblAlerta, "Producto agregado", 3);
                 } else {
                     Estilo.lblMensajes(lblAlerta, "El producto ingresado no esta registrado, por favor verifique.", 1);
