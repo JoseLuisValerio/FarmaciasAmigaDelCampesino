@@ -22,6 +22,7 @@ public class Producto_Root_Transaccion extends javax.swing.JFrame {
     private Object[][] datostabla;
     String[] columnas = {"Código", "Nombre", "Activo", "Stock", "Sucursal"};
     Controlador_Producto_Root_Transaccion ctr = new Controlador_Producto_Root_Transaccion();
+    Object[] fila = new Object[4];
 
     /**
      * Creates new form Producto_Root_Transaccion
@@ -227,34 +228,22 @@ public class Producto_Root_Transaccion extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCodigoActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+
+        
         int cor = tblProductos.getSelectedRow();
         String codigo = (tblProductos.getValueAt(cor, 0).toString());
         String nombre = (tblProductos.getValueAt(cor, 1).toString());
         String activo = (tblProductos.getValueAt(cor, 2).toString());
 
-        
-
-        Object[] fila = new Object[4];
-
         fila[0] = codigo;
         fila[1] = nombre;
         fila[2] = activo;
         fila[3] = spStock.getValue().toString();
-        int valor = 0;
-       // for (int i = 0; i < tblTransaccion.getRowCount(); i++) {
 
-        //}
-        if (tblTransaccion.getRowCount() <= 0) {
             DefaultTableModel modelo = (DefaultTableModel) tblTransaccion.getModel();
             modelo.addRow(fila);
             tblTransaccion.setModel(modelo);
-        } else {
-            for (int i = 0; i < tblTransaccion.getRowCount(); i++) {
-                if (fila[0].equals(tblTransaccion.getValueAt(i, 0).toString())) {
-                    tblTransaccion.setValueAt("repetido", i, 3);                
-                }
-            }
-        }
+        
 
     }//GEN-LAST:event_btnAgregarActionPerformed
 
@@ -286,6 +275,7 @@ public class Producto_Root_Transaccion extends javax.swing.JFrame {
                 String c = tblTransaccion.getValueAt(i, 1).toString();
                 String d = tblTransaccion.getValueAt(i, 2).toString();
                 String f = tblTransaccion.getValueAt(i, 3).toString();
+
                 System.out.println(b + c + d + f);
             }
         } catch (Exception e) {
