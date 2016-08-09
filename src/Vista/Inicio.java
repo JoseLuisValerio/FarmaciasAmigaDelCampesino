@@ -53,22 +53,16 @@ public class Inicio extends javax.swing.JFrame {
         Estilo.lblTitulo(lblNombre);
         Estilo.lblTitulo(lblTipo);
         Estilo.lblTitulo(lblUsuario);
-        try {
-            datos();
-        } catch (IOException ex) {
-            System.err.println("Error a obtener datos de sesión: "+ex.getMessage());
-        }
-        
+//        try {
+//            datos();
+//        } catch (IOException ex) {
+//            System.err.println("Error a obtener datos de sesión: "+ex.getMessage());
+//        }
+        lblUsuario.setText(Sesion.LeerSesion("Usuario"));
+        lblNombre.setText("<html>"+Sesion.LeerSesion("Nombre")+"</html>");
+        lblTipo.setText(Sesion.LeerSesion("Tipo"));
     }
-    public void  datos() throws IOException{
-        //Carga los datoso Obtenido de la clase se decion mas para ser mostradosen las etiquetas
-    ArrayList <String> Permisos = new ArrayList <String>();
-        Permisos=Sesion.obtenerSesion();
-        lblUsuario.setText(Permisos.get(0));
-        lblNombre.setText("<html>"+Permisos.get(1)+"</html>");
-        lblTipo.setText(Permisos.get(2));
-        
-    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -201,6 +195,11 @@ public class Inicio extends javax.swing.JFrame {
         jMenuBar1.add(MnProductos);
 
         MnVentas.setText("Ventas");
+        MnVentas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                MnVentasMousePressed(evt);
+            }
+        });
         jMenuBar1.add(MnVentas);
 
         MnClientes.setText("Clientes");
@@ -292,16 +291,12 @@ public class Inicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
-            datos(); // TODO add your handling code here:
-        } catch (IOException ex) {
-            Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void MnItemCerrSesionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MnItemCerrSesionMousePressed
         Ayuda.Sesion.cerrarSesion();
-        this.setVisible(false);
+        this.dispose();
         Login Ventana = new Login();
         Ventana.setVisible(true);
     }//GEN-LAST:event_MnItemCerrSesionMousePressed
@@ -315,6 +310,11 @@ public class Inicio extends javax.swing.JFrame {
         Cliente Ventana = new Cliente();
         Ventana.setVisible(true);
     }//GEN-LAST:event_MnItemAddClientMousePressed
+
+    private void MnVentasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MnVentasMousePressed
+        Venta Ventana = new Venta();
+        Ventana.setVisible(true);
+    }//GEN-LAST:event_MnVentasMousePressed
 
     /**
      * @param args the command line arguments

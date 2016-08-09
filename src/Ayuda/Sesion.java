@@ -11,23 +11,26 @@ import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
  *
  * @author Jose Luis
- * Clase que Recibe datos para la creación de sesiones
+ Clase que Recibe LeerSesion para la creación de sesiones
  */
 public class Sesion {
    static ArrayList<String>datosSesion= new ArrayList<String>();
    static ArrayList<Integer>permisosSesion= new ArrayList<Integer>();
 
    
-    public static void iniciarSesion(String user,String name,String tuser) throws IOException{
+    public static void iniciarSesion(String user,String name,String tuser, String idUsuario) throws IOException{
 //rebie el usuario , el nombre de usuario  y el tipo para asignar permisos
         datosSesion.add(user);
         datosSesion.add(name);
         datosSesion.add(tuser);
+        datosSesion.add(idUsuario);
         
 		/** FORMA 2 DE ESCRITURA. Con el fichero codificado en UTF-8 **/
 		Writer out = null;
@@ -66,7 +69,7 @@ public class Sesion {
             
     }
     public static ArrayList<String> obtenerSesion() throws IOException{
-       //Retorna los datos de la sesion en en un ArrayList de tipo String con los datos leidos del archivo de la sesión
+       //Retorna los LeerSesion de la sesion en en un ArrayList de tipo String con los LeerSesion leidos del archivo de la sesión
         String cadena;
         ArrayList <String> datos= new ArrayList <String>();
       FileReader f = new FileReader("datosSesion.frm");
@@ -77,5 +80,28 @@ public class Sesion {
       b.close();
       
        return datos;
+    }
+    
+    public static String  LeerSesion(String opc){
+        //Carga los datoso Obtenido de la clase se decion mas para ser mostradosen las etiquetas
+    ArrayList <String> Permisos = new ArrayList <String>();
+       try {
+           Permisos=obtenerSesion();
+       } catch (IOException ex) {
+           Logger.getLogger(Sesion.class.getName()).log(Level.SEVERE, null, ex);
+       }
+        switch(opc){
+            case "Usuario":
+                return Permisos.get(0);
+            case "Nombre":
+                return Permisos.get(1);
+            case "Tipo":
+                return Permisos.get(2);
+            case "idUsuario":
+                return Permisos.get(3);
+            default:
+                return "No definido";
+        }
+        
     }
 }

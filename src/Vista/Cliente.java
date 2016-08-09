@@ -5,15 +5,18 @@ import Controlador.Controlador_Cliente;
 import javax.swing.table.DefaultTableModel;
 
 /**
- * En esta ventana se pueden agregar usuarios y es accesible a cualquier usuario 
+ * En esta ventana se pueden agregar usuarios y es accesible a cualquier usuario
+ *
  * @author root
  */
 public class Cliente extends javax.swing.JFrame {
-Estilo Estilo;
-Ayuda.Utilidades Util;
-Controlador.Controlador_Cliente Controlador;
-private Object[][] datostabla;
-    String[] columnas = {"Alias","Nombre","APaterno","AMaterno","Tel","Direccion","Tipo","Dinero"};
+
+    Estilo Estilo;
+    Ayuda.Utilidades Util;
+    Controlador.Controlador_Cliente Controlador;
+    private Object[][] datostabla;
+    private final String[] columnas = {"Alias", "Nombre", "APaterno", "AMaterno", "Tel", "Direccion", "Tipo", "Dinero"};
+
     /**
      * Inicializa todos los componentes usando la clase estilo
      */
@@ -31,33 +34,33 @@ private Object[][] datostabla;
         Estilo.lblBody(jLabel9);
         Estilo.lblBody(jLabel6);
         Estilo.lblBody(jLabel10);
-        
+
         //Estilo de textfields
         Estilo.txtfDescripcion(txtNombre, "Nombre del cliente");
         Estilo.txtfDescripcion(txtAPaterno, "Apellido Paterno");
         Estilo.txtfDescripcion(txtAMaterno, "Apellido Materno");
-        
+
         //Estilo de paneles
         Estilo.PnlTitulo(pnlCliente, "Datos del cliente");
         Estilo.PnlTitulo(pnlTabla, "Clientes registrados");
-        
+
         //Estilo de botones
-        Estilo.BtnOpcion(btnAdd,1);
-        Estilo.BtnOpcion(btnUpdate,2);
+        Estilo.BtnOpcion(btnAdd, 1);
+        Estilo.BtnOpcion(btnUpdate, 2);
         Estilo.BtnOpcion(btnCancelar, 3);
-        
+
         //Estilo de ventana
-        Estilo.lblMensajes(lblAlerta,"",4);
+        Estilo.lblMensajes(lblAlerta, "", 4);
         Estilo.frmInicial(this, "Clientes");
         Estilo.lblLogo(lblEncabezado);
-        
+
         //Configuraciones iniciales
         //Inicio de valores iniciales
         MostrarTabla();
         LlenarcmbTipos();
         Util.botonHabilitar(btnUpdate, false);
     }
-    
+
     /**
      * Muestra la tabla de todos los clientes
      */
@@ -66,7 +69,7 @@ private Object[][] datostabla;
         DefaultTableModel datos = new DefaultTableModel(datostabla, columnas);
         tblProductos.setModel(datos);
     }
-    
+
     /**
      * Llena los combos de los tipos
      */
@@ -78,18 +81,18 @@ private Object[][] datostabla;
             jComboBox1.addItem((String) Tipos[i]);
         }
     }
-    
+
     /**
-     * Limpia los componentes 
+     * Limpia los componentes
      */
-    private void Limpiar(){
+    private void Limpiar() {
         Util.txtLimpiar(txtNombre);
         Util.txtLimpiar(txtAPaterno);
         Util.txtLimpiar(txtAMaterno);
         Util.txtLimpiar(txtTelefono);
         jTextArea1.setText("");
         jLabel11.setText("-------------------------------------");
-        jLabel7.setText("-------------------------------------");
+        lblAlias.setText("-------------------------------------");
         Util.botonHabilitar(btnAdd, true);
         Util.botonHabilitar(btnUpdate, false);
         MostrarTabla();
@@ -124,7 +127,7 @@ private Object[][] datostabla;
         lblAlerta = new javax.swing.JLabel();
         btnCancelar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        lblAlias = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         pnlTabla = new javax.swing.JPanel();
@@ -138,6 +141,11 @@ private Object[][] datostabla;
         pnlCliente.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Datos del producto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
 
         btnUpdate.setText("jButton1");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         btnAdd.setText("jButton2");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -180,8 +188,8 @@ private Object[][] datostabla;
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel6.setText("Alias:");
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel7.setText("--------------------------------------");
+        lblAlias.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lblAlias.setText("--------------------------------------");
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel10.setText("Dinero Electro.:");
@@ -219,7 +227,7 @@ private Object[][] datostabla;
                                 .addGap(37, 37, 37)))
                         .addGroup(pnlClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel11)
-                            .addComponent(jLabel7)
+                            .addComponent(lblAlias)
                             .addGroup(pnlClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -257,7 +265,7 @@ private Object[][] datostabla;
                     .addGroup(pnlClienteLayout.createSequentialGroup()
                         .addGroup(pnlClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(jLabel7))
+                            .addComponent(lblAlias))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnlClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
@@ -357,33 +365,44 @@ private Object[][] datostabla;
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void tblProductosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProductosMousePressed
-        try{
-        int fila = tblProductos.getSelectedRow();
-        if (fila >= 0) {
-            jLabel7.setText(String.valueOf(tblProductos.getValueAt(fila, 0)));
-            txtNombre.setText(String.valueOf(tblProductos.getValueAt(fila, 1)));
-            txtAPaterno.setText(String.valueOf(tblProductos.getValueAt(fila, 2)));
-            txtAMaterno.setText(String.valueOf(tblProductos.getValueAt(fila, 3)));
-            txtTelefono.setText(String.valueOf(tblProductos.getValueAt(fila, 4)));
-            jTextArea1.setText(String.valueOf(tblProductos.getValueAt(fila, 5)));
-            //combo
-            jLabel11.setText("$ "+String.valueOf(tblProductos.getValueAt(fila, 7)+" MXN"));
-            Util.botonHabilitar(btnUpdate, true);
-            Util.botonHabilitar(btnAdd, false);
+        try {
+            int fila = tblProductos.getSelectedRow();
+            if (fila >= 0) {
+                lblAlias.setText(String.valueOf(tblProductos.getValueAt(fila, 0)));
+                txtNombre.setText(String.valueOf(tblProductos.getValueAt(fila, 1)));
+                txtAPaterno.setText(String.valueOf(tblProductos.getValueAt(fila, 2)));
+                txtAMaterno.setText(String.valueOf(tblProductos.getValueAt(fila, 3)));
+                txtTelefono.setText(String.valueOf(tblProductos.getValueAt(fila, 4)));
+                jTextArea1.setText(String.valueOf(tblProductos.getValueAt(fila, 5)));
+                //combo
+                jLabel11.setText("$ " + String.valueOf(tblProductos.getValueAt(fila, 7) + " MXN"));
+                Util.botonHabilitar(btnUpdate, true);
+                Util.botonHabilitar(btnAdd, false);
+            }
+        } catch (Exception e) {
+            System.err.println("Error al seleccionar fila");
         }
-        }catch(Exception e){System.err.println("Error al seleccionar fila");}
     }//GEN-LAST:event_tblProductosMousePressed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        int numero = (int)(Math.random()*9998+1);
-        String Alias = txtNombre.getText().substring(0,3) + txtAPaterno.getText().substring(0,2)+txtAMaterno.getText().substring(0,2)+numero;
-        if(Controlador.insertarCliente(Alias,txtNombre.getText(),txtAPaterno.getText(),txtAMaterno.getText(),txtTelefono.getText(),jTextArea1.getText(),jComboBox1.getSelectedItem().toString(),"0.0")){
+        int numero = (int) (Math.random() * 9998 + 1);
+        String Alias = txtNombre.getText().substring(0, 3) + txtAPaterno.getText().substring(0, 2) + txtAMaterno.getText().substring(0, 2) + numero;
+        if (Controlador.insertarCliente(Alias, txtNombre.getText(), txtAPaterno.getText(), txtAMaterno.getText(), txtTelefono.getText(), jTextArea1.getText(), jComboBox1.getSelectedItem().toString(), "0.0")) {
             Estilo.lblMensajes(lblAlerta, "El cliente ha sido registrado exitosamente", 3);
             Limpiar();
-        }else{
+        } else {
             Estilo.lblMensajes(lblAlerta, "Ha ocurrido un error, por favor verifique.", 2);
         }
     }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        if (Controlador.ActualizarCliente(lblAlias.getText(), txtNombre.getText(), txtAPaterno.getText(), txtAMaterno.getText(), txtTelefono.getText(), jTextArea1.getText(), jComboBox1.getSelectedItem().toString())) {
+            Estilo.lblMensajes(lblAlerta, "El cliente ha sido actualizado", 3);
+            Limpiar();
+        } else {
+            Estilo.lblMensajes(lblAlerta, "Ha ocurrido un error, por favor verifique.", 2);
+        }
+    }//GEN-LAST:event_btnUpdateActionPerformed
 
     /**
      * @param args the command line arguments
@@ -432,13 +451,13 @@ private Object[][] datostabla;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lblAlerta;
+    private javax.swing.JLabel lblAlias;
     private javax.swing.JLabel lblEncabezado;
     private javax.swing.JPanel pnlCliente;
     private javax.swing.JPanel pnlTabla;

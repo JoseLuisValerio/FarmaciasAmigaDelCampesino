@@ -1,7 +1,10 @@
 package Ayuda;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPasswordField;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  * Código diverso: Limpieza de tablas, de textfields y jPasswordFields
@@ -50,5 +53,25 @@ public class Utilidades {
      */
     public void txtHabilitar(org.edisoncor.gui.textField.TextFieldRectBackground txt, boolean estado){
         txt.setEnabled(estado);
+    }
+    
+    /**
+     * Elimina los registros contenidos en una tabla dejando su modelo definido
+     * @param tabla recibe la tabla
+     * @param modelo1 recibe el modelo de dicha tabla
+     */
+    public void tblLimpiar(JTable tabla, DefaultTableModel modelo1){
+        for (int i = 0; i < tabla.getRowCount(); i++) {
+           modelo1.removeRow(i);
+           i-=1;
+       }
+    }
+    
+    /**
+     * Limpia el JLabel recibido, es decir, muestra en él ""
+     * @param label recibe el JLabel
+     */
+    public void lblLimpiar(JLabel label){
+        label.setText("");
     }
 }
