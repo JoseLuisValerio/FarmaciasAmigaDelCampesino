@@ -58,4 +58,66 @@ public class Modelo_Producto_Root_Transaccion {
         }
         return data;
     }
+        public Object[] llenarCombo(String tabla, String nombrecol, String sql) {
+        int registros = 0;
+        try {
+            ps = con.conectado().prepareStatement("SELECT count(*) as total FROM " + tabla);
+            res = ps.executeQuery();
+            res.next();
+            registros = res.getInt("total");
+            res.close();
+            con.desconectar();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        Object[] datos = new Object[registros];
+        try {
+            ps = con.conectado().prepareStatement(sql);
+            res = ps.executeQuery();
+            int i = 0;
+            while (res.next()) {
+                datos[i] = res.getObject(nombrecol);
+                i++;
+            }
+            res.close();
+            con.desconectar();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return datos;
+    }
+        public boolean insertar(String datos[], String insert) {
+        boolean estado = false;
+        try {
+            ps = con.conectado().prepareStatement(insert);
+            for (int i = 0; i <= datos.length - 1; i++) {
+                ps.setString(i + 1, datos[i]);
+            }
+            ps.execute();
+            ps.close();
+            con.desconectar();
+            estado = true;
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return estado;
+    }
+        
+    public String idSucursal(String nombre_columna, String sentenciasql){
+        
+    String datos ="";
+      try{
+         ps = con.conectado().prepareStatement(sentenciasql);
+         res = ps.executeQuery();
+         while(res.next()){
+            datos = res.getString(nombre_columna);
+         }
+         res.close();
+         con.desconectar();
+          }catch(SQLException e){
+         System.out.println(e);
+    }
+    return datos;
+    }
 }

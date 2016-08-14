@@ -30,6 +30,7 @@ public class Producto_Root_Transaccion extends javax.swing.JFrame {
     public Producto_Root_Transaccion() {
         initComponents();
         mostrar_tabla();
+        cargarCombos();
         estilo.lblTitulo(jLabel1);
         estilo.lblTitulo(jLabel2);
         estilo.lblBody(jLabel3);
@@ -40,6 +41,19 @@ public class Producto_Root_Transaccion extends javax.swing.JFrame {
         datostabla = ctr.mostrarProductos();
         DefaultTableModel datos = new DefaultTableModel(datostabla, columnas);
         tblProductos.setModel(datos);
+
+    }
+
+    public void cargarCombos() {
+        Object[] sucursales = ctr.cargaSucursal("sucursal WHERE sucursal.idsucursal != 1");
+        cmbSucursal.removeAllItems();
+        cmbSucursal.addItem("SELECIONES SUCURSAL");
+        for (int i = 0; i < sucursales.length; i++) {
+            cmbSucursal.addItem(sucursales[i]);
+        }
+    }
+
+    public void obtenersucursal() {
 
     }
 
@@ -60,7 +74,7 @@ public class Producto_Root_Transaccion extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         btnAgregar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnTransaccion = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         txtCodigo = new org.edisoncor.gui.textField.TextFieldRectBackground();
         jLabel3 = new javax.swing.JLabel();
@@ -70,6 +84,7 @@ public class Producto_Root_Transaccion extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         cmbSucursal = new javax.swing.JComboBox();
         jLabel6 = new javax.swing.JLabel();
+        lblmensaje = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -91,6 +106,11 @@ public class Producto_Root_Transaccion extends javax.swing.JFrame {
 
             }
         ));
+        tblProductos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblProductosMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblProductos);
 
         jLabel1.setText("Productos");
@@ -111,7 +131,12 @@ public class Producto_Root_Transaccion extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Transacción");
+        btnTransaccion.setText("Transacción");
+        btnTransaccion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTransaccionActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -124,6 +149,11 @@ public class Producto_Root_Transaccion extends javax.swing.JFrame {
         txtCodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCodigoActionPerformed(evt);
+            }
+        });
+        txtCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCodigoKeyPressed(evt);
             }
         });
 
@@ -145,13 +175,14 @@ public class Producto_Root_Transaccion extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnCancelar)
                         .addGap(28, 28, 28)
-                        .addComponent(jButton3))
+                        .addComponent(btnTransaccion)
+                        .addGap(61, 61, 61))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(71, 71, 71)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -175,21 +206,28 @@ public class Producto_Root_Transaccion extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2)
-                            .addComponent(cmbSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))))
-                .addGap(61, 61, 61))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel6)
+                                    .addComponent(cmbSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                                .addComponent(lblmensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(93, Short.MAX_VALUE)
+                .addGap(70, 70, 70)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(lblmensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(131, 131, 131)
@@ -197,7 +235,7 @@ public class Producto_Root_Transaccion extends javax.swing.JFrame {
                         .addGap(91, 91, 91)
                         .addComponent(btnEliminar))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(jLabel5)
@@ -215,7 +253,7 @@ public class Producto_Root_Transaccion extends javax.swing.JFrame {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
+                    .addComponent(btnTransaccion)
                     .addComponent(btnCancelar))
                 .addGap(26, 26, 26))
         );
@@ -229,22 +267,45 @@ public class Producto_Root_Transaccion extends javax.swing.JFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
 
-        
+        int actual;
+        int resta;
+        int resultado;
+
         int cor = tblProductos.getSelectedRow();
-        String codigo = (tblProductos.getValueAt(cor, 0).toString());
-        String nombre = (tblProductos.getValueAt(cor, 1).toString());
-        String activo = (tblProductos.getValueAt(cor, 2).toString());
+        resta = Integer.parseInt(spStock.getValue().toString());
+        if (cor < 0) {
+            estilo.lblMensajes(lblmensaje, "Seleccionar un producto", 2);
+        } else {
+            if (resta <= 0) {
+                estilo.lblMensajes(lblmensaje, "No ha dado la cantidad de producto", 2);
+            } else {
+                String codigo = (tblProductos.getValueAt(cor, 0).toString());
+                String nombre = (tblProductos.getValueAt(cor, 1).toString());
+                String activo = (tblProductos.getValueAt(cor, 2).toString());
+                String existencia = (tblProductos.getValueAt(cor, 3).toString());
+                actual = Integer.parseInt(existencia);
 
-        fila[0] = codigo;
-        fila[1] = nombre;
-        fila[2] = activo;
-        fila[3] = spStock.getValue().toString();
+                DefaultTableModel modelo = (DefaultTableModel) tblTransaccion.getModel();
 
-            DefaultTableModel modelo = (DefaultTableModel) tblTransaccion.getModel();
-            modelo.addRow(fila);
-            tblTransaccion.setModel(modelo);
-        
+                if (actual >= resta) {
+                    fila[0] = codigo;
+                    fila[1] = nombre;
+                    fila[2] = activo;
+                    fila[3] = spStock.getValue().toString();
 
+                    modelo.addRow(fila);
+
+                    resultado = actual - resta;
+                    tblProductos.setValueAt(resultado, cor, 3);
+
+                    tblTransaccion.setModel(modelo);
+                    lblexistencia.setText(null);
+                    spStock.setValue(0);
+                } else {
+                    estilo.lblMensajes(lblmensaje, "Limite de producto excedido", 2);
+                }
+            }
+        }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
@@ -253,7 +314,7 @@ public class Producto_Root_Transaccion extends javax.swing.JFrame {
         int a = tblTransaccion.getSelectedRow();
         if (a < 0) {
             JOptionPane.showMessageDialog(null,
-                    "Debe seleccionar una fila de la tabla");
+                    "Debe seleccionar el producto a eliminar de la tabla");
         } else {
             int confirmar = JOptionPane.showConfirmDialog(null,
                     "Esta seguro que desea Eliminar el registro? ");
@@ -268,20 +329,54 @@ public class Producto_Root_Transaccion extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        System.out.println("Codigo              Nombre                     Activo                Stock");
-        try {
-            for (int i = 0; i < tblTransaccion.getRowCount(); i++) {
-                String b = tblTransaccion.getValueAt(i, 0).toString();
-                String c = tblTransaccion.getValueAt(i, 1).toString();
-                String d = tblTransaccion.getValueAt(i, 2).toString();
-                String f = tblTransaccion.getValueAt(i, 3).toString();
+        datostabla = null;
+        DefaultTableModel datos = new DefaultTableModel(datostabla, columnas);
+        tblTransaccion.setModel(datos);
+        cmbSucursal.setSelectedIndex(0);
+        spStock.setValue(0);
+        lblexistencia.setText(null);
+        mostrar_tabla();
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
-                System.out.println(b + c + d + f);
+    private void txtCodigoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyPressed
+        datostabla = ctr.buscarProducto(txtCodigo.getText());
+        DefaultTableModel datos = new DefaultTableModel(datostabla, columnas);
+        tblProductos.setModel(datos);
+    }//GEN-LAST:event_txtCodigoKeyPressed
+
+    private void tblProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProductosMouseClicked
+        int cor = tblProductos.getSelectedRow();
+        lblexistencia.setText((tblProductos.getValueAt(cor, 3).toString()));
+    }//GEN-LAST:event_tblProductosMouseClicked
+
+    private void btnTransaccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransaccionActionPerformed
+        String sucursal = ctr.idsucursal((String) cmbSucursal.getSelectedItem());
+        System.out.println("Id de Sucursal : "+sucursal);
+        if (datostabla == null) {
+            estilo.lblMensajes(lblmensaje, "No a selecionado productos", 1);
+        } else {
+            for (int i = 0; i < tblTransaccion.getRowCount(); i++) {
+                if (cmbSucursal.getSelectedIndex() != 0) {
+                    String codigo = (String) tblTransaccion.getValueAt(i, 0);
+                    String stock = (String) tblTransaccion.getValueAt(i, 3);
+                    System.out.println("Codigo del Producto : " + codigo + " Esta esto de lo que se trasacciona : " + stock);
+                    if (ctr.transaccion(codigo, sucursal, stock) == true && ctr.actualizarStock(codigo, stock)== true) {
+                        estilo.lblMensajes(lblmensaje, "Transacción exitosa", 3);
+                        
+                        //aquí falta la parte de os tickets             
+                                     datostabla = null;
+        DefaultTableModel datos = new DefaultTableModel(datostabla, columnas);
+        tblTransaccion.setModel(datos);
+                    } else {
+                        estilo.lblMensajes(lblmensaje,"No se pudo hacer la transación",1);                        
+                    }
+                } else {
+                    estilo.lblMensajes(lblmensaje, "Debe seleccionar una Sucursal", 1);                   
+                }
             }
-        } catch (Exception e) {
 
         }
-    }//GEN-LAST:event_btnCancelarActionPerformed
+    }//GEN-LAST:event_btnTransaccionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -322,8 +417,8 @@ public class Producto_Root_Transaccion extends javax.swing.JFrame {
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnTransaccion;
     private javax.swing.JComboBox cmbSucursal;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -333,6 +428,7 @@ public class Producto_Root_Transaccion extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblexistencia;
+    private javax.swing.JLabel lblmensaje;
     private javax.swing.JSpinner spStock;
     private javax.swing.JTable tblProductos;
     private javax.swing.JTable tblTransaccion;

@@ -266,7 +266,6 @@ public class Producto_Root extends javax.swing.JFrame {
             }
         });
 
-        cmbProveedor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbProveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbProveedorActionPerformed(evt);
@@ -630,15 +629,20 @@ public class Producto_Root extends javax.swing.JFrame {
             limpia();
 
         } else {
-            if (txtNombre.getText().isEmpty() == false && txtActivo.getText().isEmpty() == false && txtDescripcion.getText().isEmpty() == false) {
+            if (txtNombre.getText().isEmpty() == false && txtActivo.getText().isEmpty() == false && txtDescripcion.getText().isEmpty() == false && cmbProveedor.getSelectedIndex() != 0) {
                 ctr.ingresarProductoNuevo(id, nombre, activo, descripcion, ppublico, pcompra, categoria1, "1");
                 ctr.ingresarDetalleNuevo(id, "1", stock, "0", "1");
+                for (int i = 2; i <= cmbSucursal.getItemCount() - 1; i++) {
+                    System.out.println(cmbSucursal.getItemAt(i));
+                    String suc = String.valueOf(i);
+                    ctr.ingresarDetalleNuevo(id, suc, "0", "0", "1");
+                }
                 mostrartodo();
                 limpia();
                 this.desactivarStock();
-                Estilo.lblMensajes(lblmensaje, "", 4);
+                Estilo.lblMensajes(lblmensaje, "Producto Agregado", 3);
             } else {
-                JOptionPane.showMessageDialog(null, "HAY ALGUNOS CAMPOS SIN LLENAR");
+                Estilo.lblMensajes(lblmensaje, "HAY CAMPOS SIN LLENAR", 1);
             }
         }
     }//GEN-LAST:event_btnAgregarMouseClicked
@@ -746,7 +750,7 @@ public class Producto_Root extends javax.swing.JFrame {
         btnGuardar.setVisible(true);
         cmbProveedor.setEnabled(false);
         cmbSucursal.setEnabled(false);
-        spStock.setEnabled(false);  
+        spStock.setEnabled(false);
         rbtAgregar.setSelected(true);// TODO add your handling code here:
     }//GEN-LAST:event_menuItemAgregarActionPerformed
 
