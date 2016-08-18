@@ -42,6 +42,17 @@ public class Controlador_Producto_Root_Transaccion {
         datos = sensql.GetTabla(columna, sentencia, tablas);
         return datos;
     }
+    
+    public Object[][] comprobar(String codigo, String sucursal) {
+        String seleccion = "SELECT detallesucursal.IDPRODUCTO from  ";
+        String tablas = "detallesucursal WHERE detallesucursal.IDPRODUCTO='"+codigo+"' AND detallesucursal.idsucursal= '"+sucursal+"'";
+        String sentencia = seleccion + tablas;
+        Object[][] datos = null;
+        String[] columna = {"detallesucursal.IDPRODUCTO"};
+
+        datos = sensql.GetTabla(columna, sentencia, tablas);
+        return datos;   
+    }
 
     public Object[] cargaSucursal(String tablas) {
         String seleccion = "SELECT sucursal.nombre from ";
@@ -68,4 +79,9 @@ public class Controlador_Producto_Root_Transaccion {
         String sentencia="SELECT sucursal.idsucursal from sucursal WHERE sucursal.nombre = '" + sucursal + "'";
         return idsucursal = sensql.idSucursal(campos, sentencia);
         }
-}
+    public boolean ingresarDetalleNuevo(String idproducto, String sucursal, String stock, String vendidos, String area) {
+
+        String datos[] = {idproducto, sucursal, stock, vendidos, area};
+        return sensql.insertar(datos, "INSERT INTO `detallesucursal` (`IDPRODUCTO`, `idsucursal`, `Stock`, `Vendidos`, `idArea`) VALUES (?,?,?,?,?)");
+    }
+   }

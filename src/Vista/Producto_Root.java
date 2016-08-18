@@ -38,7 +38,7 @@ public class Producto_Root extends javax.swing.JFrame {
     public void mostrar_tabla() {
         datostabla = ctr.consulta_Productos();
         DefaultTableModel datos = new DefaultTableModel(datostabla, columnas);
-        tblproducto.setModel(datos);
+        tblProducto.setModel(datos);
         Estilo.lblMensajes(lblmensaje, "Hace falta producto", 1);
         btnAgregar.setVisible(false);
         //rbtBuscar.setSelected(true);
@@ -49,7 +49,7 @@ public class Producto_Root extends javax.swing.JFrame {
     public void mostrartodo() {
         datostabla = ctr.mostrarProductos();
         DefaultTableModel datos = new DefaultTableModel(datostabla, columnas);
-        tblproducto.setModel(datos);
+        tblProducto.setModel(datos);
         Estilo.lblMensajes(lblmensaje, "Agregado con Exito", 3);
     }
 
@@ -63,25 +63,25 @@ public class Producto_Root extends javax.swing.JFrame {
             Estilo.lblMensajes(lblmensaje, "Producto no existe", 2);
         }
         DefaultTableModel datos = new DefaultTableModel(datostabla, columnas);
-        tblproducto.setModel(datos);
+        tblProducto.setModel(datos);
     }
 
     public void bucarProductoActivo(String activo) {
         datostabla = ctr.buscaProductosaActivo(activo);
         DefaultTableModel datos = new DefaultTableModel(datostabla, columnas);
-        tblproducto.setModel(datos);
+        tblProducto.setModel(datos);
     }
 
     public void buscarProductoNombre(String Nombre) {
         datostabla = ctr.buscaProductosaNombre(Nombre);
         DefaultTableModel datos = new DefaultTableModel(datostabla, columnas);
-        tblproducto.setModel(datos);
+        tblProducto.setModel(datos);
     }
 
     public void buscarProductoDescripcion(String Descripcion) {
         datostabla = ctr.buscaProductosaDescripcion(Descripcion);
         DefaultTableModel datos = new DefaultTableModel(datostabla, columnas);
-        tblproducto.setModel(datos);
+        tblProducto.setModel(datos);
     }
 
     public void cargarCombos() {
@@ -102,13 +102,13 @@ public class Producto_Root extends javax.swing.JFrame {
     public void buscarSucursal(String Sucursal) {
         datostabla = ctr.buscaProductosSucursal(Sucursal);
         DefaultTableModel datos = new DefaultTableModel(datostabla, columnas);
-        tblproducto.setModel(datos);
+        tblProducto.setModel(datos);
     }
 
     public void buscarProveedor(String Proveedor) {
         datostabla = ctr.buscaProductosProveedor(Proveedor);
         DefaultTableModel datos = new DefaultTableModel(datostabla, columnas);
-        tblproducto.setModel(datos);
+        tblProducto.setModel(datos);
     }
 
     public void limpia() {
@@ -180,7 +180,7 @@ public class Producto_Root extends javax.swing.JFrame {
         cmbProveedor = new javax.swing.JComboBox();
         jLabel9 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblproducto = new javax.swing.JTable();
+        tblProducto = new javax.swing.JTable();
         lblmensaje = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         rbtBuscar = new javax.swing.JRadioButton();
@@ -274,7 +274,7 @@ public class Producto_Root extends javax.swing.JFrame {
 
         jLabel9.setText("Proveedor");
 
-        tblproducto.setModel(new javax.swing.table.DefaultTableModel(
+        tblProducto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -282,12 +282,15 @@ public class Producto_Root extends javax.swing.JFrame {
 
             }
         ));
-        tblproducto.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblProducto.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblproductoMouseClicked(evt);
+                tblProductoMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                tblProductoMouseEntered(evt);
             }
         });
-        jScrollPane2.setViewportView(tblproducto);
+        jScrollPane2.setViewportView(tblProducto);
 
         lblmensaje.setText("LABEL DE MENSAJES");
 
@@ -574,10 +577,12 @@ public class Producto_Root extends javax.swing.JFrame {
 
     private void rbtAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtAgregarActionPerformed
         this.desactivarStock();
+        limpia();
         txtCodigo.setEnabled(true);
         btnAgregar.setVisible(true);
         btnGuardar.setVisible(false);
         Estilo.lblMensajes(lblmensaje, "", 4);
+        
     }//GEN-LAST:event_rbtAgregarActionPerformed
 
     private void cmbSucursalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSucursalActionPerformed
@@ -605,6 +610,7 @@ public class Producto_Root extends javax.swing.JFrame {
     private void rbtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtBuscarActionPerformed
         activar();
         desactivar();
+        limpia();
         txtCodigo.setEnabled(true);
         btnAgregar.setVisible(false);
         Estilo.lblMensajes(lblmensaje, "", 4);
@@ -629,14 +635,9 @@ public class Producto_Root extends javax.swing.JFrame {
             limpia();
 
         } else {
-            if (txtNombre.getText().isEmpty() == false && txtActivo.getText().isEmpty() == false && txtDescripcion.getText().isEmpty() == false && cmbProveedor.getSelectedIndex() != 0) {
+            if (txtNombre.getText().isEmpty() == false && txtActivo.getText().isEmpty() == false && txtDescripcion.getText().isEmpty() == false && cmbProveedor.getSelectedIndex() != 0 && (int) spStock.getValue() > 0) {
                 ctr.ingresarProductoNuevo(id, nombre, activo, descripcion, ppublico, pcompra, categoria1, "1");
-                ctr.ingresarDetalleNuevo(id, "1", stock, "0", "1");
-                for (int i = 2; i <= cmbSucursal.getItemCount() - 1; i++) {
-                    System.out.println(cmbSucursal.getItemAt(i));
-                    String suc = String.valueOf(i);
-                    ctr.ingresarDetalleNuevo(id, suc, "0", "0", "1");
-                }
+                ctr.ingresarDetalleNuevo(id, "1", stock, "0", "1");                
                 mostrartodo();
                 limpia();
                 this.desactivarStock();
@@ -665,6 +666,7 @@ public class Producto_Root extends javax.swing.JFrame {
 
     private void rbtModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtModificarActionPerformed
         activar();
+        limpia();
         txtCodigo.setEnabled(true);
         btnAgregar.setVisible(false);
         btnGuardar.setVisible(true);
@@ -700,15 +702,15 @@ public class Producto_Root extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
-    private void tblproductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblproductoMouseClicked
-        int cor = tblproducto.getSelectedRow();
-        txtCodigo.setText((tblproducto.getValueAt(cor, 0).toString()));
-        txtNombre.setText((tblproducto.getValueAt(cor, 1).toString()));
-        txtActivo.setText((tblproducto.getValueAt(cor, 2).toString()));
-        txtDescripcion.setText((tblproducto.getValueAt(cor, 3).toString()));
-        txtPCompra.setText((tblproducto.getValueAt(cor, 5).toString()));
-        txtPPublico.setText((tblproducto.getValueAt(cor, 4).toString()));
-    }//GEN-LAST:event_tblproductoMouseClicked
+    private void tblProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProductoMouseClicked
+        int cor = tblProducto.getSelectedRow();
+        txtCodigo.setText((tblProducto.getValueAt(cor, 0).toString()));
+        txtNombre.setText((tblProducto.getValueAt(cor, 1).toString()));
+        txtActivo.setText((tblProducto.getValueAt(cor, 2).toString()));
+        txtDescripcion.setText((tblProducto.getValueAt(cor, 3).toString()));
+        txtPCompra.setText((tblProducto.getValueAt(cor, 5).toString()));
+        txtPPublico.setText((tblProducto.getValueAt(cor, 4).toString()));
+    }//GEN-LAST:event_tblProductoMouseClicked
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
@@ -763,6 +765,10 @@ public class Producto_Root extends javax.swing.JFrame {
         Proveedor prov = new Proveedor();
         prov.setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void tblProductoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProductoMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblProductoMouseEntered
 
     /**
      * @param args the command line arguments
@@ -837,7 +843,7 @@ public class Producto_Root extends javax.swing.JFrame {
     private javax.swing.JRadioButton rbtBuscar;
     private javax.swing.JRadioButton rbtModificar;
     private javax.swing.JSpinner spStock;
-    private javax.swing.JTable tblproducto;
+    private javax.swing.JTable tblProducto;
     private org.edisoncor.gui.textField.TextFieldRectBackground txtActivo;
     private org.edisoncor.gui.textField.TextFieldRectBackground txtCodigo;
     private javax.swing.JTextArea txtDescripcion;

@@ -1,4 +1,8 @@
 package Vista;
+
+import Controlador.Controlador_Producto_Consultar;
+import javax.swing.table.DefaultTableModel;
+
 /**
  * Esta clase es la vista de todos los productos, es posible agregar y modificar los valores de 
  * los mismos.
@@ -6,12 +10,16 @@ package Vista;
  */
 public class Producto_Consultar extends javax.swing.JFrame {
     Ayuda.Estilo Estilo; 
+        private Object[][] datostabla;
+    String[] columnas = {"Código", "Nombre", "Activo", "Descripcion", "Precio","Stock", "Area"};
+    Controlador_Producto_Consultar ctr = new Controlador_Producto_Consultar ();
     /**
      * Inicializa todos los componentes usando la clase estilo
      */
     public Producto_Consultar() {
         Estilo = new Ayuda.Estilo();
         initComponents();
+        mostrarProductos();
         Estilo.lblBody(jLabel1);
         Estilo.lblBody(jLabel2);
         Estilo.lblBody(jLabel3);
@@ -34,9 +42,38 @@ public class Producto_Consultar extends javax.swing.JFrame {
         Estilo.lblMensajes(lblAlerta, "",4);
         Estilo.frmInicial(this, "Productos");
         Estilo.lblLogo(lblEncabezado);
+        
+        cargarAreas();
                 
     }
-    
+    public void mostrarProductos(){
+    datostabla = ctr.mostrarProductos();
+    DefaultTableModel datos = new DefaultTableModel (datostabla,columnas);
+    tblProducto.setModel(datos);
+    }
+    public void buscarCodigo(String codigo){
+    datostabla = ctr.buscarCodigo(codigo);
+    DefaultTableModel datos = new DefaultTableModel (datostabla,columnas); 
+    tblProducto.setModel(datos);
+    }
+     public void buscarProducto(String busqueda){
+    datostabla = ctr.buscarProducto(busqueda);
+    DefaultTableModel datos = new DefaultTableModel (datostabla,columnas); 
+    tblProducto.setModel(datos);
+    }
+     public void cargarAreas(){
+     Object[] Areas = ctr.cargaSucursal("area");
+        cmbAreas.removeAllItems();
+        cmbAreas.addItem("SELECIONES AREA");
+        for (int i = 0; i < Areas.length; i++) {
+            cmbAreas.addItem((String) Areas[i]);
+        }
+     }
+    public void buscarArea(String area){
+    datostabla = ctr.buscarArea(area);
+    DefaultTableModel datos = new DefaultTableModel (datostabla,columnas);
+    tblProducto.setModel(datos);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -50,7 +87,7 @@ public class Producto_Consultar extends javax.swing.JFrame {
         lblEncabezado = new javax.swing.JLabel();
         pnlTabla = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblProductos = new javax.swing.JTable();
+        tblProducto = new javax.swing.JTable();
         lblAlerta = new javax.swing.JLabel();
         pnlProducto = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
@@ -68,12 +105,12 @@ public class Producto_Consultar extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtDescripcion = new javax.swing.JTextArea();
         txtPPublico = new org.edisoncor.gui.textField.TextFieldRectBackground();
-        txtPPublico2 = new org.edisoncor.gui.textField.TextFieldRectBackground();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        txtStock = new org.edisoncor.gui.textField.TextFieldRectBackground();
+        cmbAreas = new javax.swing.JComboBox<String>();
         btnUpdate = new javax.swing.JButton();
         btnAdd = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblEncabezado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
@@ -87,10 +124,10 @@ public class Producto_Consultar extends javax.swing.JFrame {
         );
         pnlEncabezadoLayout.setVerticalGroup(
             pnlEncabezadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblEncabezado, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
+            .addComponent(lblEncabezado, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
         );
 
-        tblProductos.setModel(new javax.swing.table.DefaultTableModel(
+        tblProducto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -98,7 +135,12 @@ public class Producto_Consultar extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane2.setViewportView(tblProductos);
+        tblProducto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblProductoMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tblProducto);
 
         lblAlerta.setText("jLabel8");
 
@@ -158,20 +200,45 @@ public class Producto_Consultar extends javax.swing.JFrame {
         pnlProducto.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 17, 95, 280));
 
         txtCodigo.setDescripcion("Código de producto");
+        txtCodigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCodigoActionPerformed(evt);
+            }
+        });
 
         txtNombre.setDescripcion("");
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNombreKeyPressed(evt);
+            }
+        });
 
         txtActivo.setDescripcion("");
+        txtActivo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtActivoKeyPressed(evt);
+            }
+        });
 
         txtDescripcion.setColumns(20);
         txtDescripcion.setRows(5);
+        txtDescripcion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtDescripcionKeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(txtDescripcion);
 
         txtPPublico.setDescripcion("");
 
-        txtPPublico2.setDescripcion("");
+        txtStock.setDescripcion("");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbAreas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbAreas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbAreasActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -186,8 +253,8 @@ public class Producto_Consultar extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPPublico, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtPPublico2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)))
+                        .addComponent(cmbAreas, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtStock, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -203,13 +270,13 @@ public class Producto_Consultar extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtPPublico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtPPublico2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(cmbAreas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
-        pnlProducto.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 200, 280));
+        pnlProducto.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 200, 290));
 
         btnUpdate.setText("jButton1");
         pnlProducto.add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 140, 60));
@@ -245,6 +312,43 @@ public class Producto_Consultar extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
+        String codigo =txtCodigo.getText();
+        System.out.println(codigo);
+        buscarCodigo(codigo);
+        txtCodigo.setText(null);
+    }//GEN-LAST:event_txtCodigoActionPerformed
+
+    private void txtNombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyPressed
+        String busqueda = txtNombre.getText();
+        buscarProducto(busqueda);
+    }//GEN-LAST:event_txtNombreKeyPressed
+
+    private void txtActivoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtActivoKeyPressed
+        String busqueda = txtActivo.getText();
+        buscarProducto(busqueda);
+    }//GEN-LAST:event_txtActivoKeyPressed
+
+    private void txtDescripcionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripcionKeyPressed
+        String busqueda = txtDescripcion.getText();
+        buscarProducto(busqueda);
+    }//GEN-LAST:event_txtDescripcionKeyPressed
+
+    private void cmbAreasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAreasActionPerformed
+        String valor = (String) cmbAreas.getSelectedItem();
+        buscarArea(valor);        
+    }//GEN-LAST:event_cmbAreasActionPerformed
+
+    private void tblProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProductoMouseClicked
+        int cor = tblProducto.getSelectedRow();
+        txtCodigo.setText((tblProducto.getValueAt(cor, 0).toString()));
+        txtNombre.setText((tblProducto.getValueAt(cor, 1).toString()));
+        txtActivo.setText((tblProducto.getValueAt(cor, 2).toString()));
+        txtDescripcion.setText((tblProducto.getValueAt(cor, 3).toString()));
+        txtPPublico.setText((tblProducto.getValueAt(cor, 4).toString()));
+        txtStock.setText((tblProducto.getValueAt(cor, 5).toString()));
+    }//GEN-LAST:event_tblProductoMouseClicked
 
     /**
      * @param args the command line arguments
@@ -285,7 +389,7 @@ public class Producto_Consultar extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnUpdate;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cmbAreas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -302,12 +406,12 @@ public class Producto_Consultar extends javax.swing.JFrame {
     private javax.swing.JPanel pnlEncabezado;
     private javax.swing.JPanel pnlProducto;
     private javax.swing.JPanel pnlTabla;
-    private javax.swing.JTable tblProductos;
+    private javax.swing.JTable tblProducto;
     private org.edisoncor.gui.textField.TextFieldRectBackground txtActivo;
     private org.edisoncor.gui.textField.TextFieldRectBackground txtCodigo;
     private javax.swing.JTextArea txtDescripcion;
     private org.edisoncor.gui.textField.TextFieldRectBackground txtNombre;
     private org.edisoncor.gui.textField.TextFieldRectBackground txtPPublico;
-    private org.edisoncor.gui.textField.TextFieldRectBackground txtPPublico2;
+    private org.edisoncor.gui.textField.TextFieldRectBackground txtStock;
     // End of variables declaration//GEN-END:variables
 }

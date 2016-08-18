@@ -21,11 +21,11 @@ public class Controlador_Producto_Root {
 
     public Object[][] mostrarProductos() {
 
-        String seleccion = "SELECT producto.IDPRODUCTO, producto.NOMBRE,producto.ACTIVO,producto.DESCRIPCION,producto.PPUBLICO,producto.PCOMPRA,detallesucursal.Stock,proveedor.CONTACTO,sucursal.nombre from";
+        String seleccion = "SELECT producto.IDPRODUCTO, producto.NOMBRE,producto.ACTIVO,producto.DESCRIPCION,producto.PPUBLICO,producto.PCOMPRA,detallesucursal.Stock,proveedor.RSOCIAL,sucursal.nombre from";
         String tablas = "(producto INNER JOIN proveedor on producto.IDPROVEEDOR = proveedor.IDproveedor) INNER JOIN (detallesucursal INNER JOIN sucursal on detallesucursal.idsucursal = sucursal.idsucursal) on producto.IDPRODUCTO =detallesucursal.IDPRODUCTO";
         String sentencia = seleccion + tablas;
         Object[][] datos = null;
-        String[] columnas = {"producto.IDPRODUCTO", "producto.NOMBRE", "producto.ACTIVO", "producto.DESCRIPCION", "producto.PPUBLICO", "producto.PCOMPRA", "detallesucursal.Stock", "proveedor.CONTACTO", "sucursal.nombre"};
+        String[] columnas = {"producto.IDPRODUCTO", "producto.NOMBRE", "producto.ACTIVO", "producto.DESCRIPCION", "producto.PPUBLICO", "producto.PCOMPRA", "detallesucursal.Stock", "proveedor.RSOCIAL", "sucursal.nombre"};
         //dividir la consulta en dos una parta de los datos a busca y otra que tendra las tablas 
         datos = sensql.GetTabla(columnas, sentencia, tablas);
 
@@ -34,11 +34,11 @@ public class Controlador_Producto_Root {
 
     public Object[][] consulta_Productos() {
 
-        String seleccion = "SELECT producto.IDPRODUCTO, producto.NOMBRE,producto.ACTIVO,producto.DESCRIPCION,producto.PPUBLICO,producto.PCOMPRA,detallesucursal.Stock,proveedor.CONTACTO,sucursal.nombre from";
+        String seleccion = "SELECT producto.IDPRODUCTO, producto.NOMBRE,producto.ACTIVO,producto.DESCRIPCION,producto.PPUBLICO,producto.PCOMPRA,detallesucursal.Stock,proveedor.RSOCIAL,sucursal.nombre from";
         String tablas = "(producto INNER JOIN proveedor on producto.IDPROVEEDOR = proveedor.IDproveedor) INNER JOIN (detallesucursal INNER JOIN sucursal on detallesucursal.idsucursal = sucursal.idsucursal and detallesucursal.stock <= 3 and sucursal.idsucursal = 1) on producto.IDPRODUCTO =detallesucursal.IDPRODUCTO";
         String sentencia = seleccion + tablas;
         Object[][] datos = null;
-        String[] columnas = {"producto.IDPRODUCTO", "producto.NOMBRE", "producto.ACTIVO", "producto.DESCRIPCION", "producto.PPUBLICO", "producto.PCOMPRA", "detallesucursal.Stock", "proveedor.CONTACTO", "sucursal.nombre"};
+        String[] columnas = {"producto.IDPRODUCTO", "producto.NOMBRE", "producto.ACTIVO", "producto.DESCRIPCION", "producto.PPUBLICO", "producto.PCOMPRA", "detallesucursal.Stock", "proveedor.RSOCIAL", "sucursal.nombre"};
         //dividir la consulta en dos una parta de los datos a busca y otra que tendra las tablas 
         datos = sensql.GetTabla(columnas, sentencia, tablas);
 
@@ -47,11 +47,11 @@ public class Controlador_Producto_Root {
 
     public Object[][] buscaProductosCodigo(String codigo) {
 
-        String seleccion = "SELECT producto.IDPRODUCTO, producto.NOMBRE,producto.ACTIVO,producto.DESCRIPCION,producto.PPUBLICO,producto.PCOMPRA,detallesucursal.Stock,proveedor.CONTACTO,sucursal.nombre from";
+        String seleccion = "SELECT producto.IDPRODUCTO, producto.NOMBRE,producto.ACTIVO,producto.DESCRIPCION,producto.PPUBLICO,producto.PCOMPRA,detallesucursal.Stock,proveedor.RSOCIAL,sucursal.nombre from";
         String tablas = "(producto INNER JOIN proveedor on producto.IDPROVEEDOR = proveedor.IDproveedor) INNER JOIN (detallesucursal INNER JOIN sucursal on detallesucursal.idsucursal = sucursal.idsucursal) on producto.IDPRODUCTO =detallesucursal.IDPRODUCTO and producto.IDPRODUCTO like '%" + codigo + "%'";
         String sentencia = seleccion + tablas;
         Object[][] datos = null;
-        String[] columnas = {"producto.IDPRODUCTO", "producto.NOMBRE", "producto.ACTIVO", "producto.DESCRIPCION", "producto.PPUBLICO", "producto.PCOMPRA", "detallesucursal.Stock", "proveedor.CONTACTO", "sucursal.nombre"};
+        String[] columnas = {"producto.IDPRODUCTO", "producto.NOMBRE", "producto.ACTIVO", "producto.DESCRIPCION", "producto.PPUBLICO", "producto.PCOMPRA", "detallesucursal.Stock", "proveedor.RSOCIAL", "sucursal.nombre"};
         //dividir la consulta en dos una parta de los datos a busca y otra que tendra las tablas 
         datos = sensql.GetTabla(columnas, sentencia, tablas);
 
@@ -60,11 +60,11 @@ public class Controlador_Producto_Root {
 
     public Object[][] buscaProductosaActivo(String activo) {
 
-        String seleccion = "SELECT producto.IDPRODUCTO, producto.NOMBRE,producto.ACTIVO,producto.DESCRIPCION,producto.PPUBLICO,producto.PCOMPRA,detallesucursal.Stock,proveedor.CONTACTO,sucursal.nombre from";
+        String seleccion = "SELECT producto.IDPRODUCTO, producto.NOMBRE,producto.ACTIVO,producto.DESCRIPCION,producto.PPUBLICO,producto.PCOMPRA,detallesucursal.Stock,proveedor.RSOCIAL,sucursal.nombre from";
         String tablas = "(producto INNER JOIN proveedor on producto.IDPROVEEDOR = proveedor.IDproveedor) INNER JOIN (detallesucursal INNER JOIN sucursal on detallesucursal.idsucursal = sucursal.idsucursal) on producto.IDPRODUCTO =detallesucursal.IDPRODUCTO and producto.ACTIVO like '%" + activo + "%'";
         String sentencia = seleccion + tablas;
         Object[][] datos = null;
-        String[] columnas = {"producto.IDPRODUCTO", "producto.NOMBRE", "producto.ACTIVO", "producto.DESCRIPCION", "producto.PPUBLICO", "producto.PCOMPRA", "detallesucursal.Stock", "proveedor.CONTACTO", "sucursal.nombre"};
+        String[] columnas = {"producto.IDPRODUCTO", "producto.NOMBRE", "producto.ACTIVO", "producto.DESCRIPCION", "producto.PPUBLICO", "producto.PCOMPRA", "detallesucursal.Stock", "proveedor.RSOCIAL", "sucursal.nombre"};
         //dividir la consulta en dos una parta de los datos a busca y otra que tendra las tablas 
         datos = sensql.GetTabla(columnas, sentencia, tablas);
 
@@ -73,11 +73,11 @@ public class Controlador_Producto_Root {
 
     public Object[][] buscaProductosaNombre(String nombre) {
 
-        String seleccion = "SELECT producto.IDPRODUCTO, producto.NOMBRE,producto.ACTIVO,producto.DESCRIPCION,producto.PPUBLICO,producto.PCOMPRA,detallesucursal.Stock,proveedor.CONTACTO,sucursal.nombre from";
+        String seleccion = "SELECT producto.IDPRODUCTO, producto.NOMBRE,producto.ACTIVO,producto.DESCRIPCION,producto.PPUBLICO,producto.PCOMPRA,detallesucursal.Stock,proveedor.RSOCIAL,sucursal.nombre from";
         String tablas = "(producto INNER JOIN proveedor on producto.IDPROVEEDOR = proveedor.IDproveedor) INNER JOIN (detallesucursal INNER JOIN sucursal on detallesucursal.idsucursal = sucursal.idsucursal) on producto.IDPRODUCTO =detallesucursal.IDPRODUCTO and producto.NOMBRE like '%" + nombre + "%'";
         String sentencia = seleccion + tablas;
         Object[][] datos = null;
-        String[] columnas = {"producto.IDPRODUCTO", "producto.NOMBRE", "producto.ACTIVO", "producto.DESCRIPCION", "producto.PPUBLICO", "producto.PCOMPRA", "detallesucursal.Stock", "proveedor.CONTACTO", "sucursal.nombre"};
+        String[] columnas = {"producto.IDPRODUCTO", "producto.NOMBRE", "producto.ACTIVO", "producto.DESCRIPCION", "producto.PPUBLICO", "producto.PCOMPRA", "detallesucursal.Stock", "proveedor.RSOCIAL", "sucursal.nombre"};
         //dividir la consulta en dos una parta de los datos a busca y otra que tendra las tablas 
         datos = sensql.GetTabla(columnas, sentencia, tablas);
 
@@ -86,11 +86,11 @@ public class Controlador_Producto_Root {
 
     public Object[][] buscaProductosaDescripcion(String Descripcion) {
 
-        String seleccion = "SELECT producto.IDPRODUCTO, producto.NOMBRE,producto.ACTIVO,producto.DESCRIPCION,producto.PPUBLICO,producto.PCOMPRA,detallesucursal.Stock,proveedor.CONTACTO,sucursal.nombre from";
+        String seleccion = "SELECT producto.IDPRODUCTO, producto.NOMBRE,producto.ACTIVO,producto.DESCRIPCION,producto.PPUBLICO,producto.PCOMPRA,detallesucursal.Stock,proveedor.RSOCIAL,sucursal.nombre from";
         String tablas = "(producto INNER JOIN proveedor on producto.IDPROVEEDOR = proveedor.IDproveedor) INNER JOIN (detallesucursal INNER JOIN sucursal on detallesucursal.idsucursal = sucursal.idsucursal) on producto.IDPRODUCTO =detallesucursal.IDPRODUCTO and producto.DESCRIPCION like '%" + Descripcion + "%'";
         String sentencia = seleccion + tablas;
         Object[][] datos = null;
-        String[] columnas = {"producto.IDPRODUCTO", "producto.NOMBRE", "producto.ACTIVO", "producto.DESCRIPCION", "producto.PPUBLICO", "producto.PCOMPRA", "detallesucursal.Stock", "proveedor.CONTACTO", "sucursal.nombre"};
+        String[] columnas = {"producto.IDPRODUCTO", "producto.NOMBRE", "producto.ACTIVO", "producto.DESCRIPCION", "producto.PPUBLICO", "producto.PCOMPRA", "detallesucursal.Stock", "proveedor.RSOCIAL", "sucursal.nombre"};
         //dividir la consulta en dos una parta de los datos a busca y otra que tendra las tablas 
         datos = sensql.GetTabla(columnas, sentencia, tablas);
 
@@ -105,19 +105,19 @@ public class Controlador_Producto_Root {
     }
 
     public Object[] cargaProveedor(String tablas) {
-        String seleccion = "SELECT proveedor.CONTACTO from ";
+        String seleccion = "SELECT proveedor.RSOCIAL from ";
         String sentencia = seleccion + tablas;
-        String columnas = "proveedor.CONTACTO";
+        String columnas = "proveedor.RSOCIAL";
         return sensql.llenarCombo(tablas, columnas, sentencia);
     }
 
     public Object[][] buscaProductosSucursal(String Sucursal) {
 
-        String seleccion = "SELECT producto.IDPRODUCTO, producto.NOMBRE,producto.ACTIVO,producto.DESCRIPCION,producto.PPUBLICO,producto.PCOMPRA,detallesucursal.Stock,proveedor.CONTACTO,sucursal.nombre from";
+        String seleccion = "SELECT producto.IDPRODUCTO, producto.NOMBRE,producto.ACTIVO,producto.DESCRIPCION,producto.PPUBLICO,producto.PCOMPRA,detallesucursal.Stock,proveedor.RSOCIAL,sucursal.nombre from";
         String tablas = "(producto INNER JOIN proveedor on producto.IDPROVEEDOR = proveedor.IDproveedor) INNER JOIN (detallesucursal INNER JOIN sucursal on detallesucursal.idsucursal = sucursal.idsucursal and sucursal.nombre LIKE '%" + Sucursal + "%') on producto.IDPRODUCTO =detallesucursal.IDPRODUCTO";
         String sentencia = seleccion + tablas;
         Object[][] datos = null;
-        String[] columnas = {"producto.IDPRODUCTO", "producto.NOMBRE", "producto.ACTIVO", "producto.DESCRIPCION", "producto.PPUBLICO", "producto.PCOMPRA", "detallesucursal.Stock", "proveedor.CONTACTO", "sucursal.nombre"};
+        String[] columnas = {"producto.IDPRODUCTO", "producto.NOMBRE", "producto.ACTIVO", "producto.DESCRIPCION", "producto.PPUBLICO", "producto.PCOMPRA", "detallesucursal.Stock", "proveedor.RSOCIAL", "sucursal.nombre"};
         //dividir la consulta en dos una parta de los datos a busca y otra que tendra las tablas 
         datos = sensql.GetTabla(columnas, sentencia, tablas);
 
@@ -126,11 +126,11 @@ public class Controlador_Producto_Root {
 
     public Object[][] buscaProductosProveedor(String Proveedor) {
 
-        String seleccion = "SELECT producto.IDPRODUCTO, producto.NOMBRE,producto.ACTIVO,producto.DESCRIPCION,producto.PPUBLICO,producto.PCOMPRA,detallesucursal.Stock,proveedor.CONTACTO,sucursal.nombre from";
-        String tablas = "(producto INNER JOIN proveedor on producto.IDPROVEEDOR = proveedor.IDproveedor and proveedor.CONTACTO LIKE '%" + Proveedor + "%') INNER JOIN (detallesucursal INNER JOIN sucursal on detallesucursal.idsucursal = sucursal.idsucursal) on producto.IDPRODUCTO =detallesucursal.IDPRODUCTO";
+        String seleccion = "SELECT producto.IDPRODUCTO, producto.NOMBRE,producto.ACTIVO,producto.DESCRIPCION,producto.PPUBLICO,producto.PCOMPRA,detallesucursal.Stock,proveedor.RSOCIAL,sucursal.nombre from";
+        String tablas = "(producto INNER JOIN proveedor on producto.IDPROVEEDOR = proveedor.IDproveedor and proveedor.RSOCIAL LIKE '%" + Proveedor + "%') INNER JOIN (detallesucursal INNER JOIN sucursal on detallesucursal.idsucursal = sucursal.idsucursal) on producto.IDPRODUCTO =detallesucursal.IDPRODUCTO";
         String sentencia = seleccion + tablas;
         Object[][] datos = null;
-        String[] columnas = {"producto.IDPRODUCTO", "producto.NOMBRE", "producto.ACTIVO", "producto.DESCRIPCION", "producto.PPUBLICO", "producto.PCOMPRA", "detallesucursal.Stock", "proveedor.CONTACTO", "sucursal.nombre"};
+        String[] columnas = {"producto.IDPRODUCTO", "producto.NOMBRE", "producto.ACTIVO", "producto.DESCRIPCION", "producto.PPUBLICO", "producto.PCOMPRA", "detallesucursal.Stock", "proveedor.RSOCIAL", "sucursal.nombre"};
         //dividir la consulta en dos una parta de los datos a busca y otra que tendra las tablas 
         datos = sensql.GetTabla(columnas, sentencia, tablas);
 
@@ -150,7 +150,7 @@ public class Controlador_Producto_Root {
     }
 
     public String obtenerIdProveedor(String contacto) {
-        String sentencia = "SELECT proveedor.IDproveedor from proveedor WHERE proveedor.CONTACTO = '" + contacto + "'";
+        String sentencia = "SELECT proveedor.IDproveedor from proveedor WHERE proveedor.RSOCIAL = '" + contacto + "'";
         String datos = null;
         String columnas = "IDproveedor";
         //dividir la consulta en dos una parta de los datos a busca y otra que tendra las tablas 

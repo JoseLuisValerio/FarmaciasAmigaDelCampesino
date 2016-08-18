@@ -44,6 +44,16 @@ public class Producto_Root_Transaccion extends javax.swing.JFrame {
 
     }
 
+    public boolean verificar(String codigo, String sucursal) {
+        boolean existe = false;
+        datostabla = ctr.comprobar(codigo, sucursal);
+        if (datostabla.length == 0) {
+            return existe = true;
+        } else {
+            return existe = false;
+        }
+    }
+
     public void cargarCombos() {
         Object[] sucursales = ctr.cargaSucursal("sucursal WHERE sucursal.idsucursal != 1");
         cmbSucursal.removeAllItems();
@@ -53,7 +63,11 @@ public class Producto_Root_Transaccion extends javax.swing.JFrame {
         }
     }
 
-    public void obtenersucursal() {
+    public void actualizar() {
+
+    }
+
+    public void agregar() {
 
     }
 
@@ -351,7 +365,7 @@ public class Producto_Root_Transaccion extends javax.swing.JFrame {
 
     private void btnTransaccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransaccionActionPerformed
         String sucursal = ctr.idsucursal((String) cmbSucursal.getSelectedItem());
-        System.out.println("Id de Sucursal : "+sucursal);
+        System.out.println("Id de Sucursal : " + sucursal);
         if (datostabla == null) {
             estilo.lblMensajes(lblmensaje, "No a selecionado productos", 1);
         } else {
@@ -359,23 +373,27 @@ public class Producto_Root_Transaccion extends javax.swing.JFrame {
                 if (cmbSucursal.getSelectedIndex() != 0) {
                     String codigo = (String) tblTransaccion.getValueAt(i, 0);
                     String stock = (String) tblTransaccion.getValueAt(i, 3);
-                    System.out.println("Codigo del Producto : " + codigo + " Esta esto de lo que se trasacciona : " + stock);
-                    if (ctr.transaccion(codigo, sucursal, stock) == true && ctr.actualizarStock(codigo, stock)== true) {
+                    datostabla = ctr.comprobar(codigo, sucursal);
+                    if (datostabla.length == 0) {
+                        ctr.ingresarDetalleNuevo(codigo, sucursal, stock, "0", "1");
+                        ctr.actualizarStock(codigo, stock);
                         estilo.lblMensajes(lblmensaje, "Transacción exitosa", 3);
-                        
-                        //aquí falta la parte de os tickets             
-                                     datostabla = null;
-        DefaultTableModel datos = new DefaultTableModel(datostabla, columnas);
-        tblTransaccion.setModel(datos);
                     } else {
-                        estilo.lblMensajes(lblmensaje,"No se pudo hacer la transación",1);                        
+                        ctr.transaccion(codigo, sucursal, stock);
+                        ctr.actualizarStock(codigo, stock);
+                        estilo.lblMensajes(lblmensaje, "Transacción exitosa", 3);
+                        //aquí falta la parte de os tickets
                     }
                 } else {
-                    estilo.lblMensajes(lblmensaje, "Debe seleccionar una Sucursal", 1);                   
+                    estilo.lblMensajes(lblmensaje, "Debe seleccionar una Sucursal", 1);
+                    break;
                 }
             }
-
         }
+            datostabla = null;
+            DefaultTableModel datos = new DefaultTableModel(datostabla, columnas);
+            tblTransaccion.setModel(datos);
+            cmbSucursal.setSelectedIndex(0);
     }//GEN-LAST:event_btnTransaccionActionPerformed
 
     /**
