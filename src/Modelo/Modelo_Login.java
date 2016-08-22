@@ -32,6 +32,7 @@ public class Modelo_Login {
          res.next();
          registros = res.getInt("total");
          res.close();
+         con.desconectar();
       }catch(SQLException e){
          System.err.println("Error al contar la cantidad de usuarios: "+e.getMessage());
       }

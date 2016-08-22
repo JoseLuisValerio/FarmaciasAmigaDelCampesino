@@ -32,11 +32,11 @@ public class Controlador_Venta {
         return estado;
     }
     
-    public boolean RegistrarDetalleVenta(String Cantidad, String idProducto, String idVenta){
+    public boolean RegistrarDetalleVenta(String Cantidad, String idProducto, String idVenta, String Total){
         boolean exitoso=false;
-        String datos[]={Cantidad, idProducto, idVenta};
-        exitoso = Modelo.insertar(datos, "INSERT INTO DetallesVenta(Cantidad, idProducto, idVenta )"
-                + "VALUES (?,?,?);");
+        String datos[]={Cantidad, idProducto, idVenta, Total};
+        exitoso = Modelo.insertar(datos, "INSERT INTO DetallesVenta(Cantidad, idProducto, idVenta, Total )"
+                + "VALUES (?,?,?,?);");
         return exitoso;
     }
     

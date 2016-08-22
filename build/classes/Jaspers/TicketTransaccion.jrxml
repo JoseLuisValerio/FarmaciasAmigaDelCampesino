@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Ticket1" pageWidth="147" pageHeight="324" columnWidth="147" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isSummaryWithPageHeaderAndFooter="true" isIgnorePagination="true" uuid="185e57d6-76cc-4db6-9546-6477fe3189ea">
+	<property name="ireport.zoom" value="4.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idTransaccion" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     producto.`NOMBRE` AS producto_NOMBRE,
+     detalletransaccion.`Cantidad` AS detalletransaccion_Cantidad,
+     detalletransaccion.`IDPRODUCTO` AS detalletransaccion_IDPRODUCTO,
+     sucursal.`nombre` AS sucursal_nombre,
+     transaccion.`idTransaccion` AS transaccion_idTransaccion,
+     transaccion.`Fecha` AS transaccion_Fecha,
+     usuario.`NOMBRE` AS usuario_NOMBRE,
+     usuario.`APATERNO` AS usuario_APATERNO
+FROM
+     `producto` producto INNER JOIN `detalletransaccion` detalletransaccion ON producto.`IDPRODUCTO` = detalletransaccion.`IDPRODUCTO`
+     INNER JOIN `transaccion` transaccion ON detalletransaccion.`idTransaccion` = transaccion.`idTransaccion`
+     INNER JOIN `sucursal` sucursal ON transaccion.`idsucursal` = sucursal.`idsucursal`
+     INNER JOIN `usuario` usuario ON transaccion.`idusuario` = usuario.`idusuario`
+WHERE
+     Transaccion.idTransaccion = $P{idTransaccion}]]>
+	</queryString>
+	<field name="producto_NOMBRE" class="java.lang.String"/>
+	<field name="detalletransaccion_Cantidad" class="java.lang.Integer"/>
+	<field name="detalletransaccion_IDPRODUCTO" class="java.lang.String"/>
+	<field name="sucursal_nombre" class="java.lang.String"/>
+	<field name="transaccion_idTransaccion" class="java.lang.Long"/>
+	<field name="transaccion_Fecha" class="java.lang.String"/>
+	<field name="usuario_NOMBRE" class="java.lang.String"/>
+	<field name="usuario_APATERNO" class="java.lang.String"/>
+	<title>
+		<band height="89" splitType="Stretch">
+			<image scaleImage="FillFrame">
+				<reportElement x="0" y="3" width="43" height="29" uuid="9aa7aabe-d234-46f6-b3b7-5930bf0440e4"/>
+				<imageExpression><![CDATA["C:\\Report\\Logoticket.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="25" y="18" width="100" height="13" uuid="818d489f-24d8-431a-a545-f46b4dbec8b8"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA["Amiga del Campesino"]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="18" y="3" width="125" height="13" uuid="3a55181a-661a-486b-b823-36f3f33698a0"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Farmacia Y Consultorio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3" y="35" width="60" height="13" uuid="218c1236-97a6-4f3f-b91c-5bb459fbab77"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Transacción #:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="62" y="35" width="51" height="13" uuid="b39d600f-4e6e-4151-be79-c8f6331c13e7"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{transaccion_idTransaccion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="42" y="47" width="100" height="13" uuid="4524ad35-a0ea-4533-bd5a-37b74cad60ed"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{transaccion_Fecha}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="3" y="47" width="40" height="13" uuid="c29d8ecd-d8d1-4430-8082-c8b48cbafe67"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="76" width="78" height="13" uuid="15193ce8-6ce5-4c71-a385-ad255240a4ec"/>
+				<textElement textAlignment="Justified">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<line>
+				<reportElement x="2" y="88" width="144" height="1" uuid="a90a9243-b22c-42bb-b263-6966e719d47f"/>
+			</line>
+			<staticText>
+				<reportElement x="86" y="76" width="33" height="13" uuid="d9b10531-4f65-41f5-a3b6-48292044fd43"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Unidades]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="59" width="40" height="13" uuid="76d270fb-644b-4b43-a952-c48c7f62070f"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sucursal:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="43" y="59" width="100" height="13" uuid="5800ff50-2d0b-45f0-967c-4ba90d9034c1"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sucursal_nombre}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="12" splitType="Stretch">
+			<textField pattern="">
+				<reportElement x="4" y="-1" width="78" height="13" uuid="c0cc190a-6dae-4347-98f1-bb3372c7d99f"/>
+				<textElement>
+					<font size="5" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{producto_NOMBRE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="86" y="-1" width="33" height="13" uuid="5de14a34-036e-4251-b4e0-7f4326eeb661"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{detalletransaccion_Cantidad}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="50">
+			<line>
+				<reportElement x="4" y="0" width="143" height="1" uuid="dd357711-5210-4985-adaa-117fcdf4f352"/>
+			</line>
+			<staticText>
+				<reportElement x="4" y="6" width="45" height="13" uuid="e8310dc1-ec77-4f6f-91c7-d734d1307e8f"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Envió:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="49" y="6" width="82" height="13" uuid="b055932d-12e2-445e-b966-251f2107b42a"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{usuario_NOMBRE}+" "+$F{usuario_APATERNO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="4" y="19" width="127" height="13" uuid="f4f28145-e117-44cf-907c-673448350bad"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Favor de verificar]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="32" width="127" height="13" uuid="81255371-c511-4f48-9c1f-ad48c90163f7"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[el producto recibido]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

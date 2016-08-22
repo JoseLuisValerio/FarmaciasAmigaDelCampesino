@@ -16,6 +16,7 @@ public class Venta extends javax.swing.JFrame {
     private Ayuda.Estilo Estilo = null;
     private Ayuda.Utilidades Util = null;
     private Controlador.Controlador_Venta Controlador = null;
+    private Controlador.Reportes Ticket=null;
     private final String[] columnas = {"Código", "Nombre", "Descripcion", "Precio Unitario", "Cantidad", "Precio Total"};
     private DefaultTableModel ModelVenta;
     private String idCliente;
@@ -27,6 +28,7 @@ public class Venta extends javax.swing.JFrame {
         Estilo = new Ayuda.Estilo();
         Util = new Ayuda.Utilidades();
         Controlador = new Controlador.Controlador_Venta();
+        Ticket = new Controlador.Reportes();
         idCliente="";
         initComponents();
         //Estilo JLabels
@@ -153,6 +155,7 @@ public class Venta extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         txtProducto = new org.edisoncor.gui.textField.TextFieldRectBackground();
         lblDinElectro = new javax.swing.JLabel();
+        jCheckBox1 = new javax.swing.JCheckBox();
         pnlProductos = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblVenta = new javax.swing.JTable();
@@ -181,7 +184,7 @@ public class Venta extends javax.swing.JFrame {
         jLabel5.setText("Cliente:");
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel6.setText("Dinero Electronico:");
+        jLabel6.setText("Dinero Electronico: $");
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel7.setText("Producto:");
@@ -192,7 +195,7 @@ public class Venta extends javax.swing.JFrame {
             }
         });
 
-        lblDinElectro.setText("$");
+        jCheckBox1.setText("Usar!");
 
         javax.swing.GroupLayout pnlClienteLayout = new javax.swing.GroupLayout(pnlCliente);
         pnlCliente.setLayout(pnlClienteLayout);
@@ -208,11 +211,14 @@ public class Venta extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlClienteLayout.createSequentialGroup()
                         .addGroup(pnlClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
-                            .addComponent(jLabel6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                         .addGroup(pnlClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblDinElectro, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(pnlClienteLayout.createSequentialGroup()
+                                .addComponent(lblDinElectro, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jCheckBox1)))))
                 .addContainerGap())
         );
         pnlClienteLayout.setVerticalGroup(
@@ -224,8 +230,10 @@ public class Venta extends javax.swing.JFrame {
                     .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblDinElectro)
-                    .addComponent(jLabel6))
+                    .addComponent(jCheckBox1)
+                    .addGroup(pnlClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(lblDinElectro, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -395,18 +403,25 @@ public class Venta extends javax.swing.JFrame {
         String Hora = Integer.toString(c.get(Calendar.HOUR_OF_DAY)) + ":" + Integer.toString(c.get(Calendar.MINUTE)) + ":" + Integer.toString(c.get(Calendar.SECOND));
         String Sucursal = Controlador.ObtenerSucursal();
         String Usuario=Sesion.LeerSesion("idUsuario");
-        if(Controlador.RegistrarVenta(Fecha, Hora,"0", PrecioTotal(), Usuario, idCliente, Sucursal)){
+        Float DineroElectro = 0f;
+        if(jCheckBox1.isSelected()){//Ocupa dinero electronico
+            DineroElectro = Float.parseFloat(lblDinElectro.getText()); //No optinizado aun
+        }     
+        if(Controlador.RegistrarVenta(Fecha, Hora,String.valueOf(DineroElectro), PrecioTotal(), Usuario, idCliente, Sucursal)){
             String idVenta = Controlador.ObteneridVenta(Fecha, Hora, Sucursal, Usuario);
             for(int i=0;i<tblVenta.getRowCount();i++){
                 String Cantidad= String.valueOf(tblVenta.getValueAt(i, 4));
                 String idProducto= String.valueOf(tblVenta.getValueAt(i, 0));
-            Controlador.RegistrarDetalleVenta(Cantidad, idProducto, idVenta);
+                String Total = String.valueOf(tblVenta.getValueAt(i, 5));
+            Controlador.RegistrarDetalleVenta(Cantidad, idProducto, idVenta, Total);
             }
+            Ticket.TicketVenta(idVenta);
             Estilo.lblMensajes(lblAlerta, "Venta Cobrada exitosamente", 3);
             Limpiar();
         }else{
             Estilo.lblMensajes(lblAlerta, "Ha ocurrido un error, por favor verifique", 2);
         }
+        
         }else{
             Estilo.lblMensajes(lblAlerta, "Debe ingresar a menos un producto y seleccionar un cliente", 1);
         }
@@ -421,7 +436,7 @@ public class Venta extends javax.swing.JFrame {
             int fila = tblCliente.getSelectedRow();
             if (fila >= 0) {
                 txtCliente.setText(String.valueOf(tblCliente.getValueAt(fila, 0)));
-                lblDinElectro.setText("$ " + String.valueOf(tblCliente.getValueAt(fila, 5)));
+                lblDinElectro.setText( String.valueOf(tblCliente.getValueAt(fila, 5)));
                 idCliente = String.valueOf(tblCliente.getValueAt(fila, 6));
                 Util.txtFoco(txtProducto);
                 Util.txtHabilitar(txtCliente, false);
@@ -517,6 +532,7 @@ public class Venta extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnCancelar;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

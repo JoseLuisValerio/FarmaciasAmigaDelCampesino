@@ -2,10 +2,6 @@
 package Vista;
 
 import Ayuda.Sesion;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 
@@ -53,11 +49,6 @@ public class Inicio extends javax.swing.JFrame {
         Estilo.lblTitulo(lblNombre);
         Estilo.lblTitulo(lblTipo);
         Estilo.lblTitulo(lblUsuario);
-//        try {
-//            datos();
-//        } catch (IOException ex) {
-//            System.err.println("Error a obtener datos de sesión: "+ex.getMessage());
-//        }
         lblUsuario.setText(Sesion.LeerSesion("Usuario"));
         lblNombre.setText("<html>"+Sesion.LeerSesion("Nombre")+"</html>");
         lblTipo.setText(Sesion.LeerSesion("Tipo"));
