@@ -1,4 +1,8 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package Modelo;
 
 import java.sql.PreparedStatement;
@@ -9,16 +13,16 @@ import java.sql.SQLException;
  *
  * @author Jose Luis
  */
+public class Modelo_Producto_Acomodar {
+         private Conexion con;
+    PreparedStatement ps;
+    ResultSet res;
 
-public class Modelo_Producto_Consultar {
- private Conexion con;
-    private PreparedStatement ps;
-    private ResultSet res;
-    
-    public Modelo_Producto_Consultar(){
+    public Modelo_Producto_Acomodar() {
         con = new Conexion();
-    }   
-        public Object[][] GetTabla(String colName[], String sql, String tablas) {//recibir de las tablas el final de la consulta 
+    }
+    
+            public Object[][] GetTabla(String colName[], String sql, String tablas) {//recibir de las tablas el final de la consulta 
         int registros = 0;
         String sentencia = "select count(*) as total from " + tablas;
 
@@ -54,7 +58,7 @@ public class Modelo_Producto_Consultar {
         }
         return data;
     }
-           public Object[] llenarCombo(String tabla, String nombrecol, String sql) {
+        public Object[] llenarCombo(String tabla, String nombrecol, String sql) {
         int registros = 0;
         try {
             ps = con.conectado().prepareStatement("SELECT count(*) as total FROM " + tabla);
@@ -83,7 +87,7 @@ public class Modelo_Producto_Consultar {
         }
         return datos;
     }
-    public boolean insertar(String datos[], String insert) {
+        public boolean insertar(String datos[], String insert) {
         boolean estado = false;
         try {
             ps = con.conectado().prepareStatement(insert);
@@ -98,5 +102,21 @@ public class Modelo_Producto_Consultar {
             System.out.println(e);
         }
         return estado;
+    }
+        public String idSucursal(String nombre_columna, String sentenciasql){
+        
+    String datos ="";
+      try{
+         ps = con.conectado().prepareStatement(sentenciasql);
+         res = ps.executeQuery();
+         while(res.next()){
+            datos = res.getString(nombre_columna);
+         }
+         res.close();
+         con.desconectar();
+          }catch(SQLException e){
+         System.out.println(e);
+    }
+    return datos;
     }
 }

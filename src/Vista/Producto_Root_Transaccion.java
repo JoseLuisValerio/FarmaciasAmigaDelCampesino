@@ -6,7 +6,6 @@
 package Vista;
 
 import Ayuda.Estilo;
-import Controlador.Controlador_Producto_Root;
 import Controlador.Controlador_Producto_Root_Transaccion;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -152,7 +151,7 @@ public class Producto_Root_Transaccion extends javax.swing.JFrame {
             }
         });
 
-        btnCancelar.setText("Cancelar");
+        btnCancelar.setText("Limpiar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
@@ -327,15 +326,13 @@ public class Producto_Root_Transaccion extends javax.swing.JFrame {
 
         int a = tblTransaccion.getSelectedRow();
         if (a < 0) {
-            JOptionPane.showMessageDialog(null,
-                    "Debe seleccionar el producto a eliminar de la tabla");
+            estilo.lblMensajes(lblmensaje, "Seleccione un producto", 2);
         } else {
             int confirmar = JOptionPane.showConfirmDialog(null,
                     "Esta seguro que desea Eliminar el registro? ");
             if (JOptionPane.OK_OPTION == confirmar) {
                 model.removeRow(a);
-                JOptionPane.showMessageDialog(null,
-                        "Registro Eliminado");
+                estilo.lblMensajes(lblmensaje, "Registro Eliminado", 3);
 
             }
         }
@@ -389,11 +386,15 @@ public class Producto_Root_Transaccion extends javax.swing.JFrame {
                     break;
                 }
             }
-        }
             datostabla = null;
-            DefaultTableModel datos = new DefaultTableModel(datostabla, columnas);
-            tblTransaccion.setModel(datos);
-            cmbSucursal.setSelectedIndex(0);
+        DefaultTableModel datos = new DefaultTableModel(datostabla, columnas);
+        tblTransaccion.setModel(datos);
+        cmbSucursal.setSelectedIndex(0);
+        spStock.setValue(0);
+        lblexistencia.setText(null);
+        mostrar_tabla();
+        }
+
     }//GEN-LAST:event_btnTransaccionActionPerformed
 
     /**
