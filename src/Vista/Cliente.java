@@ -14,8 +14,10 @@ public class Cliente extends javax.swing.JFrame {
     Estilo Estilo;
     Ayuda.Utilidades Util;
     Controlador.Controlador_Cliente Controlador;
+    Controlador.Reportes Reporte;
     private Object[][] datostabla;
     private final String[] columnas = {"Alias", "Nombre", "APaterno", "AMaterno", "Tel", "Direccion", "Tipo", "Dinero"};
+    
 
     /**
      * Inicializa todos los componentes usando la clase estilo
@@ -25,6 +27,7 @@ public class Cliente extends javax.swing.JFrame {
         Estilo = new Estilo();
         Controlador = new Controlador_Cliente();
         Util = new Ayuda.Utilidades();
+        Reporte = new Controlador.Reportes();
         //Estilo de jLabels 
         Estilo.lblBody(jLabel2);
         Estilo.lblBody(jLabel3);
@@ -56,9 +59,10 @@ public class Cliente extends javax.swing.JFrame {
 
         //Configuraciones iniciales
         //Inicio de valores iniciales
-        MostrarTabla();
+        MostrarTabla();//--->Error
         LlenarcmbTipos();
         Util.botonHabilitar(btnUpdate, false);
+        Reporte.ReporteCliente("3");//-->No funcional
     }
 
     /**
@@ -385,14 +389,16 @@ public class Cliente extends javax.swing.JFrame {
     }//GEN-LAST:event_tblProductosMousePressed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        int numero = (int) (Math.random() * 9998 + 1);
-        String Alias = txtNombre.getText().substring(0, 3) + txtAPaterno.getText().substring(0, 2) + txtAMaterno.getText().substring(0, 2) + numero;
-        if (Controlador.insertarCliente(Alias, txtNombre.getText(), txtAPaterno.getText(), txtAMaterno.getText(), txtTelefono.getText(), jTextArea1.getText(), jComboBox1.getSelectedItem().toString(), "0.0")) {
-            Estilo.lblMensajes(lblAlerta, "El cliente ha sido registrado exitosamente", 3);
-            Limpiar();
-        } else {
-            Estilo.lblMensajes(lblAlerta, "Ha ocurrido un error, por favor verifique.", 2);
-        }
+        Reporte.ReporteCliente("3");
+//        int numero = (int) (Math.random() * 9998 + 1);
+//        String Alias = txtNombre.getText().substring(0, 3) + txtAPaterno.getText().substring(0, 2) + txtAMaterno.getText().substring(0, 2) + numero;
+//        if (Controlador.insertarCliente(Alias, txtNombre.getText(), txtAPaterno.getText(), txtAMaterno.getText(), txtTelefono.getText(), jTextArea1.getText(), jComboBox1.getSelectedItem().toString(), "0.0")) {
+//            Estilo.lblMensajes(lblAlerta, "El cliente ha sido registrado exitosamente", 3);
+//            
+//            Limpiar();
+//        } else {
+//            Estilo.lblMensajes(lblAlerta, "Ha ocurrido un error, por favor verifique.", 2);
+//        }
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed

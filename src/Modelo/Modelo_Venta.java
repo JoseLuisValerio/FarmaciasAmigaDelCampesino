@@ -3,6 +3,7 @@ package Modelo;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  * Modelo para el controlador Controlador_Venta
@@ -12,6 +13,7 @@ public class Modelo_Venta {
     private Conexion con;
     private PreparedStatement ps;
     private ResultSet res;
+    private Statement st;
     
     public Modelo_Venta(){
         con = new Conexion();
@@ -93,4 +95,75 @@ public class Modelo_Venta {
         }
         return idVenta;
     }
+    /**
+     * Obtiene el stock o el número de vendidos de un producto en una sucursal
+     * @param Columna recibe la columna "Stock" o "Vendidos".
+     * @param Producto recibe el idproducto para buscar.
+     * @param Sucursal recibe la sucursal donde buscará el producto.
+     * @return entero con Stock o número de vendidos
+     */
+    public int GetStock(String Columna, String Producto, String Sucursal){
+        int Stock =0;
+        String SQL = "SELECT "+Columna+" FROM DetalleSucursal WHERE idSucursal ="+Sucursal+" AND idProducto="+Producto+";";
+        try{
+            ps = con.conectado().prepareStatement(SQL);
+            res = ps.executeQuery();
+            res.next();
+            Stock = res.getInt(Columna);
+            res.close();
+            con.desconectar();
+        }catch(SQLException e){
+            System.err.println("Error al obtener "+Columna+" de Detalle de Sucursal");
+        }
+        return Stock;
+    }
+    
+    /**
+     * Recibe el nuevo Stock y el número de vendidos dado un producto y una sucursal
+     * @param Producto recibe el producto que se acualizará
+     * @param Sucursal recibe la sucursal que corresponde al producto ingresado
+     * @param Stock recibe el nuevo stock del producto
+     * @param Vendidos recibe el nuevo número de productos vendidos.
+     * @return si la operación fue exitosa o no.
+     */
+    public boolean ActualizaStockYVendidos(String Producto, String Sucursal, int Stock, int Vendidos){
+        boolean exitoso = false;
+        String SQL = "UPDATE DetalleSucursal SET Stock=?, Vendidos=? WHERE idProducto ='"+Producto+"' AND idSucursal='"+Sucursal+"'";
+        try{
+        ps= con.conectado().prepareStatement(SQL);
+        ps.setInt(1, Stock);
+        ps.setInt(2, Vendidos);
+        ps.executeUpdate();
+        ps.close();
+        con.desconectar();
+        exitoso = true;
+        }catch(SQLException e){
+            System.err.println("Error al actualizar Stock y vendidos: "+e.getMessage());
+        }
+        return exitoso;
+    }
+    
+    /**
+     * Actualiza el dinero electronico de un cliente dado
+     * @param idCliente recibe el cliente
+     * @param DinElectro recibe el nuevo saldo en 
+     * @return 
+     */
+    public boolean ActualizaDinElectro(String idCliente, float DinElectro){
+        boolean exitoso=false;
+        String SQL ="UPDATE Cliente SET DineroElectronico=? WHERE idCliente='"+idCliente+"';";
+        try{
+            ps =con.conectado().prepareStatement(SQL);
+            ps.setFloat(1, DinElectro);
+            ps.executeUpdate();
+            ps.close();
+            con.desconectar();
+            exitoso= true;
+        }catch(SQLException e){
+            System.err.println("Error al actualizar DineroElectronico: +"+e.getMessage());
+        }
+        return exitoso;
+    }
+    
+
 }

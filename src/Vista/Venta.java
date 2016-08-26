@@ -136,6 +136,7 @@ public class Venta extends javax.swing.JFrame {
         lblTotal.setText("0.0");
         Estilo.lblMensajes(lblAlerta, "", 4);
         idCliente ="";
+        Util.ChkbxLimpiar(jCheckBox1);
     }
 
     /**
@@ -404,8 +405,14 @@ public class Venta extends javax.swing.JFrame {
         String Sucursal = Controlador.ObtenerSucursal();
         String Usuario=Sesion.LeerSesion("idUsuario");
         Float DineroElectro = 0f;
-        if(jCheckBox1.isSelected()){//Ocupa dinero electronico
-            DineroElectro = Float.parseFloat(lblDinElectro.getText()); //No optinizado aun
+        if(jCheckBox1.isSelected() && Float.parseFloat(lblDinElectro.getText())>0f){//Ocupa dinero electronico
+            float PrecioTotal = Float.parseFloat(PrecioTotal());
+            if (Float.parseFloat(lblDinElectro.getText())> PrecioTotal){
+                DineroElectro = PrecioTotal;
+            }else{
+                DineroElectro = Float.parseFloat(lblDinElectro.getText());
+                    }
+            Controlador.ActualizaDineroElectronico(idCliente, Float.parseFloat(lblDinElectro.getText()), DineroElectro);
         }     
         if(Controlador.RegistrarVenta(Fecha, Hora,String.valueOf(DineroElectro), PrecioTotal(), Usuario, idCliente, Sucursal)){
             String idVenta = Controlador.ObteneridVenta(Fecha, Hora, Sucursal, Usuario);
@@ -414,6 +421,7 @@ public class Venta extends javax.swing.JFrame {
                 String idProducto= String.valueOf(tblVenta.getValueAt(i, 0));
                 String Total = String.valueOf(tblVenta.getValueAt(i, 5));
             Controlador.RegistrarDetalleVenta(Cantidad, idProducto, idVenta, Total);
+            Controlador.ActualizarStockYVendidos(Sucursal, Cantidad, idProducto);
             }
             Ticket.TicketVenta(idVenta);
             Estilo.lblMensajes(lblAlerta, "Venta Cobrada exitosamente", 3);

@@ -46,7 +46,7 @@ public class Estilo {
     public void lblMensajes(JLabel label,String mensaje,int opc){
         label.setOpaque(true);
         label.setText(mensaje);
-        label.setFont(new java.awt.Font("Impact",Font.PLAIN,22));
+        label.setFont(new java.awt.Font("Impact",Font.PLAIN,18));
         String path="";
         URL url=null;
         ImageIcon icon=null;
