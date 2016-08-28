@@ -76,9 +76,9 @@ public class Reportes {
     @SuppressWarnings("unchecked")
     public void ReporteCliente(String idCliente) {
         try{
-            String ruta="src/Jaspers/VentasDiario.jasper";
+            String ruta="src/Jaspers/DatosCliente.jasper";
             Map parametros = new HashMap();
-            parametros.put("idCliente", idCliente);
+            parametros.put("Alias", idCliente);
             JasperReport jr = (JasperReport) JRLoader.loadObjectFromFile(ruta);
             JasperPrint jp = JasperFillManager.fillReport(jr, parametros, con.conectado());
             JasperViewer jv = new JasperViewer(jp, true);

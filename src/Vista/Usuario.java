@@ -313,12 +313,20 @@ public class Usuario extends javax.swing.JFrame {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         String Password = new String(passField1.getPassword());
+        if(!Valido.txtVacio(txtNombre) && !Valido.txtVacio(txtUsuario) && !Valido.txtVacio(txtAMaterno) && !Valido.txtVacio(txtAPaterno) && !Valido.ComboVacio(cmbTipo)){
+        if(!Controlador.ExisteUsuario(txtUsuario.getText())){
         if (Controlador.InsertarUsuario(txtUsuario.getText(), Password, cmbTipo.getSelectedItem().toString(), txtNombre.getText(), txtAPaterno.getText(), txtAMaterno.getText())) {
             Estilo.lblMensajes(lblAlerta, "Usuario Registrado exitosamente ", 3);
             MostrarTabla();
             Limpiar();
         } else {
-            Estilo.lblMensajes(lblAlerta, "Ha ocurrido un error al insertar ", 2);
+            Estilo.lblMensajes(lblAlerta, "Ha ocurrido un error al insertar el usuario", 2);
+        }
+        }else{
+            Estilo.lblMensajes(lblAlerta, "El nombre de usuario ya existe. Por favor cambielo", 2);
+        }
+        }else{
+            Estilo.lblMensajes(lblAlerta, "Fantan datos, por favor verifique", 1);
         }
     }//GEN-LAST:event_btnAddActionPerformed
 

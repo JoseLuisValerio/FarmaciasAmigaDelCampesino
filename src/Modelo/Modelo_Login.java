@@ -52,6 +52,7 @@ public class Modelo_Login {
             i++;
          }
          res.close();
+         con.desconectar();
           }catch(SQLException e){
          System.err.println(e.getMessage());
     }

@@ -1,10 +1,6 @@
 package Vista;
 
-import Ayuda.Validacion;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 /**
  * Esta vista permite la autentificación del usuario que quiere acceder al sistema.
@@ -178,7 +174,6 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelActionPerformed
     private void VerificaUsuario(){
         boolean ses=false;
-        Validacion.txtVacio(txtUser);
         String Password = new String(passwField.getPassword());
         try {
             ses= ControladorLogin.consultaUsuario(txtUser.getText(), Password);

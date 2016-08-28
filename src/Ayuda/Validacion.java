@@ -1,6 +1,6 @@
 package Ayuda;
 
-import javax.swing.JOptionPane;
+import javax.swing.JComboBox;
 import javax.swing.JPasswordField;
 
 /**
@@ -13,11 +13,14 @@ public class Validacion {
      * Verifica que lo ingresado en un textfield este vacio
      * @param txt recibe el textfield de edison.
      */
-    public static void txtVacio(org.edisoncor.gui.textField.TextFieldRectBackground txt) {
+    public boolean txtVacio(org.edisoncor.gui.textField.TextFieldRectBackground txt) {
+        boolean estado=false;
         while(txt.getText().isEmpty()) {            
             txt.setDescripcion("Campo Vacio");
+            estado=true;
             break; 
         }
+        return estado;
     }
 
     /**
@@ -46,7 +49,7 @@ public class Validacion {
         return esIgual;
     }
 
-    public static void txtNumero(org.edisoncor.gui.textField.TextFieldRectBackground txt) {
+    public void txtNumero(org.edisoncor.gui.textField.TextFieldRectBackground txt) {
         String numero = txt.getText();
 
 
@@ -58,8 +61,16 @@ public class Validacion {
         
     }
 
-    private static boolean isNumeric(String str) {
+    private boolean isNumeric(String str) {
         return (str.matches("[+-]?\\d*(\\.\\d+)?-") && str.equals("") == false);
+    }
+    
+    public boolean ComboVacio(JComboBox combo){
+        boolean vacio=false;
+        if(combo.getSelectedIndex() <=0){
+            vacio=true;
+        }
+        return vacio;
     }
     
     

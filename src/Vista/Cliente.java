@@ -59,10 +59,9 @@ public class Cliente extends javax.swing.JFrame {
 
         //Configuraciones iniciales
         //Inicio de valores iniciales
-        MostrarTabla();//--->Error
+        MostrarTabla();
         LlenarcmbTipos();
         Util.botonHabilitar(btnUpdate, false);
-        Reporte.ReporteCliente("3");//-->No funcional
     }
 
     /**
@@ -111,6 +110,8 @@ public class Cliente extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        Opciones = new javax.swing.JPopupMenu();
+        Reimpresion = new javax.swing.JMenuItem();
         lblEncabezado = new javax.swing.JLabel();
         pnlCliente = new javax.swing.JPanel();
         btnUpdate = new javax.swing.JButton();
@@ -137,6 +138,14 @@ public class Cliente extends javax.swing.JFrame {
         pnlTabla = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblProductos = new javax.swing.JTable();
+
+        Reimpresion.setText("Reimprimir datos");
+        Reimpresion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                ReimpresionMousePressed(evt);
+            }
+        });
+        Opciones.add(Reimpresion);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -307,6 +316,7 @@ public class Cliente extends javax.swing.JFrame {
 
             }
         ));
+        tblProductos.setComponentPopupMenu(Opciones);
         tblProductos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 tblProductosMousePressed(evt);
@@ -389,16 +399,16 @@ public class Cliente extends javax.swing.JFrame {
     }//GEN-LAST:event_tblProductosMousePressed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        Reporte.ReporteCliente("3");
-//        int numero = (int) (Math.random() * 9998 + 1);
-//        String Alias = txtNombre.getText().substring(0, 3) + txtAPaterno.getText().substring(0, 2) + txtAMaterno.getText().substring(0, 2) + numero;
-//        if (Controlador.insertarCliente(Alias, txtNombre.getText(), txtAPaterno.getText(), txtAMaterno.getText(), txtTelefono.getText(), jTextArea1.getText(), jComboBox1.getSelectedItem().toString(), "0.0")) {
-//            Estilo.lblMensajes(lblAlerta, "El cliente ha sido registrado exitosamente", 3);
-//            
-//            Limpiar();
-//        } else {
-//            Estilo.lblMensajes(lblAlerta, "Ha ocurrido un error, por favor verifique.", 2);
-//        }
+        int numero = (int) (Math.random() * 9998 + 1);
+        String Alias = txtNombre.getText().substring(0, 3) + txtAPaterno.getText().substring(0, 2) + txtAMaterno.getText().substring(0, 2) + numero;
+        if (Controlador.insertarCliente(Alias, txtNombre.getText(), txtAPaterno.getText(), txtAMaterno.getText(), txtTelefono.getText(), jTextArea1.getText(), jComboBox1.getSelectedItem().toString(), "0.0")) {
+            Estilo.lblMensajes(lblAlerta, "El cliente ha sido registrado exitosamente", 3);
+            System.out.println(Alias);
+            Reporte.ReporteCliente(Alias);
+            Limpiar();
+        } else {
+            Estilo.lblMensajes(lblAlerta, "Ha ocurrido un error, por favor verifique.", 2);
+        }
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
@@ -409,6 +419,15 @@ public class Cliente extends javax.swing.JFrame {
             Estilo.lblMensajes(lblAlerta, "Ha ocurrido un error, por favor verifique.", 2);
         }
     }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void ReimpresionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ReimpresionMousePressed
+        try{
+            int fila = tblProductos.getSelectedRow();
+            Reporte.ReporteCliente(String.valueOf(tblProductos.getValueAt(fila, 0)));
+        }catch(Exception e){
+            System.err.println("Error al seleccionar fila para reimpresión:\n"+e.getMessage());
+        }
+    }//GEN-LAST:event_ReimpresionMousePressed
 
     /**
      * @param args the command line arguments
@@ -446,6 +465,8 @@ public class Cliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPopupMenu Opciones;
+    private javax.swing.JMenuItem Reimpresion;
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnUpdate;

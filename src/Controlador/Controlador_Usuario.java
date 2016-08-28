@@ -65,6 +65,13 @@ public class Controlador_Usuario {
         datos = ModelUser.obtenerIdTipoUsuario(columnas, sentencia);
         return datos;
     }
+     
+     public boolean ExisteUsuario(String Alias){
+         boolean Existe=false;
+         String SQL = "SELECT Alias FROM Usuario WHERE Alias ='"+Alias+"';";
+         Existe = ModelUser.ExisteUsuario(SQL);
+         return Existe;
+     }
 
     
 }

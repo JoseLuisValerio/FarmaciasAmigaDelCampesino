@@ -31,6 +31,7 @@ public class Modelo_Usuario {
             res.next();
             registros = res.getInt("total");
             res.close();
+            con.desconectar();
         } catch (SQLException e) {
             System.err.println("Error al contar las filas: " + e.getMessage());
         }
@@ -50,6 +51,7 @@ public class Modelo_Usuario {
                 i++;
             }
             res.close();
+            con.desconectar();
         } catch (SQLException e) {
             System.err.println("Error al obtener los datos de a tabla" + e.getMessage());
         }
@@ -64,6 +66,7 @@ public class Modelo_Usuario {
             res.next();
             registros = res.getInt("total");
             res.close();
+            con.desconectar();
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -78,6 +81,7 @@ public class Modelo_Usuario {
                 i++;
             }
             res.close();
+            con.desconectar();
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -91,6 +95,7 @@ public class Modelo_Usuario {
             stmn.executeUpdate(insert);
 
             exitoso = true;
+            con.desconectar();
         } catch (SQLException e) {
             System.err.println("Error al insertar: " + e.getMessage());
         }
@@ -106,9 +111,26 @@ public class Modelo_Usuario {
                 datos = res.getString(nombre_columna);
             }
             res.close();
+            con.desconectar();
         } catch (SQLException e) {
             System.err.println("Error al obtener el idTipoUsuario " + e.getMessage());
         }
         return datos;
+    }
+    
+    public boolean ExisteUsuario(String SQL){
+        boolean Existe=false;
+        try {
+            ps = con.conectado().prepareStatement(SQL);
+            res = ps.executeQuery();
+            while (res.next()) {
+                Existe = true;
+            }
+            res.close();
+            con.desconectar();
+        } catch (SQLException e) {
+            System.err.println("Error al verificar si existe el usuario " + e.getMessage());
+        }
+        return Existe;
     }
 }

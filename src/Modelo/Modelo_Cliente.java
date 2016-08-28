@@ -95,7 +95,7 @@ public class Modelo_Cliente {
      * @param SQL recibe la sentencia a ejecutar
      * @return 
      */
-    public String obtenerIdTipoCliente(String nombre_columna, String SQL) {
+    public String obtenerId(String nombre_columna, String SQL) {
         String datos = "";
         try {
             ps = con.conectado().prepareStatement(SQL);
@@ -106,7 +106,7 @@ public class Modelo_Cliente {
             res.close();
             con.desconectar();
         } catch (SQLException e) {
-            System.err.println("Error al obtener el idTipoCliente " + e.getMessage());
+            System.err.println("Error al obtener "+nombre_columna+": "+ e.getMessage());
         }
         return datos;
     }

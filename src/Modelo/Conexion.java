@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
+import javax.swing.JOptionPane;
 
 /**
  * Esta clase desencripta la conexión usando los datos de un archivo de
@@ -70,9 +71,10 @@ public class Conexion {
                 System.out.println("Conexión a base de datos "+base+". listo");
             }
         } catch (SQLException e) {
-            System.out.println(e);
+            JOptionPane.showMessageDialog(null, "Ha ocurrido un error con conexión: \n"+e.getMessage(),"Error al realizar conexión", JOptionPane.ERROR_MESSAGE);
         } catch (ClassNotFoundException e) {
-            System.out.println(e);
+            JOptionPane.showMessageDialog(null, e.getMessage(),"Error al realizar conexión", JOptionPane.ERROR_MESSAGE);
+            
         }
     }
 

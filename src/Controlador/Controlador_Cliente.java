@@ -27,7 +27,7 @@ public class Controlador_Cliente {
         if (Alias.equals("")) {
             String SQLContar="Cliente INNER JOIN Tipo_Cliente ON Cliente.TipoCliente = Tipo_Cliente.idTipoCliente";
             String SQLExecute="SELECT Alias, Cliente.Nombre, APaterno, AMaterno, Tel, Direccion, Tipo_Cliente.Nombre, DineroElectronico FROM "+SQLContar;
-            datos = ModeloCliente.GetTabla(columnas, SQLExecute,SQLExecute);
+            datos = ModeloCliente.GetTabla(columnas, SQLExecute,SQLContar);
         } else {
             String SQLContar="Cliente INNER JOIN Tipo_Cliente ON Cliente.TipoCliente = Tipo_Cliente.idTipoCliente WHERE Alias = '" + Alias + "';";
             String SQLExecute="SELECT Alias, Cliente.Nombre, APaterno, AMaterno, Tel, Direccion, Tipo_Cliente.Nombre, DineroElectronico FROM "+SQLContar;
@@ -110,8 +110,7 @@ public class Controlador_Cliente {
         String sentencia = "SELECT idTipocliente FROM Tipo_Cliente WHERE Nombre = '" + Tipo + "';";
         String datos = null;
         String columnas = "idTipoCliente";
-        //dividir la consulta en dos una parta de los datos a busca y otra que tendra las tablas 
-        datos = ModeloCliente.obtenerIdTipoCliente(columnas, sentencia);
+        datos = ModeloCliente.obtenerId(columnas, sentencia);
         return datos;
     }
 }
