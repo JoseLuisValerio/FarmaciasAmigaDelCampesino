@@ -1,6 +1,7 @@
 package Ayuda;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTable;
@@ -73,5 +74,13 @@ public class Utilidades {
      */
     public void lblLimpiar(JLabel label){
         label.setText("");
+    }
+    
+    /**
+     * Desekecciona un objeto de tipo jCheckBox
+     * @param checkbox recibe el JCheckBox
+     */
+    public void ChkbxLimpiar(JCheckBox checkbox){
+        checkbox.setSelected(false);
     }
 }

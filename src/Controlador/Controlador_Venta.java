@@ -40,6 +40,21 @@ public class Controlador_Venta {
         return exitoso;
     }
     
+    /**
+     * Actualiza el stock y el número de vendidos de acuerdo a la cantidad vendida en Venta
+     * @param idSucursal recibe la sucursal de la que se esta realizando la venta
+     * @param Cantidad recibe la cantidad vendida del producto
+     * @param idProducto recibe el producto que actualizará
+     * @return el resultado de la operación realizada
+     */
+    public boolean ActualizarStockYVendidos(String idSucursal, String Cantidad, String idProducto){
+        boolean exitoso = false;
+        int Stock = Modelo.GetStock("Stock", idProducto, idSucursal)-Integer.parseInt(Cantidad);
+        int Vendidos = Modelo.GetStock("Vendidos", idProducto, idSucursal)+Integer.parseInt(Cantidad);
+        exitoso = Modelo.ActualizaStockYVendidos(idProducto, idSucursal, Stock, Vendidos);
+        return exitoso;
+    }
+    
     public String ObteneridVenta(String Fecha, String Hora, String Sucursal, String Usuario){
         String idVenta="";
         idVenta = Modelo.GetIdVenta(Fecha, Hora, Sucursal, Usuario);
@@ -61,6 +76,11 @@ public class Controlador_Venta {
         return datos;
     }
     
+    /**
+     * Obtiene la sucursal desde la que se esta haciendo la venta
+     * lee el archivo de configuración
+     * @return el número de sucursal
+     */
     public String ObtenerSucursal(){
         String sucursal="";
         Properties propiedades = new Properties();
@@ -75,5 +95,19 @@ public class Controlador_Venta {
             System.err.println("Error al leer el archivo de configuración ");
         } 
         return sucursal;
+    }
+    
+    /**
+     * Hace la llamada para actualizar el dinero electronico del cliente si es que paga con dinero electronico
+     * @param idCliente recibe el id del cliente
+     * @param DinElectro1 recibe el dinero electronico original
+     * @param DinElectro2 recibe el dinero electronico usado
+     * @return el resultado de la operación.
+     */
+    public boolean ActualizaDineroElectronico(String idCliente, float DinElectro1, float DinElectro2) {
+        boolean exitoso = false;
+        float NuevoSaldo = DinElectro1-DinElectro2;
+        exitoso = Modelo.ActualizaDinElectro(idCliente, NuevoSaldo);
+        return exitoso;
     }
 }
