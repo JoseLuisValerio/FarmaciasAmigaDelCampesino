@@ -1,7 +1,9 @@
 package Controlador;
 
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -40,21 +42,38 @@ public class Reportes {
     }
     
     @SuppressWarnings("unchecked")
-    public void TicketTransaccion(int ID) {
-        try {
+    public void TicketTransaccion(String ID) {
+       try {
             String ruta = "src/Jaspers/TicketTransaccion.jasper";
             Map parametros = new HashMap();
-            parametros.put("ID", ID);
+            parametros.put("idTransaccion", ID);
             JasperReport jr = (JasperReport) JRLoader.loadObjectFromFile(ruta);
             JasperPrint jp = JasperFillManager.fillReport(jr, parametros, con.conectado());
-            JasperViewer jv = new JasperViewer(jp, true); //Eliminar cuando este listo
+            JasperViewer jv = new JasperViewer(jp, false); //Eliminar cuando este listo
             jv.setVisible(true);
+            //JasperExportManager.exportReportToPdfFile( jp, "src/Jaspers/ReportePedido"+ID+".pdf");          
             //JasperPrintManager.printReport(jp, true);   
             con.desconectar();
         } catch (Exception ex) {
-            System.err.println("Error al generar ticket Trasaccion: "+ex.getMessage());
+            System.err.println("Error al generar ticket Venta: "+ex.getMessage());
         }
     }
-
+        @SuppressWarnings("unchecked")
+public void pedido(String pedido) {
+        try {
+            String ruta = "src/Jaspers/ReportePedido.jasper";
+            Map parametros = new HashMap();
+            parametros.put("idPedido", pedido);
+            JasperReport jr = (JasperReport) JRLoader.loadObjectFromFile(ruta);
+            JasperPrint jp = JasperFillManager.fillReport(jr, parametros, con.conectado());
+            JasperViewer jv = new JasperViewer(jp, false); //Eliminar cuando este listo
+            jv.setVisible(true);
+            JasperExportManager.exportReportToPdfFile( jp, "src/Jaspers/ReportePedido"+pedido+".pdf");          
+            //JasperPrintManager.printReport(jp, true);   
+            con.desconectar();
+        } catch (Exception ex) {
+            System.err.println("Error al generar ticket Venta: "+ex.getMessage());
+        }
+    }
     
 }

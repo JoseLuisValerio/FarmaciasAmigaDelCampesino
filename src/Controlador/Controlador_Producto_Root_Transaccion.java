@@ -80,4 +80,20 @@ public class Controlador_Producto_Root_Transaccion {
         String datos[] = {idproducto, sucursal, stock, vendidos, area};
         return sensql.insertar(datos, "INSERT INTO `detallesucursal` (`IDPRODUCTO`, `idsucursal`, `Stock`, `Vendidos`, `idArea`) VALUES (?,?,?,?,?)");
     }
+    public boolean nuevaTransaccion(String fecha, String usuario, String idsucursal) {
+
+        String datos[] = {fecha, usuario, idsucursal};
+        return sensql.insertar(datos, "INSERT INTO transaccion (`Fecha`, `idusuario`, `idsucursal`) VALUES (?,?,?)");
+    }
+    public boolean nuevoDetalleTransaccion(String idTransanccion, String IDPRODUCTO, String Cantidad) {
+
+        String datos[] = {idTransanccion, Cantidad, IDPRODUCTO};
+        return sensql.insertar(datos, "INSERT INTO `detalletransaccion` (`idTransaccion`, `Cantidad`, `IDPRODUCTO`) VALUES (?,?,?)");
+    }
+        public String ultimoIdTransaccion(String Transaccion,String fecha) {
+        String idsucursal = null;
+        String campos = "transaccion.idTransaccion";
+        String sentencia = "SELECT transaccion.idTransaccion FROM transaccion WHERE transaccion.Fecha ='"+fecha+"'";
+        return idsucursal = sensql.Correo(campos, sentencia);
+    }
    }
