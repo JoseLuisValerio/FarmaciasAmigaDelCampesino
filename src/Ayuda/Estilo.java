@@ -172,7 +172,7 @@ public class Estilo {
         ventana.setTitle(titulo);
         ventana.setIconImage(icon);
         ventana.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        ventana.dispose();
+        //ventana.dispose();
     }
     
     /**

@@ -68,7 +68,7 @@ public class Conexion {
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection(url, usuario, pass);
             if (con != null) {
-                System.out.println("Conexión a base de datos "+base+". listo");
+                //System.out.println("Conexión a base de datos "+base+". listo");
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Ha ocurrido un error con conexión: \n"+e.getMessage(),"Error al realizar conexión", JOptionPane.ERROR_MESSAGE);
@@ -93,7 +93,7 @@ public class Conexion {
     public void desconectar() {
         try{
         con.close();
-        System.out.println("conexion terminada");
+        //System.out.println("conexion terminada");
         }catch(SQLException e){
             System.err.println("Ha Ocurrido un error al cerrar la conexion: "+e.getMessage());
         }

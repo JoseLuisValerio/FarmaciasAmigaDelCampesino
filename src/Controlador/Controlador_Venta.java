@@ -110,4 +110,11 @@ public class Controlador_Venta {
         exitoso = Modelo.ActualizaDinElectro(idCliente, NuevoSaldo);
         return exitoso;
     }
+    
+    public boolean ActualizaCaja(String idSucursal, Float Monto){
+        boolean exitoso = false;
+        exitoso = Modelo.ActualizaCaja(idSucursal, Monto);
+        System.out.println("-----------------------Caja: "+Monto);
+        return exitoso;
+    }
 }

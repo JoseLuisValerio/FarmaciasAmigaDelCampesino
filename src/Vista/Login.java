@@ -183,6 +183,9 @@ public class Login extends javax.swing.JFrame {
         if(ses==false){
             Estilo.lblMensajes(lblAlerta, "No se ha podido iniciar sesión. Verifique datos.", 2);
         }else{
+            Modelo.Modelo_Venta Saldo = new Modelo.Modelo_Venta();
+            Controlador.Controlador_Venta Sucursal = new Controlador.Controlador_Venta();
+            Saldo.SaldoInicial(Sucursal.ObtenerSucursal());
             Inicio in = new Inicio();
             in.setVisible(true);
             this.setVisible(false);

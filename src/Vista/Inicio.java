@@ -286,6 +286,9 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void MnItemCerrSesionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MnItemCerrSesionMousePressed
+        Controlador.Reportes Ticket = new Controlador.Reportes();
+        Controlador.Controlador_Venta Controlador = new Controlador.Controlador_Venta();
+        Ticket.TicketCorte(Controlador.ObtenerSucursal());
         Ayuda.Sesion.cerrarSesion();
         this.dispose();
         Login Ventana = new Login();

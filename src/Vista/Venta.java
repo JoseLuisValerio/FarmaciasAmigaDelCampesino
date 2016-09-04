@@ -404,17 +404,24 @@ public class Venta extends javax.swing.JFrame {
         String Hora = Integer.toString(c.get(Calendar.HOUR_OF_DAY)) + ":" + Integer.toString(c.get(Calendar.MINUTE)) + ":" + Integer.toString(c.get(Calendar.SECOND));
         String Sucursal = Controlador.ObtenerSucursal();
         String Usuario=Sesion.LeerSesion("idUsuario");
-        Float DineroElectro = 0f;
-        if(jCheckBox1.isSelected() && Float.parseFloat(lblDinElectro.getText())>0f){//Ocupa dinero electronico
-            float PrecioTotal = Float.parseFloat(PrecioTotal());
-            if (Float.parseFloat(lblDinElectro.getText())> PrecioTotal){
+        float DineroElectro = Float.parseFloat(lblDinElectro.getText());
+        float PrecioTotal = Float.parseFloat(PrecioTotal());
+        float auxPrecioTotal=0f;
+        if(jCheckBox1.isSelected() && DineroElectro>0f){//Ocupa dinero electronico
+            if (DineroElectro> PrecioTotal){
                 DineroElectro = PrecioTotal;
+                auxPrecioTotal = PrecioTotal-DineroElectro;
             }else{
-                DineroElectro = Float.parseFloat(lblDinElectro.getText());
-                    }
+                DineroElectro = 0;
+                auxPrecioTotal = PrecioTotal;
+                }
             Controlador.ActualizaDineroElectronico(idCliente, Float.parseFloat(lblDinElectro.getText()), DineroElectro);
-        }     
-        if(Controlador.RegistrarVenta(Fecha, Hora,String.valueOf(DineroElectro), PrecioTotal(), Usuario, idCliente, Sucursal)){
+        }else{
+            DineroElectro=0;
+            auxPrecioTotal =PrecioTotal;
+        }
+            Controlador.ActualizaCaja(Sucursal, auxPrecioTotal);
+        if(Controlador.RegistrarVenta(Fecha, Hora,String.valueOf(DineroElectro), String.valueOf(PrecioTotal), Usuario, idCliente, Sucursal)){
             String idVenta = Controlador.ObteneridVenta(Fecha, Hora, Sucursal, Usuario);
             for(int i=0;i<tblVenta.getRowCount();i++){
                 String Cantidad= String.valueOf(tblVenta.getValueAt(i, 4));

@@ -89,4 +89,22 @@ public class Reportes {
             System.err.println("Error al leer el reporte de cliente");
         }
     }
+    
+    @SuppressWarnings("unchecked")
+    public void TicketCorte(String idSucursal) {
+        try {
+            String ruta = "src/Jaspers/CorteCaja.jasper";
+            Map parametros = new HashMap();
+            parametros.put("idSucursal", idSucursal);
+            JasperReport jr = (JasperReport) JRLoader.loadObjectFromFile(ruta);
+            JasperPrint jp = JasperFillManager.fillReport(jr, parametros, con.conectado());
+            JasperViewer jv = new JasperViewer(jp, true); //Eliminar cuando este listo
+            jv.setVisible(true);
+            //JasperPrintManager.printReport(jp, true);   
+            con.desconectar();
+        } catch (Exception ex) {
+            System.err.println("Error al generar ticket Corte de caja: "+ex.getMessage());
+        }
+    
+}
 }

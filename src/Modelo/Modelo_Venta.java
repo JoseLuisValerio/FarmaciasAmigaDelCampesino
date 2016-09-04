@@ -165,5 +165,49 @@ public class Modelo_Venta {
         return exitoso;
     }
     
+    public boolean ActualizaCaja(String idSucursal, float Monto){
+        boolean exitoso=false;
+        float SaldoTotal=0f;
+        try{
+            ps = con.conectado().prepareStatement("SELECT SaldoTotal AS total FROM Caja WHERE idSucursal='"+idSucursal+"';" );
+         res = ps.executeQuery();
+         res.next();
+         SaldoTotal = res.getFloat("total");
+         res.close();
+         con.desconectar();
+        }catch(SQLException e){
+            System.err.println("Error al obtener SaldoTotal");
+        }
+        //ACTUALIZACIÓN DEL SALDO
+        String SQL ="UPDATE Caja SET SaldoTotal=? WHERE idSucursal='"+idSucursal+"';";
+        try{
+            ps =con.conectado().prepareStatement(SQL);
+            ps.setFloat(1, SaldoTotal+=Monto);
+            ps.executeUpdate();
+            ps.close();
+            con.desconectar();
+            exitoso= true;
+        }catch(SQLException e){
+            System.err.println("Error al actualizar Saldo Total: +"+e.getMessage());
+        }
+        return exitoso;
+    }
+    
+    public boolean SaldoInicial(String idSucursal){
+        boolean exitoso=false;
+        //ACTUALIZACIÓN DEL SALDO
+        String SQL ="UPDATE Caja SET SaldoTotal=? WHERE idSucursal='"+idSucursal+"';";
+        try{
+            ps =con.conectado().prepareStatement(SQL);
+            ps.setFloat(1, 0f);
+            ps.executeUpdate();
+            ps.close();
+            con.desconectar();
+            exitoso= true;
+        }catch(SQLException e){
+            System.err.println("Error al actualizar Saldo Inicial: +"+e.getMessage());
+        }
+        return exitoso;
+    }
 
 }
