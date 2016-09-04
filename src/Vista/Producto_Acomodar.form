@@ -75,13 +75,6 @@
               </Group>
               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
           </Group>
-          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="199" max="-2" attributes="0"/>
-                  <Component id="lblexistencia" min="-2" pref="53" max="-2" attributes="0"/>
-                  <EmptySpace pref="1093" max="32767" attributes="0"/>
-              </Group>
-          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -134,13 +127,6 @@
               </Group>
               <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
           </Group>
-          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
-                  <EmptySpace pref="197" max="32767" attributes="0"/>
-                  <Component id="lblexistencia" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="380" max="-2" attributes="0"/>
-              </Group>
-          </Group>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -187,11 +173,6 @@
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
         <Property name="text" type="java.lang.String" value="Codigo"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblexistencia">
-      <Properties>
-        <Property name="text" type="java.lang.String" value=" "/>
       </Properties>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane2">

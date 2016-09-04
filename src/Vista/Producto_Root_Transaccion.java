@@ -6,7 +6,11 @@
 package Vista;
 
 import Ayuda.Estilo;
+import Ayuda.Sesion;
 import Controlador.Controlador_Producto_Root_Transaccion;
+import Controlador.Reportes;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -22,6 +26,10 @@ public class Producto_Root_Transaccion extends javax.swing.JFrame {
     String[] columnas = {"Código", "Nombre", "Activo", "Stock", "Sucursal"};
     Controlador_Producto_Root_Transaccion ctr = new Controlador_Producto_Root_Transaccion();
     Object[] fila = new Object[4];
+    Calendar c = new GregorianCalendar();
+    String Fecha = Integer.toString(c.get(Calendar.DATE)) + "/" + Integer.toString(c.get(Calendar.MONTH) + 1) + "/" + Integer.toString(c.get(Calendar.YEAR));
+    String Usuario = Sesion.LeerSesion("idUsuario");
+    Reportes Ticket = new Reportes();
 
     /**
      * Creates new form Producto_Root_Transaccion
@@ -275,7 +283,9 @@ public class Producto_Root_Transaccion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
-
+        datostabla = ctr.buscarProducto(txtCodigo.getText());
+        DefaultTableModel datos = new DefaultTableModel(datostabla, columnas);
+        tblProductos.setModel(datos);
     }//GEN-LAST:event_txtCodigoActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
@@ -340,13 +350,14 @@ public class Producto_Root_Transaccion extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        datostabla = null;
+/*        datostabla = null;
         DefaultTableModel datos = new DefaultTableModel(datostabla, columnas);
         tblTransaccion.setModel(datos);
         cmbSucursal.setSelectedIndex(0);
         spStock.setValue(0);
         lblexistencia.setText(null);
-        mostrar_tabla();
+        mostrar_tabla();*/
+        Ticket.TicketTransaccion("5");
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void txtCodigoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyPressed
@@ -366,33 +377,43 @@ public class Producto_Root_Transaccion extends javax.swing.JFrame {
         if (datostabla == null) {
             estilo.lblMensajes(lblmensaje, "No a selecionado productos", 1);
         } else {
-            for (int i = 0; i < tblTransaccion.getRowCount(); i++) {
-                if (cmbSucursal.getSelectedIndex() != 0) {
-                    String codigo = (String) tblTransaccion.getValueAt(i, 0);
-                    String stock = (String) tblTransaccion.getValueAt(i, 3);
-                    datostabla = ctr.comprobar(codigo, sucursal);
-                    if (datostabla.length == 0) {
-                        ctr.ingresarDetalleNuevo(codigo, sucursal, stock, "0", "1");
-                        ctr.actualizarStock(codigo, stock);
-                        estilo.lblMensajes(lblmensaje, "Transacción exitosa", 3);
+            
+            if (ctr.nuevaTransaccion(Fecha, Usuario, sucursal) == true) {
+                String idtransaccion = ctr.ultimoIdTransaccion("transaccion", Fecha);
+                
+                estilo.lblMensajes(lblmensaje, "Pedido Realizado", 3);
+                for (int i = 0; i < tblTransaccion.getRowCount(); i++) {
+                    if (cmbSucursal.getSelectedIndex() != 0) {
+                        String codigo = (String) tblTransaccion.getValueAt(i, 0);
+                        String stock = (String) tblTransaccion.getValueAt(i, 3);
+                        datostabla = ctr.comprobar(codigo, sucursal);
+                        if (datostabla.length == 0) {
+                            ctr.ingresarDetalleNuevo(codigo, sucursal, stock, "0", "1");
+                            ctr.actualizarStock(codigo, stock);
+                            ctr.nuevoDetalleTransaccion(idtransaccion, codigo, stock);
+                        } else {
+                            ctr.transaccion(codigo, sucursal, stock);
+                            ctr.actualizarStock(codigo, stock);
+                            ctr.nuevoDetalleTransaccion(idtransaccion, codigo, stock);
+                           
+                        }
                     } else {
-                        ctr.transaccion(codigo, sucursal, stock);
-                        ctr.actualizarStock(codigo, stock);
-                        estilo.lblMensajes(lblmensaje, "Transacción exitosa", 3);
-                        //aquí falta la parte de os tickets
+                        estilo.lblMensajes(lblmensaje, "Debe seleccionar una Sucursal", 1);
+                        break;
                     }
-                } else {
-                    estilo.lblMensajes(lblmensaje, "Debe seleccionar una Sucursal", 1);
-                    break;
                 }
+                
+                Ticket.TicketTransaccion(idtransaccion);
+            } else {
+                estilo.lblMensajes(lblmensaje, "No se pudo Hacer la Transacción", 2);
             }
             datostabla = null;
-        DefaultTableModel datos = new DefaultTableModel(datostabla, columnas);
-        tblTransaccion.setModel(datos);
-        cmbSucursal.setSelectedIndex(0);
-        spStock.setValue(0);
-        lblexistencia.setText(null);
-        mostrar_tabla();
+            DefaultTableModel datos = new DefaultTableModel(datostabla, columnas);
+            tblTransaccion.setModel(datos);
+            cmbSucursal.setSelectedIndex(0);
+            spStock.setValue(0);
+            lblexistencia.setText(null);
+            mostrar_tabla();
         }
 
     }//GEN-LAST:event_btnTransaccionActionPerformed

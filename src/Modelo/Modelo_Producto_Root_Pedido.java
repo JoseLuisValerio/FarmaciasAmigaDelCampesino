@@ -1,25 +1,22 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Modelo;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  *
  * @author Jose Luis
  */
-public class Modelo_Producto_Root_Transaccion {
+public class Modelo_Producto_Root_Pedido {
 
     private Conexion con;
     PreparedStatement ps;
     ResultSet res;
+    Statement stmn;
 
-    public Modelo_Producto_Root_Transaccion() {
+    public Modelo_Producto_Root_Pedido() {
         con = new Conexion();
     }
 
@@ -90,40 +87,6 @@ public class Modelo_Producto_Root_Transaccion {
         return datos;
     }
 
-    public boolean insertar(String datos[], String insert) {
-        boolean estado = false;
-        try {
-            ps = con.conectado().prepareStatement(insert);
-            for (int i = 0; i <= datos.length - 1; i++) {
-                ps.setString(i + 1, datos[i]);
-            }
-            ps.execute();
-            ps.close();
-            con.desconectar();
-            estado = true;
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-        return estado;
-    }
-
-    public String idSucursal(String nombre_columna, String sentenciasql) {
-
-        String datos = "";
-        try {
-            ps = con.conectado().prepareStatement(sentenciasql);
-            res = ps.executeQuery();
-            while (res.next()) {
-                datos = res.getString(nombre_columna);
-            }
-            res.close();
-            con.desconectar();
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-        return datos;
-    }
-
     public String Correo(String nombre_columna, String sentenciasql) {
 
         String datos = "";
@@ -139,5 +102,22 @@ public class Modelo_Producto_Root_Transaccion {
             System.out.println(e);
         }
         return datos;
+    }
+
+    public boolean insertar(String datos[], String insert) {
+        boolean estado = false;
+        try {
+            ps = con.conectado().prepareStatement(insert);
+            for (int i = 0; i <= datos.length - 1; i++) {
+                ps.setString(i + 1, datos[i]);
+            }
+            ps.execute();
+            ps.close();
+            con.desconectar();
+            estado = true;
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return estado;
     }
 }

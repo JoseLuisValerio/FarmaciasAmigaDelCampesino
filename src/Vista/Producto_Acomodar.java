@@ -59,7 +59,6 @@ public class Producto_Acomodar extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblTransaccion = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
-        lblexistencia = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblProductos = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
@@ -99,8 +98,6 @@ public class Producto_Acomodar extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblTransaccion);
 
         jLabel3.setText("Codigo");
-
-        lblexistencia.setText(" ");
 
         tblProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -198,11 +195,6 @@ public class Producto_Acomodar extends javax.swing.JFrame {
                             .addComponent(cmbAreas, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel7))
                 .addGap(36, 36, 36))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(199, 199, 199)
-                    .addComponent(lblexistencia, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(1093, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -244,11 +236,6 @@ public class Producto_Acomodar extends javax.swing.JFrame {
                     .addComponent(btnAcomodar)
                     .addComponent(btnCancelar))
                 .addGap(25, 25, 25))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap(197, Short.MAX_VALUE)
-                    .addComponent(lblexistencia)
-                    .addGap(380, 380, 380)))
         );
 
         pack();
@@ -338,7 +325,6 @@ public class Producto_Acomodar extends javax.swing.JFrame {
         DefaultTableModel datos = new DefaultTableModel(datostabla,columnas1);
         tblTransaccion.setModel(datos);
         cmbAreas.setSelectedIndex(0);
-        lblexistencia.setText(null);
         mostrarProducto();
         }
     }//GEN-LAST:event_btnAcomodarActionPerformed
@@ -349,7 +335,6 @@ public class Producto_Acomodar extends javax.swing.JFrame {
         DefaultTableModel datos = new DefaultTableModel(datostabla,columnas1);
         tblTransaccion.setModel(datos);
         cmbAreas.setSelectedIndex(0);
-        lblexistencia.setText(null);
         mostrarProducto();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
@@ -401,7 +386,6 @@ public class Producto_Acomodar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel lblexistencia;
     private javax.swing.JLabel lblmensaje;
     private javax.swing.JTable tblProductos;
     private javax.swing.JTable tblTransaccion;
