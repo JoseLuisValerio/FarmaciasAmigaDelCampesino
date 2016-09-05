@@ -46,6 +46,8 @@ public class Producto_Consultar extends javax.swing.JFrame {
         Estilo.lblMensajes(lblAlerta, "", 4);
         Estilo.frmInicial(this, "Productos");
         Estilo.lblLogo(lblEncabezado);
+        Estilo.MnIcon(menuAcomodar, 1);
+        Estilo.mnitemIcon(jMenuItem1, 4);
 
         cargarAreas();
         mostrarProductos();
@@ -88,7 +90,7 @@ public class Producto_Consultar extends javax.swing.JFrame {
             cmbAreas.addItem((String) Areas[i]);
         }
     }
-
+    
     public void buscarArea(String area) {
         datostabla = ctr.buscarArea(area);
         DefaultTableModel datos = new DefaultTableModel(datostabla, columnas);
@@ -134,7 +136,6 @@ public class Producto_Consultar extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         menuAcomodar = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -337,9 +338,6 @@ public class Producto_Consultar extends javax.swing.JFrame {
 
         jMenuBar1.add(menuAcomodar);
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
-
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -442,7 +440,9 @@ public class Producto_Consultar extends javax.swing.JFrame {
         String stock = txtStock.getText();
         datostabla = ctr.buscarCodigo(codigo);
         if (datostabla.length == 0) {
-            Estilo.lblMensajes(lblmensaje, "El producto no existe", 2);
+            Estilo.lblMensajes(lblmensaje, "EL PRODUCTO NO EXISTE  FAVOR DE AGREGAR", 2);
+            Producto_Consultar_Add nuevo = new Producto_Consultar_Add();
+            nuevo.setVisible(true);
         }else{
         if (txtNombre.getText().isEmpty() == false && txtActivo.getText().isEmpty() == false && txtDescripcion.getText().isEmpty() == false && txtPPublico.getText().isEmpty() == false) {
             if (ctr.agregarStock(codigo,stock )== true) {
@@ -514,7 +514,6 @@ public class Producto_Consultar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;

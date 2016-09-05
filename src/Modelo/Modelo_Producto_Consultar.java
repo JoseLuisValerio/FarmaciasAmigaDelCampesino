@@ -99,4 +99,20 @@ public class Modelo_Producto_Consultar {
         }
         return estado;
     }
+     public String obtenerIdProvedor(String nombre_columna, String sentenciasql){
+        
+    String datos ="";
+      try{
+         ps = con.conectado().prepareStatement(sentenciasql);
+         res = ps.executeQuery();
+         while(res.next()){
+            datos = res.getString(nombre_columna);
+         }
+         res.close();
+         con.desconectar();
+          }catch(SQLException e){
+         System.out.println(e);
+    }
+    return datos;
+    }
 }
