@@ -20,12 +20,8 @@ public class ConectorCorreos {
 
     public static String usuario;
     public static String contraseña;
-    public static String destino1;
-    public static String destino2;
     public static String mensaje;
-    public static String asunto = "Constancia";
-    public static String ruta = "C:/img/Prestamo.pdf";
-    public static String archivo = "Prestamo.pdf";
+    public static String asunto ;
 
     public void config() {
         Properties propiedades = new Properties();
@@ -37,8 +33,7 @@ public class ConectorCorreos {
             // obtenemos las propiedades y las imprimimos
             usuario = propiedades.getProperty("email");
             contraseña = propiedades.getProperty("psw");
-            destino1 = propiedades.getProperty("correomatutino");
-            destino2 = propiedades.getProperty("correovespertino");
+
         } catch (IOException ex) {
             ex.printStackTrace();
         } finally {
@@ -52,15 +47,15 @@ public class ConectorCorreos {
         }
     }
 
-    public void mail(String mensaje, String asunto) {
+    public void mail(String mensaje, String asunto,String archivo,String Ruta,String correo) {
 
         ConectorCorreos.mensaje = mensaje;
         ConectorCorreos.asunto = asunto;
         config();
-        C();
+        C(Ruta,correo,archivo);
     }
 
-    public void C() {
+    public void C(String ruta,String correo,String archivo) {
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
@@ -92,9 +87,7 @@ public class ConectorCorreos {
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(usuario));
             message.addRecipient(Message.RecipientType.BCC,
-                    new InternetAddress(destino1));
-            message.addRecipient(Message.RecipientType.BCC,
-                    new InternetAddress(destino2));
+                    new InternetAddress(correo));
             message.setSubject(asunto);
             message.setContent(multiParte);
 
