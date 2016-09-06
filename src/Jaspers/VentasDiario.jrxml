@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="VentasDiario" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9e01838a-88d7-4a4c-a686-01f64deeac76">
 	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="101"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<style name="Title" fontName="Times New Roman" fontSize="50" isBold="true" pdfFontName="Times-Bold"/>
 	<style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="18"/>
@@ -84,7 +84,7 @@ WHERE Venta.Fecha LIKE $P{Fecha}
 		<band height="136" splitType="Stretch">
 			<image>
 				<reportElement x="0" y="0" width="164" height="126" uuid="1b020862-869c-4600-9b66-b24f2ac1106c"/>
-				<imageExpression><![CDATA["coffee.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["Campesina.png"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement style="Title" x="270" y="0" width="263" height="62" uuid="a9843487-2239-494a-9fda-3d0f06c5fc1b"/>

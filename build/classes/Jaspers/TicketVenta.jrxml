@@ -49,6 +49,10 @@ WHERE
 	<field name="detallesventa_Total" class="java.lang.Float"/>
 	<title>
 		<band height="101" splitType="Stretch">
+			<image scaleImage="FillFrame">
+				<reportElement x="0" y="3" width="43" height="29" uuid="9aa7aabe-d234-46f6-b3b7-5930bf0440e4"/>
+				<imageExpression><![CDATA["CampesinaTicket.png"]]></imageExpression>
+			</image>
 			<staticText>
 				<reportElement x="23" y="16" width="112" height="14" uuid="818d489f-24d8-431a-a545-f46b4dbec8b8"/>
 				<textElement textAlignment="Center">
