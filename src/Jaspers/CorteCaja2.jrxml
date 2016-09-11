@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Ticket1" pageWidth="147" pageHeight="324" columnWidth="147" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isSummaryWithPageHeaderAndFooter="true" isIgnorePagination="true" uuid="185e57d6-76cc-4db6-9546-6477fe3189ea">
 	<property name="ireport.zoom" value="4.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="397"/>
 	<parameter name="idSucursal" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -26,7 +26,7 @@ FROM
      inner JOIN `movimiento` movimiento ON caja.`idcaja` = movimiento.`idcaja`
      INNER JOIN `usuario` usuario ON movimiento.`idusuario` = usuario.`idusuario`
 WHERE
-Sucursal.idsucursal = $P{idSucursal} AND Movimiento.Fecha LIKE $P{Fecha} AND Usuario.idUsuario]]>
+Sucursal.idsucursal = $P{idSucursal} ]]>
 	</queryString>
 	<field name="usuario" class="java.lang.String"/>
 	<field name="sucursal" class="java.lang.String"/>
@@ -46,13 +46,13 @@ Sucursal.idsucursal = $P{idSucursal} AND Movimiento.Fecha LIKE $P{Fecha} AND Usu
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<title>
-		<band height="118" splitType="Stretch">
+		<band height="107" splitType="Stretch">
 			<textField>
 				<reportElement x="46" y="51" width="92" height="13" uuid="4524ad35-a0ea-4533-bd5a-37b74cad60ed"/>
 				<textElement>
 					<font size="7"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{FECHA}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{Fecha}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="4" y="51" width="40" height="13" uuid="c29d8ecd-d8d1-4430-8082-c8b48cbafe67"/>
@@ -60,23 +60,6 @@ Sucursal.idsucursal = $P{idSucursal} AND Movimiento.Fecha LIKE $P{Fecha} AND Usu
 					<font size="7" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Fecha:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="4" y="105" width="19" height="13" uuid="15193ce8-6ce5-4c71-a385-ad255240a4ec"/>
-				<textElement textAlignment="Justified">
-					<font size="7" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Mov.]]></text>
-			</staticText>
-			<line>
-				<reportElement x="3" y="117" width="144" height="1" uuid="a90a9243-b22c-42bb-b263-6966e719d47f"/>
-			</line>
-			<staticText>
-				<reportElement x="24" y="105" width="19" height="13" uuid="d9b10531-4f65-41f5-a3b6-48292044fd43"/>
-				<textElement textAlignment="Center">
-					<font size="7" isBold="true"/>
-				</textElement>
-				<text><![CDATA[$]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="4" y="63" width="40" height="13" uuid="76d270fb-644b-4b43-a952-c48c7f62070f"/>
@@ -134,49 +117,14 @@ Sucursal.idsucursal = $P{idSucursal} AND Movimiento.Fecha LIKE $P{Fecha} AND Usu
 				</textElement>
 				<textFieldExpression><![CDATA[]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement x="46" y="105" width="86" height="13" uuid="9037593b-3cce-4d3b-a226-eb7652b45947"/>
-				<textElement textAlignment="Center">
-					<font size="7" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Descripción]]></text>
-			</staticText>
 			<image scaleImage="FillFrame">
 				<reportElement x="0" y="0" width="138" height="35" uuid="4079d709-c6db-49bc-8bf6-4fefb6b47d08"/>
 				<imageExpression><![CDATA["Jaspers\\Encabezado.png"]]></imageExpression>
 			</image>
 		</band>
 	</title>
-	<detail>
-		<band height="12" splitType="Stretch">
-			<textField pattern="">
-				<reportElement x="4" y="-1" width="19" height="13" uuid="c0cc190a-6dae-4347-98f1-bb3372c7d99f"/>
-				<textElement>
-					<font size="5" isBold="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{idmovimiento}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="24" y="-1" width="19" height="13" uuid="2d04e7c4-fc13-44ba-a4bd-c99df9d7802b"/>
-				<textElement textAlignment="Center">
-					<font size="7"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{MONTO}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="46" y="-1" width="85" height="13" uuid="dada6b24-788b-4cad-ae5d-222edf7630fe"/>
-				<textElement textAlignment="Center">
-					<font size="7"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{DESCRIPCION}]]></textFieldExpression>
-			</textField>
-		</band>
-	</detail>
 	<pageFooter>
 		<band height="69">
-			<line>
-				<reportElement x="4" y="0" width="143" height="1" uuid="dd357711-5210-4985-adaa-117fcdf4f352"/>
-			</line>
 			<textField>
 				<reportElement x="3" y="4" width="138" height="31" uuid="2a0c0bc1-19df-4fe2-a96a-3278dd9804e5"/>
 				<textElement textAlignment="Center" markup="html"/>

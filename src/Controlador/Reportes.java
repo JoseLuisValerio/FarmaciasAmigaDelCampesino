@@ -32,9 +32,7 @@ public class Reportes {
             parametros.put("idVenta", idVenta);
             JasperReport jr = (JasperReport) JRLoader.loadObjectFromFile(ruta);
             JasperPrint jp = JasperFillManager.fillReport(jr, parametros, con.conectado());
-            JasperViewer jv = new JasperViewer(jp, false); //Eliminar cuando este listo
-            jv.setVisible(true);
-            //JasperPrintManager.printReport(jp, true);   
+            JasperPrintManager.printReport(jp, false);   
             con.desconectar();
         } catch (Exception ex) {
             System.err.println("Error al generar ticket Venta: "+ex.getMessage());
@@ -49,10 +47,7 @@ public class Reportes {
             parametros.put("idTransaccion", ID);
             JasperReport jr = (JasperReport) JRLoader.loadObjectFromFile(ruta);
             JasperPrint jp = JasperFillManager.fillReport(jr, parametros, con.conectado());
-            JasperViewer jv = new JasperViewer(jp, false); //Eliminar cuando este listo
-            jv.setVisible(true);
-            //JasperExportManager.exportReportToPdfFile( jp, "src/Jaspers/ReportePedido"+ID+".pdf");          
-            //JasperPrintManager.printReport(jp, true);   
+            JasperPrintManager.printReport(jp, false);   
             con.desconectar();
         } catch (Exception ex) {
             System.err.println("Error al generar ticket Venta: "+ex.getMessage());
@@ -69,7 +64,6 @@ public void pedido(String pedido) {
             JasperViewer jv = new JasperViewer(jp, false); //Eliminar cuando este listo
             jv.setVisible(true);
             JasperExportManager.exportReportToPdfFile( jp, "src/Jaspers/ReportePedido"+pedido+".pdf");          
-            //JasperPrintManager.printReport(jp, true);   
             con.desconectar();
         } catch (Exception ex) {
             System.err.println("Error al generar ticket Venta: "+ex.getMessage());
@@ -111,20 +105,36 @@ public void pedido(String pedido) {
     }
     
     @SuppressWarnings("unchecked")
-    public void TicketCorte(String idSucursal) {
+    public void CorteConMov(String idSucursal, String Fecha,String idUsuario) {
         try {
             String ruta = "src/Jaspers/CorteCaja.jasper";
             Map parametros = new HashMap();
             parametros.put("idSucursal", idSucursal);
+            parametros.put("Fecha", Fecha);
+            parametros.put("idUsuario", idUsuario);
             JasperReport jr = (JasperReport) JRLoader.loadObjectFromFile(ruta);
             JasperPrint jp = JasperFillManager.fillReport(jr, parametros, con.conectado());
-            JasperViewer jv = new JasperViewer(jp, true); //Eliminar cuando este listo
-            jv.setVisible(true);
-            //JasperPrintManager.printReport(jp, true);   
+            JasperPrintManager.printReport(jp, false);   
             con.desconectar();
         } catch (Exception ex) {
             System.err.println("Error al generar ticket Corte de caja: "+ex.getMessage());
         }
+}
     
+        @SuppressWarnings("unchecked")
+    public void CorteSinMov(String idSucursal, String Fecha,String idUsuario) {
+        try {
+            String ruta = "src/Jaspers/CorteCaja2.jasper";
+            Map parametros = new HashMap();
+            parametros.put("idSucursal", idSucursal);
+            parametros.put("Fecha", Fecha);
+            parametros.put("idUsuario", idUsuario);
+            JasperReport jr = (JasperReport) JRLoader.loadObjectFromFile(ruta);
+            JasperPrint jp = JasperFillManager.fillReport(jr, parametros, con.conectado());
+            JasperPrintManager.printReport(jp, false);   
+            con.desconectar();
+        } catch (Exception ex) {
+            System.err.println("Error al generar ticket Corte de caja: "+ex.getMessage());
+        }
 }
 }
