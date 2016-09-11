@@ -17,7 +17,9 @@ public class Producto_Consultar_Add extends javax.swing.JFrame {
      */
     public Producto_Consultar_Add() {
         initComponents();
-        Estilo.lblLogo(lblEncabezado);
+        Estilo.frmInicial(this, "Agregar producto");
+        Estilo.lblLogoChico(lblEncabezado);
+        Estilo.PnlTitulo(jPanel1, "Datos del producto");
         Estilo.BtnOpcion(btnAdd, 1);
         cargarCombos();
         Estilo.txtfDescripcion(txtCodigo, "Código de Producto");

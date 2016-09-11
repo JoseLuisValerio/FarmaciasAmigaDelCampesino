@@ -45,7 +45,7 @@ public class Venta extends javax.swing.JFrame {
         Estilo.PnlTitulo(pnlProductos, "Productos agregados");
         Estilo.PnlTitulo(pnlClienteBuscar, "Búsqueda de cliente");
         //Estilo botones
-        Estilo.BtnOpcion(btnAdd, 1);
+        Estilo.BtnOpcion(btnCobrar, 5);
         Estilo.BtnOpcion(btnCancelar, 3);
         //Estilo de ventana
         Estilo.lblMensajes(lblAlerta, "", 4);
@@ -161,7 +161,7 @@ public class Venta extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblVenta = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        btnAdd = new javax.swing.JButton();
+        btnCobrar = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         lblTotal = new javax.swing.JLabel();
         btnCancelar = new javax.swing.JButton();
@@ -170,6 +170,7 @@ public class Venta extends javax.swing.JFrame {
         txtBusqueda = new org.edisoncor.gui.textField.TextFieldRectBackground();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblCliente = new javax.swing.JTable();
+        jCheckBox2 = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -271,10 +272,10 @@ public class Venta extends javax.swing.JFrame {
 
         jLabel1.setText("Total:");
 
-        btnAdd.setText("jButton1");
-        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+        btnCobrar.setText("jButton1");
+        btnCobrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddActionPerformed(evt);
+                btnCobrarActionPerformed(evt);
             }
         });
 
@@ -333,6 +334,9 @@ public class Venta extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jCheckBox2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jCheckBox2.setText("Material de uso!");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -351,6 +355,8 @@ public class Venta extends javax.swing.JFrame {
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jCheckBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -362,7 +368,7 @@ public class Venta extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnCobrar, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(26, 26, 26))))
             .addComponent(lblAlerta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -381,13 +387,15 @@ public class Venta extends javax.swing.JFrame {
                         .addComponent(pnlProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnCobrar, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(42, 42, 42)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jCheckBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(lblTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblAlerta, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -397,7 +405,7 @@ public class Venta extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+    private void btnCobrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCobrarActionPerformed
         if(tblVenta.getRowCount()>0 && !idCliente.equals("")){
             Calendar c = new GregorianCalendar();
         String Fecha = Integer.toString(c.get(Calendar.DATE)) + "/" + Integer.toString(c.get(Calendar.MONTH) + 1) + "/" + Integer.toString(c.get(Calendar.YEAR));
@@ -421,7 +429,9 @@ public class Venta extends javax.swing.JFrame {
             auxPrecioTotal =PrecioTotal;
         }
             Controlador.ActualizaCaja(Sucursal, auxPrecioTotal);
-        if(Controlador.RegistrarVenta(Fecha, Hora,String.valueOf(DineroElectro), String.valueOf(PrecioTotal), Usuario, idCliente, Sucursal)){
+            
+            if(jCheckBox2.isSelected()){
+                if(Controlador.RegistrarVenta(Fecha, Hora,"0", "0", Usuario, idCliente, Sucursal)){
             String idVenta = Controlador.ObteneridVenta(Fecha, Hora, Sucursal, Usuario);
             for(int i=0;i<tblVenta.getRowCount();i++){
                 String Cantidad= String.valueOf(tblVenta.getValueAt(i, 4));
@@ -436,11 +446,29 @@ public class Venta extends javax.swing.JFrame {
         }else{
             Estilo.lblMensajes(lblAlerta, "Ha ocurrido un error, por favor verifique", 2);
         }
+            }else{
+                if(Controlador.RegistrarVenta(Fecha, Hora,String.valueOf(DineroElectro), String.valueOf(PrecioTotal), Usuario, idCliente, Sucursal)){
+            String idVenta = Controlador.ObteneridVenta(Fecha, Hora, Sucursal, Usuario);
+            for(int i=0;i<tblVenta.getRowCount();i++){
+                String Cantidad= String.valueOf(tblVenta.getValueAt(i, 4));
+                String idProducto= String.valueOf(tblVenta.getValueAt(i, 0));
+                String Total = String.valueOf(tblVenta.getValueAt(i, 5));
+            Controlador.RegistrarDetalleVenta(Cantidad, idProducto, idVenta, Total);
+            Controlador.ActualizarStockYVendidos(Sucursal, Cantidad, idProducto);
+            }
+            Ticket.TicketVenta(idVenta);
+            Estilo.lblMensajes(lblAlerta, "Venta Cobrada exitosamente", 3);
+            Limpiar();
+        }else{
+            Estilo.lblMensajes(lblAlerta, "Ha ocurrido un error, por favor verifique", 2);
+        }
+            }
+        
         
         }else{
             Estilo.lblMensajes(lblAlerta, "Debe ingresar a menos un producto y seleccionar un cliente", 1);
         }
-    }//GEN-LAST:event_btnAddActionPerformed
+    }//GEN-LAST:event_btnCobrarActionPerformed
 
     private void txtBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaKeyReleased
         MostrarCliente(txtBusqueda.getText());
@@ -545,9 +573,10 @@ public class Venta extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnCobrar;
     private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
