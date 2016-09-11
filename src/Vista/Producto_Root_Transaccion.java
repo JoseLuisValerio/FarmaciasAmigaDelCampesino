@@ -81,7 +81,7 @@ public class Producto_Root_Transaccion extends javax.swing.JFrame {
     public void cargarCombos() {
         Object[] sucursales = ctr.cargaSucursal("sucursal WHERE sucursal.idsucursal != 1");
         cmbSucursal.removeAllItems();
-        cmbSucursal.addItem("SELECIONES SUCURSAL");
+        cmbSucursal.addItem("SELECCIONE SUCURSAL");
         for (int i = 0; i < sucursales.length; i++) {
             cmbSucursal.addItem(sucursales[i]);
         }

@@ -147,7 +147,7 @@ public class Cliente extends javax.swing.JFrame {
         });
         Opciones.add(Reimpresion);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblEncabezado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 

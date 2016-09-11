@@ -70,7 +70,7 @@ public class Producto_Root_Pedido extends javax.swing.JFrame {
     public void cargaProveedores() {
         Object[] sucursales = ctr.cargaProveedores("proveedor");
         cmbProveedor.removeAllItems();
-        cmbProveedor.addItem("SELECIONES PROVEEDOR");
+        cmbProveedor.addItem("SELECCIONE PROVEEDOR");
         for (int i = 0; i < sucursales.length; i++) {
             cmbProveedor.addItem(sucursales[i]);
         }

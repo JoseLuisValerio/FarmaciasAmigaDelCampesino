@@ -29,6 +29,10 @@ public class Estilo {
     public void lblTitulo(JLabel label){
         label.setFont(new java.awt.Font("Science Fair",Font.PLAIN,16));
     }
+    
+    public void lblTituloGrande(JLabel label){
+        label.setFont(new java.awt.Font("Science Fair",Font.PLAIN,25));
+    }
     /**
      * Estilo de JLabel común.
      * @param label recibe el JLabel al que se le cambiará fuente, tipo y tamaño
@@ -101,6 +105,11 @@ public class Estilo {
      */
     public void PnlTitulo(JPanel panel,String titulo){
         panel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, titulo, javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Science Fair", Font.PLAIN, 14), new java.awt.Color(0,0,0)));
+        panel.setBackground(Color.WHITE);
+    }
+    
+    public void PnlBlanco(JPanel panel){
+        panel.setBackground(Color.WHITE);
     }
     
     /**
@@ -145,6 +154,14 @@ public class Estilo {
                 boton.setText("Entrar");
                 boton.setIcon(icon);
                 break;
+                
+            case 5: //Cobrar
+                path = "/Vista/Imagenes/Vender.png";
+                url = this.getClass().getResource(path);
+                icon = new ImageIcon(url);
+                boton.setText("Cobrar");
+                boton.setIcon(icon);
+                break;
             default:
                 boton.setText("No definido");
                 break;
@@ -172,7 +189,7 @@ public class Estilo {
         ventana.setTitle(titulo);
         ventana.setIconImage(icon);
         ventana.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        //ventana.dispose();
+        ventana.getContentPane().setBackground(Color.WHITE);
     }
     
     /**
@@ -181,6 +198,19 @@ public class Estilo {
      */
     public void lblLogo(JLabel label){
         String path = "/Vista/Imagenes/Encabezado.png";
+        URL url = this.getClass().getResource(path);
+        ImageIcon icon = new ImageIcon(url);
+        label.setIcon(icon);
+        label.setHorizontalAlignment(JLabel.CENTER);
+        label.setVerticalAlignment(JLabel.CENTER);
+    }
+    
+    /**
+     * Recibe un JLabel y dibuja la imagen de encabezado en él.
+     * @param label recibe el panel de encabezado en el que se dibujara
+     */
+    public void lblLogoChico(JLabel label){
+        String path = "/Vista/Imagenes/Encabezado2.png";
         URL url = this.getClass().getResource(path);
         ImageIcon icon = new ImageIcon(url);
         label.setIcon(icon);
@@ -279,6 +309,14 @@ public class Estilo {
                 thumbnail = new ImageIcon(tmpIcon.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
                 menu.setIcon(thumbnail);
                 break;
+                
+            case 10: //Ventas
+                path = "/Vista/Imagenes/AdminTool.png";
+                url = this.getClass().getResource(path);
+                tmpIcon = new ImageIcon(url);
+                thumbnail = new ImageIcon(tmpIcon.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+                menu.setIcon(thumbnail);
+                break;
         }
     }
     
@@ -350,7 +388,23 @@ public class Estilo {
                 item.setIcon(thumbnail);
                 break;
         case 7://Ver
-                path = "/Vista/Imagenes/Ver.png";
+                path = "/Vista/Imagenes/Pedido.png";
+                url = this.getClass().getResource(path);
+                tmpIcon = new ImageIcon(url);
+                thumbnail = new ImageIcon(tmpIcon.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+                item.setIcon(thumbnail);
+                break;
+                
+        case 8://Provedor
+                path = "/Vista/Imagenes/Proveedor.png";
+                url = this.getClass().getResource(path);
+                tmpIcon = new ImageIcon(url);
+                thumbnail = new ImageIcon(tmpIcon.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+                item.setIcon(thumbnail);
+                break;
+                
+        case 9: //Acomodar
+                path = "/Vista/Imagenes/Acomodar.png";
                 url = this.getClass().getResource(path);
                 tmpIcon = new ImageIcon(url);
                 thumbnail = new ImageIcon(tmpIcon.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
