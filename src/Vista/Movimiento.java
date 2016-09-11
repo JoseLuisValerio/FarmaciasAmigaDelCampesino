@@ -63,11 +63,6 @@ public class Movimiento extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTextArea1);
 
         btnAdd.setText("jButton1");
-        btnAdd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddActionPerformed(evt);
-            }
-        });
 
         btnCancel.setText("jButton2");
 
@@ -141,10 +136,6 @@ public class Movimiento extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAddActionPerformed
 
     /**
      * @param args the command line arguments

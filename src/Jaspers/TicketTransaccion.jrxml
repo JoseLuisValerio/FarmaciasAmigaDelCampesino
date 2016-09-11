@@ -34,6 +34,24 @@ WHERE
 	<field name="usuario_APATERNO" class="java.lang.String"/>
 	<title>
 		<band height="89" splitType="Stretch">
+			<image scaleImage="FillFrame">
+				<reportElement x="2" y="3" width="35" height="28" uuid="8698e79e-cb8b-4006-b4fa-80f7cd50d29c"/>
+				<imageExpression><![CDATA["CampesinaTicket.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="25" y="18" width="100" height="13" uuid="818d489f-24d8-431a-a545-f46b4dbec8b8"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA["Amiga del Campesino"]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="18" y="3" width="125" height="13" uuid="3a55181a-661a-486b-b823-36f3f33698a0"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Farmacia Y Consultorio]]></text>
+			</staticText>
 			<staticText>
 				<reportElement x="3" y="35" width="60" height="13" uuid="218c1236-97a6-4f3f-b91c-5bb459fbab77"/>
 				<textElement>
@@ -93,10 +111,6 @@ WHERE
 				</textElement>
 				<textFieldExpression><![CDATA[$F{sucursal_nombre}]]></textFieldExpression>
 			</textField>
-			<image scaleImage="FillFrame">
-				<reportElement x="2" y="0" width="141" height="35" uuid="80e862d8-8553-4530-b414-b1096520fdcc"/>
-				<imageExpression><![CDATA["Jaspers\\Encabezado.png"]]></imageExpression>
-			</image>
 		</band>
 	</title>
 	<detail>

@@ -17,7 +17,7 @@ public class Login extends javax.swing.JFrame {
         initComponents();
         Estilo.lblBody(jLabel3);
         Estilo.lblBody(jLabel2);
-        Estilo.lblLogoChico(lblEncabezado);
+        Estilo.lblLogo(lblEncabezado);
         Estilo.lblMensajes(lblAlerta, "", 4);
         
         Estilo.txtfDescripcion(txtUser, "Nombre de Usuario");
@@ -171,8 +171,6 @@ public class Login extends javax.swing.JFrame {
         Util.passLimpiar(passwField);
         Estilo.lblMensajes(lblAlerta, "", 4);
         Util.txtFoco(txtUser);
-                Controlador.Reportes Ticket = new Controlador.Reportes();
-        Ticket.CorteSinMov("1", "11/9/2016", "1");
     }//GEN-LAST:event_btnCancelActionPerformed
     private void VerificaUsuario(){
         boolean ses=false;

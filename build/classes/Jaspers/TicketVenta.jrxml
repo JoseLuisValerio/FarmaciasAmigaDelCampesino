@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Ticket1" pageWidth="147" pageHeight="324" columnWidth="147" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isSummaryWithPageHeaderAndFooter="true" isIgnorePagination="true" uuid="185e57d6-76cc-4db6-9546-6477fe3189ea">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="4.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="idVenta" class="java.lang.String">
@@ -49,6 +49,24 @@ WHERE
 	<field name="detallesventa_Total" class="java.lang.Float"/>
 	<title>
 		<band height="101" splitType="Stretch">
+			<image scaleImage="FillFrame">
+				<reportElement x="0" y="3" width="43" height="29" uuid="9aa7aabe-d234-46f6-b3b7-5930bf0440e4"/>
+				<imageExpression><![CDATA["CampesinaTicket.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="23" y="16" width="112" height="14" uuid="818d489f-24d8-431a-a545-f46b4dbec8b8"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Amiga del Campesino]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="18" y="3" width="125" height="13" uuid="3a55181a-661a-486b-b823-36f3f33698a0"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Farmacia Y Consultorio]]></text>
+			</staticText>
 			<staticText>
 				<reportElement x="4" y="47" width="40" height="13" uuid="218c1236-97a6-4f3f-b91c-5bb459fbab77"/>
 				<textElement>
@@ -129,10 +147,6 @@ WHERE
 				</textElement>
 				<text><![CDATA[$]]></text>
 			</staticText>
-			<image scaleImage="FillFrame">
-				<reportElement x="0" y="1" width="141" height="34" uuid="b3a8128e-2677-4214-a858-fd1f8d493eea"/>
-				<imageExpression><![CDATA["Jaspers\\Encabezado.png"]]></imageExpression>
-			</image>
 		</band>
 	</title>
 	<detail>

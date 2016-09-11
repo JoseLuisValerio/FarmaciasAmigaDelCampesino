@@ -64,6 +64,20 @@ WHERE
 	<title>
 		<band height="160" splitType="Stretch">
 			<staticText>
+				<reportElement x="112" y="0" width="320" height="39" uuid="dfc8cbbe-bc04-4d0e-b700-6a5dd8329879"/>
+				<textElement textAlignment="Center">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Farmacia Y Consultorio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="112" y="39" width="320" height="39" uuid="f07ba490-9c92-40de-ae82-697b446510ed"/>
+				<textElement textAlignment="Center">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Amiga del Campesino]]></text>
+			</staticText>
+			<staticText>
 				<reportElement x="2" y="132" width="110" height="24" uuid="5fb5051b-81ac-42c3-bc84-3b3da6986744"/>
 				<textElement textAlignment="Center">
 					<font size="16" isBold="true"/>
@@ -106,10 +120,6 @@ WHERE
 				<reportElement x="425" y="97" width="100" height="20" uuid="a6a9f73b-0e8c-4f0c-9171-f74883813d1d"/>
 				<textFieldExpression><![CDATA[$F{pedido_Fecha}]]></textFieldExpression>
 			</textField>
-			<image scaleImage="FillFrame">
-				<reportElement x="0" y="0" width="535" height="72" uuid="7aef3d39-9f90-4e41-a99d-8d93f3130b21"/>
-				<imageExpression><![CDATA["Jaspers\\Encabezado.png"]]></imageExpression>
-			</image>
 		</band>
 	</title>
 	<detail>

@@ -71,11 +71,32 @@ ORDER BY sucursal.idSucursal]]>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="104" splitType="Stretch">
-			<image scaleImage="FillFrame">
-				<reportElement x="0" y="0" width="572" height="98" uuid="d719174f-1b5b-4443-b35e-cf01fe0cb147"/>
-				<imageExpression><![CDATA["Jaspers\\Encabezado.png"]]></imageExpression>
+		<band height="136" splitType="Stretch">
+			<image>
+				<reportElement x="1" y="12" width="163" height="114" uuid="acc2cb1e-9855-4b47-8b48-1b3242ad07a4"/>
+				<imageExpression><![CDATA["coffee.jpg"]]></imageExpression>
 			</image>
+			<staticText>
+				<reportElement style="Title" x="170" y="0" width="402" height="62" uuid="7924e6cc-0608-4192-ab49-91f4da7b5991"/>
+				<textElement verticalAlignment="Middle">
+					<font size="38" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Farmacia y Consultorio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="219" y="62" width="196" height="22" uuid="69e81569-c23b-4c86-8c58-f954469be452"/>
+				<textElement>
+					<font fontName="Times New Roman" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Amiga del Campesino]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="172" y="94" width="383" height="42" uuid="999b302e-e295-4289-b6ae-41c54924bd10"/>
+				<textElement textAlignment="Right">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce auctor purus gravida arcu aliquam mattis. Donec et nulla libero, ut varius massa. Nulla sed turpis elit. Etiam aliquet mauris a ligula hendrerit in auctor leo lobortis.]]></text>
+			</staticText>
 		</band>
 	</title>
 	<pageHeader>
@@ -140,11 +161,11 @@ ORDER BY sucursal.idSucursal]]>
 				</textField>
 				<textField isStretchWithOverflow="true">
 					<reportElement style="Detail" x="237" y="0" width="79" height="15" uuid="64abfdc1-5f2a-48ef-9020-19b17959736e"/>
-					<textFieldExpression><![CDATA["$"+$F{$Publico}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{$Publico}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
 					<reportElement style="Detail" x="316" y="0" width="79" height="15" uuid="156405b5-06ca-48be-8d10-4971d98f2e23"/>
-					<textFieldExpression><![CDATA["$"+$F{$Compra}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{$Compra}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
 					<reportElement style="Detail" x="395" y="0" width="79" height="15" uuid="555f9729-c3ac-4c84-83e4-6dabe6216a49"/>

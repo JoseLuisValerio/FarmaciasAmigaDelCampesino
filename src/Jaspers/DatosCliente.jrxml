@@ -37,12 +37,7 @@ WHERE
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<title>
-		<band height="79" splitType="Stretch">
-			<image scaleImage="FillFrame">
-				<reportElement x="0" y="0" width="572" height="79" uuid="ec9bd9c2-4098-480b-91b2-5c4bac436d5f"/>
-				<imageExpression><![CDATA["Jaspers\\Encabezado.png"]]></imageExpression>
-			</image>
-		</band>
+		<band height="79" splitType="Stretch"/>
 	</title>
 	<detail>
 		<band height="200">
@@ -96,7 +91,7 @@ WHERE
 				<text><![CDATA[Código:]]></text>
 			</staticText>
 			<componentElement>
-				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="110" y="142" width="241" height="46" isRemoveLineWhenBlank="true" uuid="972c37e8-2f1d-43d6-a6b8-0530ff0a4515"/>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="110" y="142" width="179" height="46" isRemoveLineWhenBlank="true" uuid="972c37e8-2f1d-43d6-a6b8-0530ff0a4515"/>
 				<jr:Code128 xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" textPosition="bottom">
 					<jr:codeExpression><![CDATA[$F{Alias}]]></jr:codeExpression>
 				</jr:Code128>

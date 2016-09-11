@@ -1,82 +1,59 @@
+
 package Vista;
 
 import Ayuda.Sesion;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
+
+
 
 /**
- * Esta vista muestra la ventana principal del sistema, desde aqui se partirán a
- * todas las demás opciones
- *
+ * Esta vista muestra la ventana principal del sistema, desde aqui se partirán a todas las demás opciones
  * @author Jose Luis
  */
-public class Inicio extends javax.swing.JFrame implements Runnable {
-
+public class Inicio extends javax.swing.JFrame {
     Ayuda.Sesion datos = new Ayuda.Sesion();
     Ayuda.Estilo Estilo;
-    Controlador.Controlador_Inicio Controlador;
-    String hora, minutos, segundos, ampm;
-    Calendar calendario;
-    Thread h1;
-    Calendar c = new GregorianCalendar();
-    String dia = Integer.toString(c.get(Calendar.DATE));
-    String mes = Integer.toString(c.get(Calendar.MONTH)+1);
-    String annio = Integer.toString(c.get(Calendar.YEAR));
-    private Object [][] datosSucursal= null;
- 
-
+    
     public Inicio() {
         initComponents();
-        Controlador = new Controlador.Controlador_Inicio();
-        datosSucursal = Controlador.DatosSucursal();
-        lblNombreSucursal.setText("Sucursal: "+(String)datosSucursal[0][0]);
-        lblDireccion.setText("Direccion: "+(String)datosSucursal[0][1]);
-        h1 = new Thread(this);
-        h1.start();
-        lblFecha.setText(dia+"/"+mes+"/"+annio);
         Estilo = new Ayuda.Estilo();
-
+        
         Estilo.PnlTitulo(jPanel1, "Bienvenido");
-        Estilo.PnlTitulo(jPanel2, "Datos de la sucursal");
-
+        Estilo.PnlTitulo(jPanel2, "Acciones disponibles");
+        
         Estilo.MnIcon(MnArchivo, 1);
         Estilo.MnIcon(MnProductos, 2);
         Estilo.MnIcon(MnClientes, 3);
+        Estilo.MnIcon(MnCaja, 4);
         Estilo.MnIcon(MnUsuarios, 5);
         Estilo.MnIcon(MnMovimientos, 6);
+        Estilo.MnIcon(MnPedidos, 7);
+        Estilo.MnIcon(MnProveedores, 8);
         Estilo.MnIcon(MnVentas, 9);
-        Estilo.MnIcon(MnAdmin, 10);
-
+        
         Estilo.mnitemIcon(MnItemCerrSesion, 1);
         Estilo.mnitemIcon(MnItemAddProd, 2);
         Estilo.mnitemIcon(MnItemSearchProd, 3);
         Estilo.mnitemIcon(MnItemTransProd, 4);
         Estilo.mnitemIcon(MnItemAddClient, 2);
+        Estilo.mnitemIcon(MnItemDesClient, 5);
+        Estilo.mnitemIcon(MnItemCortCaja, 6);
         Estilo.mnitemIcon(MnItemAddMovimient, 2);
         Estilo.mnitemIcon(MnItemAddUser, 2);
         Estilo.mnitemIcon(MnItemAddMovimient, 2);
         Estilo.mnitemIcon(MnItemPedidos, 7);
         Estilo.mnitemIcon(MnItemProveedores, 2);
-        Estilo.mnitemIcon(MnItemProveedores, 2);
-        Estilo.mnitemIcon(MnItemProveedores, 8);
         
-
         Estilo.frmInicial(this, "Farmacia y consultorio 'Amiga del campesino'");
-
+        
         Estilo.lblLogo(lblEncabezado);
         Estilo.lblTitulo(lblNombre);
         Estilo.lblTitulo(lblTipo);
         Estilo.lblTitulo(lblUsuario);
-        Estilo.lblTituloGrande(lblDireccion);
-        Estilo.lblTituloGrande(lblNombreSucursal);
-        Estilo.lblTituloGrande(lblFecha);
-        Estilo.lblTituloGrande(lblHora);
         lblUsuario.setText(Sesion.LeerSesion("Usuario"));
-        lblNombre.setText("<html>" + Sesion.LeerSesion("Nombre") + "</html>");
+        lblNombre.setText("<html>"+Sesion.LeerSesion("Nombre")+"</html>");
         lblTipo.setText(Sesion.LeerSesion("Tipo"));
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -93,32 +70,30 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         lblUsuario = new javax.swing.JLabel();
         lblEncabezado = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        lblHora = new javax.swing.JLabel();
-        lblFecha = new javax.swing.JLabel();
-        lblNombreSucursal = new javax.swing.JLabel();
-        lblDireccion = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         MnArchivo = new javax.swing.JMenu();
         MnItemCerrSesion = new javax.swing.JMenuItem();
         MnProductos = new javax.swing.JMenu();
         MnItemAddProd = new javax.swing.JMenuItem();
         MnItemSearchProd = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        MnItemTransProd = new javax.swing.JMenuItem();
         MnVentas = new javax.swing.JMenu();
         MnClientes = new javax.swing.JMenu();
         MnItemAddClient = new javax.swing.JMenuItem();
+        MnItemDesClient = new javax.swing.JMenuItem();
+        MnCaja = new javax.swing.JMenu();
+        MnItemCortCaja = new javax.swing.JMenuItem();
         MnUsuarios = new javax.swing.JMenu();
         MnItemAddUser = new javax.swing.JMenuItem();
         MnMovimientos = new javax.swing.JMenu();
         MnItemAddMovimient = new javax.swing.JMenuItem();
-        MnAdmin = new javax.swing.JMenu();
-        MnItemTransProd = new javax.swing.JMenuItem();
+        MnPedidos = new javax.swing.JMenu();
         MnItemPedidos = new javax.swing.JMenuItem();
+        MnProveedores = new javax.swing.JMenu();
         MnItemProveedores = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/UserLogin.png"))); // NOI18N
 
@@ -158,59 +133,31 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
                 .addComponent(lblTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(84, Short.MAX_VALUE))
         );
 
-        lblHora.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
-        lblHora.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblHora.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-
-        lblFecha.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
-
-        lblNombreSucursal.setText("jLabel1");
-
-        lblDireccion.setText("jLabel1");
-        lblDireccion.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/Datos.png"))); // NOI18N
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(lblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblHora, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblDireccion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblNombreSucursal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1071, Short.MAX_VALUE)))
-                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(211, 211, 211))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblHora, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
-                .addComponent(lblNombreSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(40, 40, 40)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         MnArchivo.setText("Archivo");
@@ -228,28 +175,13 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         MnProductos.setText("Productos");
 
         MnItemAddProd.setText("Agregar");
-        MnItemAddProd.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                MnItemAddProdMousePressed(evt);
-            }
-        });
         MnProductos.add(MnItemAddProd);
 
         MnItemSearchProd.setText("Buscar");
-        MnItemSearchProd.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                MnItemSearchProdMousePressed(evt);
-            }
-        });
         MnProductos.add(MnItemSearchProd);
 
-        jMenuItem1.setText("Acomodar");
-        jMenuItem1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jMenuItem1MousePressed(evt);
-            }
-        });
-        MnProductos.add(jMenuItem1);
+        MnItemTransProd.setText("Transferir a sucursal");
+        MnProductos.add(MnItemTransProd);
 
         jMenuBar1.add(MnProductos);
 
@@ -271,7 +203,17 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         });
         MnClientes.add(MnItemAddClient);
 
+        MnItemDesClient.setText("Descuento");
+        MnClientes.add(MnItemDesClient);
+
         jMenuBar1.add(MnClientes);
+
+        MnCaja.setText("Caja");
+
+        MnItemCortCaja.setText("Corte de Caja");
+        MnCaja.add(MnItemCortCaja);
+
+        jMenuBar1.add(MnCaja);
 
         MnUsuarios.setText("Usuarios");
 
@@ -288,42 +230,23 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         MnMovimientos.setText("Movimientos");
 
         MnItemAddMovimient.setText("Ingresar/retirar dinero");
-        MnItemAddMovimient.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                MnItemAddMovimientMousePressed(evt);
-            }
-        });
         MnMovimientos.add(MnItemAddMovimient);
 
         jMenuBar1.add(MnMovimientos);
 
-        MnAdmin.setText("Administrativos");
+        MnPedidos.setText("Pedidos");
 
-        MnItemTransProd.setText("Transferir a sucursal");
-        MnItemTransProd.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                MnItemTransProdMousePressed(evt);
-            }
-        });
-        MnAdmin.add(MnItemTransProd);
+        MnItemPedidos.setText("Ver pedidos");
+        MnPedidos.add(MnItemPedidos);
 
-        MnItemPedidos.setText("Hacer pedido");
-        MnItemPedidos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                MnItemPedidosMousePressed(evt);
-            }
-        });
-        MnAdmin.add(MnItemPedidos);
+        jMenuBar1.add(MnPedidos);
 
-        MnItemProveedores.setText("Proveedor");
-        MnItemProveedores.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                MnItemProveedoresMousePressed(evt);
-            }
-        });
-        MnAdmin.add(MnItemProveedores);
+        MnProveedores.setText("Proveedores");
 
-        jMenuBar1.add(MnAdmin);
+        MnItemProveedores.setText("Agregar/Modificar Proveedores");
+        MnProveedores.add(MnItemProveedores);
+
+        jMenuBar1.add(MnProveedores);
 
         setJMenuBar(jMenuBar1);
 
@@ -335,17 +258,19 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblEncabezado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblEncabezado, javax.swing.GroupLayout.DEFAULT_SIZE, 537, Short.MAX_VALUE))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblEncabezado, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -356,16 +281,14 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     private void MnItemCerrSesionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MnItemCerrSesionMousePressed
         Controlador.Reportes Ticket = new Controlador.Reportes();
-        String Sucursal=Controlador.ObtenerSucursal();
-        String Fecha= dia+"/"+mes+"/"+annio;
-        String idUsuario =Sesion.LeerSesion("idUsuario");
-        if(Controlador.HayMovimientos(Fecha, idUsuario)){
-            Ticket.CorteConMov(Sucursal,Fecha,idUsuario);
-        }else{
-            Ticket.CorteSinMov(Sucursal, Fecha, idUsuario);
-        }
+        Controlador.Controlador_Venta Controlador = new Controlador.Controlador_Venta();
+        Ticket.TicketCorte(Controlador.ObtenerSucursal());
         Ayuda.Sesion.cerrarSesion();
         this.dispose();
         Login Ventana = new Login();
@@ -377,50 +300,15 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         Ventana.setVisible(true);
     }//GEN-LAST:event_MnItemAddUserMousePressed
 
-    private void MnVentasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MnVentasMousePressed
-        Venta Ventana = new Venta();
-        Ventana.setVisible(true);
-    }//GEN-LAST:event_MnVentasMousePressed
-
-    private void MnItemAddProdMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MnItemAddProdMousePressed
-        Vista.Producto_Consultar_Add Ventana = new Vista.Producto_Consultar_Add();
-        Ventana.setVisible(true);
-    }//GEN-LAST:event_MnItemAddProdMousePressed
-
-    private void MnItemSearchProdMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MnItemSearchProdMousePressed
-        Vista.Producto_Consultar Ventana = new Vista.Producto_Consultar();
-        Ventana.setVisible(true);
-    }//GEN-LAST:event_MnItemSearchProdMousePressed
-
-    private void MnItemTransProdMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MnItemTransProdMousePressed
-        Vista.Producto_Root_Transaccion Ventana = new Vista.Producto_Root_Transaccion();
-        Ventana.setVisible(true);
-    }//GEN-LAST:event_MnItemTransProdMousePressed
-
     private void MnItemAddClientMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MnItemAddClientMousePressed
         Cliente Ventana = new Cliente();
         Ventana.setVisible(true);
     }//GEN-LAST:event_MnItemAddClientMousePressed
 
-    private void MnItemAddMovimientMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MnItemAddMovimientMousePressed
-        Vista.Movimiento Ventana = new Vista.Movimiento();
+    private void MnVentasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MnVentasMousePressed
+        Venta Ventana = new Venta();
         Ventana.setVisible(true);
-    }//GEN-LAST:event_MnItemAddMovimientMousePressed
-
-    private void MnItemPedidosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MnItemPedidosMousePressed
-        Vista.Producto_Root_Pedido Ventana = new Vista.Producto_Root_Pedido();
-        Ventana.setVisible(true);
-    }//GEN-LAST:event_MnItemPedidosMousePressed
-
-    private void MnItemProveedoresMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MnItemProveedoresMousePressed
-        Vista.Proveedor Ventana = new Vista.Proveedor();
-        Ventana.setVisible(true);
-    }//GEN-LAST:event_MnItemProveedoresMousePressed
-
-    private void jMenuItem1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem1MousePressed
-        Vista.Producto_Acomodar Ventana = new Vista.Producto_Acomodar();
-        Ventana.setVisible(true);
-    }//GEN-LAST:event_jMenuItem1MousePressed
+    }//GEN-LAST:event_MnVentasMousePressed
 
     /**
      * @param args the command line arguments
@@ -458,65 +346,34 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu MnAdmin;
     private javax.swing.JMenu MnArchivo;
+    private javax.swing.JMenu MnCaja;
     private javax.swing.JMenu MnClientes;
     private javax.swing.JMenuItem MnItemAddClient;
     private javax.swing.JMenuItem MnItemAddMovimient;
     private javax.swing.JMenuItem MnItemAddProd;
     private javax.swing.JMenuItem MnItemAddUser;
     private javax.swing.JMenuItem MnItemCerrSesion;
+    private javax.swing.JMenuItem MnItemCortCaja;
+    private javax.swing.JMenuItem MnItemDesClient;
     private javax.swing.JMenuItem MnItemPedidos;
     private javax.swing.JMenuItem MnItemProveedores;
     private javax.swing.JMenuItem MnItemSearchProd;
     private javax.swing.JMenuItem MnItemTransProd;
     private javax.swing.JMenu MnMovimientos;
+    private javax.swing.JMenu MnPedidos;
     private javax.swing.JMenu MnProductos;
+    private javax.swing.JMenu MnProveedores;
     private javax.swing.JMenu MnUsuarios;
     private javax.swing.JMenu MnVentas;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JLabel lblDireccion;
     private javax.swing.JLabel lblEncabezado;
-    private javax.swing.JLabel lblFecha;
-    private javax.swing.JLabel lblHora;
     private javax.swing.JLabel lblNombre;
-    private javax.swing.JLabel lblNombreSucursal;
     private javax.swing.JLabel lblTipo;
     public static javax.swing.JLabel lblUsuario;
     // End of variables declaration//GEN-END:variables
-
-    @Override
-    public void run() {
-        Thread ct = Thread.currentThread();
-        while (ct == h1) {
-            calcula();
-            lblHora.setText(hora + ":" + minutos + ":" + segundos + " " + ampm);
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-            }
-        }
-    }
-
-    public void calcula() {
-        Calendar calendario = new GregorianCalendar();
-        Date fechaHoraActual = new Date();
-
-        calendario.setTime(fechaHoraActual);
-        ampm = calendario.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM";
-
-        if (ampm.equals("PM")) {
-            int h = calendario.get(Calendar.HOUR_OF_DAY) - 12;
-            hora = h > 9 ? "" + h : "0" + h;
-        } else {
-            hora = calendario.get(Calendar.HOUR_OF_DAY) > 9 ? "" + calendario.get(Calendar.HOUR_OF_DAY) : "0" + calendario.get(Calendar.HOUR_OF_DAY);
-        }
-        minutos = calendario.get(Calendar.MINUTE) > 9 ? "" + calendario.get(Calendar.MINUTE) : "0" + calendario.get(Calendar.MINUTE);
-        segundos = calendario.get(Calendar.SECOND) > 9 ? "" + calendario.get(Calendar.SECOND) : "0" + calendario.get(Calendar.SECOND);
-    }
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="VentasDiario" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9e01838a-88d7-4a4c-a686-01f64deeac76">
-	<property name="ireport.zoom" value="0.75"/>
+	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<style name="Title" fontName="Times New Roman" fontSize="50" isBold="true" pdfFontName="Times-Bold"/>
@@ -82,10 +82,31 @@ WHERE Venta.Fecha LIKE $P{Fecha}
 	</background>
 	<title>
 		<band height="136" splitType="Stretch">
-			<image scaleImage="FillFrame">
-				<reportElement x="0" y="0" width="752" height="118" uuid="ca953bde-0edc-43d5-8a17-52455fadb482"/>
-				<imageExpression><![CDATA["Jaspers\\Encabezado.png"]]></imageExpression>
+			<image>
+				<reportElement x="0" y="0" width="164" height="126" uuid="1b020862-869c-4600-9b66-b24f2ac1106c"/>
+				<imageExpression><![CDATA["Campesina.png"]]></imageExpression>
 			</image>
+			<staticText>
+				<reportElement style="Title" x="270" y="0" width="263" height="62" uuid="a9843487-2239-494a-9fda-3d0f06c5fc1b"/>
+				<textElement verticalAlignment="Middle">
+					<font pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Coffee Title]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="303" y="62" width="196" height="22" uuid="37b3294c-c302-4f01-9910-a1cd49ae6a06"/>
+				<textElement>
+					<font fontName="Times New Roman" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Coffee SubTitle]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="172" y="94" width="383" height="42" uuid="66101dd8-588c-430d-ab90-f6229b919056"/>
+				<textElement textAlignment="Right">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce auctor purus gravida arcu aliquam mattis. Donec et nulla libero, ut varius massa. Nulla sed turpis elit. Etiam aliquet mauris a ligula hendrerit in auctor leo lobortis.]]></text>
+			</staticText>
 		</band>
 	</title>
 	<pageHeader>
@@ -167,7 +188,7 @@ WHERE Venta.Fecha LIKE $P{Fecha}
 				</textField>
 				<textField isStretchWithOverflow="true">
 					<reportElement style="Detail" x="584" y="0" width="71" height="15" uuid="02c1903a-7370-49ee-8699-ea6daf9de0b2"/>
-					<textFieldExpression><![CDATA["$"+($F{Total}-$F{DinElectro})]]></textFieldExpression>
+					<textFieldExpression><![CDATA["$"+$F{Total}-$F{DinElectro}]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>
