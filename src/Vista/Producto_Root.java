@@ -52,10 +52,15 @@ public class Producto_Root extends javax.swing.JFrame {
         Estilo.mnitemIcon(menuItemTransaccion, 4);
         Estilo.mnitemIcon(mnItemProveedor, 2);
         Estilo.mnitemIcon(mnItemPedido, 4);
+        
+        Estilo.RadioBtn(rbtBuscar, 1);
+        Estilo.RadioBtn(rbtAgregar, 2);
+        Estilo.RadioBtn(rbtModificar, 3);
+        
         Estilo.BtnOpcion(btnAgregar, 1);
         Estilo.BtnOpcion(btnCancelar, 3);
         Estilo.BtnOpcion(btnGuardar, 2);
-        Estilo.BtnOpcion(btnpedido, 4);
+        Estilo.BtnOpcion(btnpedido, 6);
         btnGuardar.setVisible(false);
         txtCodigo.setEnabled(false);
         desactivarStock();
@@ -114,13 +119,13 @@ public class Producto_Root extends javax.swing.JFrame {
     public void cargarCombos() {
         Object[] sucursales = ctr.cargaSucursal("sucursal");
         cmbSucursal.removeAllItems();
-        cmbSucursal.addItem("SELECIONES SUCURSAL");
+        cmbSucursal.addItem("Seleccione Sucursal");
         for (int i = 0; i < sucursales.length; i++) {
             cmbSucursal.addItem(sucursales[i]);
         }
         Object[] Proveedores = ctr.cargaProveedor("proveedor");
         cmbProveedor.removeAllItems();
-        cmbProveedor.addItem("SELECCIONE PROVEEDOR");
+        cmbProveedor.addItem("Seleccione Proveedor");
         for (int i = 0; i < Proveedores.length; i++) {
             cmbProveedor.addItem(Proveedores[i]);
         }
@@ -319,6 +324,7 @@ public class Producto_Root extends javax.swing.JFrame {
 
         buttonGroup1.add(rbtBuscar);
         rbtBuscar.setText("Buscar");
+        rbtBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/Acomodar.png"))); // NOI18N
         rbtBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rbtBuscarActionPerformed(evt);
@@ -458,9 +464,9 @@ public class Producto_Root extends javax.swing.JFrame {
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(txtCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
-                                .addComponent(jLabel1)
                                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(cmbSucursal, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(cmbSucursal, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGap(18, 18, 18)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addGroup(layout.createSequentialGroup()
@@ -501,17 +507,17 @@ public class Producto_Root extends javax.swing.JFrame {
                                     .addGap(18, 18, 18)
                                     .addComponent(lblmensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(layout.createSequentialGroup()
-                                    .addGap(96, 96, 96)
-                                    .addComponent(btnpedido))))
+                                    .addGap(54, 54, 54)
+                                    .addComponent(btnpedido, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addComponent(jScrollPane2)
                         .addComponent(lblopciones, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(rbtBuscar)
-                                .addComponent(rbtAgregar, javax.swing.GroupLayout.Alignment.TRAILING))
-                            .addComponent(rbtModificar))
-                        .addGap(700, 700, 700)
+                        .addComponent(rbtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(rbtAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(rbtModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(389, 389, 389)
                         .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -579,12 +585,12 @@ public class Producto_Root extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblopciones, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(rbtBuscar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(rbtAgregar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(rbtModificar)
-                        .addGap(0, 4, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(rbtModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(rbtAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(rbtBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(0, 46, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)

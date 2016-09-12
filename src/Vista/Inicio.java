@@ -66,6 +66,7 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         Estilo.mnitemIcon(MnItemInProveedor, 8);
         Estilo.mnitemIcon(MnItemInvSucursal, 11);
         Estilo.mnitemIcon(MnItemProductos, 12);
+        Estilo.mnitemIcon(MnItemTipUsuario, 13);
         
 
         Estilo.frmInicial(this, "Farmacia y consultorio 'Amiga del campesino'");
@@ -125,6 +126,7 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         MnAdmin = new javax.swing.JMenu();
         MnUsuarios = new javax.swing.JMenu();
         MnItemAddUser = new javax.swing.JMenuItem();
+        MnItemTipUsuario = new javax.swing.JMenuItem();
         MnItemProductos = new javax.swing.JMenuItem();
         MnItemTransProd = new javax.swing.JMenuItem();
         MnItemPedidos = new javax.swing.JMenuItem();
@@ -315,6 +317,14 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         });
         MnUsuarios.add(MnItemAddUser);
 
+        MnItemTipUsuario.setText("Tipos de Usuario");
+        MnItemTipUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                MnItemTipUsuarioMousePressed(evt);
+            }
+        });
+        MnUsuarios.add(MnItemTipUsuario);
+
         MnAdmin.add(MnUsuarios);
 
         MnItemProductos.setText("Productos");
@@ -500,6 +510,11 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         Ventana.setVisible(true);
     }//GEN-LAST:event_MnItemProductosMousePressed
 
+    private void MnItemTipUsuarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MnItemTipUsuarioMousePressed
+        Vista.TipoCliente Ventana = new Vista.TipoCliente();
+        Ventana.setVisible(true);
+    }//GEN-LAST:event_MnItemTipUsuarioMousePressed
+
     /**
      * @param args the command line arguments
      */
@@ -552,6 +567,7 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
     private javax.swing.JMenuItem MnItemProductos;
     private javax.swing.JMenuItem MnItemProveedores;
     private javax.swing.JMenuItem MnItemSearchProd;
+    private javax.swing.JMenuItem MnItemTipUsuario;
     private javax.swing.JMenuItem MnItemTransProd;
     private javax.swing.JMenuItem MnItemVentas;
     private javax.swing.JMenu MnMovimientos;

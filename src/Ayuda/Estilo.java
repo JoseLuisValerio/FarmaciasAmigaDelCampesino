@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JTable;
 /**
  * Da formato visual a los elementos de las vistas
@@ -162,6 +163,15 @@ public class Estilo {
                 boton.setText("Cobrar");
                 boton.setIcon(icon);
                 break;
+                
+            case 6: //Pedido
+                path = "/Vista/Imagenes/Pedido.png";
+                url = this.getClass().getResource(path);
+                icon = new ImageIcon(url);
+                boton.setText("Pedidos");
+                boton.setIcon(icon);
+                break;
+                
             default:
                 boton.setText("No definido");
                 break;
@@ -442,6 +452,55 @@ public class Estilo {
                 thumbnail = new ImageIcon(tmpIcon.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
                 item.setIcon(thumbnail);
                 break;        
+                
+            case 13: //Usuario
+                path = "/Vista/Imagenes/AgregarUsuario.png";
+                url = this.getClass().getResource(path);
+                tmpIcon = new ImageIcon(url);
+                thumbnail = new ImageIcon(tmpIcon.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+                item.setIcon(thumbnail);
+                break;        
+        }
+        
+    }
+    
+    public void RadioBtn(JRadioButton boton, int opc){
+        String path = "";
+        URL url = null;
+        ImageIcon tmpIcon = null;
+        ImageIcon thumbnail = null;
+        boton.setFont(new java.awt.Font("Britannic Bold", Font.PLAIN, 16));
+        
+        switch (opc) {
+            case 1: //Buscar
+                path = "/Vista/Imagenes/Buscar.png";
+                url = this.getClass().getResource(path);
+                tmpIcon = new ImageIcon(url);
+                url = this.getClass().getResource(path);
+                tmpIcon = new ImageIcon(url);
+                thumbnail = new ImageIcon(tmpIcon.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
+                boton.setIcon(thumbnail);
+                break;
+                
+                case 2: //Agregar
+                path = "/Vista/Imagenes/Agregar.png";
+                url = this.getClass().getResource(path);
+                tmpIcon = new ImageIcon(url);
+                url = this.getClass().getResource(path);
+                tmpIcon = new ImageIcon(url);
+                thumbnail = new ImageIcon(tmpIcon.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+                boton.setIcon(thumbnail);
+                break;
+                
+            case 3: //Modificar
+                path = "/Vista/Imagenes/Editar.png";
+                url = this.getClass().getResource(path);
+                tmpIcon = new ImageIcon(url);
+                url = this.getClass().getResource(path);
+                tmpIcon = new ImageIcon(url);
+                thumbnail = new ImageIcon(tmpIcon.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+                boton.setIcon(thumbnail);
+                break;
         }
     }
     

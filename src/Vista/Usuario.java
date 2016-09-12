@@ -70,7 +70,7 @@ public class Usuario extends javax.swing.JFrame {
     private void LlenarcmbTipos() {
         Object[] Tipos = Controlador.CargaTipos();
         cmbTipo.removeAllItems();
-        cmbTipo.addItem("");
+        cmbTipo.addItem("Seleccione Tipo");
         for (int i = 0; i < Tipos.length; i++) {
             cmbTipo.addItem((String) Tipos[i]);
         }
@@ -333,7 +333,7 @@ public class Usuario extends javax.swing.JFrame {
             Estilo.lblMensajes(lblAlerta, "El nombre de usuario ya existe. Por favor cambielo", 2);
         }
         }else{
-            Estilo.lblMensajes(lblAlerta, "Fantan datos, por favor verifique", 1);
+            Estilo.lblMensajes(lblAlerta, "Faltan datos, por favor verifique", 1);
         }
     }//GEN-LAST:event_btnAddActionPerformed
 

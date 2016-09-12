@@ -7,8 +7,15 @@ package Vista;
  */
 public class TipoCliente extends javax.swing.JFrame {
     Ayuda.Estilo Estilo;
+    Controlador.Controlador_Cliente Controlador;
+    Ayuda.Validacion Valido;
+    Ayuda.Utilidades Util;
+    
     public TipoCliente() {
         initComponents();
+        Controlador = new Controlador.Controlador_Cliente();
+        Valido = new Ayuda.Validacion();
+        Util = new Ayuda.Utilidades();
         Estilo = new Ayuda.Estilo();
         Estilo.lblBody(jLabel1);
         Estilo.lblBody(jLabel2);
@@ -57,9 +64,20 @@ public class TipoCliente extends javax.swing.JFrame {
 
         jLabel1.setText("Nombre:");
 
+        txtDescuento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDescuentoKeyTyped(evt);
+            }
+        });
+
         jLabel2.setText("Descuento:");
 
         btnAdd.setText("jButton1");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
 
         btnUpdate.setText("jButton2");
 
@@ -171,6 +189,28 @@ public class TipoCliente extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        if(!Valido.txtVacio(txtNombre) && !Valido.txtVacio(txtDescuento)){
+            if(Controlador.InsertaTipoCliente(txtNombre.getText(), txtDescuento.getText())){
+                Util.txtLimpiar(txtNombre);
+                Util.txtLimpiar(txtDescuento);
+                Estilo.lblMensajes(lblAlerta, "Se ha agregado correctamente", 3);
+            }else{
+                Estilo.lblMensajes(lblAlerta, "Ha ocurrido un error al agregar", 2);
+            }
+        }else{
+            Estilo.lblMensajes(lblAlerta, "Debe completar los datos solicitados", 2);
+        }
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    private void txtDescuentoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescuentoKeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtDescuentoKeyTyped
 
     /**
      * @param args the command line arguments

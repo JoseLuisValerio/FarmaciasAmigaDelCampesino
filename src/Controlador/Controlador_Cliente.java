@@ -113,4 +113,11 @@ public class Controlador_Cliente {
         datos = ModeloCliente.obtenerId(columnas, sentencia);
         return datos;
     }
+    
+    public boolean InsertaTipoCliente(String Nombre, String Descuento) {        
+        String datos[] = {Nombre, Descuento};
+        return ModeloCliente.insertar(datos, "INSERT INTO Tipo_Cliente(Nombre, Descuento) VALUES(?,?)");
+    }
+    
+    
 }
