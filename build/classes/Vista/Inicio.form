@@ -132,6 +132,44 @@
                 <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="MnItemProveedoresMousePressed"/>
               </Events>
             </MenuItem>
+            <Menu class="javax.swing.JMenu" name="MnReportes">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Reportes"/>
+              </Properties>
+              <SubComponents>
+                <MenuItem class="javax.swing.JMenuItem" name="MnItemVentas">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Ventas"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="MnItemVentasMousePressed"/>
+                  </Events>
+                </MenuItem>
+                <Menu class="javax.swing.JMenu" name="MnInventarios">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Inventarios"/>
+                  </Properties>
+                  <SubComponents>
+                    <MenuItem class="javax.swing.JMenuItem" name="MnItemInProveedor">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Por Proveedor"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="MnItemInProveedorMousePressed"/>
+                      </Events>
+                    </MenuItem>
+                    <MenuItem class="javax.swing.JMenuItem" name="MnItemInvSucursal">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Por Sucursal"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="MnItemInvSucursalMousePressed"/>
+                      </Events>
+                    </MenuItem>
+                  </SubComponents>
+                </Menu>
+              </SubComponents>
+            </Menu>
           </SubComponents>
         </Menu>
       </SubComponents>

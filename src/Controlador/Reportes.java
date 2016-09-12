@@ -78,7 +78,7 @@ public void pedido(String pedido) {
             parametros.put("Fecha", Fecha);
             JasperReport jr = (JasperReport) JRLoader.loadObjectFromFile(ruta);
             JasperPrint jp = JasperFillManager.fillReport(jr, parametros, con.conectado());
-            JasperViewer jv = new JasperViewer(jp, true);
+            JasperViewer jv = new JasperViewer(jp, false);
             jv.setVisible(true);
             jv.setTitle("Reporte de ventas");
             con.desconectar();
@@ -87,20 +87,50 @@ public void pedido(String pedido) {
         }
     }
     
-    @SuppressWarnings("unchecked")
-    public void ReporteCliente(String idCliente) {
+            @SuppressWarnings("unchecked")
+    public void ReporteCliente(String Alias) {
         try{
             String ruta="src/Jaspers/DatosCliente.jasper";
             Map parametros = new HashMap();
-            parametros.put("Alias", idCliente);
+            parametros.put("Alias", Alias);
             JasperReport jr = (JasperReport) JRLoader.loadObjectFromFile(ruta);
             JasperPrint jp = JasperFillManager.fillReport(jr, parametros, con.conectado());
-            JasperViewer jv = new JasperViewer(jp, true);
+            JasperViewer jv = new JasperViewer(jp, false);
             jv.setVisible(true);
             jv.setTitle("Reporte de cliente");
             con.desconectar();
         }catch(Exception e){
-            System.err.println("Error al leer el reporte de cliente");
+            System.err.println("Error al acceder al report de clientes");
+        }
+    }
+    
+    @SuppressWarnings("unchecked")
+    public void InventarioSucursal() {
+        try{
+            String ruta="src/Jaspers/InventarioSucursal.jasper";            
+            JasperReport jr = (JasperReport) JRLoader.loadObjectFromFile(ruta);
+            JasperPrint jp = JasperFillManager.fillReport(jr, null, con.conectado());
+            JasperViewer jv = new JasperViewer(jp, false);
+            jv.setVisible(true);
+            jv.setTitle("Reporte de sucursal");
+            con.desconectar();
+        }catch(Exception e){
+            System.err.println("Error al leer el reporte de sucursal/Inventario");
+        }
+    }
+    
+        @SuppressWarnings("unchecked")
+    public void InventarioProveedor() {
+        try{
+            String ruta="src/Jaspers/InventarioProveedor.jasper";            
+            JasperReport jr = (JasperReport) JRLoader.loadObjectFromFile(ruta);
+            JasperPrint jp = JasperFillManager.fillReport(jr, null, con.conectado());
+            JasperViewer jv = new JasperViewer(jp, false);
+            jv.setVisible(true);
+            jv.setTitle("Reporte de proveedor");
+            con.desconectar();
+        }catch(Exception e){
+            System.err.println("Error al leer reporte de proveedor/Inventario");
         }
     }
     

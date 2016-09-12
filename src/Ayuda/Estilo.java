@@ -317,6 +317,14 @@ public class Estilo {
                 thumbnail = new ImageIcon(tmpIcon.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
                 menu.setIcon(thumbnail);
                 break;
+                
+                case 11: //Reportes
+                path = "/Vista/Imagenes/Reportes.png";
+                url = this.getClass().getResource(path);
+                tmpIcon = new ImageIcon(url);
+                thumbnail = new ImageIcon(tmpIcon.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+                menu.setIcon(thumbnail);
+                break;
         }
     }
     
@@ -410,6 +418,22 @@ public class Estilo {
                 thumbnail = new ImageIcon(tmpIcon.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
                 item.setIcon(thumbnail);
                 break;
+                
+        case 10: //Ventas
+                path = "/Vista/Imagenes/Vender.png";
+                url = this.getClass().getResource(path);
+                tmpIcon = new ImageIcon(url);
+                thumbnail = new ImageIcon(tmpIcon.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+                item.setIcon(thumbnail);
+                break;
+                
+        case 11: //Sucursal
+                path = "/Vista/Imagenes/Sucursal.png";
+                url = this.getClass().getResource(path);
+                tmpIcon = new ImageIcon(url);
+                thumbnail = new ImageIcon(tmpIcon.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+                item.setIcon(thumbnail);
+                break;        
         }
     }
     

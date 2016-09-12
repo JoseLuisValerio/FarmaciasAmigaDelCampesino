@@ -28,6 +28,7 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
 
     public Inicio() {
         initComponents();
+        Privilegios();
         Controlador = new Controlador.Controlador_Inicio();
         datosSucursal = Controlador.DatosSucursal();
         lblNombreSucursal.setText("Sucursal: "+(String)datosSucursal[0][0]);
@@ -47,6 +48,8 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         Estilo.MnIcon(MnMovimientos, 6);
         Estilo.MnIcon(MnVentas, 9);
         Estilo.MnIcon(MnAdmin, 10);
+        Estilo.MnIcon(MnReportes, 11);
+        Estilo.MnIcon(MnInventarios, 12);
 
         Estilo.mnitemIcon(MnItemCerrSesion, 1);
         Estilo.mnitemIcon(MnItemAddProd, 2);
@@ -59,6 +62,9 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         Estilo.mnitemIcon(MnItemPedidos, 7);
         Estilo.mnitemIcon(MnItemProveedores, 8);
         Estilo.mnitemIcon(MnIntemAcomodar, 9);
+        Estilo.mnitemIcon(MnItemVentas, 10);
+        Estilo.mnitemIcon(MnItemInProveedor, 8);
+        Estilo.mnitemIcon(MnItemInvSucursal, 11);
         
 
         Estilo.frmInicial(this, "Farmacia y consultorio 'Amiga del campesino'");
@@ -74,6 +80,12 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         lblUsuario.setText(Sesion.LeerSesion("Usuario"));
         lblNombre.setText("<html>" + Sesion.LeerSesion("Nombre") + "</html>");
         lblTipo.setText(Sesion.LeerSesion("Tipo"));
+    }
+    
+    private void Privilegios(){
+        if(!Sesion.LeerSesion("Tipo").equals("Administrador")){
+            MnAdmin.setEnabled(false);
+        }
     }
 
     /**
@@ -115,6 +127,11 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         MnItemTransProd = new javax.swing.JMenuItem();
         MnItemPedidos = new javax.swing.JMenuItem();
         MnItemProveedores = new javax.swing.JMenuItem();
+        MnReportes = new javax.swing.JMenu();
+        MnItemVentas = new javax.swing.JMenuItem();
+        MnInventarios = new javax.swing.JMenu();
+        MnItemInProveedor = new javax.swing.JMenuItem();
+        MnItemInvSucursal = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -322,6 +339,38 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         });
         MnAdmin.add(MnItemProveedores);
 
+        MnReportes.setText("Reportes");
+
+        MnItemVentas.setText("Ventas");
+        MnItemVentas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                MnItemVentasMousePressed(evt);
+            }
+        });
+        MnReportes.add(MnItemVentas);
+
+        MnInventarios.setText("Inventarios");
+
+        MnItemInProveedor.setText("Por Proveedor");
+        MnItemInProveedor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                MnItemInProveedorMousePressed(evt);
+            }
+        });
+        MnInventarios.add(MnItemInProveedor);
+
+        MnItemInvSucursal.setText("Por Sucursal");
+        MnItemInvSucursal.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                MnItemInvSucursalMousePressed(evt);
+            }
+        });
+        MnInventarios.add(MnItemInvSucursal);
+
+        MnReportes.add(MnInventarios);
+
+        MnAdmin.add(MnReportes);
+
         jMenuBar1.add(MnAdmin);
 
         setJMenuBar(jMenuBar1);
@@ -421,6 +470,21 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         Ventana.setVisible(true);
     }//GEN-LAST:event_MnIntemAcomodarMousePressed
 
+    private void MnItemVentasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MnItemVentasMousePressed
+        Controlador.Reportes Report= new Controlador.Reportes();
+        Report.VentasRoot(dia+"/"+mes+"/"+annio);
+    }//GEN-LAST:event_MnItemVentasMousePressed
+
+    private void MnItemInProveedorMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MnItemInProveedorMousePressed
+        Controlador.Reportes Report= new Controlador.Reportes();
+        Report.InventarioProveedor();
+    }//GEN-LAST:event_MnItemInProveedorMousePressed
+
+    private void MnItemInvSucursalMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MnItemInvSucursalMousePressed
+        Controlador.Reportes Report= new Controlador.Reportes();
+        Report.InventarioSucursal();
+    }//GEN-LAST:event_MnItemInvSucursalMousePressed
+
     /**
      * @param args the command line arguments
      */
@@ -461,17 +525,22 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
     private javax.swing.JMenu MnArchivo;
     private javax.swing.JMenu MnClientes;
     private javax.swing.JMenuItem MnIntemAcomodar;
+    private javax.swing.JMenu MnInventarios;
     private javax.swing.JMenuItem MnItemAddClient;
     private javax.swing.JMenuItem MnItemAddMovimient;
     private javax.swing.JMenuItem MnItemAddProd;
     private javax.swing.JMenuItem MnItemAddUser;
     private javax.swing.JMenuItem MnItemCerrSesion;
+    private javax.swing.JMenuItem MnItemInProveedor;
+    private javax.swing.JMenuItem MnItemInvSucursal;
     private javax.swing.JMenuItem MnItemPedidos;
     private javax.swing.JMenuItem MnItemProveedores;
     private javax.swing.JMenuItem MnItemSearchProd;
     private javax.swing.JMenuItem MnItemTransProd;
+    private javax.swing.JMenuItem MnItemVentas;
     private javax.swing.JMenu MnMovimientos;
     private javax.swing.JMenu MnProductos;
+    private javax.swing.JMenu MnReportes;
     private javax.swing.JMenu MnUsuarios;
     private javax.swing.JMenu MnVentas;
     private javax.swing.JLabel jLabel1;
