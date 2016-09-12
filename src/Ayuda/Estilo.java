@@ -434,6 +434,14 @@ public class Estilo {
                 thumbnail = new ImageIcon(tmpIcon.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
                 item.setIcon(thumbnail);
                 break;        
+                
+        case 12: //Productos
+                path = "/Vista/Imagenes/Producto.png";
+                url = this.getClass().getResource(path);
+                tmpIcon = new ImageIcon(url);
+                thumbnail = new ImageIcon(tmpIcon.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+                item.setIcon(thumbnail);
+                break;        
         }
     }
     

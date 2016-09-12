@@ -65,6 +65,7 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         Estilo.mnitemIcon(MnItemVentas, 10);
         Estilo.mnitemIcon(MnItemInProveedor, 8);
         Estilo.mnitemIcon(MnItemInvSucursal, 11);
+        Estilo.mnitemIcon(MnItemProductos, 12);
         
 
         Estilo.frmInicial(this, "Farmacia y consultorio 'Amiga del campesino'");
@@ -124,6 +125,7 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         MnAdmin = new javax.swing.JMenu();
         MnUsuarios = new javax.swing.JMenu();
         MnItemAddUser = new javax.swing.JMenuItem();
+        MnItemProductos = new javax.swing.JMenuItem();
         MnItemTransProd = new javax.swing.JMenuItem();
         MnItemPedidos = new javax.swing.JMenuItem();
         MnItemProveedores = new javax.swing.JMenuItem();
@@ -237,11 +239,6 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
                 MnItemCerrSesionMousePressed(evt);
             }
         });
-        MnItemCerrSesion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MnItemCerrSesionActionPerformed(evt);
-            }
-        });
         MnArchivo.add(MnItemCerrSesion);
 
         jMenuBar1.add(MnArchivo);
@@ -319,6 +316,14 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         MnUsuarios.add(MnItemAddUser);
 
         MnAdmin.add(MnUsuarios);
+
+        MnItemProductos.setText("Productos");
+        MnItemProductos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                MnItemProductosMousePressed(evt);
+            }
+        });
+        MnAdmin.add(MnItemProductos);
 
         MnItemTransProd.setText("Transferir a sucursal");
         MnItemTransProd.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -490,9 +495,10 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         Report.InventarioSucursal();
     }//GEN-LAST:event_MnItemInvSucursalMousePressed
 
-    private void MnItemCerrSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnItemCerrSesionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_MnItemCerrSesionActionPerformed
+    private void MnItemProductosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MnItemProductosMousePressed
+        Vista.Producto_Root Ventana = new Vista.Producto_Root();
+        Ventana.setVisible(true);
+    }//GEN-LAST:event_MnItemProductosMousePressed
 
     /**
      * @param args the command line arguments
@@ -543,6 +549,7 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
     private javax.swing.JMenuItem MnItemInProveedor;
     private javax.swing.JMenuItem MnItemInvSucursal;
     private javax.swing.JMenuItem MnItemPedidos;
+    private javax.swing.JMenuItem MnItemProductos;
     private javax.swing.JMenuItem MnItemProveedores;
     private javax.swing.JMenuItem MnItemSearchProd;
     private javax.swing.JMenuItem MnItemTransProd;
