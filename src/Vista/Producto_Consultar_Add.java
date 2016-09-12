@@ -46,6 +46,17 @@ public class Producto_Consultar_Add extends javax.swing.JFrame {
             cmbProveedor.addItem((String) Proveedores[i]);
         }
     }
+    
+    private void Limpiar(){
+        Ayuda.Utilidades Util = new Ayuda.Utilidades();
+        Util.txtLimpiar(txtStock);
+        Util.txtLimpiar(txtActivo);
+        Util.txtLimpiar(txtCodigo);
+        Util.txtLimpiar(txtNombre);
+        Util.txtLimpiar(txtPPublico);
+        txtDescripcion.setText("");
+        Estilo.lblMensajes(lblmensaje, "", 4);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -225,16 +236,18 @@ public class Producto_Consultar_Add extends javax.swing.JFrame {
         String proveedor = ctr.obtenerIdProveedor(cmbProveedor.getSelectedItem().toString());
         String area = ctr.obtenerIsArea(cmbAreas.getSelectedItem().toString());
         
-
         if (txtCodigo.getText().isEmpty() == false && txtNombre.getText().isEmpty() == false && txtActivo.getText().isEmpty() == false && txtStock.getText().isEmpty() == false && txtPPublico.getText().isEmpty() == false && cmbProveedor.getSelectedIndex() > 0 && cmbAreas.getSelectedIndex() > 0) {
             if (ctr.Comprobar(codigo).length == 0) {
                 ctr.ingresarProductoNuevo(codigo, nombre, activo, descripcion, precio, precio, proveedor, "1");
                 ctr.ingresarDetalleNuevo(codigo,stock,area);
                 ctr.ingresarDetalleNuevo1(codigo);
+                Limpiar();
+                Estilo.lblMensajes(lblmensaje, "EL PRODUCTO HA SIDO AGREGADO", 3);
             } else {
                 ctr.ingresarDetalleNuevo(codigo,stock,area);
                 ctr.ingresarDetalleNuevo1(codigo);
-                Estilo.lblMensajes(lblmensaje, "EL PRODUCTO NO EXISTE SE ACTUALIZA EL STOCK", 3);
+                Limpiar();
+                Estilo.lblMensajes(lblmensaje,"EL PRODUCTO HA SIDO AGREGADO", 3);
             }
         } else {
             Estilo.lblMensajes(lblmensaje, "HAY CAMPOS SIN LLENAR", 1);
