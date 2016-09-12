@@ -119,11 +119,11 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         MnVentas = new javax.swing.JMenu();
         MnClientes = new javax.swing.JMenu();
         MnItemAddClient = new javax.swing.JMenuItem();
-        MnUsuarios = new javax.swing.JMenu();
-        MnItemAddUser = new javax.swing.JMenuItem();
         MnMovimientos = new javax.swing.JMenu();
         MnItemAddMovimient = new javax.swing.JMenuItem();
         MnAdmin = new javax.swing.JMenu();
+        MnUsuarios = new javax.swing.JMenu();
+        MnItemAddUser = new javax.swing.JMenuItem();
         MnItemTransProd = new javax.swing.JMenuItem();
         MnItemPedidos = new javax.swing.JMenuItem();
         MnItemProveedores = new javax.swing.JMenuItem();
@@ -294,18 +294,6 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
 
         jMenuBar1.add(MnClientes);
 
-        MnUsuarios.setText("Usuarios");
-
-        MnItemAddUser.setText("Agregar/Editar usuarios");
-        MnItemAddUser.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                MnItemAddUserMousePressed(evt);
-            }
-        });
-        MnUsuarios.add(MnItemAddUser);
-
-        jMenuBar1.add(MnUsuarios);
-
         MnMovimientos.setText("Movimientos");
 
         MnItemAddMovimient.setText("Ingresar/retirar dinero");
@@ -319,6 +307,18 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         jMenuBar1.add(MnMovimientos);
 
         MnAdmin.setText("Administrativos");
+
+        MnUsuarios.setText("Usuarios");
+
+        MnItemAddUser.setText("Agregar/Editar usuarios");
+        MnItemAddUser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                MnItemAddUserMousePressed(evt);
+            }
+        });
+        MnUsuarios.add(MnItemAddUser);
+
+        MnAdmin.add(MnUsuarios);
 
         MnItemTransProd.setText("Transferir a sucursal");
         MnItemTransProd.addMouseListener(new java.awt.event.MouseAdapter() {

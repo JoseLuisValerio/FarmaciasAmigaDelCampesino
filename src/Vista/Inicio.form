@@ -74,21 +74,6 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="MnUsuarios">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Usuarios"/>
-          </Properties>
-          <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="MnItemAddUser">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Agregar/Editar usuarios"/>
-              </Properties>
-              <Events>
-                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="MnItemAddUserMousePressed"/>
-              </Events>
-            </MenuItem>
-          </SubComponents>
-        </Menu>
         <Menu class="javax.swing.JMenu" name="MnMovimientos">
           <Properties>
             <Property name="text" type="java.lang.String" value="Movimientos"/>
@@ -109,6 +94,21 @@
             <Property name="text" type="java.lang.String" value="Administrativos"/>
           </Properties>
           <SubComponents>
+            <Menu class="javax.swing.JMenu" name="MnUsuarios">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Usuarios"/>
+              </Properties>
+              <SubComponents>
+                <MenuItem class="javax.swing.JMenuItem" name="MnItemAddUser">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Agregar/Editar usuarios"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="MnItemAddUserMousePressed"/>
+                  </Events>
+                </MenuItem>
+              </SubComponents>
+            </Menu>
             <MenuItem class="javax.swing.JMenuItem" name="MnItemTransProd">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Transferir a sucursal"/>
