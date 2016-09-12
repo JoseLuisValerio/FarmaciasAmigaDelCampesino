@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Ticket1" pageWidth="147" pageHeight="324" columnWidth="147" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isSummaryWithPageHeaderAndFooter="true" isIgnorePagination="true" uuid="185e57d6-76cc-4db6-9546-6477fe3189ea">
 	<property name="ireport.zoom" value="4.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="397"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="idSucursal" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -14,35 +14,17 @@
 	</parameter>
 	<queryString>
 		<![CDATA[SELECT
-     Concat(usuario.`NOMBRE`,' ',usuario.`APATERNO`) AS usuario,
+     (SELECT Concat(usuario.`NOMBRE`,' ',usuario.`APATERNO`) FROM Usuario WHERE Usuario.idUsuario= $P{idUsuario}) AS usuario,
      sucursal.`nombre` AS sucursal,
-     caja.`saldototal` AS saldototal,
-     movimiento.`idmovimiento` AS idmovimiento,
-     movimiento.`MONTO` AS MONTO,
-     movimiento.`DESCRIPCION` AS DESCRIPCION,
-     movimiento.`FECHA` AS FECHA
+     caja.`saldototal` AS saldototal
 FROM
      `sucursal` sucursal INNER JOIN `caja` caja ON sucursal.`idsucursal` = caja.`idsucursal`
-     inner JOIN `movimiento` movimiento ON caja.`idcaja` = movimiento.`idcaja`
-     INNER JOIN `usuario` usuario ON movimiento.`idusuario` = usuario.`idusuario`
 WHERE
-Sucursal.idsucursal = $P{idSucursal} ]]>
+Sucursal.idsucursal = $P{idSucursal}]]>
 	</queryString>
 	<field name="usuario" class="java.lang.String"/>
 	<field name="sucursal" class="java.lang.String"/>
 	<field name="saldototal" class="java.lang.Float">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="idmovimiento" class="java.lang.Long">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="MONTO" class="java.lang.Float">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="DESCRIPCION" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="FECHA" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<title>

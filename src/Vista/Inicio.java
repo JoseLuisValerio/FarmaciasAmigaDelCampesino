@@ -237,6 +237,11 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
                 MnItemCerrSesionMousePressed(evt);
             }
         });
+        MnItemCerrSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnItemCerrSesionActionPerformed(evt);
+            }
+        });
         MnArchivo.add(MnItemCerrSesion);
 
         jMenuBar1.add(MnArchivo);
@@ -484,6 +489,10 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         Controlador.Reportes Report= new Controlador.Reportes();
         Report.InventarioSucursal();
     }//GEN-LAST:event_MnItemInvSucursalMousePressed
+
+    private void MnItemCerrSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnItemCerrSesionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MnItemCerrSesionActionPerformed
 
     /**
      * @param args the command line arguments
