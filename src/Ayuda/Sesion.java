@@ -62,11 +62,11 @@ public class Sesion {
     public static void cerrarSesion(){
         //Identifica el archivo creado para eliminar los daots creados en la sesion
     File fichero = new File("datosSesion.frm");
-    if (fichero.delete())
+    if (fichero.delete()){
    System.err.println("El fichero ha sido borrado satisfactoriamente");
-    else
+    }else{
    System.err.println("El fichero no puede ser borrado");
-            
+    }    
     }
     public static ArrayList<String> obtenerSesion() throws IOException{
        //Retorna los LeerSesion de la sesion en en un ArrayList de tipo String con los LeerSesion leidos del archivo de la sesión
