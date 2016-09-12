@@ -412,7 +412,7 @@ public class Producto_Root_Pedido extends javax.swing.JFrame {
 
                     }
                     Ticket.pedido(idpedido);
-                    enviar.mail("hola", "prueba", "ReportePedido" + idpedido + ".pdf", "src/Jaspers/ReportePedido" + idpedido + ".pdf", txtCorreo.getText());
+                    enviar.mail("Espero esté pasando un excelente día por este medio me permito hacerle el pedido del producto descrito en el archivo adjunto, de antemano reciba un coordial saludo de su amigo Bulmaro Torreblanca Guerrero", "Pedido de Producto Farmacia Amiga del Campesino", "ReportePedido" + idpedido + ".pdf", "src/Jaspers/ReportePedido" + idpedido + ".pdf", txtCorreo.getText());
                 } else {
                     estilo.lblMensajes(lblmensaje, "No se ha podido hacer el pedido", 1);
                 }
