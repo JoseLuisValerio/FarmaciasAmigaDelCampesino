@@ -33,7 +33,7 @@ public class Modelo_Cliente {
          res.close();
          con.desconectar();
       }catch(SQLException e){
-         System.err.println("Error al contar los registros en la tabla Cliente: "+e.getMessage());
+         System.err.println("Error al contar los registros en la tabla "+SQLContar+": "+e.getMessage());
       }
 
     Object[][] data = new String[registros][colName.length];
@@ -53,7 +53,7 @@ public class Modelo_Cliente {
          res.close();
          con.desconectar();
           }catch(SQLException e){
-         System.err.println("Error al leer los registros en cliente: "+e.getMessage());
+         System.err.println("Error al leer los registros en "+SQLContar+": "+e.getMessage());
     }
     return data;
  }

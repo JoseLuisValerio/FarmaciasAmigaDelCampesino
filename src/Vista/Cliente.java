@@ -77,7 +77,7 @@ public class Cliente extends javax.swing.JFrame {
      * Llena los combos de los tipos
      */
     private void LlenarcmbTipos() {
-        Object[] Tipos = Controlador.CargaTipos();
+        Object[] Tipos = Controlador.ComboTipos();
         jComboBox1.removeAllItems();
         jComboBox1.addItem("");
         for (int i = 0; i < Tipos.length; i++) {

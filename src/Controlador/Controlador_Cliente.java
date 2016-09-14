@@ -64,12 +64,24 @@ public class Controlador_Cliente {
      *
      * @return un arreglo con los tipos de usuario
      */
-    public Object[] CargaTipos() {
+    public Object[] ComboTipos() {
         String seleccion = "SELECT Nombre from ";
         String tablas = "Tipo_Cliente";
         String sentencia = seleccion + tablas;
         String columnas = "Nombre";
         return ModeloCliente.llenarCombo(columnas, sentencia);
+    }
+    
+    public Object[][] TablaTiposCliente() {
+        String seleccion = "SELECT IDTipoCliente,Nombre, Descuento FROM ";
+        String tablas = "Tipo_Cliente; ";
+        String sentencia = seleccion + tablas;
+        Object[][] datos = null;
+        String[] columnas = {"IdTipoCliente","Nombre", "Descuento"};
+        //dividir la consulta en dos una parta de los datos a busca y otra que tendra las tablas 
+        datos = ModeloCliente.GetTabla(columnas, sentencia, tablas);
+
+        return datos;
     }
 
     /**
@@ -94,9 +106,13 @@ public class Controlador_Cliente {
     }
 
     public boolean ActualizarCliente(String Alias, String Nombre, String APaterno, String AMaterno, String Tel, String Direccion, String TipoCliente) {
-        System.out.println(Alias);
         String datos[] = {Nombre, APaterno, AMaterno, Tel, Direccion, obtenerIdTipo(TipoCliente)};
         return ModeloCliente.insertar(datos, "UPDATE Cliente SET Nombre=? ,APaterno=? ,AMaterno=?,Tel=?,Direccion=?,TipoCliente=? WHERE Alias='" + Alias + "';");
+    }
+    
+    public boolean ActualizarTipoCliente(String ID,String Nombre, String Descuento) {
+        String datos[] = {Nombre, Descuento};
+        return ModeloCliente.insertar(datos, "UPDATE Tipo_Cliente SET Nombre=? ,Descuento=? WHERE idTipoCliente='" + ID + "';");
     }
 
     /**

@@ -136,7 +136,7 @@ public class Venta extends javax.swing.JFrame {
         lblTotal.setText("0.0");
         Estilo.lblMensajes(lblAlerta, "", 4);
         idCliente ="";
-        Util.ChkbxLimpiar(jCheckBox1);
+        Util.ChkbxLimpiar(CheckDinero);
     }
 
     /**
@@ -156,7 +156,7 @@ public class Venta extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         txtProducto = new org.edisoncor.gui.textField.TextFieldRectBackground();
         lblDinElectro = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        CheckDinero = new javax.swing.JCheckBox();
         pnlProductos = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblVenta = new javax.swing.JTable();
@@ -170,7 +170,7 @@ public class Venta extends javax.swing.JFrame {
         txtBusqueda = new org.edisoncor.gui.textField.TextFieldRectBackground();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblCliente = new javax.swing.JTable();
-        jCheckBox2 = new javax.swing.JCheckBox();
+        CheckMaterial = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -197,7 +197,7 @@ public class Venta extends javax.swing.JFrame {
             }
         });
 
-        jCheckBox1.setText("Usar!");
+        CheckDinero.setText("Usar!");
 
         javax.swing.GroupLayout pnlClienteLayout = new javax.swing.GroupLayout(pnlCliente);
         pnlCliente.setLayout(pnlClienteLayout);
@@ -220,7 +220,7 @@ public class Venta extends javax.swing.JFrame {
                             .addGroup(pnlClienteLayout.createSequentialGroup()
                                 .addComponent(lblDinElectro, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jCheckBox1)))))
+                                .addComponent(CheckDinero)))))
                 .addContainerGap())
         );
         pnlClienteLayout.setVerticalGroup(
@@ -232,7 +232,7 @@ public class Venta extends javax.swing.JFrame {
                     .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCheckBox1)
+                    .addComponent(CheckDinero)
                     .addGroup(pnlClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(lblDinElectro, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -334,8 +334,8 @@ public class Venta extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jCheckBox2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jCheckBox2.setText("Material de uso!");
+        CheckMaterial.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        CheckMaterial.setText("Material de uso!");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -355,7 +355,7 @@ public class Venta extends javax.swing.JFrame {
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jCheckBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(CheckMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(33, 33, 33)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -395,7 +395,7 @@ public class Venta extends javax.swing.JFrame {
                     .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jCheckBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(CheckMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(lblTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblAlerta, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -406,8 +406,8 @@ public class Venta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCobrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCobrarActionPerformed
-        if(tblVenta.getRowCount()>0 && !idCliente.equals("")){
-            Calendar c = new GregorianCalendar();
+        if(tblVenta.getRowCount()>0){
+        Calendar c = new GregorianCalendar();
         String Fecha = Integer.toString(c.get(Calendar.DATE)) + "/" + Integer.toString(c.get(Calendar.MONTH) + 1) + "/" + Integer.toString(c.get(Calendar.YEAR));
         String Hora = Integer.toString(c.get(Calendar.HOUR_OF_DAY)) + ":" + Integer.toString(c.get(Calendar.MINUTE)) + ":" + Integer.toString(c.get(Calendar.SECOND));
         String Sucursal = Controlador.ObtenerSucursal();
@@ -415,7 +415,10 @@ public class Venta extends javax.swing.JFrame {
         float DineroElectro = Float.parseFloat(lblDinElectro.getText());
         float PrecioTotal = Float.parseFloat(PrecioTotal());
         float auxPrecioTotal=0f;
-        if(jCheckBox1.isSelected() && DineroElectro>0f){//Ocupa dinero electronico
+        
+        /** Comprobación de cliente de mostrador*/
+        if(!txtCliente.getText().equals("")){
+        if(CheckDinero.isSelected() && DineroElectro>0f){//Ocupa dinero electronico
             if (DineroElectro> PrecioTotal){
                 DineroElectro = PrecioTotal;
                 auxPrecioTotal = PrecioTotal-DineroElectro;
@@ -429,8 +432,7 @@ public class Venta extends javax.swing.JFrame {
             auxPrecioTotal =PrecioTotal;
         }
             Controlador.ActualizaCaja(Sucursal, auxPrecioTotal);
-            
-            if(jCheckBox2.isSelected()){
+            if(CheckMaterial.isSelected()){
                 if(Controlador.RegistrarVenta(Fecha, Hora,"0", "0", Usuario, idCliente, Sucursal)){
             String idVenta = Controlador.ObteneridVenta(Fecha, Hora, Sucursal, Usuario);
             for(int i=0;i<tblVenta.getRowCount();i++){
@@ -463,10 +465,26 @@ public class Venta extends javax.swing.JFrame {
             Estilo.lblMensajes(lblAlerta, "Ha ocurrido un error, por favor verifique", 2);
         }
             }
-        
-        
+        }else{//Termina if Sin cliente
+            Controlador.ActualizaCaja(Sucursal, auxPrecioTotal);
+                if(Controlador.RegistrarVenta(Fecha, Hora,"0", "0", Usuario, "1", Sucursal)){
+            String idVenta = Controlador.ObteneridVenta(Fecha, Hora, Sucursal, Usuario);
+            for(int i=0;i<tblVenta.getRowCount();i++){
+                String Cantidad= String.valueOf(tblVenta.getValueAt(i, 4));
+                String idProducto= String.valueOf(tblVenta.getValueAt(i, 0));
+                String Total = String.valueOf(tblVenta.getValueAt(i, 5));
+            Controlador.RegistrarDetalleVenta(Cantidad, idProducto, idVenta, Total);
+            Controlador.ActualizarStockYVendidos(Sucursal, Cantidad, idProducto);
+            }
+            Ticket.TicketVenta(idVenta);
+            Estilo.lblMensajes(lblAlerta, "Venta Cobrada exitosamente", 3);
+            Limpiar();
         }else{
-            Estilo.lblMensajes(lblAlerta, "Debe ingresar a menos un producto y seleccionar un cliente", 1);
+                    Estilo.lblMensajes(lblAlerta, "Ha ocurrido un error, por favor verifique", 2);
+                }   
+                }//Termina else de cliente vacio    
+        }else{
+            Estilo.lblMensajes(lblAlerta, "Debe ingresar a menos un producto", 1);
         }
     }//GEN-LAST:event_btnCobrarActionPerformed
 
@@ -573,10 +591,10 @@ public class Venta extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox CheckDinero;
+    private javax.swing.JCheckBox CheckMaterial;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnCobrar;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
