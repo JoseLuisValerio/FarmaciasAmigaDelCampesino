@@ -242,15 +242,15 @@ public class Producto_Consultar_Add extends javax.swing.JFrame {
                 ctr.ingresarDetalleNuevo(codigo,stock,area);
                 ctr.ingresarDetalleNuevo1(codigo);
                 Limpiar();
-                Estilo.lblMensajes(lblmensaje, "EL PRODUCTO HA SIDO AGREGADO", 3);
+                Estilo.lblMensajes(lblmensaje, "El producto a sido agregado", 3);
             } else {
                 ctr.ingresarDetalleNuevo(codigo,stock,area);
                 ctr.ingresarDetalleNuevo1(codigo);
                 Limpiar();
-                Estilo.lblMensajes(lblmensaje,"EL PRODUCTO HA SIDO AGREGADO", 3);
+                Estilo.lblMensajes(lblmensaje,"El producto a sido agregado", 3);
             }
         } else {
-            Estilo.lblMensajes(lblmensaje, "HAY CAMPOS SIN LLENAR", 1);
+            Estilo.lblMensajes(lblmensaje, "Hay campos sin llenar", 1);
         }
     }//GEN-LAST:event_btnAddActionPerformed
 

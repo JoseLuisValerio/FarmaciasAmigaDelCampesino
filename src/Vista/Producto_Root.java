@@ -689,7 +689,7 @@ public class Producto_Root extends javax.swing.JFrame {
                 this.desactivarStock();
                 Estilo.lblMensajes(lblmensaje, "Producto Agregado", 3);
             } else {
-                Estilo.lblMensajes(lblmensaje, "HAY CAMPOS SIN LLENAR", 1);
+                Estilo.lblMensajes(lblmensaje, "Hay campos sin llenar", 1);
             }
         }
     }//GEN-LAST:event_btnAgregarMouseClicked
@@ -741,10 +741,10 @@ public class Producto_Root extends javax.swing.JFrame {
                 mostrartodo();
                 limpia();
             } else {
-                Estilo.lblMensajes(lblmensaje, "NO SE PUDO ACTUALIZAR", 3);
+                Estilo.lblMensajes(lblmensaje, "No se pudo Actualizar", 3);
             }
         } else {
-            JOptionPane.showMessageDialog(null, "los campos estan vacios");
+            JOptionPane.showMessageDialog(null, "Los campos estan vacios");
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 

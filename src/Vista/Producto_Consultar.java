@@ -422,13 +422,13 @@ public class Producto_Consultar extends javax.swing.JFrame {
         if (txtNombre.getText().isEmpty() == false && txtActivo.getText().isEmpty() == false && txtDescripcion.getText().isEmpty() == false && txtPPublico.getText().isEmpty() == false && cmbAreas.getSelectedIndex() > 0) {
             if (ctr.actualizaProducto(id, nombre, activo, descripcion, ppublico) == true && ctr.actualizarStock(id, area) == true) {
                 limpia();
-                Estilo.lblMensajes(lblmensaje, "ACTUALIZA CON EXITO", 3);
+                Estilo.lblMensajes(lblmensaje, "Actualizado con exito", 3);
                 mostrarProductos();
             } else {
-                Estilo.lblMensajes(lblmensaje, "NO SE PUDO ACTUALIZAR", 2);
+                Estilo.lblMensajes(lblmensaje, "No se pudo actualizar", 2);
             }
         } else {
-            Estilo.lblMensajes(lblmensaje, "HAY CAMPOS VACIOS", 1);
+            Estilo.lblMensajes(lblmensaje, "Hay campo vacios", 1);
         }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
@@ -437,20 +437,20 @@ public class Producto_Consultar extends javax.swing.JFrame {
         String stock = txtStock.getText();
         datostabla = ctr.buscarCodigo(codigo);
         if (datostabla.length == 0) {
-            Estilo.lblMensajes(lblmensaje, "EL PRODUCTO NO EXISTE  FAVOR DE AGREGAR", 2);
+            Estilo.lblMensajes(lblmensaje, "El Producto no existe favor de agregar", 2);
             Producto_Consultar_Add nuevo = new Producto_Consultar_Add();
             nuevo.setVisible(true);
         }else{
         if (txtNombre.getText().isEmpty() == false && txtActivo.getText().isEmpty() == false && txtDescripcion.getText().isEmpty() == false && txtPPublico.getText().isEmpty() == false) {
             if (ctr.agregarStock(codigo,stock )== true) {
                 limpia();
-                Estilo.lblMensajes(lblmensaje, "AGREGADO CON EXITO", 3);
+                Estilo.lblMensajes(lblmensaje, "Agregado con exito", 3);
                 mostrarProductos();
             } else {
-                Estilo.lblMensajes(lblmensaje, "NO SE PUDO AGREGAR", 2);
+                Estilo.lblMensajes(lblmensaje, "No se pudo agregar", 2);
             }
         } else {
-            Estilo.lblMensajes(lblmensaje, "HAY CAMPOS VACIOS", 1);
+            Estilo.lblMensajes(lblmensaje, "Hay campos vacios", 1);
         }
         }
     }//GEN-LAST:event_btnAddActionPerformed
