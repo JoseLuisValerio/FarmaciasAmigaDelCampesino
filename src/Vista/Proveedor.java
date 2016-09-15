@@ -284,9 +284,12 @@ public class Proveedor extends javax.swing.JFrame {
         String email = txtEmail.getText();
         String dire = txtDireccion.getText();
         if (txtRsocial.getText().isEmpty() == false && txtContacto.getText().isEmpty() == false && txtTel.getText().isEmpty() == false && txtEmail.getText().isEmpty() == false && txtDireccion.getText().isEmpty() == false) {
-        ctr.insertarProveedor(rsocial, contacto, tel, email, dire);
+        if (ctr.insertarProveedor(rsocial, contacto, tel, email, dire)== true){
         mostraProveedores();
         limpiar();
+        }else{
+        Estilo.lblMensajes(lblmensaje, "No se puedo agregar Proveedor", 2);
+        }
         Estilo.lblMensajes(lblmensaje, "Proveedor Agregado", 3);
         }else {
             Estilo.lblMensajes(lblmensaje, "Hay Campos Vacios", 1);
@@ -301,9 +304,12 @@ public class Proveedor extends javax.swing.JFrame {
         String dire = txtDireccion.getText();
         String id = lblid.getText();
         if (txtRsocial.getText().isEmpty() == false && txtContacto.getText().isEmpty() == false && txtTel.getText().isEmpty() == false && txtEmail.getText().isEmpty() == false && txtDireccion.getText().isEmpty() == false) {
-            ctr.actualizaProveedor(id, rsocial, contacto, tel, email, dire);
-            mostraProveedores();
+            if (ctr.actualizaProveedor(id, rsocial, contacto, tel, email, dire)== true){
+                mostraProveedores();
             limpiar();
+            }else{
+            Estilo.lblMensajes(lblmensaje, "No se pudo Actualizar", 2);
+            }
             Estilo.lblMensajes(lblmensaje, "Proveedor Actualizado", 3);
         } else {
             Estilo.lblMensajes(lblmensaje, "Hay Campos Vacios", 1);

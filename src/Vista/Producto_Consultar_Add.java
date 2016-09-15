@@ -238,16 +238,22 @@ public class Producto_Consultar_Add extends javax.swing.JFrame {
         
         if (txtCodigo.getText().isEmpty() == false && txtNombre.getText().isEmpty() == false && txtActivo.getText().isEmpty() == false && txtStock.getText().isEmpty() == false && txtPPublico.getText().isEmpty() == false && cmbProveedor.getSelectedIndex() > 0 && cmbAreas.getSelectedIndex() > 0) {
             if (ctr.Comprobar(codigo).length == 0) {
-                ctr.ingresarProductoNuevo(codigo, nombre, activo, descripcion, precio, precio, proveedor, "1");
+                if (ctr.ingresarProductoNuevo(codigo, nombre, activo, descripcion, precio, precio, proveedor, "1")== true){
                 ctr.ingresarDetalleNuevo(codigo,stock,area);
                 ctr.ingresarDetalleNuevo1(codigo);
                 Limpiar();
                 Estilo.lblMensajes(lblmensaje, "El producto a sido agregado", 3);
+                }else{
+                Estilo.lblMensajes(lblmensaje, "Error al agregar", 2);
+                }
             } else {
-                ctr.ingresarDetalleNuevo(codigo,stock,area);
+                if (ctr.ingresarDetalleNuevo(codigo,stock,area)==true){
                 ctr.ingresarDetalleNuevo1(codigo);
                 Limpiar();
                 Estilo.lblMensajes(lblmensaje,"El producto a sido agregado", 3);
+                }else{
+                Estilo.lblMensajes(lblmensaje,"Error al agregar", 2);
+                }
             }
         } else {
             Estilo.lblMensajes(lblmensaje, "Hay campos sin llenar", 1);
