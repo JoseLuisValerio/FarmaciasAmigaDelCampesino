@@ -114,7 +114,6 @@ public class Controlador_Venta {
     public boolean ActualizaCaja(String idSucursal, Float Monto){
         boolean exitoso = false;
         exitoso = Modelo.ActualizaCaja(idSucursal, Monto);
-        System.out.println("-----------------------Caja: "+Monto);
         return exitoso;
     }
 }

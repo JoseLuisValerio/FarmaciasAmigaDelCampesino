@@ -32,6 +32,7 @@ public Modelo_Inicio(){
             i++;
          }
          res.close();
+         con.desconectar();
           }catch(SQLException e){
          System.out.println(e);
     }
