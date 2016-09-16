@@ -596,6 +596,10 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         while (ct == h1) {
             calcula();
             lblHora.setText(hora + ":" + minutos + ":" + segundos + " " + ampm);
+            if((hora.equals("11") && minutos.equals("00")&&segundos.equals("00"))||(hora.equals("04")&& minutos.equals("09")&&segundos.equals("00"))||(hora.equals("08"))&& minutos.equals("00")&&segundos.equals("00")){
+            AlertasFaltaProductos alerta = new AlertasFaltaProductos ();
+            alerta.setVisible(true);
+            }
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
