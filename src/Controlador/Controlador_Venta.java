@@ -100,14 +100,26 @@ public class Controlador_Venta {
     /**
      * Hace la llamada para actualizar el dinero electronico del cliente si es que paga con dinero electronico
      * @param idCliente recibe el id del cliente
-     * @param DinElectro1 recibe el dinero electronico original
-     * @param DinElectro2 recibe el dinero electronico usado
+     * @param DinElectro recibe el dinero electronico original
      * @return el resultado de la operación.
      */
-    public boolean ActualizaDineroElectronico(String idCliente, float DinElectro1, float DinElectro2) {
+    public boolean RestaDinElectro(String idCliente, float DinElectro) {
         boolean exitoso = false;
-        float NuevoSaldo = DinElectro1-DinElectro2;
-        exitoso = Modelo.ActualizaDinElectro(idCliente, NuevoSaldo);
+        String SQL ="UPDATE Cliente SET DineroElectronico=DineroElectronico-? WHERE idCliente='"+idCliente+"';";
+        exitoso = Modelo.ActualizaDinElectro(DinElectro, SQL);
+        return exitoso;
+    }
+    
+     /**
+     * Hace la llamada para actualizar el dinero electronico del cliente si es que paga con dinero electronico
+     * @param idCliente recibe el id del cliente
+     * @param DinElectro recibe el dinero electronico original
+     * @return el resultado de la operación.
+     */
+    public boolean SumaDinElectro(String idCliente, float DinElectro) {
+        boolean exitoso = false;
+        String SQL ="UPDATE Cliente SET DineroElectronico=DineroElectronico+? WHERE idCliente='"+idCliente+"';";
+        exitoso = Modelo.ActualizaDinElectro(DinElectro, SQL);
         return exitoso;
     }
     

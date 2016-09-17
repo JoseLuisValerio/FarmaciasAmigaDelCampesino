@@ -134,37 +134,59 @@ public class Venta extends javax.swing.JFrame {
             Controlador.ActualizarStockYVendidos(Sucursal, Cantidad, idProducto);
         }
         Ticket.TicketVenta(idVenta);
-        Estilo.lblMensajes(lblAlerta, "Venta Cobrada exitosamente", 3);
+        //Estilo.lblMensajes(lblAlerta, "Venta Cobrada exitosamente", 3);
         Limpiar();
     }
 
-    private void materialUso(String Fecha, String Hora, String idUsuario, String idCliente, String idSucursal) {
-        Controlador.RegistrarVenta(Fecha, Hora, "0", "0", idUsuario, "1", idSucursal);
+    private boolean VentaMaterialUso(String Fecha, String Hora, String idUsuario, String idSucursal) {
+        boolean exitoso = false;
+        exitoso = Controlador.RegistrarVenta(Fecha, Hora, "0", "0", idUsuario, "1", idSucursal);
         detalledeventa(Fecha, Hora, idSucursal, idUsuario);
+        return exitoso;
     }
 
-    private void ventaconCliente(String Fecha, String Hora, String idUsuario, String idCliente, String idSucursal) {
+    private boolean ventaconCliente(String Fecha, String Hora, String idUsuario, String idCliente, String idSucursal) {
         //dinero electronico para cliente opcional 
-        String PrecioProducto = PrecioTotal();
-        float Total;
-        String DineroEletronico="0";
-        if (CheckDinero.isSelected()) {
-            // recibir'ia el dinero eletronico
-            DineroEletronico = lblDinElectro.getText();
-            Total = Float.parseFloat(PrecioProducto) - Float.parseFloat(DineroEletronico);
-            Controlador.RegistrarVenta(Fecha, Hora, DineroEletronico, String.valueOf(Total), idUsuario, idCliente, idSucursal);
+        boolean exitoso = false;
+        float PrecioTotalProducto = Float.parseFloat(PrecioTotal());
+        float DinElectCliente = Float.parseFloat(lblDinElectro.getText());
+        //Si ocupar dinero electronico esta habilitado y el dinero es mayor a 0
+        if (CheckDinero.isSelected() && DinElectCliente > 0f) {
+            if (DinElectCliente > PrecioTotalProducto) { //Si tiene más dinero electronico que lo que va a cobrar
+                DinElectCliente = PrecioTotalProducto;
+                float NuevoPrecioTotalProducto = PrecioTotalProducto - DinElectCliente;
+                exitoso = Controlador.RegistrarVenta(Fecha, Hora, String.valueOf(DinElectCliente), String.valueOf(NuevoPrecioTotalProducto), idUsuario, idCliente, idSucursal);
+                Controlador.RestaDinElectro(idCliente, PrecioTotalProducto);
+            } else {
+                float NuevoPrecioTotalProducto = PrecioTotalProducto - DinElectCliente;
+                exitoso = Controlador.RegistrarVenta(Fecha, Hora, String.valueOf(DinElectCliente), String.valueOf(NuevoPrecioTotalProducto), idUsuario, idCliente, idSucursal);
+                Controlador.RestaDinElectro(idCliente, DinElectCliente);
+            }
+
+            SumarDinElectro(String.valueOf(PrecioTotalProducto), idCliente);
             detalledeventa(Fecha, Hora, idSucursal, idUsuario);
-            
-        } else {
-            Controlador.RegistrarVenta(Fecha, Hora, DineroEletronico, PrecioProducto, idUsuario, idCliente, idSucursal);
+
+        } else {//Si no esta seleccionado, el dinero electronico es $0
+            exitoso = Controlador.RegistrarVenta(Fecha, Hora, "0", String.valueOf(PrecioTotalProducto), idUsuario, idCliente, idSucursal);
             detalledeventa(Fecha, Hora, idSucursal, idUsuario);
         }
+        return exitoso;
     }
-    
-    private void ventaSinCliente(String Fecha, String Hora, String idUsuario,String idSucursal){
-            String PrecioProducto = PrecioTotal();
-            Controlador.RegistrarVenta(Fecha, Hora, "0", PrecioProducto, idUsuario, "1", idSucursal);
-            detalledeventa(Fecha, Hora, idSucursal, idUsuario);
+
+    private boolean ventaSinCliente(String Fecha, String Hora, String idUsuario, String idSucursal) {
+        boolean exitoso = false;
+        String PrecioProducto = PrecioTotal();
+        exitoso = Controlador.RegistrarVenta(Fecha, Hora, "0", PrecioProducto, idUsuario, "1", idSucursal);
+        detalledeventa(Fecha, Hora, idSucursal, idUsuario);
+        return exitoso;
+    }
+
+    /**
+     * Calcula el 5% del total de la venta
+     */
+    private void SumarDinElectro(String Venta, String idCliente) {
+        float DineroElectronico = (float) ((int) ((Float.parseFloat(Venta) * 5) / 100));
+        Controlador.SumaDinElectro(idCliente, DineroElectronico);
     }
 
     /**
@@ -184,6 +206,7 @@ public class Venta extends javax.swing.JFrame {
         Estilo.lblMensajes(lblAlerta, "", 4);
         idCliente = "";
         Util.ChkbxLimpiar(CheckDinero);
+        Util.ChkbxLimpiar(CheckMaterial);
     }
 
     /**
@@ -459,82 +482,23 @@ public class Venta extends javax.swing.JFrame {
             String Hora = Integer.toString(c.get(Calendar.HOUR_OF_DAY)) + ":" + Integer.toString(c.get(Calendar.MINUTE)) + ":" + Integer.toString(c.get(Calendar.SECOND));
             String Sucursal = Controlador.ObtenerSucursal();
             String Usuario = Sesion.LeerSesion("idUsuario");
-            float PrecioTotal = Float.parseFloat(PrecioTotal());
-            float auxPrecioTotal = 0f;
 
-            /**
-             * Comprobación de cliente de mostrador
-             */
-            if (txtCliente.getText().isEmpty() == false) {
-                float DineroElectro = Float.parseFloat(lblDinElectro.getText());
-                if (CheckDinero.isSelected() && DineroElectro > 0f) {//Ocupa dinero electronico
-                    if (DineroElectro > PrecioTotal) {
-                        DineroElectro = PrecioTotal;
-                        auxPrecioTotal = PrecioTotal - DineroElectro;
-                    } else {
-                        DineroElectro = 0;
-                        auxPrecioTotal = PrecioTotal;
-                    }
-                    Controlador.ActualizaDineroElectronico(idCliente, Float.parseFloat(lblDinElectro.getText()), DineroElectro);
-                } else {
-                    DineroElectro = 0;
-                    auxPrecioTotal = PrecioTotal;
-                }
-                System.out.println(auxPrecioTotal);
-
-                if (CheckMaterial.isSelected()) {
-                    if (Controlador.RegistrarVenta(Fecha, Hora, "0", "0", Usuario, idCliente, Sucursal)) {
-                        if (Controlador.ActualizaCaja(Sucursal, auxPrecioTotal)) {
-                            System.out.println("Caja actualizada:" + Sucursal + " Monto: " + auxPrecioTotal);
-                        } else {
-                            System.err.println("No ha ocurrido");
-                        }
-                        String idVenta = Controlador.ObteneridVenta(Fecha, Hora, Sucursal, Usuario);
-                        for (int i = 0; i < tblVenta.getRowCount(); i++) {
-                            String Cantidad = String.valueOf(tblVenta.getValueAt(i, 4));
-                            String idProducto = String.valueOf(tblVenta.getValueAt(i, 0));
-                            String Total = String.valueOf(tblVenta.getValueAt(i, 5));
-                            Controlador.RegistrarDetalleVenta(Cantidad, idProducto, idVenta, Total);
-                            Controlador.ActualizarStockYVendidos(Sucursal, Cantidad, idProducto);
-                        }
-                        Ticket.TicketVenta(idVenta);
-                        Estilo.lblMensajes(lblAlerta, "Venta Cobrada exitosamente", 3);
-                        Limpiar();
-                    } else {
-                        Estilo.lblMensajes(lblAlerta, "Ha ocurrido un error, por favor verifique", 2);
-                    }
-                } else if (Controlador.RegistrarVenta(Fecha, Hora, String.valueOf(DineroElectro), String.valueOf(PrecioTotal), Usuario, idCliente, Sucursal)) {
-                    String idVenta = Controlador.ObteneridVenta(Fecha, Hora, Sucursal, Usuario);
-                    for (int i = 0; i < tblVenta.getRowCount(); i++) {
-                        String Cantidad = String.valueOf(tblVenta.getValueAt(i, 4));
-                        String idProducto = String.valueOf(tblVenta.getValueAt(i, 0));
-                        String Total = String.valueOf(tblVenta.getValueAt(i, 5));
-                        Controlador.RegistrarDetalleVenta(Cantidad, idProducto, idVenta, Total);
-                        Controlador.ActualizarStockYVendidos(Sucursal, Cantidad, idProducto);
-                    }
-                    Ticket.TicketVenta(idVenta);
+            if (!txtCliente.getText().isEmpty()) {
+                if (ventaconCliente(Fecha, Hora, Usuario, idCliente, Sucursal)) {
                     Estilo.lblMensajes(lblAlerta, "Venta Cobrada exitosamente", 3);
-                    Limpiar();
                 } else {
                     Estilo.lblMensajes(lblAlerta, "Ha ocurrido un error, por favor verifique", 2);
                 }
-            } else//Termina if Sin cliente
-            {
-                if (Controlador.RegistrarVenta(Fecha, Hora, "0", String.valueOf(PrecioTotal), Usuario, "1", Sucursal)) {
-                    String idVenta = Controlador.ObteneridVenta(Fecha, Hora, Sucursal, Usuario);
-                    for (int i = 0; i < tblVenta.getRowCount(); i++) {
-                        String Cantidad = String.valueOf(tblVenta.getValueAt(i, 4));
-                        String idProducto = String.valueOf(tblVenta.getValueAt(i, 0));
-                        String Total = String.valueOf(tblVenta.getValueAt(i, 5));
-                        Controlador.RegistrarDetalleVenta(Cantidad, idProducto, idVenta, Total);
-                        Controlador.ActualizarStockYVendidos(Sucursal, Cantidad, idProducto);
-                    }
-                    Ticket.TicketVenta(idVenta);
+            } else if (CheckMaterial.isSelected()) {
+                if (VentaMaterialUso(Fecha, Hora, Usuario, Sucursal)) {
                     Estilo.lblMensajes(lblAlerta, "Venta Cobrada exitosamente", 3);
-                    Limpiar();
                 } else {
                     Estilo.lblMensajes(lblAlerta, "Ha ocurrido un error, por favor verifique", 2);
-                }//Termina else de cliente vacio    
+                }
+            } else if (ventaSinCliente(Fecha, Hora, Usuario, Sucursal)) {
+                Estilo.lblMensajes(lblAlerta, "Venta Cobrada exitosamente", 3);
+            } else {
+                Estilo.lblMensajes(lblAlerta, "Ha ocurrido un error, por favor verifique", 2);
             }
         } else {
             Estilo.lblMensajes(lblAlerta, "Debe ingresar a menos un producto", 1);

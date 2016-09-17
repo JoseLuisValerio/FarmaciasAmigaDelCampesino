@@ -145,13 +145,11 @@ public class Modelo_Venta {
     
     /**
      * Actualiza el dinero electronico de un cliente dado
-     * @param idCliente recibe el cliente
      * @param DinElectro recibe el nuevo saldo en 
      * @return 
      */
-    public boolean ActualizaDinElectro(String idCliente, float DinElectro){
+    public boolean ActualizaDinElectro(float DinElectro, String SQL){
         boolean exitoso=false;
-        String SQL ="UPDATE Cliente SET DineroElectronico=? WHERE idCliente='"+idCliente+"';";
         try{
             ps =con.conectado().prepareStatement(SQL);
             ps.setFloat(1, DinElectro);
