@@ -156,18 +156,22 @@ public class Venta extends javax.swing.JFrame {
                 DinElectCliente = PrecioTotalProducto;
                 float NuevoPrecioTotalProducto = PrecioTotalProducto - DinElectCliente;
                 exitoso = Controlador.RegistrarVenta(Fecha, Hora, String.valueOf(DinElectCliente), String.valueOf(NuevoPrecioTotalProducto), idUsuario, idCliente, idSucursal);
+                Controlador.ActualizaCaja(idSucursal, NuevoPrecioTotalProducto);
                 Controlador.RestaDinElectro(idCliente, PrecioTotalProducto);
             } else {
                 float NuevoPrecioTotalProducto = PrecioTotalProducto - DinElectCliente;
                 exitoso = Controlador.RegistrarVenta(Fecha, Hora, String.valueOf(DinElectCliente), String.valueOf(NuevoPrecioTotalProducto), idUsuario, idCliente, idSucursal);
+                Controlador.ActualizaCaja(idSucursal, NuevoPrecioTotalProducto);
                 Controlador.RestaDinElectro(idCliente, DinElectCliente);
             }
 
             SumarDinElectro(String.valueOf(PrecioTotalProducto), idCliente);
             detalledeventa(Fecha, Hora, idSucursal, idUsuario);
+            
 
         } else {//Si no esta seleccionado, el dinero electronico es $0
             exitoso = Controlador.RegistrarVenta(Fecha, Hora, "0", String.valueOf(PrecioTotalProducto), idUsuario, idCliente, idSucursal);
+            Controlador.ActualizaCaja(idSucursal, PrecioTotalProducto);
             detalledeventa(Fecha, Hora, idSucursal, idUsuario);
         }
         return exitoso;
@@ -178,6 +182,7 @@ public class Venta extends javax.swing.JFrame {
         String PrecioProducto = PrecioTotal();
         exitoso = Controlador.RegistrarVenta(Fecha, Hora, "0", PrecioProducto, idUsuario, "1", idSucursal);
         detalledeventa(Fecha, Hora, idSucursal, idUsuario);
+        Controlador.ActualizaCaja(idSucursal,Float.parseFloat(PrecioProducto));
         return exitoso;
     }
 
