@@ -34,11 +34,9 @@ public class Conexion {
             propiedades.load(entrada);
             //Se obtienen las valores almacenados en el archivo de configuracion
             base = Descifrar.Desencriptar(propiedades.getProperty("BD"));
-            //usuario = Descifrar.Desencriptar(propiedades.getProperty("User"));
-            url = "jdbc:mysql://localhost/farmacia";
-usuario="root";
+            usuario = Descifrar.Desencriptar(propiedades.getProperty("User"));
             pass = Descifrar.Desencriptar(propiedades.getProperty("Psw"));
-           // url = Descifrar.Desencriptar(propiedades.getProperty("Servidor")) + base;
+            url = Descifrar.Desencriptar(propiedades.getProperty("Servidor")) + base;
         } catch (IOException ex) {
             System.err.println("Error al leer el archivo de configuración ");
         } finally {
