@@ -106,16 +106,16 @@
                     <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="MnItemAddUserMousePressed"/>
                   </Events>
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="MnItemTipUsuario">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Tipos de Usuario"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="MnItemTipUsuarioMousePressed"/>
-                  </Events>
-                </MenuItem>
               </SubComponents>
             </Menu>
+            <MenuItem class="javax.swing.JMenuItem" name="MnItemTipUsuario">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Tipos de Cliente"/>
+              </Properties>
+              <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="MnItemTipUsuarioMousePressed"/>
+              </Events>
+            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="MnItemProductos">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Productos"/>

@@ -411,8 +411,13 @@ public class Producto_Root_Pedido extends javax.swing.JFrame {
                         ctr.nuevoDetallePedido(codigo, stock, idpedido.toString());
 
                     }
+                    if(txtCorreo.getText().isEmpty()== false){
                     Ticket.pedido(idpedido);
                     enviar.mail("Espero esté pasando un excelente día por este medio me permito hacerle el pedido del producto descrito en el archivo adjunto, de antemano reciba un coordial saludo de su amigo Bulmaro Torreblanca Guerrero", "Pedido de Producto Farmacia Amiga del Campesino", "ReportePedido" + idpedido + ".pdf", "src/Jaspers/ReportePedido" + idpedido + ".pdf", txtCorreo.getText());
+                    estilo.lblMensajes(lblmensaje, "Se ha enviado el correo con el pedido", 3);
+                    }else {
+                    estilo.lblMensajes(lblmensaje, "Se ha generado el archivo", 3);
+                    }
                 } else {
                     estilo.lblMensajes(lblmensaje, "No se ha podido hacer el pedido", 1);
                 }

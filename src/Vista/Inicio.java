@@ -317,15 +317,15 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         });
         MnUsuarios.add(MnItemAddUser);
 
-        MnItemTipUsuario.setText("Tipos de Usuario");
+        MnAdmin.add(MnUsuarios);
+
+        MnItemTipUsuario.setText("Tipos de Cliente");
         MnItemTipUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 MnItemTipUsuarioMousePressed(evt);
             }
         });
-        MnUsuarios.add(MnItemTipUsuario);
-
-        MnAdmin.add(MnUsuarios);
+        MnAdmin.add(MnItemTipUsuario);
 
         MnItemProductos.setText("Productos");
         MnItemProductos.addMouseListener(new java.awt.event.MouseAdapter() {

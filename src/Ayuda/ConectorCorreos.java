@@ -96,9 +96,7 @@ public class ConectorCorreos {
             t.connect(usuario, contraseña);
 
             t.sendMessage(message, message.getAllRecipients());
-            //t.close();
-            //     JOptionPane.showMessageDialog(null, "Mensaje enviado con éxito");
-            System.out.println("Formato de prestamo por E-mail: Enviado");
+            
         } catch (Exception e) {
             System.out.println("Error al enviar email: " + e.getMessage());
         }
