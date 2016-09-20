@@ -67,11 +67,12 @@ public class Controlador_Venta {
      * @param codigo recibe el codigo del producto
      * @return los datos del producto recibidos de la consulta
      */
-    public Object[][] ObtenerProducto(String codigo){
+    public Object[][] ObtenerProducto(String codigo, String idSucursal){
         Object[][] datos= null;
-        String columnas[]={"IdProducto","Nombre","Descripcion", "PPublico"};
-        String SQLContar="Producto WHERE idProducto='"+codigo+"';";
-        String SQLExecute="SELECT IdProducto, Nombre, Descripcion, PPublico FROM "+SQLContar;
+        String columnas[]={"Producto.IdProducto","Nombre","Descripcion", "PPublico"};
+        String SQLContar="Producto INNER JOIN DetalleSucursal ON Producto.idProducto = DetalleSucursal.idProducto "
+                + "WHERE DetalleSucursal.idProducto='"+codigo+"' && DetalleSucursal.idSucursal ='"+idSucursal+"';";
+        String SQLExecute="SELECT Producto.IdProducto, Nombre, Descripcion, PPublico FROM "+SQLContar;
         datos = Modelo.GetTable(columnas, SQLContar, SQLExecute);
         return datos;
     }

@@ -20,6 +20,7 @@ public class Venta extends javax.swing.JFrame {
     private final String[] columnas = {"Código", "Nombre", "Descripcion", "Precio Unitario", "Cantidad", "Precio Total"};
     private DefaultTableModel ModelVenta;
     private String idCliente;
+    private final String Sucursal;
 
     /**
      * Inicializa los elementos usando la clase Estilo
@@ -30,6 +31,7 @@ public class Venta extends javax.swing.JFrame {
         Controlador = new Controlador.Controlador_Venta();
         Ticket = new Controlador.Reportes();
         idCliente = "";
+        Sucursal = Controlador.ObtenerSucursal();
         initComponents();
         //Estilo JLabels
         Estilo.lblBody(jLabel5);
@@ -223,6 +225,8 @@ public class Venta extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        JPopMnTablaProductos = new javax.swing.JPopupMenu();
+        JMnItemEliminar = new javax.swing.JMenuItem();
         lblEncabezado = new javax.swing.JLabel();
         pnlCliente = new javax.swing.JPanel();
         txtCliente = new org.edisoncor.gui.textField.TextFieldRectBackground();
@@ -246,6 +250,16 @@ public class Venta extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblCliente = new javax.swing.JTable();
         CheckMaterial = new javax.swing.JCheckBox();
+
+        JMnItemEliminar.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        JMnItemEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/Error.png"))); // NOI18N
+        JMnItemEliminar.setText("Cancelar producto");
+        JMnItemEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMnItemEliminarActionPerformed(evt);
+            }
+        });
+        JPopMnTablaProductos.add(JMnItemEliminar);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -326,6 +340,7 @@ public class Venta extends javax.swing.JFrame {
 
             }
         ));
+        tblVenta.setComponentPopupMenu(JPopMnTablaProductos);
         jScrollPane1.setViewportView(tblVenta);
 
         javax.swing.GroupLayout pnlProductosLayout = new javax.swing.GroupLayout(pnlProductos);
@@ -485,7 +500,6 @@ public class Venta extends javax.swing.JFrame {
             Calendar c = new GregorianCalendar();
             String Fecha = Integer.toString(c.get(Calendar.DATE)) + "/" + Integer.toString(c.get(Calendar.MONTH) + 1) + "/" + Integer.toString(c.get(Calendar.YEAR));
             String Hora = Integer.toString(c.get(Calendar.HOUR_OF_DAY)) + ":" + Integer.toString(c.get(Calendar.MINUTE)) + ":" + Integer.toString(c.get(Calendar.SECOND));
-            String Sucursal = Controlador.ObtenerSucursal();
             String Usuario = Sesion.LeerSesion("idUsuario");
 
             if (!txtCliente.getText().isEmpty()) {
@@ -546,7 +560,7 @@ public class Venta extends javax.swing.JFrame {
                 Estilo.lblMensajes(lblAlerta, "Producto agregado", 3);
             } else {//No existe en la tabla, busca en la BD
                 Object[][] aux = null; //Auxiliar para obtener arreglo unidimensional de los resultados
-                aux = Controlador.ObtenerProducto(txtProducto.getText()).clone();
+                aux = Controlador.ObtenerProducto(txtProducto.getText(),Sucursal);
 
                 if (aux.length != 0) { //Si su tamaño es = 0 es por que no recibio nada de la consulta
                     Object[] Producto = null; //arreglo que se mostrará en la tabla
@@ -576,6 +590,18 @@ public class Venta extends javax.swing.JFrame {
     private void txtClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtClienteActionPerformed
         Util.txtFoco(txtProducto);
     }//GEN-LAST:event_txtClienteActionPerformed
+
+    private void JMnItemEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMnItemEliminarActionPerformed
+        try{
+        int fila = tblVenta.getSelectedRow();
+        if (fila >= 0) {
+            System.out.println(fila);
+            ModelVenta.removeRow(fila);
+        }
+        }catch(Exception e){
+            System.err.println("Error al capturar fila para eliminar en jTableVenta\n"+e.getMessage());
+        }
+    }//GEN-LAST:event_JMnItemEliminarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -615,6 +641,8 @@ public class Venta extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox CheckDinero;
     private javax.swing.JCheckBox CheckMaterial;
+    private javax.swing.JMenuItem JMnItemEliminar;
+    private javax.swing.JPopupMenu JPopMnTablaProductos;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnCobrar;
     private javax.swing.JLabel jLabel1;

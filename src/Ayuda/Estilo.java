@@ -509,5 +509,5 @@ public class Estilo {
         tabla.getColumnModel().getColumn(Columna).setMinWidth(0);
         tabla.getColumnModel().getColumn(Columna).setPreferredWidth(0);
     }
-}
+    }
 
