@@ -551,6 +551,8 @@ public class Venta extends javax.swing.JFrame {
 
     private void txtProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProductoActionPerformed
         if (txtProducto.getText().length() != 0) {
+                        String Sucursal = Controlador.ObtenerSucursal();
+
             //Recorre el arreglo original para obtener solo la primera columna
             int ResultadosTabla[] = ExisteCodigoTbl(tblVenta, txtProducto.getText());
 
@@ -562,7 +564,7 @@ public class Venta extends javax.swing.JFrame {
                 Estilo.lblMensajes(lblAlerta, "Producto agregado", 3);
             } else {//No existe en la tabla, busca en la BD
                 Object[][] aux = null; //Auxiliar para obtener arreglo unidimensional de los resultados
-                aux = Controlador.ObtenerProducto(txtProducto.getText()).clone();
+                aux = Controlador.ObtenerProducto(idCliente,Sucursal);
 
                 if (aux.length != 0) { //Si su tamaño es = 0 es por que no recibio nada de la consulta
                     Object[] Producto = null; //arreglo que se mostrará en la tabla
