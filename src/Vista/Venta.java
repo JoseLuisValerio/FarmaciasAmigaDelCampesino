@@ -564,7 +564,7 @@ public class Venta extends javax.swing.JFrame {
                 Estilo.lblMensajes(lblAlerta, "Producto agregado", 3);
             } else {//No existe en la tabla, busca en la BD
                 Object[][] aux = null; //Auxiliar para obtener arreglo unidimensional de los resultados
-                aux = Controlador.ObtenerProducto(idCliente,Sucursal);
+                aux = Controlador.ObtenerProducto(txtProducto.getText(),Sucursal);
 
                 if (aux.length != 0) { //Si su tamaño es = 0 es por que no recibio nada de la consulta
                     Object[] Producto = null; //arreglo que se mostrará en la tabla
