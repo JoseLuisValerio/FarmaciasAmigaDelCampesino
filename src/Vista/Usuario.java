@@ -352,6 +352,15 @@ public class Usuario extends javax.swing.JFrame {
     }//GEN-LAST:event_tblUsuariosMousePressed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        if(passField1.getPassword().length == 0 && passField2.getPassword().length == 0 && cmbTipo.getSelectedIndex() == 0 ){
+        if(Controlador.ActualizarUsuario2(txtUsuario.getText(), txtNombre.getText(), txtAPaterno.getText(), txtAMaterno.getText())){
+            Estilo.lblMensajes(lblAlerta, "Usuario actualizado correctamente", 3);
+            Limpiar();
+            Util.txtHabilitar(txtUsuario, true);
+        }else{
+            Estilo.lblMensajes(lblAlerta, "Ha ocurrido un error al actualizar usuario", 2);
+        }
+        }else{
         if(Valido.PassCompara(passField1, passField2)){
         String Password = new String(passField1.getPassword());
         if(Controlador.ActualizarUsuario(txtUsuario.getText(), Password, cmbTipo.getSelectedItem().toString(), txtNombre.getText(), txtAPaterno.getText(), txtAMaterno.getText())){
@@ -363,7 +372,8 @@ public class Usuario extends javax.swing.JFrame {
         }
     }else{
             Estilo.lblMensajes(lblAlerta, "Las contraseñas no coinciden, verifique", 1);
-            }
+            }}
+        
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed

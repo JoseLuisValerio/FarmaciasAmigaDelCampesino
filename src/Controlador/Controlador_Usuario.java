@@ -56,6 +56,9 @@ public class Controlador_Usuario {
      public boolean ActualizarUsuario(String Alias, String Password, String Tipo, String Nombre,String APaterno, String AMaterno){
         return ModelUser.InsertarOActualizar("UPDATE Usuario SET Password = SHA('"+Password+"'), idTipoUsuario='"+obtenerIdTipo(Tipo)+"',Nombre='"+Nombre+"',APaterno='"+APaterno+"', AMaterno='"+AMaterno+"',Estatus='1' WHERE Alias = '"+Alias+"';");
     }
+     public boolean ActualizarUsuario2(String Alias, String Nombre,String APaterno, String AMaterno){
+        return ModelUser.InsertarOActualizar("UPDATE Usuario SET Nombre='"+Nombre+"',APaterno='"+APaterno+"', AMaterno='"+AMaterno+"',Estatus='1' WHERE Alias = '"+Alias+"';");
+    }
     
      public String obtenerIdTipo(String Tipo){
         String sentencia = "SELECT idTipoUsuario from TipoUsuario WHERE Nombre = '"+Tipo+"';";
