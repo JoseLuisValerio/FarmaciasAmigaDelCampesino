@@ -601,6 +601,7 @@ public class Venta extends javax.swing.JFrame {
         }catch(Exception e){
             System.err.println("Error al capturar fila para eliminar en jTableVenta\n"+e.getMessage());
         }
+        lblTotal.setText("" + PrecioTotal());
     }//GEN-LAST:event_JMnItemEliminarActionPerformed
 
     /**
