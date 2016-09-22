@@ -676,10 +676,13 @@ public class Producto_Root extends javax.swing.JFrame {
         //
 
         if (txtNombre.isEnabled() == false && txtActivo.isEnabled() == false && txtDescripcion.isEnabled() == false) {
+            if(txtNombre.getText().isEmpty() == false && (int) spStock.getValue() > 0 ){
             ctr.actualizarStock(id, "1", stock);
             mostrartodo();
             limpia();
-
+            }else{
+            Estilo.lblMensajes(lblmensaje, "Hay campos sin llenar", 1);
+            }
         } else {
             if (txtNombre.getText().isEmpty() == false && txtActivo.getText().isEmpty() == false && txtDescripcion.getText().isEmpty() == false && cmbProveedor.getSelectedIndex() != 0 && (int) spStock.getValue() > 0) {
                 ctr.ingresarProductoNuevo(id, nombre, activo, descripcion, ppublico, pcompra, categoria1, "1");
