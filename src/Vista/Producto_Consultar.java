@@ -1,7 +1,6 @@
 package Vista;
 
 import Controlador.Controlador_Producto_Consultar;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -39,10 +38,7 @@ public class Producto_Consultar extends javax.swing.JFrame {
 
         Estilo.PnlTitulo(pnlProducto, "Datos del producto");
         Estilo.PnlTitulo(pnlTabla, "Productos");
-
-        Estilo.BtnOpcion(btnAdd, 1);
-        Estilo.BtnOpcion(btnUpdate, 2);
-
+        
         Estilo.lblMensajes(lblmensaje, "", 4);
         Estilo.frmInicial(this, "Productos");
         Estilo.lblLogo(lblEncabezado);
@@ -133,8 +129,6 @@ public class Producto_Consultar extends javax.swing.JFrame {
         txtPPublico = new org.edisoncor.gui.textField.TextFieldRectBackground();
         txtStock = new org.edisoncor.gui.textField.TextFieldRectBackground();
         cmbAreas = new javax.swing.JComboBox<>();
-        btnUpdate = new javax.swing.JButton();
-        btnAdd = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuAcomodar = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -283,8 +277,8 @@ public class Producto_Consultar extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(cmbAreas, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txtStock, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(11, 11, 11))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -306,22 +300,6 @@ public class Producto_Consultar extends javax.swing.JFrame {
         );
 
         pnlProducto.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 200, 290));
-
-        btnUpdate.setText("jButton1");
-        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateActionPerformed(evt);
-            }
-        });
-        pnlProducto.add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 140, 60));
-
-        btnAdd.setText("jButton2");
-        btnAdd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddActionPerformed(evt);
-            }
-        });
-        pnlProducto.add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 320, 150, 60));
 
         menuAcomodar.setText("Producto");
         menuAcomodar.addActionListener(new java.awt.event.ActionListener() {
@@ -409,52 +387,6 @@ public class Producto_Consultar extends javax.swing.JFrame {
         txtPPublico.setText((tblProducto.getValueAt(cor, 4).toString()));        
     }//GEN-LAST:event_tblProductoMouseClicked
 
-    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        String id = txtCodigo.getText();
-        String nombre = txtNombre.getText();
-        String activo = txtActivo.getText();
-        String descripcion = txtDescripcion.getText();
-        String ppublico = txtPPublico.getText();
-        int areai = cmbAreas.getSelectedIndex();
-        String area = "";
-        area = String.valueOf(areai);
-
-        if (txtNombre.getText().isEmpty() == false && txtActivo.getText().isEmpty() == false && txtDescripcion.getText().isEmpty() == false && txtPPublico.getText().isEmpty() == false && cmbAreas.getSelectedIndex() > 0) {
-            if (ctr.actualizaProducto(id, nombre, activo, descripcion, ppublico) == true && ctr.actualizarStock(id, area) == true) {
-                limpia();
-                Estilo.lblMensajes(lblmensaje, "Actualizado con exito", 3);
-                mostrarProductos();
-            } else {
-                Estilo.lblMensajes(lblmensaje, "No se pudo actualizar", 2);
-            }
-        } else {
-            Estilo.lblMensajes(lblmensaje, "Hay campo vacios", 1);
-        }
-    }//GEN-LAST:event_btnUpdateActionPerformed
-
-    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        String codigo = txtCodigo.getText();
-        String stock = txtStock.getText();
-        datostabla = ctr.buscarCodigo(codigo);
-        if (datostabla.length == 0) {
-            Estilo.lblMensajes(lblmensaje, "El Producto no existe favor de agregar", 2);
-            Producto_Consultar_Add nuevo = new Producto_Consultar_Add();
-            nuevo.setVisible(true);
-        }else{
-        if (txtNombre.getText().isEmpty() == false && txtActivo.getText().isEmpty() == false && txtDescripcion.getText().isEmpty() == false && txtPPublico.getText().isEmpty() == false) {
-            if (ctr.agregarStock(codigo,stock )== true) {
-                limpia();
-                Estilo.lblMensajes(lblmensaje, "Agregado con exito", 3);
-                mostrarProductos();
-            } else {
-                Estilo.lblMensajes(lblmensaje, "No se pudo agregar", 2);
-            }
-        } else {
-            Estilo.lblMensajes(lblmensaje, "Hay campos vacios", 1);
-        }
-        }
-    }//GEN-LAST:event_btnAddActionPerformed
-
     private void menuAcomodarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAcomodarActionPerformed
         
     }//GEN-LAST:event_menuAcomodarActionPerformed
@@ -501,8 +433,6 @@ public class Producto_Consultar extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAdd;
-    private javax.swing.JButton btnUpdate;
     private javax.swing.JComboBox<String> cmbAreas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
