@@ -48,7 +48,7 @@ public class Controlador_Producto_Root {
     public Object[][] buscaProductosCodigo(String codigo) {
 
         String seleccion = "SELECT producto.IDPRODUCTO, producto.NOMBRE,producto.ACTIVO,producto.DESCRIPCION,producto.PPUBLICO,producto.PCOMPRA,detallesucursal.Stock,proveedor.RSOCIAL,sucursal.nombre from";
-        String tablas = "(producto INNER JOIN proveedor on producto.IDPROVEEDOR = proveedor.IDproveedor) INNER JOIN (detallesucursal INNER JOIN sucursal on detallesucursal.idsucursal = sucursal.idsucursal) on producto.IDPRODUCTO =detallesucursal.IDPRODUCTO and producto.IDPRODUCTO like '%" + codigo + "%'";
+        String tablas = "(producto INNER JOIN proveedor on producto.IDPROVEEDOR = proveedor.IDproveedor) INNER JOIN (detallesucursal INNER JOIN sucursal on detallesucursal.idsucursal = sucursal.idsucursal) on producto.IDPRODUCTO =detallesucursal.IDPRODUCTO and producto.IDPRODUCTO ='" + codigo + "'";
         String sentencia = seleccion + tablas;
         Object[][] datos = null;
         String[] columnas = {"producto.IDPRODUCTO", "producto.NOMBRE", "producto.ACTIVO", "producto.DESCRIPCION", "producto.PPUBLICO", "producto.PCOMPRA", "detallesucursal.Stock", "proveedor.RSOCIAL", "sucursal.nombre"};

@@ -92,7 +92,7 @@ public class Producto_Root extends javax.swing.JFrame {
             if (rbtBuscar.isSelected() == false) {
                 cmbSucursal.setEnabled(false);
             }
-            Estilo.lblMensajes(lblmensaje, "Producto no existe", 2);
+            Estilo.lblMensajes(lblmensaje, "Producto no existe, Favor de agregarlo", 2);
         }
         DefaultTableModel datos = new DefaultTableModel(datostabla, columnas);
         tblProducto.setModel(datos);
@@ -289,7 +289,7 @@ public class Producto_Root extends javax.swing.JFrame {
 
         txtPPublico.setDescripcion("Código de producto");
 
-        spStock.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        spStock.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
 
         jLabel6.setText("Stock");
 
@@ -380,6 +380,11 @@ public class Producto_Root extends javax.swing.JFrame {
 
             }
         ));
+        tblProducto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblProductoMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblProducto);
 
         mnArchivo.setText("Archivo");
@@ -587,9 +592,8 @@ public class Producto_Root extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(rbtModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(rbtAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(rbtBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(rbtAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(rbtBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 46, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -676,7 +680,7 @@ public class Producto_Root extends javax.swing.JFrame {
         //
 
         if (txtNombre.isEnabled() == false && txtActivo.isEnabled() == false && txtDescripcion.isEnabled() == false) {
-            if(txtNombre.getText().isEmpty() == false && (int) spStock.getValue() > 0 ){
+            if((int) spStock.getValue() > 0 ){
             ctr.actualizarStock(id, "1", stock);
             mostrartodo();
             limpia();
@@ -741,7 +745,8 @@ public class Producto_Root extends javax.swing.JFrame {
 
         if (txtNombre.getText().isEmpty() == false && txtActivo.getText().isEmpty() == false && txtDescripcion.getText().isEmpty() == false && txtPPublico.getText().isEmpty() == false && txtPCompra.getText().isEmpty() == false) {
             if (ctr.actualizaProducto(id, nombre, activo, descripcion, ppublico, pcompra) == true) {
-                mostrartodo();
+                //mostrartodo();
+                this.bucarProductoCodigo(id);
                 limpia();
             } else {
                 Estilo.lblMensajes(lblmensaje, "No se pudo Actualizar", 3);
@@ -806,6 +811,16 @@ public class Producto_Root extends javax.swing.JFrame {
         Proveedor prov = new Proveedor();
         prov.setVisible(true);
     }//GEN-LAST:event_mnItemProveedorActionPerformed
+
+    private void tblProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProductoMouseClicked
+        int cor = tblProducto.getSelectedRow();
+        txtCodigo.setText((tblProducto.getValueAt(cor, 0).toString()));
+        txtNombre.setText((tblProducto.getValueAt(cor, 1).toString()));
+        txtActivo.setText((tblProducto.getValueAt(cor, 2).toString()));
+        txtDescripcion.setText((tblProducto.getValueAt(cor, 3).toString()));
+        txtPPublico.setText((tblProducto.getValueAt(cor, 4).toString()));
+        txtPCompra.setText((tblProducto.getValueAt(cor, 5).toString()));
+    }//GEN-LAST:event_tblProductoMouseClicked
 
     /**
      * @param args the command line arguments
