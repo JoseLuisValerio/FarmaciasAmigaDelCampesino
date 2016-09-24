@@ -58,6 +58,9 @@ public class Producto_Root_Pedido extends javax.swing.JFrame {
         datostabla = ctr.cargaPocaExistencia(valor);
         DefaultTableModel datos = new DefaultTableModel(datostabla, columnas);
         tblPedido.setModel(datos);
+        for (int i = 0; i < tblPedido.getRowCount(); i++) {
+            tblPedido.setValueAt("50", i, 4);
+        }
 
     }
 
