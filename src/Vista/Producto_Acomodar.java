@@ -174,15 +174,15 @@ public class Producto_Acomodar extends javax.swing.JFrame {
                 .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(pnlProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlProductosLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(25, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlProductosLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 127, Short.MAX_VALUE)
                         .addComponent(btnAgregar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnEliminar)
-                        .addGap(121, 121, 121))))
+                        .addGap(121, 121, 121))
+                    .addGroup(pnlProductosLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         tblTransaccion.setModel(new javax.swing.table.DefaultTableModel(
@@ -223,9 +223,7 @@ public class Producto_Acomodar extends javax.swing.JFrame {
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAcomodarLayout.createSequentialGroup()
                             .addComponent(txtArea, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(7, 7, 7))
-                        .addGroup(pnlAcomodarLayout.createSequentialGroup()
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(48, 48, 48))
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(cmbAreas, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlAcomodarLayout.createSequentialGroup()
                         .addGroup(pnlAcomodarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -250,7 +248,7 @@ public class Producto_Acomodar extends javax.swing.JFrame {
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cmbAreas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -276,14 +274,14 @@ public class Producto_Acomodar extends javax.swing.JFrame {
                                         .addComponent(Limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(61, 61, 61)
                                         .addComponent(btnAcomodar, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(671, 671, 671))))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addContainerGap()
                 .addComponent(lblEncabezado, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblmensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(4, 4, 4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -320,19 +318,29 @@ public class Producto_Acomodar extends javax.swing.JFrame {
     private void tblProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProductosMouseClicked
         
     }//GEN-LAST:event_tblProductosMouseClicked
-
+public boolean Repite (String codigo){
+    boolean repetido=false;
+    for (int i=0;i<tblTransaccion.getRowCount();i++){
+         String a=tblTransaccion.getValueAt(i, 0).toString();
+         if (a.equals(codigo)){
+         repetido=true;
+         }         
+    }
+return repetido;
+}
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
 
         int cor = tblProductos.getSelectedRow();
         if (cor < 0) {
             estilo.lblMensajes(lblmensaje, "Seleccionar un producto", 2);
         } else {
+                
                 String codigo = (tblProductos.getValueAt(cor, 0).toString());
                 String nombre = (tblProductos.getValueAt(cor, 1).toString());
                 String activo = (tblProductos.getValueAt(cor, 2).toString());
                 String existencia = (tblProductos.getValueAt(cor, 5).toString());
-                
-                DefaultTableModel modelo = (DefaultTableModel) tblTransaccion.getModel();
+                if(this.Repite(codigo)==false){
+                    DefaultTableModel modelo = (DefaultTableModel) tblTransaccion.getModel();
 
                     fila[0] = codigo;
                     fila[1] = nombre;
@@ -342,6 +350,12 @@ public class Producto_Acomodar extends javax.swing.JFrame {
                     modelo.addRow(fila);
 
                     tblTransaccion.setModel(modelo);
+                estilo.lblMensajes(lblmensaje, "Agregado para Acomodar", 3);
+                }else{
+                estilo.lblMensajes(lblmensaje, "Producto ya ha sido Agregado", 1);
+                }
+                
+                
                             
         }
     }//GEN-LAST:event_btnAgregarActionPerformed

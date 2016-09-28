@@ -327,7 +327,16 @@ public class Producto_Root_Pedido extends javax.swing.JFrame {
         DefaultTableModel datos = new DefaultTableModel(datostabla, columnas);
         tblProductos.setModel(datos);
     }//GEN-LAST:event_txtCodigoKeyPressed
-
+public boolean Repite (String codigo){
+    boolean repetido=false;
+    for (int i=0;i<tblPedido.getRowCount();i++){
+         String a=tblPedido.getValueAt(i, 0).toString();
+         if (a.equals(codigo)){
+         repetido=true;
+         }         
+    }
+return repetido;
+}
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         int cantidad;
         int cor = tblProductos.getSelectedRow();
@@ -338,12 +347,13 @@ public class Producto_Root_Pedido extends javax.swing.JFrame {
             if (cantidad <= 0) {
                 estilo.lblMensajes(lblmensaje, "No ha dado la cantidad de Producto", 2);
             } else {
+                
                 String codigo = (tblProductos.getValueAt(cor, 0).toString());
                 String nombre = (tblProductos.getValueAt(cor, 1).toString());
                 String Descripcion = (tblProductos.getValueAt(cor, 2).toString());
                 String activo = (tblProductos.getValueAt(cor, 3).toString());
                 String existencia = (tblProductos.getValueAt(cor, 4).toString());
-
+                if(this.Repite(codigo)==false){
                 DefaultTableModel modelo = (DefaultTableModel) tblPedido.getModel();
 
                 fila[0] = codigo;
@@ -355,6 +365,10 @@ public class Producto_Root_Pedido extends javax.swing.JFrame {
                 modelo.addRow(fila);
 
                 tblPedido.setModel(modelo);
+                estilo.lblMensajes(lblmensaje, "Agregado Al Pedido", 3);
+                }else{
+                estilo.lblMensajes(lblmensaje, "Producto ya ha sido Agregado", 1);
+                }
             }
 
         }
