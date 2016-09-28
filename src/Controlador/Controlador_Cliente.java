@@ -52,7 +52,7 @@ public class Controlador_Cliente {
             datos = ModeloCliente.GetTabla(columnaminima,SQLExecte,SQLContar);
         } else {
             String SQLContar="Cliente WHERE idCliente != 1 (&& Nombre LIKE '%"+Buscar+"%' OR APaterno LIKE '%"+Buscar+"%' "
-                    + "OR AMaterno LIKE '%"+Buscar+"%' OR Tel LIKE '%"+Buscar+"%' OR Alias LIKE '"+Buscar+"');";
+                    + "OR AMaterno LIKE '%"+Buscar+"%' OR Tel LIKE '%"+Buscar+"%' OR Alias = '"+Buscar+"');";
             String SQLExecute="SELECT Alias, Nombre, APaterno, AMaterno, Tel,DineroElectronico, idCliente FROM "+SQLContar;
             datos = ModeloCliente.GetTabla(columnaminima, SQLExecute,SQLContar);
         }

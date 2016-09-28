@@ -42,6 +42,7 @@ public class Venta extends javax.swing.JFrame {
         //Estilo textfields
         Estilo.txtfDescripcion(txtCliente, "Clave del cliente");
         Estilo.txtfDescripcion(txtProducto, "Clave del producto");
+        Estilo.txtfDescripcion(txtBusqueda, "Búsqueda de cliente");
         //Estilo Paneles
         Estilo.PnlTitulo(pnlCliente, "Datos del cliente");
         Estilo.PnlTitulo(pnlProductos, "Productos agregados");
@@ -382,6 +383,11 @@ public class Venta extends javax.swing.JFrame {
 
         lblAlerta.setText("Mensajes");
 
+        txtBusqueda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBusquedaActionPerformed(evt);
+            }
+        });
         txtBusqueda.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtBusquedaKeyReleased(evt);
@@ -603,6 +609,10 @@ public class Venta extends javax.swing.JFrame {
         }
         lblTotal.setText("" + PrecioTotal());
     }//GEN-LAST:event_JMnItemEliminarActionPerformed
+
+    private void txtBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBusquedaActionPerformed
+        MostrarCliente(txtBusqueda.getText());
+    }//GEN-LAST:event_txtBusquedaActionPerformed
 
     /**
      * @param args the command line arguments
