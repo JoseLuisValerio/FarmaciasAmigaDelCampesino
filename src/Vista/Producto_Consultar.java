@@ -40,7 +40,7 @@ public class Producto_Consultar extends javax.swing.JFrame {
         Estilo.PnlTitulo(pnlTabla, "Productos");
         
         Estilo.lblMensajes(lblmensaje, "", 4);
-        Estilo.frmInicial(this, "Productos");
+        Estilo.frmInicial(this, "Búsqueda de productos");
         Estilo.lblLogo(lblEncabezado);
         Estilo.MnIcon(menuAcomodar, 1);
         Estilo.mnitemIcon(jMenuItem1, 4);
