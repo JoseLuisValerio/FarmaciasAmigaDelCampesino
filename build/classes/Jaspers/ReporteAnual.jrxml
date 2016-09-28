@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteAnual" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="699081e8-aa84-480b-9a93-e7835e4908a1">
+	<property name="ireport.zoom" value="0.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="dataset1" uuid="78001421-f826-4df2-866f-3e1df2e67ce8"/>
+	<parameter name="Enero" class="java.lang.Float">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Febrero" class="java.lang.Float">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Marzo" class="java.lang.Float">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Abril" class="java.lang.Float">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Mayo" class="java.lang.Float">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Junio" class="java.lang.Float">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Julio" class="java.lang.Float">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Agosto" class="java.lang.Float">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Septiembre" class="java.lang.Float">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Octubre" class="java.lang.Float">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Noviembre" class="java.lang.Float">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Diciembre" class="java.lang.Float">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[Select "1";]]>
+	</queryString>
+	<title>
+		<band height="79" splitType="Stretch">
+			<image scaleImage="FillFrame">
+				<reportElement x="0" y="8" width="572" height="71" uuid="eb54b133-d197-4c9a-96ad-8f7a5d8d875d"/>
+				<imageExpression><![CDATA["Jaspers\\Encabezado.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<detail>
+		<band height="350" splitType="Stretch">
+			<textField>
+				<reportElement x="141" y="11" width="100" height="30" uuid="a7155518-4240-4ee3-885c-462d147e4c3c"/>
+				<textElement>
+					<font size="22" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["$"+$P{Enero}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="141" y="43" width="100" height="30" uuid="785faa04-1d85-4caa-b338-f359c5546b4b"/>
+				<textElement>
+					<font size="22" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["$"+$P{Febrero}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="141" y="73" width="100" height="30" uuid="5f75458c-bb39-45d5-ba70-68a1e51f6de2"/>
+				<textElement>
+					<font size="22" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["$"+$P{Marzo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="141" y="101" width="100" height="30" uuid="843830ab-30a3-4d8a-82cd-dbe30f611c51"/>
+				<textElement>
+					<font size="22" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["$"+$P{Abril}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="141" y="133" width="100" height="30" uuid="3b538ec1-2e56-453d-95e8-2d46c4ddcd04"/>
+				<textElement>
+					<font size="22" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["$"+$P{Mayo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="141" y="163" width="100" height="30" uuid="9201d8d2-2c3b-45ea-be1b-4b01ee1252af"/>
+				<textElement>
+					<font size="22" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["$"+$P{Junio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="415" y="13" width="100" height="30" uuid="f41abb65-b7e2-4e5a-9acb-5e23669dca30"/>
+				<textElement>
+					<font size="22" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["$"+$P{Julio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="414" y="43" width="100" height="30" uuid="35b69928-f021-4d5a-967d-be382b6b171d"/>
+				<textElement>
+					<font size="22" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["$"+$P{Agosto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="414" y="73" width="100" height="30" uuid="feb9d5ed-b687-448a-bcf5-70f988936b8b"/>
+				<textElement>
+					<font size="22" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["$"+$P{Septiembre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="415" y="103" width="100" height="30" uuid="900448d0-2b23-457f-98f6-27c2e6f2b1e3"/>
+				<textElement>
+					<font size="22" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["$"+$P{Octubre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="414" y="133" width="100" height="30" uuid="555eafff-c85a-4f5f-9a63-9f7f0ff7290e"/>
+				<textElement>
+					<font size="22" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["$"+$P{Noviembre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="414" y="163" width="100" height="30" uuid="ecd4900d-e8f1-4243-babb-e3fe34d66871"/>
+				<textElement>
+					<font size="22" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["$"+$P{Diciembre}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="17" y="10" width="100" height="30" uuid="460e7f5f-122c-43f9-90a8-d01edd5a537f"/>
+				<textElement>
+					<font size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Enero:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="40" width="100" height="30" uuid="a546daf1-79ad-4355-8f68-c84234e8ef6d"/>
+				<textElement>
+					<font size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Febrero:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="69" width="100" height="30" uuid="9dfa1404-5800-47ba-a0b8-1ffca68cda20"/>
+				<textElement>
+					<font size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Marzo:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="99" width="100" height="30" uuid="707beb71-929b-4d51-a3f7-d7f2446cf6a6"/>
+				<textElement>
+					<font size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Abril:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="131" width="100" height="30" uuid="08baba0a-ead6-45cd-a412-0c5940628a4b"/>
+				<textElement>
+					<font size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Mayo:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="161" width="100" height="30" uuid="74062673-9987-4e16-9a6a-7f5a347a5322"/>
+				<textElement>
+					<font size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Junio:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="263" y="13" width="100" height="30" uuid="8ba2a37f-0b02-44c5-8e14-0b96cfc60a0d"/>
+				<textElement>
+					<font size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Julio:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="263" y="43" width="100" height="30" uuid="27570ea8-26bb-495d-a5f0-4cc0a6ca17ab"/>
+				<textElement>
+					<font size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Agosto:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="263" y="103" width="100" height="30" uuid="e3d32365-f3db-441e-8915-79bc08757bcf"/>
+				<textElement>
+					<font size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Octubre:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="263" y="135" width="121" height="30" uuid="044576d0-fdaa-46e1-b031-75618db0e716"/>
+				<textElement>
+					<font size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Noviembre:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="263" y="165" width="121" height="30" uuid="8eacffa2-361f-4395-82d7-a24ba2aa55ef"/>
+				<textElement>
+					<font size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Diciembre:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="263" y="73" width="121" height="30" uuid="6d7aa782-5a62-4b6e-bef1-3819c01f1ccc"/>
+				<textElement>
+					<font size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Septiembre:]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>

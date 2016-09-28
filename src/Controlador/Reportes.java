@@ -105,7 +105,7 @@ public void pedido(String pedido) {
     }
     
     @SuppressWarnings("unchecked")
-    public void InventarioSucursal() {
+    public void InventarioSucursalTodas() {
         try{
             String ruta="src/Jaspers/InventarioSucursal.jasper";            
             JasperReport jr = (JasperReport) JRLoader.loadObjectFromFile(ruta);
@@ -167,4 +167,44 @@ public void pedido(String pedido) {
             System.err.println("Error al generar ticket Corte de caja: "+ex.getMessage());
         }
 }
+    
+    @SuppressWarnings("unchecked")
+    public void InventarioPorSucursal(String idSucursal) {
+        try {
+            String ruta = "src/Reportes/Inventario.jasper";
+            Map parametros = new HashMap();
+            parametros.put("idSucursal", idSucursal);
+            JasperReport jr = (JasperReport) JRLoader.loadObjectFromFile(ruta);
+            JasperPrint jp = JasperFillManager.fillReport(jr, parametros, con.conectado());
+            JasperViewer jv = new JasperViewer(jp, false);
+            jv.setVisible(true);
+            jv.setTitle("Inventario de Sucursal "+idSucursal);
+            con.desconectar();
+        } catch (Exception ex) {
+            System.err.println("Error al generar reporte inventario: "+ex.getMessage());
+        }
+    }
+    
+    @SuppressWarnings("unchecked")
+    public void ReporteAnual(String Fecha) {
+        String[]Meses ={null,"Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"};
+        Modelo.Modelo_Venta Venta = new Modelo.Modelo_Venta();
+        try {
+            String ruta = "src/Jaspers/ReporteAnual.jasper";
+            Map parametros = new HashMap();
+            for(int i=1;i<=12;i++){
+            parametros.put(Meses[i], Venta.RetornaTotalMes(i, Fecha));    
+            }
+            JasperReport jr = (JasperReport) JRLoader.loadObjectFromFile(ruta);
+            JasperPrint jp = JasperFillManager.fillReport(jr, parametros, con.conectado());
+            JasperViewer jv = new JasperViewer(jp, false);
+            jv.setVisible(true);
+            jv.setTitle("Reporte Anual");
+            con.desconectar();
+        } catch (Exception ex) {
+            System.err.println("Error al generar reporte anual: "+ex.getMessage());
+        }
+    }
+    
+    
 }

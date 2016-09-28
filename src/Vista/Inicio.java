@@ -491,8 +491,8 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_MnIntemAcomodarMousePressed
 
     private void MnItemVentasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MnItemVentasMousePressed
-        Controlador.Reportes Report= new Controlador.Reportes();
-        Report.VentasRoot(dia+"/"+mes+"/"+annio);
+        Vista.Reportes Ventana = new Vista.Reportes();
+        Ventana.setVisible(true);
     }//GEN-LAST:event_MnItemVentasMousePressed
 
     private void MnItemInProveedorMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MnItemInProveedorMousePressed
@@ -502,7 +502,7 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
 
     private void MnItemInvSucursalMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MnItemInvSucursalMousePressed
         Controlador.Reportes Report= new Controlador.Reportes();
-        Report.InventarioSucursal();
+        Report.InventarioSucursalTodas();
     }//GEN-LAST:event_MnItemInvSucursalMousePressed
 
     private void MnItemProductosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MnItemProductosMousePressed

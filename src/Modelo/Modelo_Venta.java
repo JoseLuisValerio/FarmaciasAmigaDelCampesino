@@ -180,5 +180,23 @@ public class Modelo_Venta {
         }
         return exitoso;
     }
+    
+    public Float RetornaTotalMes(int Mes, String Year) {
+        String sql = "SELECT SUM(Total) FROM Venta WHERE Fecha LIKE '%/"+Mes+"/"+Year+"';";
+        Float Total=0f;
+        try {
+            Statement st = con.conectado().createStatement();
+            ResultSet rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+                Total= rs.getFloat(1);
+            }
+            con.desconectar();
+        } catch (SQLException ex) {
+            System.err.println("Error al contar los totales del mes: " + ex.getMessage());
+        }
+
+        return Total;
+    }
 
 }

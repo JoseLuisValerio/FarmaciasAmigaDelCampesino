@@ -172,6 +172,13 @@ public class Estilo {
                 boton.setIcon(icon);
                 break;
                 
+            case 7: //Reporte
+                path = "/Vista/Imagenes/Reporte.png";
+                url = this.getClass().getResource(path);
+                icon = new ImageIcon(url);
+                boton.setIcon(icon);
+                break;
+                
             default:
                 boton.setText("No definido");
                 break;
