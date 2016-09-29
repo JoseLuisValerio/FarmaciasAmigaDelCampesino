@@ -25,7 +25,15 @@
      venta.`Hora` AS Hora,
      venta.`DinElectro` AS DinElectro,
      venta.`Total` AS Total,
-     sucursal.`nombre` AS Sucursal
+     sucursal.`nombre` AS Sucursal,
+     (SELECT Sum(Venta.Total) FROM Venta
+	WHERE Venta.Fecha LIKE $P{Fecha}
+     ) AS VentaTotal,
+(SELECT Sum(Venta.DinElectro) FROM
+     Venta
+	WHERE Venta.Fecha LIKE $P{Fecha}
+     ) AS TotalElectronico
+
 FROM
      `cliente` cliente INNER JOIN `venta` venta ON cliente.`idCliente` = venta.`idCliente`
      INNER JOIN `usuario` usuario ON venta.`idusuario` = usuario.`idusuario`
@@ -51,6 +59,8 @@ WHERE Venta.Fecha LIKE $P{Fecha}
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="Sucursal" class="java.lang.String"/>
+	<field name="VentaTotal" class="java.lang.Double"/>
+	<field name="TotalElectronico" class="java.lang.Double"/>
 	<group name="Sucursal">
 		<groupExpression><![CDATA[$F{Sucursal}]]></groupExpression>
 		<groupHeader>
@@ -89,7 +99,56 @@ WHERE Venta.Fecha LIKE $P{Fecha}
 		</band>
 	</title>
 	<pageHeader>
-		<band splitType="Stretch"/>
+		<band height="91" splitType="Stretch">
+			<textField>
+				<reportElement x="571" y="0" width="140" height="20" uuid="da1ced5c-bfc4-408b-ab5a-83fc866fa12c"/>
+				<textElement textAlignment="Center">
+					<font size="20"/>
+				</textElement>
+				<textFieldExpression><![CDATA["$"+$F{VentaTotal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="418" y="0" width="153" height="28" uuid="bb27a79d-c744-4de7-af02-1c49047c052f"/>
+				<textElement textAlignment="Right">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Venta Total:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="571" y="28" width="140" height="25" uuid="a892b204-70f7-4224-b121-9e4b62ff15e0"/>
+				<textElement textAlignment="Center">
+					<font size="20"/>
+				</textElement>
+				<textFieldExpression><![CDATA["$"+$F{TotalElectronico}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="332" y="28" width="239" height="28" uuid="b0b26f2c-921f-4e48-a511-11ad12a507fa"/>
+				<textElement textAlignment="Right">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dinero Electrónico Total:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="571" y="56" width="140" height="22" uuid="94f393aa-fded-4ba0-8447-777fa1546ae9"/>
+				<textElement textAlignment="Center">
+					<font size="20"/>
+				</textElement>
+				<textFieldExpression><![CDATA["$"+($F{VentaTotal} - $F{TotalElectronico})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="418" y="56" width="153" height="28" uuid="a91cdf6b-8de4-4ec0-802d-4c504204b697"/>
+				<textElement textAlignment="Right">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cobrado Total:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Transparent" x="332" y="0" width="408" height="91" uuid="07c36c8d-14d4-4629-b017-de5f6a67186d"/>
+				<graphicElement>
+					<pen lineWidth="1.25" lineStyle="Double"/>
+				</graphicElement>
+			</rectangle>
+		</band>
 	</pageHeader>
 	<columnHeader>
 		<band height="16" splitType="Stretch">

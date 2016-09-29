@@ -49,3 +49,5 @@ build/classes/Vista/Producto.class
 *.properties
 /dist/
 *.class
+nbproject/private/private.xml
+nbproject/private/private.xml
