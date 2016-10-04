@@ -49,7 +49,8 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         Estilo.MnIcon(MnVentas, 9);
         Estilo.MnIcon(MnAdmin, 10);
         Estilo.MnIcon(MnReportes, 11);
-        Estilo.MnIcon(MnInventarios, 12);
+        Estilo.MnIcon(MnInventarios, 13);
+        Estilo.MnIcon(MnAcercade, 12);
 
         Estilo.mnitemIcon(MnItemCerrSesion, 1);
         Estilo.mnitemIcon(MnItemAddProd, 2);
@@ -67,6 +68,7 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         Estilo.mnitemIcon(MnItemInvSucursal, 11);
         Estilo.mnitemIcon(MnItemProductos, 12);
         Estilo.mnitemIcon(MnItemTipUsuario, 13);
+        
         
 
         Estilo.frmInicial(this, "Farmacia y consultorio 'Amiga del campesino'");
@@ -99,6 +101,9 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuBar2 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         lblNombre = new javax.swing.JLabel();
@@ -136,6 +141,13 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         MnInventarios = new javax.swing.JMenu();
         MnItemInProveedor = new javax.swing.JMenuItem();
         MnItemInvSucursal = new javax.swing.JMenuItem();
+        MnAcercade = new javax.swing.JMenu();
+
+        jMenu1.setText("File");
+        jMenuBar2.add(jMenu1);
+
+        jMenu2.setText("Edit");
+        jMenuBar2.add(jMenu2);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -393,6 +405,14 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
 
         jMenuBar1.add(MnAdmin);
 
+        MnAcercade.setText("Acerca de");
+        MnAcercade.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                MnAcercadeMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(MnAcercade);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -515,6 +535,11 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         Ventana.setVisible(true);
     }//GEN-LAST:event_MnItemTipUsuarioMousePressed
 
+    private void MnAcercadeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MnAcercadeMouseClicked
+        About a = new About();
+        a.setVisible(true);
+    }//GEN-LAST:event_MnAcercadeMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -551,6 +576,7 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu MnAcercade;
     private javax.swing.JMenu MnAdmin;
     private javax.swing.JMenu MnArchivo;
     private javax.swing.JMenu MnClientes;
@@ -577,7 +603,10 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
     private javax.swing.JMenu MnVentas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblDireccion;

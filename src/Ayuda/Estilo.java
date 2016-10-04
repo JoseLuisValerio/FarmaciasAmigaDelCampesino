@@ -342,6 +342,21 @@ public class Estilo {
                 thumbnail = new ImageIcon(tmpIcon.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
                 menu.setIcon(thumbnail);
                 break;
+                     case 12: //Reportes
+                path = "/Vista/Imagenes/a.jpg";
+                url = this.getClass().getResource(path);
+                tmpIcon = new ImageIcon(url);
+                thumbnail = new ImageIcon(tmpIcon.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+                menu.setIcon(thumbnail);
+                break;
+                         case 13: //Reportes
+                path = "/Vista/Imagenes/Inventario.png";
+                url = this.getClass().getResource(path);
+                tmpIcon = new ImageIcon(url);
+                thumbnail = new ImageIcon(tmpIcon.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+                menu.setIcon(thumbnail);
+                break;
+                                  
         }
     }
     
