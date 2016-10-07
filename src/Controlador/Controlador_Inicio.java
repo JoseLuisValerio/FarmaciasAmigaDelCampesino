@@ -36,7 +36,7 @@ public String ObtenerSucursal() {
 public Object[][] DatosSucursal() {
         Object[][] datos = null;
         String[] columnas = {"Nombre","Direccion"};
-        datos = Model.GetTabla(columnas,"SELECT Nombre, Direccion FROM Sucursal WHERE IdSucursal = '"+ObtenerSucursal()+"';");
+        datos = Model.GetTabla(columnas,"SELECT Nombre, Direccion FROM sucursal WHERE IdSucursal = '"+ObtenerSucursal()+"';");
         return datos;
     }
 

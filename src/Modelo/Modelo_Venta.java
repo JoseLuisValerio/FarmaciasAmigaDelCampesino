@@ -82,7 +82,7 @@ public class Modelo_Venta {
     
     public String GetIdVenta(String Fecha, String Hora, String Sucursal, String Usuario){
         String idVenta="";
-        String SQL ="SELECT idVenta FROM Venta WHERE Fecha='"+Fecha+"' AND Hora='"+Hora+"' AND idSucursal='"+Sucursal+"' AND idUsuario='"+Usuario+"';";
+        String SQL ="SELECT idVenta FROM venta WHERE Fecha='"+Fecha+"' AND Hora='"+Hora+"' AND idSucursal='"+Sucursal+"' AND idUsuario='"+Usuario+"';";
         try{
             ps = con.conectado().prepareStatement(SQL);
          res = ps.executeQuery();
@@ -104,7 +104,7 @@ public class Modelo_Venta {
      */
     public int GetStock(String Columna, String Producto, String Sucursal){
         int Stock =0;
-        String SQL = "SELECT "+Columna+" FROM DetalleSucursal WHERE idSucursal ="+Sucursal+" AND idProducto="+Producto+";";
+        String SQL = "SELECT "+Columna+" FROM detalleSucursal WHERE idSucursal ="+Sucursal+" AND idProducto="+Producto+";";
         try{
             ps = con.conectado().prepareStatement(SQL);
             res = ps.executeQuery();
@@ -128,7 +128,7 @@ public class Modelo_Venta {
      */
     public boolean ActualizaStockYVendidos(String Producto, String Sucursal, int Stock, int Vendidos){
         boolean exitoso = false;
-        String SQL = "UPDATE DetalleSucursal SET Stock=?, Vendidos=? WHERE idProducto ='"+Producto+"' AND idSucursal='"+Sucursal+"'";
+        String SQL = "UPDATE detalleSucursal SET Stock=?, Vendidos=? WHERE idProducto ='"+Producto+"' AND idSucursal='"+Sucursal+"'";
         try{
         ps= con.conectado().prepareStatement(SQL);
         ps.setInt(1, Stock);
@@ -182,7 +182,7 @@ public class Modelo_Venta {
     }
     
     public Float RetornaTotalMes(int Mes, String Year) {
-        String sql = "SELECT SUM(Total) FROM Venta WHERE Fecha LIKE '%/"+Mes+"/"+Year+"';";
+        String sql = "SELECT SUM(Total) FROM venta WHERE Fecha LIKE '%/"+Mes+"/"+Year+"';";
         Float Total=0f;
         try {
             Statement st = con.conectado().createStatement();

@@ -27,7 +27,7 @@ public class Controlador_Venta {
     public boolean RegistrarVenta(String Fecha, String Hora,String DineroElectro, String Total,String Usuario, String Cliente, String Sucursal){
         boolean estado=false;
         String Datos[]={Fecha,Hora,DineroElectro,Total,Usuario,Cliente,Sucursal};
-        estado= Modelo.insertar(Datos, "INSERT INTO Venta (Fecha, Hora, DinElectro, Total, idUsuario, idCliente, idSucursal) "
+        estado= Modelo.insertar(Datos, "INSERT INTO venta (Fecha, Hora, DinElectro, Total, idUsuario, idCliente, idSucursal) "
                 + "VALUES(?,?,?,?,?,?,?);");
         return estado;
     }
@@ -35,7 +35,7 @@ public class Controlador_Venta {
     public boolean RegistrarDetalleVenta(String Cantidad, String idProducto, String idVenta, String Total){
         boolean exitoso=false;
         String datos[]={Cantidad, idProducto, idVenta, Total};
-        exitoso = Modelo.insertar(datos, "INSERT INTO DetallesVenta(Cantidad, idProducto, idVenta, Total )"
+        exitoso = Modelo.insertar(datos, "INSERT INTO detallesVenta(Cantidad, idProducto, idVenta, Total )"
                 + "VALUES (?,?,?,?);");
         return exitoso;
     }
@@ -70,8 +70,8 @@ public class Controlador_Venta {
     public Object[][] ObtenerProducto(String codigo, String idSucursal){
         Object[][] datos= null;
         String columnas[]={"Producto.IdProducto","Nombre","Descripcion", "PPublico"};
-        String SQLContar="Producto INNER JOIN DetalleSucursal ON Producto.idProducto = DetalleSucursal.idProducto "
-                + "WHERE DetalleSucursal.idProducto='"+codigo+"' && DetalleSucursal.idSucursal ='"+idSucursal+"';";
+        String SQLContar="Producto INNER JOIN detalleSucursal ON Producto.idProducto = detalleSucursal.idProducto "
+                + "WHERE detalleSucursal.idProducto='"+codigo+"' && detalleSucursal.idSucursal ='"+idSucursal+"';";
         String SQLExecute="SELECT Producto.IdProducto, Nombre, Descripcion, PPublico FROM "+SQLContar;
         datos = Modelo.GetTable(columnas, SQLContar, SQLExecute);
         return datos;
@@ -106,7 +106,7 @@ public class Controlador_Venta {
      */
     public boolean RestaDinElectro(String idCliente, float DinElectro) {
         boolean exitoso = false;
-        String SQL ="UPDATE Cliente SET DineroElectronico=DineroElectronico-? WHERE idCliente='"+idCliente+"';";
+        String SQL ="UPDATE cliente SET DineroElectronico=DineroElectronico-? WHERE idCliente='"+idCliente+"';";
         exitoso = Modelo.ActualizaDinElectro(DinElectro, SQL);
         return exitoso;
     }
@@ -119,7 +119,7 @@ public class Controlador_Venta {
      */
     public boolean SumaDinElectro(String idCliente, float DinElectro) {
         boolean exitoso = false;
-        String SQL ="UPDATE Cliente SET DineroElectronico=DineroElectronico+? WHERE idCliente='"+idCliente+"';";
+        String SQL ="UPDATE cliente SET DineroElectronico=DineroElectronico+? WHERE idCliente='"+idCliente+"';";
         exitoso = Modelo.ActualizaDinElectro(DinElectro, SQL);
         return exitoso;
     }

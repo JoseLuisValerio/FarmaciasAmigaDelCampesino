@@ -14,11 +14,11 @@ public class Controlador_Usuario {
     }
     
     public Object[][] ConsultaUsuarios() {
-        String seleccion = "SELECT Usuario.Alias,TipoUsuario.Nombre,Usuario.Nombre,Usuario.APaterno, Usuario.AMaterno FROM";
-        String tablas = "(Usuario INNER JOIN TipoUsuario on Usuario.idTipoUsuario = TipoUsuario.idTipoUsuario); ";
+        String seleccion = "SELECT usuario.Alias,TipoUsuario.Nombre,usuario.Nombre,usuario.APaterno, usuario.AMaterno FROM";
+        String tablas = "(usuario INNER JOIN TipoUsuario on usuario.idTipoUsuario = TipoUsuario.idTipoUsuario); ";
         String sentencia = seleccion + tablas;
         Object[][] datos = null;
-        String[] columnas = {"Usuario.Alias", "TipoUsuario.Nombre", "Usuario.Nombre","Usuario.APaterno", "Usuario.AMaterno"};
+        String[] columnas = {"usuario.Alias", "TipoUsuario.Nombre", "usuario.Nombre","usuario.APaterno", "usuario.AMaterno"};
         //dividir la consulta en dos una parta de los datos a busca y otra que tendra las tablas 
         datos = ModelUser.GetTabla(columnas, sentencia, tablas);
 
@@ -26,11 +26,11 @@ public class Controlador_Usuario {
     }
 
     public Object[][] BuscaUsuario(String Usuario) {
-        String seleccion = "SELECT Usuario.Alias,TipoUsuario.Nombre,Usuario.Nombre,Usuario.APaterno, Usuario.AMaterno FROM";
-        String tablas = "(Usuario INNER JOIN TipoUsuario on Usuario.idTipoUsuario = TipoUsuario.idTipoUsuario) AND Usuario= '" + Usuario + "';";
+        String seleccion = "SELECT usuario.Alias,TipoUsuario.Nombre,usuario.Nombre,usuario.APaterno, usuario.AMaterno FROM";
+        String tablas = "(usuario INNER JOIN TipoUsuario on usuario.idTipoUsuario = TipoUsuario.idTipoUsuario) AND usuario= '" + Usuario + "';";
         String sentencia = seleccion + tablas;
         Object[][] datos = null;
-        String[] columnas = {"Usuario.Alias", "TipoUsuario.Nombre", "Usuario.Nombre","Usuario.APaterno", "Usuario.AMaterno"};
+        String[] columnas = {"usuario.Alias", "TipoUsuario.Nombre", "usuario.Nombre","usuario.APaterno", "usuario.AMaterno"};
         //dividir la consulta en dos una parta de los datos a busca y otra que tendra las tablas 
         datos = ModelUser.GetTabla(columnas, sentencia, tablas);
         return datos;
@@ -49,15 +49,15 @@ public class Controlador_Usuario {
     }
     
     public boolean InsertarUsuario(String Alias, String Password, String Tipo, String Nombre,String APaterno, String AMaterno){
-        return ModelUser.InsertarOActualizar("INSERT INTO Usuario (Alias, Password, idTipoUsuario, Nombre, APaterno, AMaterno, Estatus)"
+        return ModelUser.InsertarOActualizar("INSERT INTO usuario (Alias, Password, idTipoUsuario, Nombre, APaterno, AMaterno, Estatus)"
                 + " VALUES ('"+Alias+"', SHA('"+Password+"'),'"+obtenerIdTipo(Tipo)+"','"+Nombre+"','"+APaterno+"', '"+AMaterno+"','1');");
     }
     
      public boolean ActualizarUsuario(String Alias, String Password, String Tipo, String Nombre,String APaterno, String AMaterno){
-        return ModelUser.InsertarOActualizar("UPDATE Usuario SET Password = SHA('"+Password+"'), idTipoUsuario='"+obtenerIdTipo(Tipo)+"',Nombre='"+Nombre+"',APaterno='"+APaterno+"', AMaterno='"+AMaterno+"',Estatus='1' WHERE Alias = '"+Alias+"';");
+        return ModelUser.InsertarOActualizar("UPDATE usuario SET Password = SHA('"+Password+"'), idTipoUsuario='"+obtenerIdTipo(Tipo)+"',Nombre='"+Nombre+"',APaterno='"+APaterno+"', AMaterno='"+AMaterno+"',Estatus='1' WHERE Alias = '"+Alias+"';");
     }
      public boolean ActualizarUsuario2(String Alias, String Nombre,String APaterno, String AMaterno){
-        return ModelUser.InsertarOActualizar("UPDATE Usuario SET Nombre='"+Nombre+"',APaterno='"+APaterno+"', AMaterno='"+AMaterno+"',Estatus='1' WHERE Alias = '"+Alias+"';");
+        return ModelUser.InsertarOActualizar("UPDATE usuario SET Nombre='"+Nombre+"',APaterno='"+APaterno+"', AMaterno='"+AMaterno+"',Estatus='1' WHERE Alias = '"+Alias+"';");
     }
     
      public String obtenerIdTipo(String Tipo){
@@ -71,7 +71,7 @@ public class Controlador_Usuario {
      
      public boolean ExisteUsuario(String Alias){
          boolean Existe=false;
-         String SQL = "SELECT Alias FROM Usuario WHERE Alias ='"+Alias+"';";
+         String SQL = "SELECT Alias FROM usuario WHERE Alias ='"+Alias+"';";
          Existe = ModelUser.ExisteUsuario(SQL);
          return Existe;
      }

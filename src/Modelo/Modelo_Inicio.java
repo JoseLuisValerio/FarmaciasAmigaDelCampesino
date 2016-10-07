@@ -42,7 +42,7 @@ public Modelo_Inicio(){
      public boolean ExisteMovimientos(String Fecha, String idUsuario){
          boolean Existe=false;
          int registros=0;
-         String SQL="SELECT COUNT(idMovimiento) as total FROM Movimiento WHERE Fecha LiKE '"+Fecha+"' AND idUsuario='"+idUsuario+"';";
+         String SQL="SELECT COUNT(idMovimiento) as total FROM movimiento WHERE Fecha LiKE '"+Fecha+"' AND idUsuario='"+idUsuario+"';";
           try {
             ps = con.conectado().prepareStatement(SQL);
             res = ps.executeQuery();

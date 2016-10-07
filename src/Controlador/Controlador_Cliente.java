@@ -25,12 +25,12 @@ public class Controlador_Cliente {
         Object[][] datos = null;
         String[] columnas = {"Alias", "Nombre", "APaterno", "AMaterno", "Tel", "Direccion", "Tipo_Cliente.Nombre", "DineroElectronico"};
         if (Alias.equals("")) {
-            String SQLContar="Cliente INNER JOIN Tipo_Cliente ON Cliente.TipoCliente = Tipo_Cliente.idTipoCliente";
-            String SQLExecute="SELECT Alias, Cliente.Nombre, APaterno, AMaterno, Tel, Direccion, Tipo_Cliente.Nombre, DineroElectronico FROM "+SQLContar;
+            String SQLContar="cliente INNER JOIN Tipo_Cliente ON cliente.TipoCliente = Tipo_Cliente.idTipoCliente";
+            String SQLExecute="SELECT Alias, cliente.Nombre, APaterno, AMaterno, Tel, Direccion, Tipo_Cliente.Nombre, DineroElectronico FROM "+SQLContar;
             datos = ModeloCliente.GetTabla(columnas, SQLExecute,SQLContar);
         } else {
-            String SQLContar="Cliente INNER JOIN Tipo_Cliente ON Cliente.TipoCliente = Tipo_Cliente.idTipoCliente WHERE Alias = '" + Alias + "';";
-            String SQLExecute="SELECT Alias, Cliente.Nombre, APaterno, AMaterno, Tel, Direccion, Tipo_Cliente.Nombre, DineroElectronico FROM "+SQLContar;
+            String SQLContar="cliente INNER JOIN tipo_cliente ON cliente.TipoCliente = Tipo_Cliente.idTipoCliente WHERE Alias = '" + Alias + "';";
+            String SQLExecute="SELECT Alias, cliente.Nombre, APaterno, AMaterno, Tel, Direccion, Tipo_Cliente.Nombre, DineroElectronico FROM "+SQLContar;
             datos = ModeloCliente.GetTabla(columnas,SQLExecute, SQLContar);
         }
         return datos;
@@ -47,11 +47,11 @@ public class Controlador_Cliente {
         Object[][] datos = null;
         String[] columnaminima = {"Alias", "Nombre", "APaterno", "AMaterno", "Tel", "DineroElectronico", "idCliente"};
         if (Buscar.equals("")) {
-            String SQLContar="Cliente WHERE idCliente !=1;";
+            String SQLContar="cliente WHERE idCliente !=1;";
             String SQLExecte="SELECT Alias, Nombre, APaterno, AMaterno, Tel, DineroElectronico,idCliente FROM "+SQLContar;
             datos = ModeloCliente.GetTabla(columnaminima,SQLExecte,SQLContar);
         } else {
-            String SQLContar="Cliente WHERE idCliente != 1 (&& Nombre LIKE '%"+Buscar+"%' OR APaterno LIKE '%"+Buscar+"%' "
+            String SQLContar="cliente WHERE idCliente != 1 (&& Nombre LIKE '%"+Buscar+"%' OR APaterno LIKE '%"+Buscar+"%' "
                     + "OR AMaterno LIKE '%"+Buscar+"%' OR Tel LIKE '%"+Buscar+"%' OR Alias = '"+Buscar+"');";
             String SQLExecute="SELECT Alias, Nombre, APaterno, AMaterno, Tel,DineroElectronico, idCliente FROM "+SQLContar;
             datos = ModeloCliente.GetTabla(columnaminima, SQLExecute,SQLContar);
@@ -102,13 +102,13 @@ public class Controlador_Cliente {
      */
     public boolean insertarCliente(String Alias, String Nombre, String APaterno, String AMaterno, String Tel, String Direccion, String TipoCliente, String DineroElectronico) {
         String datos[] = {Alias, Nombre, APaterno, AMaterno, Tel, Direccion, obtenerIdTipo(TipoCliente), DineroElectronico};
-        return ModeloCliente.insertar(datos, "INSERT INTO Cliente(Alias,Nombre,APaterno,AMaterno,Tel,Direccion,TipoCliente,DineroElectronico)"
+        return ModeloCliente.insertar(datos, "INSERT INTO cliente(Alias,Nombre,APaterno,AMaterno,Tel,Direccion,TipoCliente,DineroElectronico)"
                 + " VALUES (?,?,?,?,?,?,?,?)");
     }
 
     public boolean ActualizarCliente(String Alias, String Nombre, String APaterno, String AMaterno, String Tel, String Direccion, String TipoCliente) {
         String datos[] = {Nombre, APaterno, AMaterno, Tel, Direccion, obtenerIdTipo(TipoCliente)};
-        return ModeloCliente.insertar(datos, "UPDATE Cliente SET Nombre=? ,APaterno=? ,AMaterno=?,Tel=?,Direccion=?,TipoCliente=? WHERE Alias='" + Alias + "';");
+        return ModeloCliente.insertar(datos, "UPDATE cliente SET Nombre=? ,APaterno=? ,AMaterno=?,Tel=?,Direccion=?,TipoCliente=? WHERE Alias='" + Alias + "';");
     }
     
     public boolean ActualizarTipoCliente(String ID,String Nombre, String Descuento) {
