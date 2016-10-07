@@ -61,7 +61,7 @@ public class Modelo_Cliente {
     public Object[] llenarCombo(String nombrecol, String sql) {
         int registros = 0;
         try {
-            ps = con.conectado().prepareStatement("SELECT count(*) as total FROM Tipo_Cliente");
+            ps = con.conectado().prepareStatement("SELECT count(*) as total FROM tipo_cliente");
             res = ps.executeQuery();
             res.next();
             registros = res.getInt("total");

@@ -28,7 +28,7 @@ public class Producto_Consultar_Add extends javax.swing.JFrame {
         Estilo.txtfDescripcion(txtNombre, "Nombre del Producto");
         Estilo.txtfDescripcion(txtActivo, "Nombre del Activo");
         Estilo.txtfDescripcion(txtPPublico, "Precio al Publico ");
-        Estilo.txtfDescripcion(txtStock,"Stock");
+        Estilo.txtfDescripcion(txtStock, "Stock");
 
     }
 
@@ -46,8 +46,8 @@ public class Producto_Consultar_Add extends javax.swing.JFrame {
             cmbProveedor.addItem((String) Proveedores[i]);
         }
     }
-    
-    private void Limpiar(){
+
+    private void Limpiar() {
         Ayuda.Utilidades Util = new Ayuda.Utilidades();
         Util.txtLimpiar(txtStock);
         Util.txtLimpiar(txtActivo);
@@ -235,24 +235,24 @@ public class Producto_Consultar_Add extends javax.swing.JFrame {
         String descripcion = txtDescripcion.getText();
         String proveedor = ctr.obtenerIdProveedor(cmbProveedor.getSelectedItem().toString());
         String area = ctr.obtenerIsArea(cmbAreas.getSelectedItem().toString());
-        
+
         if (txtCodigo.getText().isEmpty() == false && txtNombre.getText().isEmpty() == false && txtActivo.getText().isEmpty() == false && txtStock.getText().isEmpty() == false && txtPPublico.getText().isEmpty() == false && cmbProveedor.getSelectedIndex() > 0 && cmbAreas.getSelectedIndex() > 0) {
             if (ctr.Comprobar(codigo).length == 0) {
-                if (ctr.ingresarProductoNuevo(codigo, nombre, activo, descripcion, precio, precio, proveedor, "1")== true){
-                ctr.ingresarDetalleNuevo(codigo,stock,area);
-                ctr.ingresarDetalleNuevo1(codigo);
-                Limpiar();
-                Estilo.lblMensajes(lblmensaje, "El producto a sido agregado", 3);
-                }else{
-                Estilo.lblMensajes(lblmensaje, "Error al agregar", 2);
+                if (ctr.ingresarProductoNuevo(codigo, nombre, activo, descripcion, precio, precio, proveedor, "1") == true) {
+                    ctr.ingresarDetalleNuevo(codigo, stock, area);
+                    ctr.ingresarDetalleNuevo1(codigo);
+                    Limpiar();
+                    Estilo.lblMensajes(lblmensaje, "El producto a sido agregado", 3);
+                } else {
+                    Estilo.lblMensajes(lblmensaje, "Error al agregar", 2);
                 }
             } else {
-                if (ctr.ingresarDetalleNuevo(codigo,stock,area)==true){
-                ctr.ingresarDetalleNuevo1(codigo);
-                Limpiar();
-                Estilo.lblMensajes(lblmensaje,"El producto a sido agregado", 3);
-                }else{
-                Estilo.lblMensajes(lblmensaje,"Error al agregar", 2);
+                if (ctr.agregarStock(codigo,stock) == true) {
+                    //ctr.ingresarDetalleNuevo1(codigo);
+                    Limpiar();
+                    Estilo.lblMensajes(lblmensaje, "El producto a sido agregado", 3);
+                } else {
+                    Estilo.lblMensajes(lblmensaje, "Error al agregar", 2);
                 }
             }
         } else {

@@ -37,7 +37,7 @@ public class Conexion {
             usuario = Descifrar.Desencriptar(propiedades.getProperty("User"));
             pass = Descifrar.Desencriptar(propiedades.getProperty("Psw"));
             url = Descifrar.Desencriptar(propiedades.getProperty("Servidor")) + base;
-            
+            System.out.println(pass);
         } catch (IOException ex) {
             System.err.println("Error al leer el archivo de configuración ");
         } finally {

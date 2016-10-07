@@ -35,7 +35,7 @@ public class Controlador_Venta {
     public boolean RegistrarDetalleVenta(String Cantidad, String idProducto, String idVenta, String Total){
         boolean exitoso=false;
         String datos[]={Cantidad, idProducto, idVenta, Total};
-        exitoso = Modelo.insertar(datos, "INSERT INTO detallesVenta(Cantidad, idProducto, idVenta, Total )"
+        exitoso = Modelo.insertar(datos, "INSERT INTO detallesventa(Cantidad, idProducto, idVenta, Total )"
                 + "VALUES (?,?,?,?);");
         return exitoso;
     }
@@ -69,10 +69,10 @@ public class Controlador_Venta {
      */
     public Object[][] ObtenerProducto(String codigo, String idSucursal){
         Object[][] datos= null;
-        String columnas[]={"Producto.IdProducto","Nombre","Descripcion", "PPublico"};
-        String SQLContar="Producto INNER JOIN detalleSucursal ON Producto.idProducto = detalleSucursal.idProducto "
-                + "WHERE detalleSucursal.idProducto='"+codigo+"' && detalleSucursal.idSucursal ='"+idSucursal+"';";
-        String SQLExecute="SELECT Producto.IdProducto, Nombre, Descripcion, PPublico FROM "+SQLContar;
+        String columnas[]={"producto.IdProducto","Nombre","Descripcion", "PPublico"};
+        String SQLContar="producto INNER JOIN detallesucursal ON producto.idProducto = detallesucursal.idProducto "
+                + "WHERE detallesucursal.idProducto='"+codigo+"' && detallesucursal.idSucursal ='"+idSucursal+"';";
+        String SQLExecute="SELECT producto.IdProducto, Nombre, Descripcion, PPublico FROM "+SQLContar;
         datos = Modelo.GetTable(columnas, SQLContar, SQLExecute);
         return datos;
     }

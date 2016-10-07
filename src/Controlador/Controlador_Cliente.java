@@ -23,14 +23,14 @@ public class Controlador_Cliente {
      */
     public Object[][] ConsultaCliente(String Alias) {
         Object[][] datos = null;
-        String[] columnas = {"Alias", "Nombre", "APaterno", "AMaterno", "Tel", "Direccion", "Tipo_Cliente.Nombre", "DineroElectronico"};
+        String[] columnas = {"Alias", "Nombre", "APaterno", "AMaterno", "Tel", "Direccion", "tipo_cliente.Nombre", "DineroElectronico"};
         if (Alias.equals("")) {
-            String SQLContar="cliente INNER JOIN Tipo_Cliente ON cliente.TipoCliente = Tipo_Cliente.idTipoCliente";
-            String SQLExecute="SELECT Alias, cliente.Nombre, APaterno, AMaterno, Tel, Direccion, Tipo_Cliente.Nombre, DineroElectronico FROM "+SQLContar;
+            String SQLContar="cliente INNER JOIN tipo_cliente ON cliente.TipoCliente = tipo_cliente.idTipoCliente";
+            String SQLExecute="SELECT Alias, cliente.Nombre, APaterno, AMaterno, Tel, Direccion, tipo_cliente.Nombre, DineroElectronico FROM "+SQLContar;
             datos = ModeloCliente.GetTabla(columnas, SQLExecute,SQLContar);
         } else {
-            String SQLContar="cliente INNER JOIN tipo_cliente ON cliente.TipoCliente = Tipo_Cliente.idTipoCliente WHERE Alias = '" + Alias + "';";
-            String SQLExecute="SELECT Alias, cliente.Nombre, APaterno, AMaterno, Tel, Direccion, Tipo_Cliente.Nombre, DineroElectronico FROM "+SQLContar;
+            String SQLContar="cliente INNER JOIN tipo_cliente ON cliente.TipoCliente = tipo_cliente.idTipoCliente WHERE Alias = '" + Alias + "';";
+            String SQLExecute="SELECT Alias, cliente.Nombre, APaterno, AMaterno, Tel, Direccion, tipo_cliente.Nombre, DineroElectronico FROM "+SQLContar;
             datos = ModeloCliente.GetTabla(columnas,SQLExecute, SQLContar);
         }
         return datos;
@@ -67,7 +67,7 @@ public class Controlador_Cliente {
      */
     public Object[] ComboTipos() {
         String seleccion = "SELECT Nombre from ";
-        String tablas = "Tipo_Cliente";
+        String tablas = "tipo_cliente";
         String sentencia = seleccion + tablas;
         String columnas = "Nombre";
         return ModeloCliente.llenarCombo(columnas, sentencia);
@@ -75,7 +75,7 @@ public class Controlador_Cliente {
     
     public Object[][] TablaTiposCliente() {
         String seleccion = "SELECT IDTipoCliente,Nombre, Descuento FROM ";
-        String tablas = "Tipo_Cliente; ";
+        String tablas = "tipo_cliente; ";
         String sentencia = seleccion + tablas;
         Object[][] datos = null;
         String[] columnas = {"IdTipoCliente","Nombre", "Descuento"};
@@ -113,7 +113,7 @@ public class Controlador_Cliente {
     
     public boolean ActualizarTipoCliente(String ID,String Nombre, String Descuento) {
         String datos[] = {Nombre, Descuento};
-        return ModeloCliente.insertar(datos, "UPDATE Tipo_Cliente SET Nombre=? ,Descuento=? WHERE idTipoCliente='" + ID + "';");
+        return ModeloCliente.insertar(datos, "UPDATE tipo_cliente SET Nombre=? ,Descuento=? WHERE idTipoCliente='" + ID + "';");
     }
 
     /**
@@ -124,7 +124,7 @@ public class Controlador_Cliente {
      * @return el id de dicho tipo
      */
     public String obtenerIdTipo(String Tipo) {
-        String sentencia = "SELECT idTipocliente FROM Tipo_Cliente WHERE Nombre = '" + Tipo + "';";
+        String sentencia = "SELECT idTipocliente FROM tipo_cliente WHERE Nombre = '" + Tipo + "';";
         String datos = null;
         String columnas = "idTipoCliente";
         datos = ModeloCliente.obtenerId(columnas, sentencia);
@@ -133,7 +133,7 @@ public class Controlador_Cliente {
     
     public boolean InsertaTipoCliente(String Nombre, String Descuento) {        
         String datos[] = {Nombre, Descuento};
-        return ModeloCliente.insertar(datos, "INSERT INTO Tipo_Cliente(Nombre, Descuento) VALUES(?,?)");
+        return ModeloCliente.insertar(datos, "INSERT INTO tipo_cliente(Nombre, Descuento) VALUES(?,?)");
     }
     
     

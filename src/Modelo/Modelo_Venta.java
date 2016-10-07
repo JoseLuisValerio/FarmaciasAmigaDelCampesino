@@ -104,7 +104,7 @@ public class Modelo_Venta {
      */
     public int GetStock(String Columna, String Producto, String Sucursal){
         int Stock =0;
-        String SQL = "SELECT "+Columna+" FROM detalleSucursal WHERE idSucursal ="+Sucursal+" AND idProducto="+Producto+";";
+        String SQL = "SELECT "+Columna+" FROM detallesucursal WHERE idSucursal ="+Sucursal+" AND idProducto="+Producto+";";
         try{
             ps = con.conectado().prepareStatement(SQL);
             res = ps.executeQuery();
@@ -128,7 +128,7 @@ public class Modelo_Venta {
      */
     public boolean ActualizaStockYVendidos(String Producto, String Sucursal, int Stock, int Vendidos){
         boolean exitoso = false;
-        String SQL = "UPDATE detalleSucursal SET Stock=?, Vendidos=? WHERE idProducto ='"+Producto+"' AND idSucursal='"+Sucursal+"'";
+        String SQL = "UPDATE detallesucursal SET Stock=?, Vendidos=? WHERE idProducto ='"+Producto+"' AND idSucursal='"+Sucursal+"'";
         try{
         ps= con.conectado().prepareStatement(SQL);
         ps.setInt(1, Stock);
@@ -167,7 +167,7 @@ public class Modelo_Venta {
         boolean exitoso=false;
         
         //ACTUALIZACIÓN DEL SALDO
-        String SQL ="UPDATE Caja SET SaldoTotal=SaldoTotal+? WHERE idSucursal='"+idSucursal+"';";
+        String SQL ="UPDATE caja SET SaldoTotal=SaldoTotal+? WHERE idSucursal='"+idSucursal+"';";
         try{
             ps =con.conectado().prepareStatement(SQL);
             ps.setFloat(1,Monto);
