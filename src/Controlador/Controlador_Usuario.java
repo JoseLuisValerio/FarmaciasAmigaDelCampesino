@@ -14,11 +14,11 @@ public class Controlador_Usuario {
     }
     
     public Object[][] ConsultaUsuarios() {
-        String seleccion = "SELECT usuario.Alias,TipoUsuario.Nombre,usuario.Nombre,usuario.APaterno, usuario.AMaterno FROM";
-        String tablas = "(usuario INNER JOIN TipoUsuario on usuario.idTipoUsuario = TipoUsuario.idTipoUsuario); ";
+        String seleccion = "SELECT usuario.Alias,tipousuario.Nombre,usuario.Nombre,usuario.APaterno, usuario.AMaterno FROM";
+        String tablas = "(usuario INNER JOIN tipousuario on usuario.idTipoUsuario = tipousuario.idTipoUsuario); ";
         String sentencia = seleccion + tablas;
         Object[][] datos = null;
-        String[] columnas = {"usuario.Alias", "TipoUsuario.Nombre", "usuario.Nombre","usuario.APaterno", "usuario.AMaterno"};
+        String[] columnas = {"usuario.Alias", "tipousuario.Nombre", "usuario.Nombre","usuario.APaterno", "usuario.AMaterno"};
         //dividir la consulta en dos una parta de los datos a busca y otra que tendra las tablas 
         datos = ModelUser.GetTabla(columnas, sentencia, tablas);
 
@@ -26,11 +26,11 @@ public class Controlador_Usuario {
     }
 
     public Object[][] BuscaUsuario(String Usuario) {
-        String seleccion = "SELECT usuario.Alias,TipoUsuario.Nombre,usuario.Nombre,usuario.APaterno, usuario.AMaterno FROM";
-        String tablas = "(usuario INNER JOIN TipoUsuario on usuario.idTipoUsuario = TipoUsuario.idTipoUsuario) AND usuario= '" + Usuario + "';";
+        String seleccion = "SELECT usuario.Alias,tipousuario.Nombre,usuario.Nombre,usuario.APaterno, usuario.AMaterno FROM";
+        String tablas = "(usuario INNER JOIN tipousuario on usuario.idTipoUsuario = tipousuario.idTipoUsuario) AND usuario= '" + Usuario + "';";
         String sentencia = seleccion + tablas;
         Object[][] datos = null;
-        String[] columnas = {"usuario.Alias", "TipoUsuario.Nombre", "usuario.Nombre","usuario.APaterno", "usuario.AMaterno"};
+        String[] columnas = {"usuario.Alias", "tipousuario.Nombre", "usuario.Nombre","usuario.APaterno", "usuario.AMaterno"};
         //dividir la consulta en dos una parta de los datos a busca y otra que tendra las tablas 
         datos = ModelUser.GetTabla(columnas, sentencia, tablas);
         return datos;
@@ -42,7 +42,7 @@ public class Controlador_Usuario {
      */
     public Object[] CargaTipos(){
         String seleccion = "SELECT Nombre from ";
-        String tablas ="TipoUsuario";
+        String tablas ="tipotsuario";
         String sentencia = seleccion + tablas;
         String columnas = "Nombre";
          return ModelUser.llenarCombo(tablas, columnas, sentencia);
@@ -61,7 +61,7 @@ public class Controlador_Usuario {
     }
     
      public String obtenerIdTipo(String Tipo){
-        String sentencia = "SELECT idTipoUsuario from TipoUsuario WHERE Nombre = '"+Tipo+"';";
+        String sentencia = "SELECT idTipoUsuario from tipousuario WHERE Nombre = '"+Tipo+"';";
         String datos = null;
         String columnas = "idTipoUsuario";
         //dividir la consulta en dos una parta de los datos a busca y otra que tendra las tablas 
