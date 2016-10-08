@@ -83,7 +83,7 @@ public void pedido(String pedido) {
             jv.setTitle("Reporte de ventas");
             con.desconectar();
         }catch(Exception e){
-            System.err.println("Error al leer el reporte de ventas");
+            System.err.println("Error al leer el reporte de ventas: "+e.getMessage());
         }
     }
     
@@ -100,7 +100,7 @@ public void pedido(String pedido) {
             jv.setTitle("Reporte de cliente");
             con.desconectar();
         }catch(Exception e){
-            System.err.println("Error al acceder al report de clientes");
+            System.err.println("Error al acceder al report de clientes: "+e.getMessage());
         }
     }
     
@@ -115,7 +115,7 @@ public void pedido(String pedido) {
             jv.setTitle("Reporte de sucursal");
             con.desconectar();
         }catch(Exception e){
-            System.err.println("Error al leer el reporte de sucursal/Inventario");
+            System.err.println("Error al leer el reporte de sucursal/Inventario: "+e.getMessage());
         }
     }
     
@@ -130,7 +130,7 @@ public void pedido(String pedido) {
             jv.setTitle("Reporte de proveedor");
             con.desconectar();
         }catch(Exception e){
-            System.err.println("Error al leer reporte de proveedor/Inventario");
+            System.err.println("Error al leer reporte de proveedor/Inventario: "+e.getMessage());
         }
     }
     

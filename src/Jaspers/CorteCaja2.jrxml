@@ -14,13 +14,13 @@
 	</parameter>
 	<queryString>
 		<![CDATA[SELECT
-     (SELECT Concat(usuario.`NOMBRE`,' ',usuario.`APATERNO`) FROM Usuario WHERE Usuario.idUsuario= $P{idUsuario}) AS usuario,
+     (SELECT Concat(usuario.`nombre`,' ',usuario.`apaterno`) FROM usuario WHERE usuario.idusuario= $P{idUsuario}) AS usuario,
      sucursal.`nombre` AS sucursal,
      caja.`saldototal` AS saldototal
 FROM
      `sucursal` sucursal INNER JOIN `caja` caja ON sucursal.`idsucursal` = caja.`idsucursal`
 WHERE
-Sucursal.idsucursal = $P{idSucursal}]]>
+sucursal.idsucursal = $P{idSucursal}]]>
 	</queryString>
 	<field name="usuario" class="java.lang.String"/>
 	<field name="sucursal" class="java.lang.String"/>

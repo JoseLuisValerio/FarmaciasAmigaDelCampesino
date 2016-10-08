@@ -8,17 +8,17 @@
 	</parameter>
 	<queryString>
 		<![CDATA[SELECT
-     cliente.`Alias` AS Alias,
-     cliente.`NOMBRE` AS NOMBRE,
-     cliente.`APATERNO` AS APATERNO,
-     cliente.`AMATERNO` AS AMATERNO,
-     cliente.`TEL` AS Telefono,
-     cliente.`DIRECCION` AS Direccion
+     cliente.`alias` AS Alias,
+     cliente.`nombre` AS NOMBRE,
+     cliente.`apaterno` AS APATERNO,
+     cliente.`amaterno` AS AMATERNO,
+     cliente.`tel` AS Telefono,
+     cliente.`direccion` AS Direccion
 FROM
      `cliente` cliente
 
 WHERE
-	Cliente.Alias = $P{Alias}]]>
+	cliente.alias = $P{Alias}]]>
 	</queryString>
 	<field name="Alias" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>

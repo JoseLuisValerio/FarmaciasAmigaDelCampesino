@@ -18,28 +18,28 @@
 	</parameter>
 	<queryString>
 		<![CDATA[SELECT
-     cliente.`Alias` AS Cliente,
-     usuario.`ALIAS` AS Usuario,
-     venta.`idVenta` AS idVenta,
-     venta.`FECHA` AS Fecha,
-     venta.`Hora` AS Hora,
-     venta.`DinElectro` AS DinElectro,
-     venta.`Total` AS Total,
+     cliente.`alias` AS Cliente,
+     usuario.`alias` AS Usuario,
+     venta.`idventa` AS idVenta,
+     venta.`fecha` AS Fecha,
+     venta.`hora` AS Hora,
+     venta.`dinelectro` AS DinElectro,
+     venta.`total` AS Total,
      sucursal.`nombre` AS Sucursal,
-     (SELECT Sum(Venta.Total) FROM Venta
-	WHERE Venta.Fecha LIKE $P{Fecha}
+     (SELECT Sum(venta.total) FROM venta
+	WHERE venta.fecha LIKE $P{Fecha}
      ) AS VentaTotal,
-(SELECT Sum(Venta.DinElectro) FROM
-     Venta
-	WHERE Venta.Fecha LIKE $P{Fecha}
+(SELECT Sum(venta.dinElectro) FROM
+     venta
+	WHERE venta.fecha LIKE $P{Fecha}
      ) AS TotalElectronico
 
 FROM
-     `cliente` cliente INNER JOIN `venta` venta ON cliente.`idCliente` = venta.`idCliente`
+     `cliente` cliente INNER JOIN `venta` venta ON cliente.`idcliente` = venta.`idCliente`
      INNER JOIN `usuario` usuario ON venta.`idusuario` = usuario.`idusuario`
      INNER JOIN `sucursal` sucursal ON venta.`idsucursal` = sucursal.`idsucursal`
-WHERE Venta.Fecha LIKE $P{Fecha}
-	ORDER BY Sucursal.idSucursal,Venta.idVenta]]>
+WHERE venta.fecha LIKE $P{Fecha}
+	ORDER BY sucursal.idsucursal,venta.idventa]]>
 	</queryString>
 	<field name="Cliente" class="java.lang.String"/>
 	<field name="Usuario" class="java.lang.String"/>

@@ -8,29 +8,29 @@
 	</parameter>
 	<queryString>
 		<![CDATA[SELECT
-     cliente.`DineroElectronico` AS cliente_DineroElectronico,
-     cliente.`NOMBRE` AS cliente_NOMBRE,
-     cliente.`APATERNO` AS cliente_APATERNO,
-     venta.`FECHA` AS venta_FECHA,
-     venta.`Hora` AS venta_Hora,
-     venta.`DinElectro` AS venta_DinElectro,
-     venta.`Total` AS venta_Total,
-     venta.`idVenta` AS venta_idVenta,
-     usuario.`NOMBRE` AS usuario_NOMBRE,
-     usuario.`APATERNO` AS usuario_APATERNO,
+     cliente.`dineroelectronico` AS cliente_DineroElectronico,
+     cliente.`nombre` AS cliente_NOMBRE,
+     cliente.`apaterno` AS cliente_APATERNO,
+     venta.`fecha` AS venta_FECHA,
+     venta.`hora` AS venta_Hora,
+     venta.`dinelectro` AS venta_DinElectro,
+     venta.`total` AS venta_Total,
+     venta.`idventa` AS venta_idVenta,
+     usuario.`nombre` AS usuario_NOMBRE,
+     usuario.`apaterno` AS usuario_APATERNO,
      sucursal.`nombre` AS sucursal_nombre,
-     producto.`NOMBRE` AS producto_NOMBRE,
-     producto.`PPUBLICO` AS producto_PPUBLICO,
-     detallesventa.`Cantidad` AS detallesventa_Cantidad,
-     detallesventa.`Total` AS detallesventa_Total
+     producto.`nombre` AS producto_NOMBRE,
+     producto.`ppublico` AS producto_PPUBLICO,
+     detallesventa.`cantidad` AS detallesventa_Cantidad,
+     detallesventa.`total` AS detallesventa_Total
 FROM
-     `cliente` cliente INNER JOIN `venta` venta ON cliente.`idCliente` = venta.`idCliente`
+     `cliente` cliente INNER JOIN `venta` venta ON cliente.`idcliente` = venta.`idcliente`
      INNER JOIN `usuario` usuario ON venta.`idusuario` = usuario.`idusuario`
      INNER JOIN `sucursal` sucursal ON venta.`idsucursal` = sucursal.`idsucursal`
-     INNER JOIN `detallesventa` detallesventa ON venta.`idVenta` = detallesventa.`idVenta`
-     INNER JOIN `producto` producto ON detallesventa.`IDPRODUCTO` = producto.`IDPRODUCTO`
+     INNER JOIN `detallesventa` detallesventa ON venta.`idVenta` = detallesventa.`idventa`
+     INNER JOIN `producto` producto ON detallesventa.`idproducto` = producto.`idproducto`
 WHERE
-     Venta.idVenta = $P{idVenta}]]>
+     venta.idventa = $P{idVenta}]]>
 	</queryString>
 	<field name="cliente_DineroElectronico" class="java.lang.Float"/>
 	<field name="cliente_NOMBRE" class="java.lang.String"/>

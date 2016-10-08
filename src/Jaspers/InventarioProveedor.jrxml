@@ -13,7 +13,7 @@
 			<style backcolor="#E6DAC3"/>
 		</conditionalStyle>
 	</style>
-	<queryString language="SQL">
+	<queryString>
 		<![CDATA[SELECT
      producto.`IDPRODUCTO` AS Codigo,
      producto.`NOMBRE` AS Nombre,
@@ -25,10 +25,10 @@
      sucursal.`nombre` AS Sucursal
 FROM
      `proveedor` proveedor INNER JOIN `producto` producto ON proveedor.`IDproveedor` = producto.`IDPROVEEDOR`
-     INNER JOIN `detallesucursal` detallesucursal ON producto.`IDPRODUCTO` = detallesucursal.`IDPRODUCTO`
+     INNER JOIN `detallesucursal` detallesucursal ON producto.`idproducto` = detallesucursal.`idproducto`
      INNER JOIN `sucursal` sucursal ON detallesucursal.`idsucursal` = sucursal.`idsucursal`
 
-ORDER BY Proveedor.idProveedor]]>
+ORDER BY proveedor.idproveedor]]>
 	</queryString>
 	<field name="Codigo" class="java.lang.String"/>
 	<field name="Nombre" class="java.lang.String">

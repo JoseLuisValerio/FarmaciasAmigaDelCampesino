@@ -42,11 +42,11 @@
      usuario.`APATERNO` AS usuario_APATERNO,
      usuario.`AMATERNO` AS usuario_AMATERNO
 FROM
-     `pedido` pedido INNER JOIN `detallepedido` detallepedido ON pedido.`idPedido` = detallepedido.`idPedido`
-     INNER JOIN `producto` producto ON detallepedido.`IDPRODUCTO` = producto.`IDPRODUCTO`
+     `pedido` pedido INNER JOIN `detallepedido` detallepedido ON pedido.`idpedido` = detallepedido.`idpedido`
+     INNER JOIN `producto` producto ON detallepedido.`idproducto` = producto.`idproducto`
      INNER JOIN `usuario` usuario ON pedido.`idusuario` = usuario.`idusuario`
 WHERE
-     pedido.idPedido = $P{idPedido}]]>
+     pedido.idpedido = $P{idPedido}]]>
 	</queryString>
 	<field name="pedido_idPedido" class="java.lang.Long"/>
 	<field name="pedido_Fecha" class="java.lang.String"/>

@@ -23,14 +23,14 @@ public class Controlador_Cliente {
      */
     public Object[][] ConsultaCliente(String Alias) {
         Object[][] datos = null;
-        String[] columnas = {"Alias", "Nombre", "APaterno", "AMaterno", "Tel", "Direccion", "tipo_cliente.Nombre", "DineroElectronico"};
+        String[] columnas = {"alias", "nombre", "apaterno", "amaterno", "tel", "direccion", "tipo_cliente.Nombre", "dineroelectronico"};
         if (Alias.equals("")) {
-            String SQLContar="cliente INNER JOIN tipo_cliente ON cliente.TipoCliente = tipo_cliente.idTipoCliente";
-            String SQLExecute="SELECT Alias, cliente.Nombre, APaterno, AMaterno, Tel, Direccion, tipo_cliente.Nombre, DineroElectronico FROM "+SQLContar;
+            String SQLContar="cliente INNER JOIN tipo_cliente ON cliente.tipocliente = tipo_cliente.idtipocliente";
+            String SQLExecute="SELECT alias, cliente.nombre, apaterno, amaterno, tel, direccion, tipo_cliente.nombre, dineroelectronico FROM "+SQLContar;
             datos = ModeloCliente.GetTabla(columnas, SQLExecute,SQLContar);
         } else {
-            String SQLContar="cliente INNER JOIN tipo_cliente ON cliente.TipoCliente = tipo_cliente.idTipoCliente WHERE Alias = '" + Alias + "';";
-            String SQLExecute="SELECT Alias, cliente.Nombre, APaterno, AMaterno, Tel, Direccion, tipo_cliente.Nombre, DineroElectronico FROM "+SQLContar;
+            String SQLContar="cliente INNER JOIN tipo_cliente ON cliente.TipoCliente = tipo_cliente.idTipoCliente WHERE alias = '" + Alias + "';";
+            String SQLExecute="SELECT alias, cliente.nombre, apaterno, amaterno, tel, direccion, tipo_cliente.nombre, dineroelectronico FROM "+SQLContar;
             datos = ModeloCliente.GetTabla(columnas,SQLExecute, SQLContar);
         }
         return datos;

@@ -14,11 +14,11 @@ public class Controlador_Usuario {
     }
     
     public Object[][] ConsultaUsuarios() {
-        String seleccion = "SELECT usuario.Alias,tipousuario.Nombre,usuario.Nombre,usuario.APaterno, usuario.AMaterno FROM";
-        String tablas = "(usuario INNER JOIN tipousuario on usuario.idTipoUsuario = tipousuario.idTipoUsuario); ";
+        String seleccion = "SELECT usuario.alias,tipousuario.nombre,usuario.nombre,usuario.apaterno, usuario.amaterno FROM";
+        String tablas = "(usuario INNER JOIN tipousuario on usuario.idtipousuario = tipousuario.idtipousuario); ";
         String sentencia = seleccion + tablas;
         Object[][] datos = null;
-        String[] columnas = {"usuario.Alias", "tipousuario.Nombre", "usuario.Nombre","usuario.APaterno", "usuario.AMaterno"};
+        String[] columnas = {"usuario.alias", "tipousuario.nombre", "usuario.nombre","usuario.apaterno", "usuario.amaterno"};
         //dividir la consulta en dos una parta de los datos a busca y otra que tendra las tablas 
         datos = ModelUser.GetTabla(columnas, sentencia, tablas);
 
@@ -42,7 +42,7 @@ public class Controlador_Usuario {
      */
     public Object[] CargaTipos(){
         String seleccion = "SELECT Nombre from ";
-        String tablas ="tipotsuario";
+        String tablas ="tipousuario";
         String sentencia = seleccion + tablas;
         String columnas = "Nombre";
          return ModelUser.llenarCombo(tablas, columnas, sentencia);

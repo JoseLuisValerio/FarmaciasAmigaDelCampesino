@@ -14,19 +14,19 @@
 	</parameter>
 	<queryString>
 		<![CDATA[SELECT
-     Concat(usuario.`NOMBRE`,' ',usuario.`APATERNO`) AS usuario,
+     Concat(usuario.`nombre`,' ',usuario.`apaterno`) AS usuario,
      sucursal.`nombre` AS sucursal,
      caja.`saldototal` AS saldototal,
      movimiento.`idmovimiento` AS idmovimiento,
-     movimiento.`MONTO` AS MONTO,
-     movimiento.`DESCRIPCION` AS DESCRIPCION,
-     movimiento.`FECHA` AS FECHA
+     movimiento.`monto` AS MONTO,
+     movimiento.`descripcion` AS DESCRIPCION,
+     movimiento.`fecha` AS FECHA
 FROM
      `sucursal` sucursal INNER JOIN `caja` caja ON sucursal.`idsucursal` = caja.`idsucursal`
      inner JOIN `movimiento` movimiento ON caja.`idcaja` = movimiento.`idcaja`
      INNER JOIN `usuario` usuario ON movimiento.`idusuario` = usuario.`idusuario`
 WHERE
-Sucursal.idsucursal = $P{idSucursal} AND Movimiento.Fecha LIKE $P{Fecha} AND Usuario.idUsuario]]>
+sucursal.idsucursal = $P{idSucursal} AND movimiento.fecha LIKE $P{Fecha} AND usuario.idusuario]]>
 	</queryString>
 	<field name="usuario" class="java.lang.String"/>
 	<field name="sucursal" class="java.lang.String"/>

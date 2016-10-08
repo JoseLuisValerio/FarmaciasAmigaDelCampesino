@@ -8,21 +8,21 @@
 	</parameter>
 	<queryString>
 		<![CDATA[SELECT
-     producto.`NOMBRE` AS producto_NOMBRE,
-     detalletransaccion.`Cantidad` AS detalletransaccion_Cantidad,
-     detalletransaccion.`IDPRODUCTO` AS detalletransaccion_IDPRODUCTO,
+     producto.`nombre` AS producto_NOMBRE,
+     detalletransaccion.`cantidad` AS detalletransaccion_Cantidad,
+     detalletransaccion.`idproducto` AS detalletransaccion_IDPRODUCTO,
      sucursal.`nombre` AS sucursal_nombre,
-     transaccion.`idTransaccion` AS transaccion_idTransaccion,
-     transaccion.`Fecha` AS transaccion_Fecha,
-     usuario.`NOMBRE` AS usuario_NOMBRE,
-     usuario.`APATERNO` AS usuario_APATERNO
+     transaccion.`idtransaccion` AS transaccion_idTransaccion,
+     transaccion.`fecha` AS transaccion_Fecha,
+     usuario.`nombre` AS usuario_NOMBRE,
+     usuario.`apaterno` AS usuario_APATERNO
 FROM
-     `producto` producto INNER JOIN `detalletransaccion` detalletransaccion ON producto.`IDPRODUCTO` = detalletransaccion.`IDPRODUCTO`
-     INNER JOIN `transaccion` transaccion ON detalletransaccion.`idTransaccion` = transaccion.`idTransaccion`
+     `producto` producto INNER JOIN `detalletransaccion` detalletransaccion ON producto.`idproducto` = detalletransaccion.`idproducto`
+     INNER JOIN `transaccion` transaccion ON detalletransaccion.`idtransaccion` = transaccion.`idtransaccion`
      INNER JOIN `sucursal` sucursal ON transaccion.`idsucursal` = sucursal.`idsucursal`
      INNER JOIN `usuario` usuario ON transaccion.`idusuario` = usuario.`idusuario`
 WHERE
-     Transaccion.idTransaccion = $P{idTransaccion}]]>
+     transaccion.idtransaccion = $P{idTransaccion}]]>
 	</queryString>
 	<field name="producto_NOMBRE" class="java.lang.String"/>
 	<field name="detalletransaccion_Cantidad" class="java.lang.Integer"/>

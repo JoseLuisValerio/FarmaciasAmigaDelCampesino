@@ -24,10 +24,10 @@
      detallesucursal.`Stock` AS Existencias,
      sucursal.`nombre` AS Sucursal
 FROM
-     `proveedor` proveedor INNER JOIN `producto` producto ON proveedor.`IDproveedor` = producto.`IDPROVEEDOR`
-     INNER JOIN `detallesucursal` detallesucursal ON producto.`IDPRODUCTO` = detallesucursal.`IDPRODUCTO`
+     `proveedor` proveedor INNER JOIN `producto` producto ON proveedor.`idproveedor` = producto.`idproveedor`
+     INNER JOIN `detallesucursal` detallesucursal ON producto.`idproducto` = detallesucursal.`idproducto`
      INNER JOIN `sucursal` sucursal ON detallesucursal.`idsucursal` = sucursal.`idsucursal`
-ORDER BY sucursal.idSucursal]]>
+ORDER BY sucursal.idsucursal]]>
 	</queryString>
 	<field name="Codigo" class="java.lang.String"/>
 	<field name="Nombre" class="java.lang.String">
