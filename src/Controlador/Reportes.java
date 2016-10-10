@@ -147,7 +147,7 @@ public void pedido(String pedido) {
             JasperPrintManager.printReport(jp, false);   
             con.desconectar();
         } catch (Exception ex) {
-            System.err.println("Error al generar ticket Corte de caja: "+ex.getMessage());
+            System.err.println("Error al generar ticket Corte de caja(Movimientos): "+ex.getMessage());
         }
 }
     
@@ -164,7 +164,7 @@ public void pedido(String pedido) {
             JasperPrintManager.printReport(jp, false);   
             con.desconectar();
         } catch (Exception ex) {
-            System.err.println("Error al generar ticket Corte de caja: "+ex.getMessage());
+            System.err.println("Error al generar ticket Corte de caja (Sin movimientos): "+ex.getMessage());
         }
 }
     

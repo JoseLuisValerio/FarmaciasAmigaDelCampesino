@@ -166,14 +166,17 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_passwFieldActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        Limpiar();
+    }//GEN-LAST:event_btnCancelActionPerformed
+    
+    private void Limpiar(){
         Ayuda.Utilidades Util = new Ayuda.Utilidades();
         Util.txtLimpiar(txtUser);
         Util.passLimpiar(passwField);
         Estilo.lblMensajes(lblAlerta, "", 4);
         Util.txtFoco(txtUser);
-                Controlador.Reportes Ticket = new Controlador.Reportes();
-        Ticket.CorteSinMov("1", "11/9/2016", "1");
-    }//GEN-LAST:event_btnCancelActionPerformed
+    }
+            
     private void VerificaUsuario(){
         boolean ses=false;
         String Password = new String(passwField.getPassword());

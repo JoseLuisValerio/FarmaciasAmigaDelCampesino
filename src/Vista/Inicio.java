@@ -24,6 +24,7 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
     String mes = Integer.toString(c.get(Calendar.MONTH)+1);
     String annio = Integer.toString(c.get(Calendar.YEAR));
     private Object [][] datosSucursal= null;
+
  
 
     public Inicio() {

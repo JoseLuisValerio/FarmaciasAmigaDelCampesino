@@ -14,12 +14,13 @@ public class Producto_Consultar extends javax.swing.JFrame {
     Ayuda.Estilo Estilo;
     private Object[][] datostabla;
     String[] columnas = {"Código", "Nombre", "Activo", "Descripcion", "Precio", "Stock", "Area"};
-    Controlador_Producto_Consultar ctr = new Controlador_Producto_Consultar();
+    Controlador_Producto_Consultar ctr;
 
     /**
      * Inicializa todos los componentes usando la clase estilo
      */
     public Producto_Consultar() {
+        ctr = new Controlador_Producto_Consultar();
         Estilo = new Ayuda.Estilo();
         initComponents();
         mostrarProductos();
@@ -84,7 +85,7 @@ public class Producto_Consultar extends javax.swing.JFrame {
     public void cargarAreas() {
         Object[] Areas = ctr.cargaSucursal("area");
         cmbAreas.removeAllItems();
-        cmbAreas.addItem("SELECIONES AREA");
+        cmbAreas.addItem("Seleccione area");
         for (int i = 0; i < Areas.length; i++) {
             cmbAreas.addItem((String) Areas[i]);
         }
@@ -190,37 +191,61 @@ public class Producto_Consultar extends javax.swing.JFrame {
         pnlProducto.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Datos del producto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
         pnlProducto.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
         jLabel1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel1.setText("Código:");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 57, -1));
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel2.setText("Nombre:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 32, 94, -1));
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel3.setText("Activo:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 65, 57, -1));
 
         jLabel4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel4.setText("Descripción:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 91, 107, -1));
 
         jLabel5.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel5.setText("P. Público");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 87, -1));
 
         jLabel7.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel7.setText("Stock:");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 50, -1));
 
         jLabel6.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel6.setText("Area:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 57, -1));
 
-        pnlProducto.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 17, 95, 280));
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addGap(17, 17, 17)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addGap(23, 23, 23)
+                .addComponent(jLabel4)
+                .addGap(74, 74, 74)
+                .addComponent(jLabel5)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel7)
+                .addGap(22, 22, 22)
+                .addComponent(jLabel6))
+        );
+
+        pnlProducto.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 120, 280));
 
         txtCodigo.setDescripcion("Código de producto");
         txtCodigo.addActionListener(new java.awt.event.ActionListener() {
@@ -353,7 +378,6 @@ public class Producto_Consultar extends javax.swing.JFrame {
 
     private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
         String codigo = txtCodigo.getText();
-        System.out.println(codigo);
         buscarCodigo(codigo);
         txtCodigo.setText(null);
     }//GEN-LAST:event_txtCodigoActionPerformed

@@ -352,7 +352,7 @@ public class Usuario extends javax.swing.JFrame {
     }//GEN-LAST:event_tblUsuariosMousePressed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        if(passField1.getPassword().length == 0 && passField2.getPassword().length == 0 && cmbTipo.getSelectedIndex() == 0 ){
+        if(passField1.getPassword().length == 0 && passField2.getPassword().length == 0 && cmbTipo.getSelectedIndex()>0 ){
         if(Controlador.ActualizarUsuario2(txtUsuario.getText(), txtNombre.getText(), txtAPaterno.getText(), txtAMaterno.getText())){
             Estilo.lblMensajes(lblAlerta, "Usuario actualizado correctamente", 3);
             Limpiar();

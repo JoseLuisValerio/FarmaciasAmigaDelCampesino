@@ -79,7 +79,7 @@ public class Cliente extends javax.swing.JFrame {
     private void LlenarcmbTipos() {
         Object[] Tipos = Controlador.ComboTipos();
         jComboBox1.removeAllItems();
-        jComboBox1.addItem("");
+        jComboBox1.addItem("Seleccione tipo");
         for (int i = 0; i < Tipos.length; i++) {
             jComboBox1.addItem((String) Tipos[i]);
         }
