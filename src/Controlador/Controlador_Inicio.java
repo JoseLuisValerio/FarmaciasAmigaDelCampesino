@@ -14,7 +14,6 @@ public class Controlador_Inicio {
     String suc = ObtenerSucursal();
     public Controlador_Inicio(){
         Model = new Modelo.Modelo_Inicio();
-        String suc = ObtenerSucursal();
     }
 
 public String ObtenerSucursal() {
@@ -56,6 +55,11 @@ public boolean HayMovimientos(String Fecha, String idUsuario){
         datos = Model.ObtenetExistencias(columnas, sentencia, tablas);
 
         return datos;
+    }
+    
+    public void CajaCero(){
+        String SQL ="UPDATE caja set saldototal=0 WHERE idcaja='"+suc+"'";
+        Model.CajaCero(SQL);
     }
     
 }

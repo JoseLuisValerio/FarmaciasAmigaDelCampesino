@@ -95,4 +95,15 @@ public Modelo_Inicio(){
         }
         return data;
     }
+  
+  public void CajaCero(String Sentencia){
+      try {
+            ps = con.conectado().prepareStatement(Sentencia);
+            ps.execute();
+            ps.close();
+            con.desconectar();
+      }catch(SQLException e){
+          System.err.println("Error al actulizar caja: "+e.getMessage());
+      }
+  }
 }

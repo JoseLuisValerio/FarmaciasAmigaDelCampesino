@@ -456,6 +456,7 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
             Ticket.CorteSinMov(Sucursal, Fecha, idUsuario);
         }
         Ayuda.Sesion.cerrarSesion();
+        Controlador.CajaCero();
         this.dispose();
         Login Ventana = new Login();
         Ventana.setVisible(true);

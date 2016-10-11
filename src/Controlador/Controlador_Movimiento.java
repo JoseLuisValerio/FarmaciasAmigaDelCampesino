@@ -6,7 +6,6 @@
 package Controlador;
 
 import Modelo.Modelo_Movimiento;
-import Modelo.Modelo_Producto_Acomodar;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,8 +23,6 @@ public class Controlador_Movimiento {
     //String caja = IdCaja();
     public Controlador_Movimiento() {
         sensql = new Modelo_Movimiento();
-        String suc = ObtenerSucursal();
-        //String caja = IdCaja();
     }
 
     public String ObtenerSucursal() {
@@ -45,13 +42,11 @@ public class Controlador_Movimiento {
     }
 
     public boolean nuevoMovimiento(String Monto, String Descripcion, String Fecha, String Hora, String IdUsuario) {
-        String caja = IdCaja();
-        String datos[] = {Monto, Descripcion, Fecha, Hora, IdUsuario, caja};
+        String datos[] = {Monto, Descripcion, Fecha, Hora, IdUsuario, suc};
         return sensql.insertar(datos, "INSERT INTO `movimiento` (`MONTO`, `DESCRIPCION`,`FECHA`, `HORA`, `idusuario`, `idcaja`) VALUES (?,?,?,?,?,?)");
     }
 
     public String obtenerSaldo() {
-        String caja = IdCaja();
         String sentencia = "SELECT caja.saldototal from caja WHERE caja.idsucursal = '" + suc + "'";
         String datos = null;
         String columnas = "caja.saldototal";
@@ -60,18 +55,8 @@ public class Controlador_Movimiento {
         return datos;
     }
 
-    public String IdCaja() {
-        String sentencia = "SELECT caja.idcaja from caja WHERE caja.idsucursal = '" + suc + "'";
-        String datos = null;
-        String columnas = "caja.idcaja";
-        //dividir la consulta en dos una parta de los datos a busca y otra que tendra las tablas 
-        datos = sensql.obtenerIdProvedor(columnas, sentencia);
-        return datos;
-    }
-
     public boolean actualizaSaldo(String monto, boolean opc) {
-        String caja = IdCaja();
-        String campos[] = {monto, caja};
+        String campos[] = {monto, suc};
         String sentencia;
         if (opc == false) {
             sentencia = "UPDATE caja SET saldototal=saldototal-? WHERE caja.idcaja =?";
