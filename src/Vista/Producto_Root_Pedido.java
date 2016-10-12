@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -148,11 +149,6 @@ public class Producto_Root_Pedido extends javax.swing.JFrame {
         txtCodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCodigoActionPerformed(evt);
-            }
-        });
-        txtCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtCodigoKeyPressed(evt);
             }
         });
 
@@ -321,12 +317,6 @@ public class Producto_Root_Pedido extends javax.swing.JFrame {
     private void tblProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProductosMouseClicked
 
     }//GEN-LAST:event_tblProductosMouseClicked
-
-    private void txtCodigoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyPressed
-        datostabla = ctr.buscarProducto(txtCodigo.getText(), cmbProveedor.getSelectedItem().toString());
-        DefaultTableModel datos = new DefaultTableModel(datostabla, columnas);
-        tblProductos.setModel(datos);
-    }//GEN-LAST:event_txtCodigoKeyPressed
 public boolean Repite (String codigo){
     boolean repetido=false;
     for (int i=0;i<tblPedido.getRowCount();i++){
@@ -392,9 +382,9 @@ return repetido;
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
-//        datostabla = ctr.buscarProducto(txtCodigo.getText());
-        //      DefaultTableModel datos = new DefaultTableModel(datostabla, columnas);
-        //    tblProductos.setModel(datos);
+        datostabla = ctr.buscarProducto(txtCodigo.getText(), cmbProveedor.getSelectedItem().toString());
+        DefaultTableModel datos = new DefaultTableModel(datostabla, columnas);
+        tblProductos.setModel(datos);
     }//GEN-LAST:event_txtCodigoActionPerformed
 
     private void cmbProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbProveedorActionPerformed

@@ -255,16 +255,16 @@ public class Producto_Consultar extends javax.swing.JFrame {
         });
 
         txtNombre.setDescripcion("");
-        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtNombreKeyPressed(evt);
+        txtNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombreActionPerformed(evt);
             }
         });
 
         txtActivo.setDescripcion("");
-        txtActivo.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtActivoKeyPressed(evt);
+        txtActivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtActivoActionPerformed(evt);
             }
         });
 
@@ -382,16 +382,6 @@ public class Producto_Consultar extends javax.swing.JFrame {
         txtCodigo.setText(null);
     }//GEN-LAST:event_txtCodigoActionPerformed
 
-    private void txtNombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyPressed
-        String busqueda = txtNombre.getText();
-        buscarProducto(busqueda);
-    }//GEN-LAST:event_txtNombreKeyPressed
-
-    private void txtActivoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtActivoKeyPressed
-        String busqueda = txtActivo.getText();
-        buscarProducto(busqueda);
-    }//GEN-LAST:event_txtActivoKeyPressed
-
     private void txtDescripcionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripcionKeyPressed
         String busqueda = txtDescripcion.getText();
         buscarProducto(busqueda);
@@ -419,6 +409,16 @@ public class Producto_Consultar extends javax.swing.JFrame {
        Producto_Acomodar acomodar = new Producto_Acomodar();
        acomodar.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
+        String busqueda = txtNombre.getText();
+        buscarProducto(busqueda);
+    }//GEN-LAST:event_txtNombreActionPerformed
+
+    private void txtActivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtActivoActionPerformed
+        String busqueda = txtActivo.getText();
+        buscarProducto(busqueda);
+    }//GEN-LAST:event_txtActivoActionPerformed
 
     /**
      * @param args the command line arguments

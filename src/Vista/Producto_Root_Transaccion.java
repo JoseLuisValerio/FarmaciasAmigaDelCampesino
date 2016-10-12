@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -192,11 +193,6 @@ public class Producto_Root_Transaccion extends javax.swing.JFrame {
                 txtCodigoActionPerformed(evt);
             }
         });
-        txtCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtCodigoKeyPressed(evt);
-            }
-        });
 
         jLabel3.setText("Codigo");
 
@@ -204,7 +200,7 @@ public class Producto_Root_Transaccion extends javax.swing.JFrame {
 
         jLabel5.setText("Existencias");
 
-        spStock.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
+        spStock.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
         jLabel4.setText("Cantidad");
 
@@ -387,12 +383,6 @@ public class Producto_Root_Transaccion extends javax.swing.JFrame {
         mostrar_tabla();*/
         Ticket.TicketTransaccion("5");
     }//GEN-LAST:event_LimpiarActionPerformed
-
-    private void txtCodigoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyPressed
-        datostabla = ctr.buscarProducto(txtCodigo.getText());
-        DefaultTableModel datos = new DefaultTableModel(datostabla, columnas);
-        tblProductos.setModel(datos);
-    }//GEN-LAST:event_txtCodigoKeyPressed
 
     private void tblProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProductosMouseClicked
         int cor = tblProductos.getSelectedRow();

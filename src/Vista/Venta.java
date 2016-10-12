@@ -388,11 +388,6 @@ public class Venta extends javax.swing.JFrame {
                 txtBusquedaActionPerformed(evt);
             }
         });
-        txtBusqueda.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtBusquedaKeyReleased(evt);
-            }
-        });
 
         tblCliente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -529,10 +524,6 @@ public class Venta extends javax.swing.JFrame {
             Estilo.lblMensajes(lblAlerta, "Debe ingresar a menos un producto", 1);
         }
     }//GEN-LAST:event_btnCobrarActionPerformed
-
-    private void txtBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaKeyReleased
-        MostrarCliente(txtBusqueda.getText());
-    }//GEN-LAST:event_txtBusquedaKeyReleased
 
     private void tblClienteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblClienteMousePressed
         try {

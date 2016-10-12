@@ -255,16 +255,11 @@ public class Producto_Root extends javax.swing.JFrame {
                 txtNombreActionPerformed(evt);
             }
         });
-        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtNombreKeyPressed(evt);
-            }
-        });
 
         txtActivo.setDescripcion("Código de producto");
-        txtActivo.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtActivoKeyPressed(evt);
+        txtActivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtActivoActionPerformed(evt);
             }
         });
 
@@ -278,18 +273,13 @@ public class Producto_Root extends javax.swing.JFrame {
 
         txtDescripcion.setColumns(20);
         txtDescripcion.setRows(5);
-        txtDescripcion.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtDescripcionKeyPressed(evt);
-            }
-        });
         jScrollPane1.setViewportView(txtDescripcion);
 
         jLabel5.setText("Precio Público");
 
         txtPPublico.setDescripcion("Código de producto");
 
-        spStock.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
+        spStock.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
         jLabel6.setText("Stock");
 
@@ -607,24 +597,6 @@ public class Producto_Root extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtActivoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtActivoKeyPressed
-        if (rbtBuscar.isSelected() == true || rbtModificar.isSelected() == true) {
-            this.bucarProductoActivo(txtActivo.getText());
-        }
-    }//GEN-LAST:event_txtActivoKeyPressed
-
-    private void txtDescripcionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripcionKeyPressed
-        if (rbtBuscar.isSelected() == true || rbtModificar.isSelected() == true) {
-            this.buscarProductoDescripcion(txtDescripcion.getText());
-        }     // TODO add your handling code here:
-    }//GEN-LAST:event_txtDescripcionKeyPressed
-
-    private void txtNombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyPressed
-        if (rbtBuscar.isSelected() == true || rbtModificar.isSelected() == true) {
-            this.buscarProductoNombre(txtNombre.getText());
-        }        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombreKeyPressed
-
     private void rbtAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtAgregarActionPerformed
         this.desactivarStock();
         limpia();
@@ -645,7 +617,9 @@ public class Producto_Root extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbSucursalActionPerformed
 
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
-        // TODO add your handling code here:
+                if (rbtBuscar.isSelected() == true || rbtModificar.isSelected() == true) {
+            this.buscarProductoNombre(txtNombre.getText());
+        }
     }//GEN-LAST:event_txtNombreActionPerformed
 
     private void cmbProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbProveedorActionPerformed
@@ -821,6 +795,12 @@ public class Producto_Root extends javax.swing.JFrame {
         txtPPublico.setText((tblProducto.getValueAt(cor, 4).toString()));
         txtPCompra.setText((tblProducto.getValueAt(cor, 5).toString()));
     }//GEN-LAST:event_tblProductoMouseClicked
+
+    private void txtActivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtActivoActionPerformed
+                if (rbtBuscar.isSelected() == true || rbtModificar.isSelected() == true) {
+            this.bucarProductoActivo(txtActivo.getText());
+        }
+    }//GEN-LAST:event_txtActivoActionPerformed
 
     /**
      * @param args the command line arguments

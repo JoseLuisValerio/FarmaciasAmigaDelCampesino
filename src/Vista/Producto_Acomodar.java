@@ -109,9 +109,9 @@ public class Producto_Acomodar extends javax.swing.JFrame {
         lblEncabezado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         txtCodigo.setDescripcion("Código de producto");
-        txtCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtCodigoKeyPressed(evt);
+        txtCodigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCodigoActionPerformed(evt);
             }
         });
 
@@ -360,11 +360,6 @@ return repetido;
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
-    private void txtCodigoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyPressed
-        String buscar = txtCodigo.getText();
-        this.buscar(buscar);
-    }//GEN-LAST:event_txtCodigoKeyPressed
-
     private void btnAreaNuevaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAreaNuevaActionPerformed
         String area = txtArea.getText();
         if (area.length() > 0){
@@ -413,6 +408,11 @@ return repetido;
         mostrarProducto();
         estilo.lblMensajes(lblmensaje, "", 4);
     }//GEN-LAST:event_LimpiarActionPerformed
+
+    private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
+        String buscar = txtCodigo.getText();
+        this.buscar(buscar);
+    }//GEN-LAST:event_txtCodigoActionPerformed
 
     /**
      * @param args the command line arguments
