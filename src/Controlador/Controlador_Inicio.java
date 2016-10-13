@@ -48,7 +48,7 @@ public boolean HayMovimientos(String Fecha, String idUsuario){
     public Object[][] mostrarProductos() {
         Object[][] datos = null;
         String seleccion = "SELECT producto.IDPRODUCTO,producto.NOMBRE,producto.ACTIVO,producto.DESCRIPCION,detallesucursal.Stock FROM ";
-        String tablas = "(producto INNER JOIN (detallesucursal INNER JOIN sucursal ON detallesucursal.idsucursal = sucursal.idsucursal AND sucursal.idsucursal = '1') ON producto.IDPRODUCTO = detallesucursal.IDPRODUCTO and detallesucursal.Stock <20)INNER JOIN area ON area.idArea = detallesucursal.idArea";
+        String tablas = "(producto INNER JOIN (detallesucursal INNER JOIN sucursal ON detallesucursal.idsucursal = sucursal.idsucursal AND sucursal.idsucursal = '"+suc+"') ON producto.IDPRODUCTO = detallesucursal.IDPRODUCTO and detallesucursal.Stock <50)INNER JOIN area ON area.idArea = detallesucursal.idArea";
         String sentencia = seleccion + tablas;
         String[] columnas = {"producto.IDPRODUCTO", "producto.NOMBRE", "producto.ACTIVO", "producto.DESCRIPCION","detallesucursal.Stock"};
         //dividir la consulta en dos una parta de los datos a busca y otra que tendra las tablas 

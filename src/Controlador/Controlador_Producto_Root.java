@@ -35,7 +35,7 @@ public class Controlador_Producto_Root {
     public Object[][] consulta_Productos() {
 
         String seleccion = "SELECT producto.IDPRODUCTO, producto.NOMBRE,producto.ACTIVO,producto.DESCRIPCION,producto.PPUBLICO,producto.PCOMPRA,detallesucursal.Stock,proveedor.RSOCIAL,sucursal.nombre from";
-        String tablas = "(producto INNER JOIN proveedor on producto.IDPROVEEDOR = proveedor.IDproveedor) INNER JOIN (detallesucursal INNER JOIN sucursal on detallesucursal.idsucursal = sucursal.idsucursal and detallesucursal.stock <= 3 and sucursal.idsucursal = 1) on producto.IDPRODUCTO =detallesucursal.IDPRODUCTO";
+        String tablas = "(producto INNER JOIN proveedor on producto.IDPROVEEDOR = proveedor.IDproveedor) INNER JOIN (detallesucursal INNER JOIN sucursal on detallesucursal.idsucursal = sucursal.idsucursal and detallesucursal.stock <= 100 and sucursal.idsucursal = 1) on producto.IDPRODUCTO =detallesucursal.IDPRODUCTO";
         String sentencia = seleccion + tablas;
         Object[][] datos = null;
         String[] columnas = {"producto.IDPRODUCTO", "producto.NOMBRE", "producto.ACTIVO", "producto.DESCRIPCION", "producto.PPUBLICO", "producto.PCOMPRA", "detallesucursal.Stock", "proveedor.RSOCIAL", "sucursal.nombre"};
