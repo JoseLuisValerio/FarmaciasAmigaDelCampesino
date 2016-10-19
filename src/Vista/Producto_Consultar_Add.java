@@ -29,6 +29,7 @@ public class Producto_Consultar_Add extends javax.swing.JFrame {
         Estilo.txtfDescripcion(txtActivo, "Nombre del Activo");
         Estilo.txtfDescripcion(txtPPublico, "Precio al Publico ");
         Estilo.txtfDescripcion(txtStock, "Stock");
+        desactivar();
 
     }
 
@@ -133,6 +134,11 @@ public class Producto_Consultar_Add extends javax.swing.JFrame {
         pnlProducto.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 17, 95, 320));
 
         txtCodigo.setDescripcion("Código de producto");
+        txtCodigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCodigoActionPerformed(evt);
+            }
+        });
 
         txtNombre.setDescripcion("");
 
@@ -236,29 +242,61 @@ public class Producto_Consultar_Add extends javax.swing.JFrame {
         String proveedor = ctr.obtenerIdProveedor(cmbProveedor.getSelectedItem().toString());
         String area = ctr.obtenerIsArea(cmbAreas.getSelectedItem().toString());
 
-        if (txtCodigo.getText().isEmpty() == false && txtNombre.getText().isEmpty() == false && txtActivo.getText().isEmpty() == false && txtStock.getText().isEmpty() == false && txtPPublico.getText().isEmpty() == false && cmbProveedor.getSelectedIndex() > 0 && cmbAreas.getSelectedIndex() > 0) {
             if (ctr.Comprobar(codigo).length == 0) {
+                if(!txtActivo.getText().isEmpty() || !txtDescripcion.getText().isEmpty() || !txtPPublico.getText().isEmpty() || cmbAreas.getSelectedIndex() == 0 || cmbProveedor.getSelectedIndex()==0){
                 if (ctr.ingresarProductoNuevo(codigo, nombre, activo, descripcion, precio, precio, proveedor, "1") == true) {
                     ctr.ingresarDetalleNuevo(codigo, stock, area);
                     ctr.ingresarDetalleNuevo1(codigo);
                     Limpiar();
+                    desactivar();
                     Estilo.lblMensajes(lblmensaje, "El producto a sido agregado", 3);
                 } else {
                     Estilo.lblMensajes(lblmensaje, "Error al agregar", 2);
                 }
+            }else{
+              Estilo.lblMensajes(lblmensaje, "Hace Falta llenar algunos campos", 2);           
+            }   
             } else {
-                if (ctr.agregarStock(codigo,stock) == true) {
-                    //ctr.ingresarDetalleNuevo1(codigo);
+             if (!txtCodigo.getText().isEmpty() || !txtStock.getText().isEmpty()){   
+                if (ctr.agregarStock(codigo, stock) == true) {
                     Limpiar();
+                    desactivar();
                     Estilo.lblMensajes(lblmensaje, "El producto a sido agregado", 3);
                 } else {
                     Estilo.lblMensajes(lblmensaje, "Error al agregar", 2);
                 }
+                 }else{
+              Estilo.lblMensajes(lblmensaje, "Hace Falta llenar algunos campos", 2);           
             }
-        } else {
-            Estilo.lblMensajes(lblmensaje, "Hay campos sin llenar", 1);
-        }
+            }
     }//GEN-LAST:event_btnAddActionPerformed
+    private void desactivar(){
+           
+            txtNombre.setEnabled(false);
+            txtActivo.setEnabled(false);
+            txtDescripcion.setEnabled(false);
+            txtPPublico.setEnabled(false);
+            txtStock.setEnabled(false);
+            cmbAreas.setEnabled(false);
+            cmbProveedor.setEnabled(false);
+    }
+    private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
+        String codigo = txtCodigo.getText();
+        if (ctr.Comprobar(codigo).length == 0) {
+            txtNombre.setEnabled(true);
+            txtActivo.setEnabled(true);
+            txtDescripcion.setEnabled(true);
+            txtPPublico.setEnabled(true);
+            txtStock.setEnabled(true);
+            cmbAreas.setEnabled(true);
+            cmbProveedor.setEnabled(true);
+            Estilo.lblMensajes(lblmensaje, "EL Producto no existe necesita agregarse", 2);           
+        } else {
+            desactivar();
+            txtStock.setEnabled(true);
+            Estilo.lblMensajes(lblmensaje, "Solo agrega cantidad a agregar", 1);           
+        }
+    }//GEN-LAST:event_txtCodigoActionPerformed
 
     /**
      * @param args the command line arguments
