@@ -27,7 +27,6 @@ public class Conexion {
     public void LeerArchivoConf() throws Exception {
         Properties propiedades = new Properties();
         InputStream entrada = null;
-
         try {
             entrada = new FileInputStream("./src/ArchivosConfiguracion/ConfiguracionBD.properties");
             // cargamos el archivo de propiedades
@@ -36,7 +35,7 @@ public class Conexion {
             base = Descifrar.Desencriptar(propiedades.getProperty("BD"));
             usuario = Descifrar.Desencriptar(propiedades.getProperty("User"));
             pass = Descifrar.Desencriptar(propiedades.getProperty("Psw"));
-            url = Descifrar.Desencriptar(propiedades.getProperty("Servidor")) + base;
+            url = Descifrar.Desencriptar(propiedades.getProperty("Servidor")) + base;    
         } catch (IOException ex) {
             System.err.println("Error al leer el archivo de configuración ");
         } finally {
@@ -69,11 +68,15 @@ public class Conexion {
             con = DriverManager.getConnection(url, usuario, pass);
             if (con != null) {
                 //System.out.println("Conexión a base de datos "+base+". listo");
+            }else{
+                JOptionPane.showMessageDialog(null, "La conexión no se ha podido realizar.\n"
+                    + "Verifique conexión a la BD. Contacte a los ingenieros.\n","Error al realizar conexión", JOptionPane.ERROR_MESSAGE);
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Ha ocurrido un error con conexión: \n"+e.getMessage(),"Error al realizar conexión", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Ha ocurrido un error con conexión al hacer la conexión.\n"
+                    + "Posibles problemas de conexión a Internet. Contacte a los ingenieros.\n"+e.getMessage(),"Error al realizar conexión", JOptionPane.ERROR_MESSAGE);
         } catch (ClassNotFoundException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(),"Error al realizar conexión", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "No se pudo leer el archivo de configuración. "+e.getMessage(),"Error al realizar conexión", JOptionPane.ERROR_MESSAGE);
             
         }
     }

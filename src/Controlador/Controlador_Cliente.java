@@ -23,7 +23,7 @@ public class Controlador_Cliente {
      */
     public Object[][] ConsultaCliente(String Alias) {
         Object[][] datos = null;
-        String[] columnas = {"alias", "nombre", "apaterno", "amaterno", "tel", "direccion", "tipo_cliente.Nombre", "dineroelectronico"};
+        String[] columnas = {"alias", "cliente.nombre", "apaterno", "amaterno", "tel", "direccion", "tipo_cliente.Nombre", "dineroelectronico"};
         if (Alias.equals("")) {
             String SQLContar="cliente INNER JOIN tipo_cliente ON cliente.tipocliente = tipo_cliente.idtipocliente";
             String SQLExecute="SELECT alias, cliente.nombre, apaterno, amaterno, tel, direccion, tipo_cliente.nombre, dineroelectronico FROM "+SQLContar;
@@ -45,17 +45,24 @@ public class Controlador_Cliente {
      */
     public Object[][] ConsultaUnCliente(String Buscar) {
         Object[][] datos = null;
-        String[] columnaminima = {"Alias", "Nombre", "APaterno", "AMaterno", "Tel", "DineroElectronico", "idCliente"};
+        String[] columnaminima = {"Alias", "cliente.Nombre", "APaterno", "AMaterno", "Tel", "DineroElectronico", "idCliente","descuento"};
         if (Buscar.equals("")) {
-            String SQLContar="cliente WHERE idCliente !=1;";
-            String SQLExecte="SELECT Alias, Nombre, APaterno, AMaterno, Tel, DineroElectronico,idCliente FROM "+SQLContar;
+            String SQLContar="cliente INNER JOIN tipo_cliente ON cliente.tipocliente = tipo_cliente.idtipocliente WHERE idCliente !=1;";
+            String SQLExecte="SELECT Alias, cliente.Nombre, APaterno, AMaterno, Tel, DineroElectronico, idcliente, descuento FROM "+SQLContar;
             datos = ModeloCliente.GetTabla(columnaminima,SQLExecte,SQLContar);
         } else {
             String SQLContar="cliente WHERE idCliente != 1 (&& Nombre LIKE '%"+Buscar+"%' OR APaterno LIKE '%"+Buscar+"%' "
                     + "OR AMaterno LIKE '%"+Buscar+"%' OR Tel LIKE '%"+Buscar+"%' OR Alias = '"+Buscar+"');";
-            String SQLExecute="SELECT Alias, Nombre, APaterno, AMaterno, Tel,DineroElectronico, idCliente FROM "+SQLContar;
+            String SQLExecute="SELECT Alias, cliente.Nombre, APaterno, AMaterno, Tel, DineroElectronico, idcliente, descuento FROM "+SQLContar;
             datos = ModeloCliente.GetTabla(columnaminima, SQLExecute,SQLContar);
         }
+        return datos;
+    }
+    
+    public String ConsultaColumna(String columnaminima, String SQL) {
+        String datos = null;
+            
+            datos = ModeloCliente.obtenerId(columnaminima, SQL);
         return datos;
     }
     

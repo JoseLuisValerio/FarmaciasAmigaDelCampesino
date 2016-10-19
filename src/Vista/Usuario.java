@@ -100,6 +100,8 @@ public class Usuario extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        Opciones = new javax.swing.JPopupMenu();
+        MnItemEliminar = new javax.swing.JMenuItem();
         lblEncabezado = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -123,6 +125,16 @@ public class Usuario extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblUsuarios = new javax.swing.JTable();
         lblAlerta = new javax.swing.JLabel();
+
+        MnItemEliminar.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        MnItemEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/Error.png"))); // NOI18N
+        MnItemEliminar.setText("Dar de baja");
+        MnItemEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnItemEliminarActionPerformed(evt);
+            }
+        });
+        Opciones.add(MnItemEliminar);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -208,16 +220,15 @@ public class Usuario extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -256,6 +267,7 @@ public class Usuario extends javax.swing.JFrame {
 
             }
         ));
+        tblUsuarios.setComponentPopupMenu(Opciones);
         tblUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 tblUsuariosMousePressed(evt);
@@ -382,6 +394,24 @@ public class Usuario extends javax.swing.JFrame {
         Util.txtHabilitar(txtUsuario, true);
     }//GEN-LAST:event_btnCancelActionPerformed
 
+    private void MnItemEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnItemEliminarActionPerformed
+        try {
+            int fila = tblUsuarios.getSelectedRow();
+            if (fila >= 0) {
+                String Usuario = String.valueOf(tblUsuarios.getValueAt(fila, 0));
+                if(Controlador.BajaUsuario(Usuario)){
+                    Estilo.lblMensajes(lblAlerta, "Usuario dado de baja exitosamente ", 3);
+                    MostrarTabla();
+                    Limpiar();
+                }else{
+                    Estilo.lblMensajes(lblAlerta, "Ha ocurrido un error al dar de baja al usuario", 2);
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Error al capturar fila para eliminar en jTableVenta\n" + e.getMessage());
+        }                                               
+    }//GEN-LAST:event_MnItemEliminarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -418,6 +448,8 @@ public class Usuario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem MnItemEliminar;
+    private javax.swing.JPopupMenu Opciones;
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnUpdate;

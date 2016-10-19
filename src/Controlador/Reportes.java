@@ -25,11 +25,12 @@ public class Reportes {
     }
     
     @SuppressWarnings("unchecked")
-    public void TicketVenta(String idVenta) {
+    public void TicketVenta(String idVenta,float Recibido) {
         try {
             String ruta = "src/Jaspers/TicketVenta.jasper";
             Map parametros = new HashMap();
             parametros.put("idVenta", idVenta);
+            parametros.put("Recibido", Recibido);
             JasperReport jr = (JasperReport) JRLoader.loadObjectFromFile(ruta);
             JasperPrint jp = JasperFillManager.fillReport(jr, parametros, con.conectado());
             JasperPrintManager.printReport(jp, false);   

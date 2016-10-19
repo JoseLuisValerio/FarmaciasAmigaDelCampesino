@@ -15,7 +15,7 @@ public class Controlador_Usuario {
     
     public Object[][] ConsultaUsuarios() {
         String seleccion = "SELECT usuario.alias,tipousuario.nombre,usuario.nombre,usuario.apaterno, usuario.amaterno FROM";
-        String tablas = "(usuario INNER JOIN tipousuario on usuario.idtipousuario = tipousuario.idtipousuario); ";
+        String tablas = "(usuario INNER JOIN tipousuario on usuario.idtipousuario = tipousuario.idtipousuario) WHERE Estatus = 1;";
         String sentencia = seleccion + tablas;
         Object[][] datos = null;
         String[] columnas = {"usuario.alias", "tipousuario.nombre", "usuario.nombre","usuario.apaterno", "usuario.amaterno"};
@@ -58,6 +58,9 @@ public class Controlador_Usuario {
     }
      public boolean ActualizarUsuario2(String Alias, String Nombre,String APaterno, String AMaterno){
         return ModelUser.InsertarOActualizar("UPDATE usuario SET Nombre='"+Nombre+"',APaterno='"+APaterno+"', AMaterno='"+AMaterno+"',Estatus='1' WHERE Alias = '"+Alias+"';");
+    }
+     public boolean BajaUsuario(String Id){
+        return ModelUser.InsertarOActualizar("UPDATE usuario SET estatus='0' WHERE Alias = '"+Id+"';");
     }
     
      public String obtenerIdTipo(String Tipo){

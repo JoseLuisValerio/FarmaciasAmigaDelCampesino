@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Ticket1" pageWidth="147" pageHeight="324" columnWidth="147" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isSummaryWithPageHeaderAndFooter="true" isIgnorePagination="true" uuid="185e57d6-76cc-4db6-9546-6477fe3189ea">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="1.4641000000000006"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="55"/>
 	<parameter name="idVenta" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Recibido" class="java.lang.Float">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
@@ -161,7 +164,7 @@ WHERE
 		</band>
 	</detail>
 	<pageFooter>
-		<band height="132">
+		<band height="166">
 			<line>
 				<reportElement x="4" y="0" width="143" height="1" uuid="dd357711-5210-4985-adaa-117fcdf4f352"/>
 			</line>
@@ -180,28 +183,28 @@ WHERE
 				<textFieldExpression><![CDATA["$"+$F{venta_Total}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="6" y="47" width="45" height="13" uuid="e8310dc1-ec77-4f6f-91c7-d734d1307e8f"/>
+				<reportElement x="5" y="71" width="45" height="13" uuid="e8310dc1-ec77-4f6f-91c7-d734d1307e8f"/>
 				<textElement>
 					<font size="7" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Atendió:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="51" y="47" width="82" height="13" uuid="b055932d-12e2-445e-b966-251f2107b42a"/>
+				<reportElement x="50" y="71" width="82" height="13" uuid="b055932d-12e2-445e-b966-251f2107b42a"/>
 				<textElement>
 					<font size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{usuario_NOMBRE}+" "+$F{usuario_APATERNO}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="5" y="102" width="127" height="13" uuid="f4f28145-e117-44cf-907c-673448350bad"/>
+				<reportElement x="4" y="126" width="127" height="13" uuid="f4f28145-e117-44cf-907c-673448350bad"/>
 				<textElement textAlignment="Center">
 					<font size="7" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Gracias por su visita]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="5" y="115" width="127" height="13" uuid="81255371-c511-4f48-9c1f-ad48c90163f7"/>
+				<reportElement x="4" y="139" width="127" height="13" uuid="81255371-c511-4f48-9c1f-ad48c90163f7"/>
 				<textElement textAlignment="Center">
 					<font size="7" isBold="true"/>
 				</textElement>
@@ -236,11 +239,39 @@ WHERE
 				<text><![CDATA[Efectivo:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="6" y="63" width="125" height="39" uuid="9c70d9a5-4045-4598-9705-9543a96b7419"/>
+				<reportElement x="5" y="87" width="125" height="39" uuid="9c70d9a5-4045-4598-9705-9543a96b7419"/>
 				<textElement textAlignment="Justified" markup="html">
 					<font size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Ud. tiene $ <b>"+$F{cliente_DineroElectronico}+"</b> en dinero electronico."]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="38" y="35" width="47" height="13" uuid="7ad2b64b-3b1c-4946-916b-2040352b473b"/>
+				<textElement textAlignment="Right">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Recibido:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="85" y="35" width="37" height="13" uuid="c92aaa88-30ab-4773-9f93-212d51ede19f"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA["$"+$P{Recibido}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="34" y="47" width="47" height="13" uuid="e4500440-fc5e-4f98-ab4c-41fe75ba9e71"/>
+				<textElement textAlignment="Right">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cambio:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="84" y="47" width="37" height="13" uuid="0b1bb5e5-cda7-4529-9b2a-6c61b2f83589"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA["$"+(($F{venta_Total}-$F{venta_DinElectro})-$P{Recibido})]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageFooter>

@@ -126,13 +126,13 @@ public class Modelo_Venta {
      * @param Vendidos recibe el nuevo número de productos vendidos.
      * @return si la operación fue exitosa o no.
      */
-    public boolean ActualizaStockYVendidos(String Producto, String Sucursal, int Stock, int Vendidos){
+    public boolean ActualizaStockYVendidos(String Producto, String Sucursal, int Cantidad){
         boolean exitoso = false;
-        String SQL = "UPDATE detallesucursal SET Stock=?, Vendidos=? WHERE idProducto ='"+Producto+"' AND idSucursal='"+Sucursal+"'";
+        String SQL = "UPDATE detallesucursal SET Stock=Stock-?, Vendidos=Vendidos+? WHERE idProducto ='"+Producto+"' AND idSucursal='"+Sucursal+"'";
         try{
         ps= con.conectado().prepareStatement(SQL);
-        ps.setInt(1, Stock);
-        ps.setInt(2, Vendidos);
+        ps.setInt(1, Cantidad);
+        ps.setInt(2, Cantidad);
         ps.executeUpdate();
         ps.close();
         con.desconectar();

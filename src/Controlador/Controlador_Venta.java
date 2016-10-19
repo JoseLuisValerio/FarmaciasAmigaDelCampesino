@@ -49,9 +49,8 @@ public class Controlador_Venta {
      */
     public boolean ActualizarStockYVendidos(String idSucursal, String Cantidad, String idProducto){
         boolean exitoso = false;
-        int Stock = Modelo.GetStock("Stock", idProducto, idSucursal)-Integer.parseInt(Cantidad);
-        int Vendidos = Modelo.GetStock("Vendidos", idProducto, idSucursal)+Integer.parseInt(Cantidad);
-        exitoso = Modelo.ActualizaStockYVendidos(idProducto, idSucursal, Stock, Vendidos);
+        int auxCantidad = Integer.parseInt(Cantidad);
+        exitoso = Modelo.ActualizaStockYVendidos(idProducto, idSucursal, auxCantidad);
         return exitoso;
     }
     

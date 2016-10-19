@@ -403,7 +403,6 @@ public class Cliente extends javax.swing.JFrame {
         String Alias = txtNombre.getText().substring(0, 3) + txtAPaterno.getText().substring(0, 2) + txtAMaterno.getText().substring(0, 2) + numero;
         if (Controlador.insertarCliente(Alias, txtNombre.getText(), txtAPaterno.getText(), txtAMaterno.getText(), txtTelefono.getText(), jTextArea1.getText(), jComboBox1.getSelectedItem().toString(), "0.0")) {
             Estilo.lblMensajes(lblAlerta, "El cliente ha sido registrado exitosamente", 3);
-            System.out.println(Alias);
             Reporte.ReporteCliente(Alias);
             Limpiar();
         } else {
