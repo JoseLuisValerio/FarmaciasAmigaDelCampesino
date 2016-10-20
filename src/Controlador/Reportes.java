@@ -1,9 +1,7 @@
 package Controlador;
 
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
-import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -25,12 +23,13 @@ public class Reportes {
     }
     
     @SuppressWarnings("unchecked")
-    public void TicketVenta(String idVenta,float Recibido) {
+    public void TicketVenta(String idVenta,float Recibido, float Cambio) {
         try {
             String ruta = "src/Jaspers/TicketVenta.jasper";
             Map parametros = new HashMap();
             parametros.put("idVenta", idVenta);
             parametros.put("Recibido", Recibido);
+            parametros.put("Cambio", Cambio);
             JasperReport jr = (JasperReport) JRLoader.loadObjectFromFile(ruta);
             JasperPrint jp = JasperFillManager.fillReport(jr, parametros, con.conectado());
             JasperPrintManager.printReport(jp, false);   
