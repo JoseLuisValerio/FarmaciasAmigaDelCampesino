@@ -9,6 +9,9 @@
 	<parameter name="Recibido" class="java.lang.Float">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
+	<parameter name="Cambio" class="java.lang.Float">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[SELECT
      cliente.`dineroelectronico` AS cliente_DineroElectronico,
@@ -271,7 +274,7 @@ WHERE
 				<textElement>
 					<font size="7"/>
 				</textElement>
-				<textFieldExpression><![CDATA["$"+(($F{venta_Total}-$F{venta_DinElectro})-$P{Recibido})]]></textFieldExpression>
+				<textFieldExpression><![CDATA["$"+$P{Cambio}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageFooter>

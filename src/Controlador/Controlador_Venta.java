@@ -105,7 +105,9 @@ public class Controlador_Venta {
      */
     public boolean RestaDinElectro(String idCliente, float DinElectro) {
         boolean exitoso = false;
-        String SQL ="UPDATE cliente SET DineroElectronico=DineroElectronico-? WHERE idCliente='"+idCliente+"';";
+        String SQL ="UPDATE cliente SET DineroElectronico=DineroElectronico -? WHERE idCliente='"+idCliente+"';";
+        System.out.println("idCliente: "+idCliente+" Dinelectro: "+DinElectro);
+        System.out.println("Se resta dinero electronico");
         exitoso = Modelo.ActualizaDinElectro(DinElectro, SQL);
         return exitoso;
     }

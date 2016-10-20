@@ -12,7 +12,7 @@ import javax.swing.table.DefaultTableModel;
  * @author root
  */
 public class Venta extends javax.swing.JFrame {
-
+    
     private Ayuda.Estilo Estilo = null;
     private Ayuda.Utilidades Util = null;
     private Controlador.Controlador_Venta Controlador = null;
@@ -129,8 +129,8 @@ public class Venta extends javax.swing.JFrame {
         }
         return String.valueOf(total);
     }
-
-    private void detalledeventa(String Fecha, String Hora, String Sucursal, String Usuario, float Recibido) {
+    
+    private void detalledeventa(String Fecha, String Hora, String Sucursal, String Usuario, float Recibido, float Cambio) {
         String idVenta = Controlador.ObteneridVenta(Fecha, Hora, Sucursal, Usuario);
         for (int i = 0; i < tblVenta.getRowCount(); i++) {
             String Cantidad = String.valueOf(tblVenta.getValueAt(i, 4));
@@ -139,91 +139,30 @@ public class Venta extends javax.swing.JFrame {
             Controlador.RegistrarDetalleVenta(Cantidad, idProducto, idVenta, Total);
             Controlador.ActualizarStockYVendidos(Sucursal, Cantidad, idProducto);
         }
-        Ticket.TicketVenta(idVenta, Recibido);
+        Ticket.TicketVenta(idVenta, Recibido, Cambio);
         Limpiar();
     }
-
+    
     private boolean VentaMaterialUso(String Fecha, String Hora, String idUsuario, String idSucursal, float Recibido) {
         boolean exitoso = false;
         exitoso = Controlador.RegistrarVenta(Fecha, Hora, "0", "0", idUsuario, "1", idSucursal);
-        detalledeventa(Fecha, Hora, idSucursal, idUsuario, Recibido);
-        return exitoso;
-    }
-
-    private boolean ventaconCliente(String Fecha, String Hora, String idUsuario, String idCliente, String idSucursal, float Recibido) {
-        //dinero electronico para cliente opcional 
-        boolean exitoso = false;
-
-        float PrecioTotalProducto = Float.parseFloat(PrecioTotal());
-        float auxDescuento = Float.parseFloat(Descuento);
-        float PrecioTotalDescuento = 0f;
-        if (auxDescuento > 0) {
-            PrecioTotalDescuento = (PrecioTotalProducto - ((auxDescuento / 100) * PrecioTotalProducto));
-        }
-        float DinElectCliente = Float.parseFloat(lblDinElectro.getText());
-        //Si ocupar dinero electronico esta habilitado y el dinero es mayor a 0
-        if (CheckDinero.isSelected() && DinElectCliente > 0f) {
-            if (DinElectCliente > PrecioTotalProducto) { //Si tiene más dinero electronico que lo que va a cobrar
-                DinElectCliente = PrecioTotalProducto;
-                float NuevoPrecioTotalProducto = PrecioTotalProducto - DinElectCliente;
-                exitoso = Controlador.RegistrarVenta(Fecha, Hora, String.valueOf(DinElectCliente), String.valueOf(NuevoPrecioTotalProducto), idUsuario, idCliente, idSucursal);
-                Controlador.ActualizaCaja(idSucursal, NuevoPrecioTotalProducto);
-                Controlador.RestaDinElectro(idCliente, PrecioTotalProducto);
-            }else {
-                float NuevoPrecioTotalProducto = PrecioTotalProducto - DinElectCliente;
-                exitoso = Controlador.RegistrarVenta(Fecha, Hora, String.valueOf(DinElectCliente), String.valueOf(NuevoPrecioTotalProducto), idUsuario, idCliente, idSucursal);
-                Controlador.ActualizaCaja(idSucursal, NuevoPrecioTotalProducto);
-                Controlador.RestaDinElectro(idCliente, DinElectCliente);
-            }
-
-            SumarDinElectro(String.valueOf(PrecioTotalProducto), idCliente);
-            detalledeventa(Fecha, Hora, idSucursal, idUsuario, Recibido);
-
-        } else {//Si no esta seleccionado, el dinero electronico es $0
-            exitoso = Controlador.RegistrarVenta(Fecha, Hora, "0", String.valueOf(PrecioTotalProducto), idUsuario, idCliente, idSucursal);
-            Controlador.ActualizaCaja(idSucursal, PrecioTotalProducto);
-            detalledeventa(Fecha, Hora, idSucursal, idUsuario, Recibido);
-        }
-        return exitoso;
-    }
-
-    private boolean ventaconClienteDescuento(String Fecha, String Hora, String idUsuario, String idCliente, String idSucursal, float Recibido) {
-        boolean exitoso = false;
-        float auxDescuento = Float.parseFloat(Descuento);
-        float PrecioTotalProducto = Float.parseFloat(PrecioTotal())- ((auxDescuento / 100) * Float.parseFloat(PrecioTotal()));
-        float DinElectCliente = Float.parseFloat(lblDinElectro.getText());
-        //Si ocupar dinero electronico esta habilitado y el dinero es mayor a 0
-        if (CheckDinero.isSelected() && DinElectCliente > 0f) {
-            if (DinElectCliente > PrecioTotalProducto) { //Si tiene más dinero electronico que lo que va a cobrar
-                DinElectCliente = PrecioTotalProducto;
-                float NuevoPrecioTotalProducto = PrecioTotalProducto - DinElectCliente;
-                exitoso = Controlador.RegistrarVenta(Fecha, Hora, String.valueOf(DinElectCliente), String.valueOf(NuevoPrecioTotalProducto), idUsuario, idCliente, idSucursal);
-                Controlador.ActualizaCaja(idSucursal, NuevoPrecioTotalProducto);
-                Controlador.RestaDinElectro(idCliente, PrecioTotalProducto);
-            }else {
-                float NuevoPrecioTotalProducto = PrecioTotalProducto - DinElectCliente;
-                exitoso = Controlador.RegistrarVenta(Fecha, Hora, String.valueOf(DinElectCliente), String.valueOf(NuevoPrecioTotalProducto), idUsuario, idCliente, idSucursal);
-                Controlador.ActualizaCaja(idSucursal, NuevoPrecioTotalProducto);
-                Controlador.RestaDinElectro(idCliente, DinElectCliente);
-            }
-
-            SumarDinElectro(String.valueOf(PrecioTotalProducto), idCliente);
-            detalledeventa(Fecha, Hora, idSucursal, idUsuario, Recibido);
-
-        } else {//Si no esta seleccionado, el dinero electronico es $0
-            exitoso = Controlador.RegistrarVenta(Fecha, Hora, "0", String.valueOf(PrecioTotalProducto), idUsuario, idCliente, idSucursal);
-            Controlador.ActualizaCaja(idSucursal, PrecioTotalProducto);
-            detalledeventa(Fecha, Hora, idSucursal, idUsuario, Recibido);
-        }
+        detalledeventa(Fecha, Hora, idSucursal, idUsuario, Recibido, 0f);
         return exitoso;
     }
     
-    private boolean ventaSinCliente(String Fecha, String Hora, String idUsuario, String idSucursal, float Recibido) {
+    
+    private boolean VentaCliente(String Fecha, String Hora, String DineroElectrnico, String PrecioTotal, String idUsuario, String Cliente, String idSucursal, String Recibido) {
         boolean exitoso = false;
-        String PrecioProducto = PrecioTotal();
-        exitoso = Controlador.RegistrarVenta(Fecha, Hora, "0", PrecioProducto, idUsuario, "1", idSucursal);
-        detalledeventa(Fecha, Hora, idSucursal, idUsuario, Recibido);
-        Controlador.ActualizaCaja(idSucursal, Float.parseFloat(PrecioProducto));
+        exitoso = Controlador.RegistrarVenta(Fecha, Hora, DineroElectrnico, PrecioTotal, idUsuario, Cliente, idSucursal);
+        Controlador.ActualizaCaja(idSucursal, Float.parseFloat(PrecioTotal));
+        return exitoso;
+    }
+
+    private boolean ventaSinCliente(String Fecha, String Hora, String idUsuario, String idSucursal, float Recibido, String PrecioTotal) {
+        boolean exitoso = false;
+        exitoso = Controlador.RegistrarVenta(Fecha, Hora, "0", PrecioTotal, idUsuario, "1", idSucursal);
+        detalledeventa(Fecha, Hora, idSucursal, idUsuario, Recibido, CalcularVuelto(Float.parseFloat(PrecioTotal), Recibido));
+        Controlador.ActualizaCaja(idSucursal, Float.parseFloat(PrecioTotal));
         return exitoso;
     }
 
@@ -231,7 +170,9 @@ public class Venta extends javax.swing.JFrame {
      * Calcula el 5% del total de la venta
      */
     private void SumarDinElectro(String Venta, String idCliente) {
+        System.out.println("Venta:---"+Venta+" idCliente: ---"+idCliente);
         float DineroElectronico = (float) ((int) ((Float.parseFloat(Venta) * 5) / 100));
+        System.out.println("Dinero Electronico = "+DineroElectronico);
         Controlador.SumaDinElectro(idCliente, DineroElectronico);
     }
 
@@ -411,7 +352,7 @@ public class Venta extends javax.swing.JFrame {
             pnlProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlProductosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 610, Short.MAX_VALUE)
                 .addContainerGap())
         );
         pnlProductosLayout.setVerticalGroup(
@@ -506,7 +447,6 @@ public class Venta extends javax.swing.JFrame {
                                 .addComponent(pnlClienteBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(CheckMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(33, 33, 33)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -563,37 +503,51 @@ public class Venta extends javax.swing.JFrame {
             String Fecha = Integer.toString(c.get(Calendar.DATE)) + "/" + Integer.toString(c.get(Calendar.MONTH) + 1) + "/" + Integer.toString(c.get(Calendar.YEAR));
             String Hora = Integer.toString(c.get(Calendar.HOUR_OF_DAY)) + ":" + Integer.toString(c.get(Calendar.MINUTE)) + ":" + Integer.toString(c.get(Calendar.SECOND));
             String Usuario = Sesion.LeerSesion("idUsuario");
+            String PrecioTotalProducto = PrecioTotal();
             float Recibido = 0f;
-            //Verificación de txtRecibido
-            if (!txtRecibido.getText().isEmpty()) {
+            try {
                 Recibido = Float.parseFloat(txtRecibido.getText());
+            } catch (Exception e) {
             }
-            if (!txtCliente.getText().isEmpty() && Float.parseFloat(Descuento)>0f) {
-                if (ventaconClienteDescuento(Fecha, Hora, Usuario, idCliente, Sucursal, Recibido)) {
-                    Estilo.lblMensajes(lblAlerta, "Venta Cobrada exitosamente", 3);
+            
+            if (CheckMaterial.isSelected()) {
+                ComprobarVenta(VentaMaterialUso(Fecha, Hora, Usuario, Sucursal, Recibido));
+            } else if (!txtCliente.getText().isEmpty()) {//Hay cliente y se paga con dinelectro
+                System.out.println("Entra a cliente");
+                        
+                float auxdescuento = Float.parseFloat(Descuento);
+                auxdescuento = (float)auxdescuento / 100f * Float.parseFloat(PrecioTotalProducto);
+                float auxPrecioTotal = Float.parseFloat(PrecioTotalProducto) - auxdescuento;
+                if (CheckDinero.isSelected()) {
+                    float DineroElectro = 0;
+                    try {
+                        DineroElectro = Float.parseFloat(lblDinElectro.getText());
+                    } catch (Exception e) {
+                    }
+                    if (DineroElectro > Float.parseFloat(PrecioTotalProducto)) {
+                        ComprobarVenta(VentaCliente(Fecha, Hora, String.valueOf(auxPrecioTotal), String.valueOf(auxPrecioTotal), Usuario, idCliente, Sucursal, String.valueOf(Recibido)));
+                        Controlador.RestaDinElectro(idCliente, Float.parseFloat(PrecioTotalProducto));
+                        SumarDinElectro(PrecioTotalProducto, idCliente);
+                        detalledeventa(Fecha, Hora, Sucursal, Usuario, Recibido, CalcularVuelto(Float.parseFloat(PrecioTotalProducto), Recibido));
+                    }else{
+                        ComprobarVenta(VentaCliente(Fecha, Hora, String.valueOf(DineroElectro), String.valueOf(auxPrecioTotal-DineroElectro), Usuario, idCliente, Sucursal, String.valueOf(Recibido)));    
+                        Controlador.RestaDinElectro(idCliente, DineroElectro);
+                        SumarDinElectro(PrecioTotalProducto, idCliente);
+                        detalledeventa(Fecha, Hora, Sucursal, Usuario, Recibido, CalcularVuelto(Float.parseFloat(PrecioTotalProducto), Recibido));
+                    }
                 } else {
-                    Estilo.lblMensajes(lblAlerta, "Ha ocurrido un error, por favor verifique", 2);
-                }
-            }else if(!txtCliente.getText().isEmpty()){ //Cliente con descuento
-                    if (ventaconCliente(Fecha, Hora, Usuario, idCliente, Sucursal, Recibido)) {
-                    Estilo.lblMensajes(lblAlerta, "Venta Cobrada exitosamente", 3);
-                } else {
-                    Estilo.lblMensajes(lblAlerta, "Ha ocurrido un error, por favor verifique", 2);
-                }
-            }else if (CheckMaterial.isSelected()) {
-                if (VentaMaterialUso(Fecha, Hora, Usuario, Sucursal, Recibido)) {
-                    Estilo.lblMensajes(lblAlerta, "Venta Cobrada exitosamente", 3);
-                } else {
-                    Estilo.lblMensajes(lblAlerta, "Ha ocurrido un error, por favor verifique", 2);
-                }
-            } else if (ventaSinCliente(Fecha, Hora, Usuario, Sucursal, Recibido)) {
-                Estilo.lblMensajes(lblAlerta, "Venta Cobrada exitosamente", 3);
-            } else {
-                Estilo.lblMensajes(lblAlerta, "Ha ocurrido un error, por favor verifique", 2);
-            }
-        } else {
+                    //venta con descuento
+                    ComprobarVenta(VentaCliente(Fecha, Hora, "0", String.valueOf(auxPrecioTotal), Usuario, idCliente, Sucursal, String.valueOf(Recibido)));
+                    SumarDinElectro(PrecioTotalProducto, idCliente);
+                    detalledeventa(Fecha, Hora, Sucursal, Usuario, Recibido, CalcularVuelto(Float.parseFloat(PrecioTotalProducto), Recibido));
+                }                
+            } else {//No hay cliente
+                ComprobarVenta(ventaSinCliente(Fecha, Hora, Usuario, Sucursal, Recibido, PrecioTotalProducto));
+            }//Fin comprobación de cliente
+        } else {//Tabla vacia
             Estilo.lblMensajes(lblAlerta, "Debe ingresar a menos un producto", 1);
-        }
+        }//Fin comprobacion de de tabla vacia
+
     }//GEN-LAST:event_btnCobrarActionPerformed
 
     private void tblClienteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblClienteMousePressed
@@ -619,37 +573,75 @@ public class Venta extends javax.swing.JFrame {
 
     private void txtProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProductoActionPerformed
         if (txtProducto.getText().length() != 0) {
+            Calendar c = new GregorianCalendar();
+            int HoraUnit = Integer.parseInt(Integer.toString(c.get(Calendar.HOUR_OF_DAY)));
             //Recorre el arreglo original para obtener solo la primera columna
             int ResultadosTabla[] = ExisteCodigoTbl(tblVenta, txtProducto.getText());
-
+            
             if (ResultadosTabla[0] == 1) {//Es por que existe en la Tabla
                 int Cantidad = Integer.parseInt(String.valueOf(tblVenta.getValueAt(ResultadosTabla[1], 4))) + 1;
                 tblVenta.setValueAt(Cantidad, ResultadosTabla[1], 4);
                 float auxPrecioTotal = Float.parseFloat(String.valueOf(tblVenta.getValueAt(ResultadosTabla[1], 3)));
                 tblVenta.setValueAt(Cantidad * auxPrecioTotal, ResultadosTabla[1], 5);
                 Estilo.lblMensajes(lblAlerta, "Producto agregado", 3);
+                
             } else {//No existe en la tabla, busca en la BD
-                Object[][] aux = null; //Auxiliar para obtener arreglo unidimensional de los resultados
-                aux = Controlador.ObtenerProducto(txtProducto.getText(), Sucursal);
-
-                if (aux.length != 0) { //Si su tamaño es = 0 es por que no recibio nada de la consulta
-                    Object[] Producto = null; //arreglo que se mostrará en la tabla
-                    for (int i = 0; i < aux.length; i++) {
-                        Producto = new Object[aux[i].length + 2];
-                        for (int j = 0; j < aux[i].length; j++) {
-                            Producto[j] = aux[i][j];
+                float Descuento = 0f;
+                
+                if (HoraUnit > 8 && HoraUnit < 21) {//Aplica descuento 
+                    Object[][] aux = null; //Auxiliar para obtener arreglo unidimensional de los resultados
+                    aux = Controlador.ObtenerProducto(txtProducto.getText(), Sucursal);
+                    
+                    if (aux.length != 0) { //Si su tamaño es = 0 es por que no recibio nada de la consulta
+                        Object[] Producto = null; //arreglo que se mostrará en la tabla
+                        for (int i = 0; i < aux.length; i++) {
+                            Producto = new Object[aux[i].length + 2];
+                            for (int j = 0; j < aux[i].length; j++) {
+                                Producto[j] = aux[i][j];
+                            }
                         }
+                        Producto[4] = 1;//Cantidad
+                        Double PrecioProducto = Double.parseDouble(String.valueOf(Producto[3]));
+                        if (PrecioProducto <= 150) {
+                            Descuento = .10f;
+                        } else if (PrecioProducto <= 300) {
+                            Descuento = .15f;
+                        } else {
+                            Descuento = .20f;
+                        }
+                        PrecioProducto -= (int) (Descuento * PrecioProducto);
+                        Producto[3] = PrecioProducto;
+                        Producto[5] = Double.parseDouble(String.valueOf(Producto[4])) * PrecioProducto; //Cantidad * PrecioUnitario
+                        ModelVenta.addRow(Producto);
+                        tblVenta.setModel(ModelVenta);
+                        Estilo.lblMensajes(lblAlerta, "Producto agregado", 3);
+                    } else {
+                        Estilo.lblMensajes(lblAlerta, "El producto ingresado no esta registrado, por favor verifique.", 1);
                     }
-                    Producto[4] = 1;
-                    Producto[5] = Double.parseDouble(String.valueOf(Producto[4])) * Double.parseDouble(String.valueOf(Producto[3]));
-                    ModelVenta.addRow(Producto);
-                    tblVenta.setModel(ModelVenta);
-                    Estilo.lblMensajes(lblAlerta, "Producto agregado", 3);
-                } else {
-                    Estilo.lblMensajes(lblAlerta, "El producto ingresado no esta registrado, por favor verifique.", 1);
-                }
+                } else {//No aplica descuento
+                    Object[][] aux = null; //Auxiliar para obtener arreglo unidimensional de los resultados
+                    aux = Controlador.ObtenerProducto(txtProducto.getText(), Sucursal);
+                    
+                    if (aux.length != 0) { //Si su tamaño es = 0 es por que no recibio nada de la consulta
+                        Object[] Producto = null; //arreglo que se mostrará en la tabla
+                        for (int i = 0; i < aux.length; i++) {
+                            Producto = new Object[aux[i].length + 2];
+                            for (int j = 0; j < aux[i].length; j++) {
+                                Producto[j] = aux[i][j];
+                            }
+                        }
+                        Producto[4] = 1;//Cantidad
+                        Double PrecioProducto = Double.parseDouble(String.valueOf(Producto[3]));
+                        Producto[5] = Double.parseDouble(String.valueOf(Producto[4])) * PrecioProducto; //Cantidad * PrecioUnitario
+                        ModelVenta.addRow(Producto);
+                        tblVenta.setModel(ModelVenta);
+                        Estilo.lblMensajes(lblAlerta, "Producto agregado", 3);
+                    } else {
+                        Estilo.lblMensajes(lblAlerta, "El producto ingresado no esta registrado, por favor verifique.", 1);
+                    }
+                }//Fin de busqueda de producto no encontrado
             }
-        } else {
+        } else {//Fin producto vacio
             Estilo.lblMensajes(lblAlerta, "Debe ingresar un código de barras válido", 1);
         }
         Util.txtLimpiar(txtProducto);
@@ -666,7 +658,6 @@ public class Venta extends javax.swing.JFrame {
         SQL = "SELECT Descuento FROM cliente INNER JOIN tipo_cliente ON "
                 + "cliente.idcliente = tipo_cliente.idcliente WHERE alias ='" + txtCliente.getText() + "';";
         Descuento = Controlador.ConsultaColumna("Descuento", SQL);
-        System.out.println("Descuento: ---->" + Descuento);
     }//GEN-LAST:event_txtClienteActionPerformed
 
     private void JMnItemEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMnItemEliminarActionPerformed
@@ -758,4 +749,21 @@ public class Venta extends javax.swing.JFrame {
     private org.edisoncor.gui.textField.TextFieldRectBackground txtProducto;
     private org.edisoncor.gui.textField.TextFieldRectBackground txtRecibido;
     // End of variables declaration//GEN-END:variables
+
+    private void ComprobarVenta(boolean estado) {
+        if (estado) {
+            Estilo.lblMensajes(lblAlerta, "Venta Cobrada exitosamente", 3);
+        } else {
+            Estilo.lblMensajes(lblAlerta, "Ha ocurrido un error, por favor verifique", 2);
+        }
+    }
+    
+    
+    private float CalcularVuelto(float PrecioTotalDescuento, float Recibido) {
+        if (Recibido != 0) {
+            return PrecioTotalDescuento - Recibido;
+        } else {
+            return 0f;
+        }
+    }
 }

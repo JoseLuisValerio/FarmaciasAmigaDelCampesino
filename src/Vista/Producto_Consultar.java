@@ -63,7 +63,6 @@ public class Producto_Consultar extends javax.swing.JFrame {
     public void limpia() {
         txtActivo.setText(null);
         txtCodigo.setText(null);
-        txtDescripcion.setText(null);
         txtPPublico.setText(null);
         txtStock.setText(null);
         txtNombre.setText(null);
@@ -125,11 +124,10 @@ public class Producto_Consultar extends javax.swing.JFrame {
         txtCodigo = new org.edisoncor.gui.textField.TextFieldRectBackground();
         txtNombre = new org.edisoncor.gui.textField.TextFieldRectBackground();
         txtActivo = new org.edisoncor.gui.textField.TextFieldRectBackground();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txtDescripcion = new javax.swing.JTextArea();
         txtPPublico = new org.edisoncor.gui.textField.TextFieldRectBackground();
         txtStock = new org.edisoncor.gui.textField.TextFieldRectBackground();
         cmbAreas = new javax.swing.JComboBox<>();
+        jTextField1 = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuAcomodar = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -268,15 +266,6 @@ public class Producto_Consultar extends javax.swing.JFrame {
             }
         });
 
-        txtDescripcion.setColumns(20);
-        txtDescripcion.setRows(5);
-        txtDescripcion.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtDescripcionKeyPressed(evt);
-            }
-        });
-        jScrollPane1.setViewportView(txtDescripcion);
-
         txtPPublico.setDescripcion("");
 
         txtStock.setDescripcion("");
@@ -285,6 +274,12 @@ public class Producto_Consultar extends javax.swing.JFrame {
         cmbAreas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbAreasActionPerformed(evt);
+            }
+        });
+
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
             }
         });
 
@@ -302,7 +297,7 @@ public class Producto_Consultar extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(cmbAreas, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txtStock, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -313,9 +308,9 @@ public class Producto_Consultar extends javax.swing.JFrame {
                 .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtActivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
                 .addComponent(txtPPublico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -382,11 +377,6 @@ public class Producto_Consultar extends javax.swing.JFrame {
         txtCodigo.setText(null);
     }//GEN-LAST:event_txtCodigoActionPerformed
 
-    private void txtDescripcionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripcionKeyPressed
-        String busqueda = txtDescripcion.getText();
-        buscarProducto(busqueda);
-    }//GEN-LAST:event_txtDescripcionKeyPressed
-
     private void cmbAreasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAreasActionPerformed
         String valor = (String) cmbAreas.getSelectedItem();
         buscarArea(valor);
@@ -397,7 +387,6 @@ public class Producto_Consultar extends javax.swing.JFrame {
         txtCodigo.setText((tblProducto.getValueAt(cor, 0).toString()));
         txtNombre.setText((tblProducto.getValueAt(cor, 1).toString()));
         txtActivo.setText((tblProducto.getValueAt(cor, 2).toString()));
-        txtDescripcion.setText((tblProducto.getValueAt(cor, 3).toString()));
         txtPPublico.setText((tblProducto.getValueAt(cor, 4).toString()));        
     }//GEN-LAST:event_tblProductoMouseClicked
 
@@ -419,6 +408,9 @@ public class Producto_Consultar extends javax.swing.JFrame {
         String busqueda = txtActivo.getText();
         buscarProducto(busqueda);
     }//GEN-LAST:event_txtActivoActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -469,8 +461,8 @@ public class Producto_Consultar extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblEncabezado;
     private javax.swing.JLabel lblmensaje;
     private javax.swing.JMenu menuAcomodar;
@@ -480,7 +472,6 @@ public class Producto_Consultar extends javax.swing.JFrame {
     private javax.swing.JTable tblProducto;
     private org.edisoncor.gui.textField.TextFieldRectBackground txtActivo;
     private org.edisoncor.gui.textField.TextFieldRectBackground txtCodigo;
-    private javax.swing.JTextArea txtDescripcion;
     private org.edisoncor.gui.textField.TextFieldRectBackground txtNombre;
     private org.edisoncor.gui.textField.TextFieldRectBackground txtPPublico;
     private org.edisoncor.gui.textField.TextFieldRectBackground txtStock;
