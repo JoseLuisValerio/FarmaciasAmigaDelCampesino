@@ -50,10 +50,9 @@ public class Conexion {
     }
 
     public Conexion() {
-        try{
-        LeerArchivoConf();
-        }catch(Exception e){System.err.println("Error al leer el archivo de configuración");}
-    }
+        Conectar();
+                }
+    
     private void Conectar(){
         if(cont==0){
             try{
